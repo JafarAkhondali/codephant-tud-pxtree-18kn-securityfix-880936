@@ -5,61 +5,59 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	{
 		this.game = game;
 		this.sprite = null;
-		this.model = {speed: 0.5};
-		this.floating = false;
+		this.model = {speed: 0.1};
+		this.idling = null;
+		this.currentTween = null;
+		this.yOffset = { v: 0, up: true };
 	};
 	
 	AzK.Ship.prototype =
 			{ preload: function ()
 				{
-					this.game.load.image('ship', 'assets/ship.png');
+					this.game.load.image('ship', 'assets/schiff-64x64-2x.png');
 				}
 	
 			, create: function ()
 				{
-					var ship = this;
-					this.sprite = this.game.make.sprite(0, 200, 'ship');
-					this.sprite.scale.setTo(0.5, 0.5);
-//					this.game.input.mouse.mouseDownCallback = function (event)
-//					{
-//						ship.moveShip(event.clientX, event.clientY);
-//					};
-//					this.floating = this.game.add.tween(this.sprite)
-//						.to({y: this.sprite.y - 10}, 500)
-//						.to({y: this.sprite.y}, 500)
-//						.loop().start();
+					this.sprite = this.game.make.sprite(0, 0, 'ship');
 					this.game.world.add(this.sprite);
+					this.idle();
 				}
 			
 			, update: function ()
-				{}
+				{
+				}
 			
-			, moveShip: function (toX, toY)
+			, move: function (toX, toY, withoutTween)
 				{
 					var ship = this.sprite
 						, dest = new Phaser.Point(toX, toY)
-								.subtract(ship.width * (2/3), ship.height * (2/3))
+								.subtract(ship.width * (3/4), ship.height * (3/4))
+						, tween
 						;
-					this.game.add.tween(this.sprite)
-						.to({x: dest.x, y:dest.y},
-								1000,
-								Phaser.Easing.Linear.None)
-						.start();
+					this.currentTween && this.currentTween.stop();
+					if (withoutTween)
+					{
+						this.sprite.position.copyFrom(dest);
+					}
+					else
+					{
+						tween = this.game.add.tween(this.sprite);
+						this.currentTween = tween;
+						
+						tween.to({x: dest.x, y:dest.y},
+								dest.distance({x:toX, y:toY}) / this.model.speed,
+								Phaser.Easing.Quadratic.InOut);
+						tween.onComplete.add(function(){ this.idle(); }, this);
+						tween.start();
+					}
+					
+					this.idling = false;
 				}
 			
-			, startFloating: function ()
+			, idle: function ()
 				{
-					this.floating = this.game.add.tween(this.sprite)
-					.to({y: this.sprite.y - 10}, 500)
-					.to({y: this.sprite.y}, 500)
-					.loop().start();
-				}
-			, stopFloating: function ()
-				{
-					this.floating
+					this.idling = true;
 				}
 			};
-	
-	AzK.Ship.sinusoidalInterpolation = function sinusoidalInterpolation (v, k)
-	{};
 });
