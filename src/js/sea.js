@@ -6,6 +6,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 		this.game = game;
 		this.ship = new AzK.Ship(game);
 		this.spots = new AzK.Spots(game, this);
+		this.currentSpotNr = null;
 	};
 	
 	AzK.Sea.prototype = 
@@ -35,11 +36,24 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.ship.move(
 							this.spots.start[enteringFrom].port,
 							true);
+					this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
 				}
 			
 			, moveShip: function (port)
 				{
 					this.ship.move(port);
+				}
+			
+			, moveShipToSpot: function (spotNr)
+				{
+					var spot = this.spots.spot[spotNr];
+					if (this.spots.spotIsReachable(spotNr,
+							this.currentSpotNr))
+					{
+						this.currentSpotNr = spotNr;
+						this.moveShip(spot.port);
+					}
+					
 				}
 			};
 });

@@ -4,8 +4,8 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 	{
 		this.game = game;
 		this.sea = sea;
-		this.leveldat = leveldat || null;
 		this.spot = [];
+		this._group = [];
 		this.start = {};
 	};
 	
@@ -29,7 +29,6 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 	, create: function ()
 		{
 			this._spotLayer = this.game.add.group();
-			this.leveldat && this.loadLevel(this.leveldat);
 		}
 
 	, update: function ()
@@ -37,19 +36,18 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 	
 	, loadLevel: function (leveldat)
 		{
-			var _me = this;
-			this.parseLevelData(leveldat);
-			this.leveldat.spots.forEach(function (spot)
+			this.spot = this.parseLevelData(leveldat).spots;
+			this.spot.forEach(function (spot)
 			{
 				spot.reachable.forEach(function (to)
 				{
-					_me.createConnector(spot, to);
-				});
-			});
-			this.leveldat.spots.forEach(function (spot)
+					this.createConnector(spot, to);
+				}, this);
+			}, this);
+			this.spot.forEach(function (spot, i)
 			{
-				_me.createSpotGroup(spot);
-			});
+				this.createSpotGroup(i);
+			}, this);
 		}
 	
 	, createConnector: function (from, to)
@@ -65,9 +63,10 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 			return line;
 		}
 	
-	, createSpotGroup: function (props)
+	, createSpotGroup: function (spotNr)
 		{
-			var port = props.port
+			var props = this.spot[spotNr]
+				, port = props.port
 				, type = props.type
 				, grp = this.game.make.group()
 				, cross = this.game.make.sprite(0, 0, 'cross')
@@ -76,33 +75,46 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 			
 			if (type.key)
 			{
-				grp.create(port.x - type.portAt[0], port.y - type.portAt[1], type.key);
+				grp.create(
+						port.x - type.portAt[0],
+						port.y - type.portAt[1],
+						type.key)
+						.spotNr = spotNr;
 			}
 			cross.position.set(
 					port.x - cross.width / 2,
 					port.y - cross.height / 2);
+			cross.spotNr = spotNr;
+			
 			grp.add(cross);
 			
-			grp.port = port;
-			grp.spottype = type;
+			grp.spotNr = spotNr;
 			
 			grp.forEach(function (part)
 			{
 				part.inputEnabled = true;
 				part.events.onInputDown = new Phaser.Signal();
 				part.events.onInputDown.add(
-						function () { this.sea.moveShip(grp.port); },
+						function (clicked)
+						{
+							this.sea.moveShipToSpot(clicked.spotNr);
+						},
 						this);
 			}, this);
+			
+			this._group[spotNr] = grp;
 			
 			return grp;
 		}
 	
+	//TODO: move level data parsing into AchtzehnKnoten.Levels, since it is simple replenishment and not actual spots code
 	, parseLevelData: function (leveldat)
 		{
 			var spots = this
 				, nu = {spots: null}
 				;
+			
+			// process spots
 			nu.spots = leveldat.spots.map(function (spot)
 			{
 				var typename = (spot.type || ('start' in spot
@@ -135,10 +147,18 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 				else
 					spot.reachable = [];
 			});
-			
-			this.leveldat = nu;
-			return this.leveldat;
+
+			return nu;
 		}
 	
-	};
-});
+	, spotIsReachable: function (spot, from)
+	{
+		var reachable = false;
+		spot = this.spot[spot];
+		from = this.spot[from];
+		reachable = (from.reachable.indexOf(spot) >= 0);
+		return reachable;
+	}
+	
+	}; // AchtzehnKnoten.prototype
+}); // namespace(PXTree.AchtzehnKnoten)
