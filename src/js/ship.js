@@ -28,10 +28,10 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 				{
 				}
 			
-			, move: function (toX, toY, withoutTween)
+			, move: function (toPort, withoutTween)
 				{
 					var ship = this.sprite
-						, dest = new Phaser.Point(toX, toY)
+						, dest = new Phaser.Point(toPort.x, toPort.y)
 								.subtract(ship.width * (3/4), ship.height * (3/4))
 						, tween
 						;
@@ -46,7 +46,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						this.currentTween = tween;
 						
 						tween.to({x: dest.x, y:dest.y},
-								dest.distance({x:toX, y:toY}) / this.model.speed,
+								dest.distance({x:toPort.x, y:toPort.y}) / this.model.speed,
 								Phaser.Easing.Quadratic.InOut);
 						tween.onComplete.add(function(){ this.idle(); }, this);
 						tween.start();

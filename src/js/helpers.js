@@ -26,9 +26,10 @@ function derive (ctor, diff)
  * @param func : Function
  * @returns mixed Whatever the function returns.
  */
-function on (obj, func)
+function on (obj, func, context)
 {
-	return func.call(obj, obj);
+	return func.call(
+			typeof(context) !== 'undefined' ? context : obj, obj);
 }
 
 /**
@@ -69,23 +70,22 @@ on(namespace.prototype, function()
 {
 	this.namespace = function(name, definition)
 	{
-		var segments = name.split('.')
-		, ns = this;
+		var ns = this;
 
-		segments.forEach(function(seg)
+		name.split('.').forEach(function(seg)
 		{
 			if (!(seg in ns && ns.hasOwnProperty(seg)))
 				ns[seg] = new namespace(seg);
-	
+
 			if (!('nsUp' in ns[seg]))
 				ns[seg].nsUp = ns;
 			
 			if (!('nsName' in ns[seg]))
 				ns[seg].nsName = seg;
-	
+
 			ns = ns[seg];
 		});
-	
+
 		if (definition)
 			if (definition instanceof Function)
 				definition.call(ns, ns);
