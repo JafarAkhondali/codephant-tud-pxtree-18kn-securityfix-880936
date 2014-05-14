@@ -4,8 +4,8 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	AzK.Sea = function Sea (game)
 	{
 		this.game = game;
-		this.ship = new AzK.Ship(game);
-		this.spots = new AzK.Spots(game, this);
+		this.ship = new AzK.Ship(this);
+		this.spots = new AzK.Spots(this);
 		this.currentSpotNr = null;
 	};
 	
@@ -34,9 +34,17 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 				{
 					this.spots.loadLevel(lvldat);
 					this.ship.move(
-							this.spots.start[enteringFrom].port,
+							this.spots.start[enteringFrom].peripheral.port,
 							true);
+					this.ship.move(
+							this.spots.start[enteringFrom].port);
 					this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
+				}
+			
+			, unloadLevel: function()
+				{
+					if ('end' in this.spots.spot[this.currentSpotNr])
+						this.ship.move(this.spots.spot[this.currentSpotNr].peripheral.port);
 				}
 			
 			, moveShip: function (port)

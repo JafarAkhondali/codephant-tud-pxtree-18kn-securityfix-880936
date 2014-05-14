@@ -1,12 +1,14 @@
 
 namespace("PXTree.AchtzehnKnoten", function (AzK)
 {
-	AzK.Ship = function Ship (game)
+	AzK.Ship = function Ship (sea)
 	{
-		this.game = game;
+		this.sea = sea;
+		this.game = sea.game;
 		this.sprite = null;
 		this.model = {speed: 0.2};
 		this.yOffset = { v: 0, up: true };
+		this.idling = true;
 		this._coordDelta = new Phaser.Point();
 	};
 	
@@ -38,10 +40,15 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					if (instant)
 						this.sprite.position.copyFrom(dest);
 					else
+					{
+						this.idling = false;
 						this.game.add.tween(this.sprite)
 								.to(dest,
 									this.sprite.position.distance(dest) / this.model.speed,
-									Phaser.Easing.Quadratic.InOut).start();
+										Phaser.Easing.Quadratic.InOut)
+								.start()
+								.onComplete.add(function(){ this.sea.unloadLevel(); }, this);
+					}
 				}
 
 			, _floatStep: function ()

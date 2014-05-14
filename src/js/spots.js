@@ -1,24 +1,48 @@
 
-namespace("PXTree.AchtzehnKnoten", function(AzK){
-	AzK.Spots = function Spots (game, sea, leveldat)
+namespace("PXTree.AchtzehnKnoten", function(){
+	
+	function Spots (sea, leveldat)
 	{
-		this.game = game;
+		this.game = sea.game;
 		this.sea = sea;
 		this.spot = [];
 		this._group = [];
 		this.start = {};
+		this.end = {};
 	};
 	
-	AzK.Spots.prototype =
-	{ TYPES:
+	Spots.Types =
 		{ water: { name: 'water', key: false, portAt:[0,0] }
 		, island: { name: 'island', key: 'island', portAt:[25,110] }
 		, atoll: { name: 'atoll', key: 'atoll', portAt:[80,70] }
-		}
+		};
+
+	Spots.TypeNames = ['water', 'island', 'atoll'];
 	
-	, TYPENAMES: ['water', 'island', 'atoll'] 
+	Spots.make = function spot (pt, opts)
+	{
+		var typename
+			, spot
+			;
+
+		opts || (opts = {});
+		typename = opts.type || ('start' in opts
+					? 'water'
+					: Spots.TypeNames[Math.floor(Math.random() * Spots.TypeNames.length)]);
+		
+		spot =
+				{ port: pt
+				, type: Spots.Types[typename]
+				, reachable: opts.reachable || null
+				};
+		
+		opts.start && (spot.start = opts.start);
+		opts.end && (spot.end = opts.end);
+		return spot;
+	};
 	
-	, preload: function ()
+	Spots.prototype =
+	{ preload: function ()
 		{
 			this.game.load.image('cross', 'assets/kreuz-16x16-2x.png');
 			this.game.load.image('island', 'assets/insel1-64x64-2x.png');
@@ -39,11 +63,17 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 			this.spot = this.parseLevelData(leveldat).spots;
 			this.spot.forEach(function (spot)
 			{
+				if ('peripheral' in spot)
+				{
+					this.createConnector(spot.peripheral, spot);
+				}
+				
 				spot.reachable.forEach(function (to)
 				{
 					this.createConnector(spot, to);
 				}, this);
 			}, this);
+			
 			this.spot.forEach(function (spot, i)
 			{
 				this.createSpotGroup(i);
@@ -53,8 +83,9 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 	, createConnector: function (from, to)
 		{
 			var diff = Phaser.Point.subtract(to.port, from.port)
-			, dist = diff.getMagnitude()
-			, line = this.game.make.tileSprite(0, 0, dist, 8, 'line');
+				, dist = diff.getMagnitude()
+				, line = this.game.make.tileSprite(0, 0, dist, 8, 'line')
+				;
 			line.angle = Math.atan2(diff.y, diff.x) * 180 / Math.PI;
 			line.position.copyFrom(from.port);
 			
@@ -107,7 +138,6 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 			return grp;
 		}
 	
-	//TODO: move level data parsing into AchtzehnKnoten.Levels, since it is simple replenishment and not actual spots code
 	, parseLevelData: function (leveldat)
 		{
 			var spots = this
@@ -117,24 +147,27 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 			// process spots
 			nu.spots = leveldat.spots.map(function (spot)
 			{
-				var typename = (spot.type || ('start' in spot
-									? 'water'
-									: spots.TYPENAMES[
-										Math.floor(Math.random() * spots.TYPENAMES.length)])
-								)
-					, map =
-						{ port: new Phaser.Point(spot.x, spot.y)
-						, type: spots.TYPES[typename]
-						, reachable: spot.reachable
-						}
+				var map = Spots.make(new Phaser.Point(spot.x, spot.y), spot);
 					;
-
 				//register start
-				if ('start' in spot)
-					spots.start[spot.start] = map;
+				if ('start' in map)
+				{
+					var start = this._getPeripheralSpot(map.start, map.port);
+					start.reachable = [map];
+					map.peripheral = start;
+					spots.start[map.start] = map;
+				}
+				
+				// register end
+				if ('end' in map)
+				{
+					var end = this._getPeripheralSpot(map.end, map.port);
+					map.peripheral = end;
+					spots.end[map.end] = map;
+				}
 
 				return map;
-			});
+			}, this);
 			
 			// replace the numeric references in "reachable" with the actual object
 			nu.spots.forEach(function (spot)
@@ -160,5 +193,26 @@ namespace("PXTree.AchtzehnKnoten", function(AzK){
 		return reachable;
 	}
 	
-	}; // AchtzehnKnoten.prototype
+	, _getPeripheralSpot: function (dir, pt)
+		{
+			var port = null
+				;
+			switch(dir)
+			{
+			case 'east':
+				port = new Phaser.Point(this.game.world.width + 100, pt.y); break;
+			case 'north':
+				port = new Phaser.Point(pt.x, -100); break;
+			case 'west':
+				port = new Phaser.Point(-100, pt.y); break;
+			case 'south':
+				port = new Phaser.Point(pt.x, this.game.world.height + 100); break;
+			}
+			
+			return Spots.make(port, { type: 'water' });
+		}
+	
+	}; // Spots.prototype
+	
+	this.Spots = Spots;
 }); // namespace(PXTree.AchtzehnKnoten)

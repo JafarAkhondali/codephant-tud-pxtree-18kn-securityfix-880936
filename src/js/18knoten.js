@@ -3,7 +3,7 @@ namespace("PXTree", function(PxT)
 {	
 	PxT.AchtzehnKnoten = function AchtzehnKnoten ()
 	{
-		this.game = new Phaser.Game(960, 600, Phaser.AUTO, '', null);
+		this.game = new Phaser.Game(1024, 576, Phaser.AUTO, '', null);
 		this.play = new AchtzehnKnoten.Play(this.game);
 	};
 	
