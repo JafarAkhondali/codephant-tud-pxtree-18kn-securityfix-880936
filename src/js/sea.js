@@ -57,14 +57,21 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.ship.move(port, onComplete, onCompleteContext);
 				}
 			
-			, moveShipToSpot: function (spotNr, oncomplete, onCompleteContext)
+			, moveShipToSpot: function (spotNr, onComplete, onCompleteContext)
 				{
 					var spot = this.spots.spot[spotNr];
 					if (this.spots.spotIsReachable(spotNr,
 							this.currentSpotNr))
 					{
+						//TODO remove this when events are properly implemented and call unload themselves
+						if ('end' in spot)
+						{
+							onComplete = this.unloadLevel;
+							onCompleteContext = this;
+						}
+						
 						this.currentSpotNr = spotNr;
-						this.moveShip(spot.port, oncomplete, onCompleteContext);
+						this.moveShip(spot.port, onComplete, onCompleteContext);
 					}
 					
 				}
