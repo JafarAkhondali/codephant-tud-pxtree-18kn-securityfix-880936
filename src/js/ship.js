@@ -33,23 +33,30 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this._floatStep();
 				}
 			
-			, move: function (toPort, instant)
+			, move: function (toPort, instantOrCallback, callbackContext)
 				{
 					var dest = new Phaser.Point.subtract(toPort, this._coordDelta)
+						, instant = instantOrCallback === true
+						, callback = instantOrCallback instanceof Function
+								? instantOrCallback : null
+						, tween
 						;
+					
 					if (instant)
 						this.sprite.position.copyFrom(dest);
 					else
 					{
 						this.idling = false;
-						this.game.add.tween(this.sprite)
+						tween = this.game.add.tween(this.sprite)
 								.to(dest,
 									this.sprite.position.distance(dest) / this.model.speed,
-										Phaser.Easing.Quadratic.InOut)
-								.start()
-								.onComplete.add(function(){ this.sea.unloadLevel(); }, this);
+										Phaser.Easing.Quadratic.InOut);
+						tween.onComplete.add(function(){ this.idling = true; }, this);
+						if (callback) tween.onComplete.add(callback, callbackContext);
+						tween.start();
 					}
 				}
+			
 
 			, _floatStep: function ()
 				{
