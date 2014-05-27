@@ -8,51 +8,38 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._stats = {};
 	};
 	
-	AK.Desk.Const = (function defineConst ()
-	{
-		var PosX = 576
-			, C = { PosX : PosX
-					
-					, StatOrigin : { x : PosX + 50, y : 50}
-					
-					, PaperOffset : { x : -40, y : -40 }
-					
-					, StatLineOffsetY : 50
-					
-					, StatLabelOffset : { x : 42, y : 10 }
-					
-					, StatValueOffsetX : 145
-					
-					, CptPanelOffset : { x : 230, y : 0 }
-					
-					, Font : { font : 'normal 12pt Sans-Serif' }
-				
-					, StatLinesConf :
-						{ crewCount :
-							{ icon : 'small-sailor'
-							, label : 'Mannschaft:'
-							, position : 0
-							}
-						, strength :
-							{ icon : 'small-soldier'
-							, label : 'Waffenstärke:'
-							, position : 1
-							}
-						, food :
-							{ icon : 'food-icon'
-							, label : 'Nahrung:'
-							, position : 2
-							}
-						, gold :
-							{ icon : 'gold-icon'
-							, label : 'Gold:'
-							, position : 3
-							}
-						}
+	AK.Desk.Const =
+			{ Origin: { x: 576, y: 0 }
+			, Font : { font : 'normal 12pt Sans-Serif' }
+			, PaperOffset: { x: 10, y: 10 }
+			, LinesOriginOffset: { x: 40, y: 40 }
+			, LinesHeight: 50
+			, LinesLabelOffset: { x: 42, y: 10 }
+			, LinesValueXOffset: 130
+			, CptPanelOffset : { x : 270, y : 20 }
+			, LinesConf :
+				{ crewCount :
+					{ icon : 'small-sailor'
+					, label : 'Mannschaft:'
+					, position : 0
 					}
-			;
-		return C;
-	})();
+				, strength :
+					{ icon : 'small-soldier'
+					, label : 'Waffenstärke:'
+					, position : 1
+					}
+				, food :
+					{ icon : 'food-icon'
+					, label : 'Nahrung:'
+					, position : 2
+					}
+				, gold :
+					{ icon : 'gold-icon'
+					, label : 'Gold:'
+					, position : 3
+					}
+				}
+			};
 		
 	
 	AK.Desk.prototype.preload = function ()
@@ -68,92 +55,114 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			load.image('captain-spanish', 'assets/captain-64x64-2x.png');
 			load.image('captain-portuguese', 'assets/captain-portugese-64x64-2x.png');
 			load.image('captain-british', 'assets/captain-british-64x64-2x.png');
+			load.image('decor-board', 'assets/board-decorated-256x64-2x.png');
+			load.image('ship-avatar', 'assets/visual-ship-400x300-2x.png');
 		});
 		
 	};
 
 	AK.Desk.prototype.create = function ()
 	{
-		var Const = AK.Desk.Const;
+		var Const = AK.Desk.Const
+			, deskGrp = this.game.add.group()
+			;
+		deskGrp.position.copyFrom(Const.Origin);
 		//desktop wood texture
-		this.game.add.tileSprite(
-				Const.PosX, 0,
-				this.game.width - Const.PosX, this.game.height,
-				'wood');
-		//stat paper on the desk
-		this.game.add.sprite(
-				Const.StatOrigin.x + Const.PaperOffset.x,
-				Const.StatOrigin.y + Const.PaperOffset.y,
-				'paper');
-		//different stats on the paper
-		this.createStatLines();
-		//show captains board
-		this.createCaptainsPanel();
+		deskGrp.add(this.game.make.tileSprite(
+				0, 0,
+				this.game.width - Const.Origin.x, this.game.height - Const.Origin.y,
+				'wood'));
+
+		this.createStatPaper(deskGrp);
+		this.createCaptainsPanel(deskGrp);
+		this.createShipAvatar(deskGrp);
 	};
 
 	AK.Desk.prototype.update = function ()
 	{};
 	
-	AK.Desk.prototype.createStatLines = function ()
+	AK.Desk.prototype.createStatPaper = function (deskGrp)
 	{
 		var dat, grp, stat, y
+			, paperGrp = this.game.make.group()
 			, Const = AK.Desk.Const
-			, StatConf = Const.StatLinesConf
+			, StatConf = Const.LinesConf
 			;
+		
+		deskGrp.add(paperGrp);
+		
+		paperGrp.position.copyFrom(Const.PaperOffset);
+		paperGrp.add(this.game.make.sprite(0, 0, 'paper'));
+
 		for (stat in StatConf) if (StatConf.hasOwnProperty(stat))
 		{
 			dat = StatConf[stat];
-			y = Const.StatOrigin.y + dat.position * Const.StatLineOffsetY;
+			y = Const.LinesOriginOffset.y + dat.position * Const.LinesHeight;
 			
-			grp = this.game.add.group();
+			grp = this.game.make.group();
+			grp.position.set(Const.LinesOriginOffset.x, y);
+			paperGrp.add(grp);
 			//create stat icon
-			grp.create(Const.StatOrigin.x, y, dat.icon);
+			grp.create(0, 0, dat.icon);
 			//create and add stat label to the group
-			grp.add(this.game.add.text(
-					Const.StatOrigin.x + Const.StatLabelOffset.x,
-					y + Const.StatLabelOffset.y,
+			grp.add(this.game.make.text(
+					Const.LinesLabelOffset.x,
+					Const.LinesLabelOffset.y,
 					dat.label,
-					AK.Desk.Const.Font));
+					Const.Font));
 			// create the stat-value text and store it for future modification, ...
 			this._getOrMakeStatData(stat).valueText = this.game.make.text(
-					Const.StatOrigin.x + Const.StatValueOffsetX,
-					y + Const.StatLabelOffset.y,
+					Const.LinesLabelOffset.x + Const.LinesValueXOffset,
+					Const.LinesLabelOffset.y,
 					'0',
 					Const.Font);
 			//... then add it to the group
 			grp.add(this._stats[stat].valueText);
 		}
-	};
+	};//Desk.createStatPaper
 	
-	AK.Desk.prototype.createCaptainsPanel = function ()
+	AK.Desk.prototype.createCaptainsPanel = function (deskGrp)
 	{
 		var Const = AK.Desk.Const
 			, grp = null
 			, font = Object.create(Const.Font)
 			, morale = this._getOrMakeStatData('morale')
 			;
-		//captain avatar and name
-		grp = this.game.add.group();
-		font.fill = 'white';
-		grp.create(
-				Const.StatOrigin.x + Const.CptPanelOffset.x,
-				Const.StatOrigin.y,
-				'captain-spanish');
-		grp.add(this.game.make.text(
-				Const.StatOrigin.x + Const.CptPanelOffset.x + 60,
-				Const.StatOrigin.y + 10,
-				'Captain',
-				font));
-		grp.add(this.game.make.text(
-				Const.StatOrigin.x + Const.CptPanelOffset.x + 60,
-				Const.StatOrigin.y + 40,
-				'Paddington',
-				font));
-		//captain morale
-		grp = this.game.add.group();
-		morale.valueText = this.game.make.text();
-		//TODO add the morale stat interface
 		
+		//captain avatar and name
+		grp = this.game.make.group();
+		deskGrp.add(grp);
+		grp.position.copyFrom(Const.CptPanelOffset);
+		font.fill = 'white';
+		
+		grp.create(0, 0, 'captain-spanish');
+		grp.add(this.game.make.text(60, 10, 'Captain', font));
+		grp.add(this.game.make.text(60, 40, 'Paddington', font));
+		
+		//captain morale
+		grp = this.game.make.group();
+		deskGrp.add(grp);
+		grp.position.set(Const.CptPanelOffset.x, Const.CptPanelOffset.y + 80);
+		morale.valueText = this.game.make.text(70, 0, '0', font);
+		grp.add(morale.valueText);
+		grp.add(this.game.make.text(70, 30, 'Moral', font));
+		
+		//document navigation
+		grp = this.game.make.group();
+		deskGrp.add(grp);
+		grp.position.set(Const.CptPanelOffset.x, Const.CptPanelOffset.y + 130);
+		grp.create(0, 0, 'decor-board').scale.set(0.6);
+	};//Desk.createCaptainsPanel
+	
+	AK.Desk.prototype.createShipAvatar = function (deskGrp)
+	{
+		var Const = AK.Desk.Const
+			, grp = this.game.make.group()
+			;
+		
+		deskGrp.add(grp);
+		grp.position.set(20, 270);
+		console.dir(grp.create(0, 0, 'ship-avatar'));
 	};
 	
 	AK.Desk.prototype.setStat = function (name, value)
