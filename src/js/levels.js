@@ -8,7 +8,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					, { x: 175, y: 486, reachable: [3] }
 					, { x: 289, y: 257, reachable: [4, 5] }
 					, { x: 408, y: 105, reachable: [5] }
-					, { x: 487, y: 337, end:'south' }
+					, { x: 477, y: 347, end:'south' }
 					]
 				}
 			];

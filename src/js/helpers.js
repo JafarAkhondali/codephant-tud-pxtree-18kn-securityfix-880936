@@ -24,6 +24,8 @@ function derive (ctor, diff)
  * It call the given function with the given object as "this"-context and as sole argument.
  * @param obj : Object
  * @param func : Function
+ * @param context : Object If this is given, then obj will not be passed as context to
+ * 	the function, but this instead.
  * @returns mixed Whatever the function returns.
  */
 function on (obj, func, context)

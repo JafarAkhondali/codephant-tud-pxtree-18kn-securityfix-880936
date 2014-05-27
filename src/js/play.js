@@ -5,6 +5,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	{
 		this.game = game;
 		this.sea = new AzK.Sea(game);
+		this.desk = new AzK.Desk(this);
 	};
 	
 	AzK.Play.prototype = derive(Phaser.State,
@@ -12,14 +13,17 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			, preload : function ()
 				{
 					this.sea.preload();
+					this.desk.preload();
 				}
 			, create: function ()
 				{
 					this.sea.create();
+					this.desk.create();
 				}
 			, update: function ()
 				{
 					this.sea.update();
+					this.desk.update();
 				}
 			});
 });
