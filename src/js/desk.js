@@ -15,7 +15,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			, LinesOriginOffset: { x: 40, y: 40 }
 			, LinesHeight: 50
 			, LinesLabelOffset: { x: 42, y: 10 }
-			, LinesValueXOffset: 130
+			, LinesValueXOffset: 105
 			, CptPanelOffset : { x : 270, y : 20 }
 			, LinesConf :
 				{ crewCount :
@@ -162,7 +162,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		deskGrp.add(grp);
 		grp.position.set(20, 270);
-		console.dir(grp.create(0, 0, 'ship-avatar'));
+		grp.create(0, 0, 'ship-avatar');
 	};
 	
 	AK.Desk.prototype.setStat = function (name, value)
