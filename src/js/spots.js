@@ -58,7 +58,7 @@ namespace("PXTree.AchtzehnKnoten", function(){
 	, update: function ()
 		{}
 	
-	, loadLevel: function (leveldat)
+	, loadLevel: function (leveldat, events)
 		{
 			this.spot = this.parseLevelData(leveldat).spots;
 			this.spot.forEach(function (spot)
@@ -124,7 +124,6 @@ namespace("PXTree.AchtzehnKnoten", function(){
 			grp.forEach(function (part)
 			{
 				part.inputEnabled = true;
-				part.events.onInputDown = new Phaser.Signal();
 				part.events.onInputDown.add(
 						function (clicked)
 						{

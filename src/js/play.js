@@ -1,10 +1,12 @@
 
 namespace("PXTree.AchtzehnKnoten", function (AzK)
 {
-	AzK.Play = function Play (game)
+	AzK.Play = function Play (parent)
 	{
-		this.game = game;
-		this.sea = new AzK.Sea(game);
+		this.parent = parent;
+		this.game = parent.game;
+		this.events = new AzK.Events(this); //TODO make extra event layer
+		this.sea = new AzK.Sea(this);
 		this.desk = new AzK.Desk(this);
 	};
 	
@@ -14,16 +16,19 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 				{
 					this.sea.preload();
 					this.desk.preload();
+					this.events.preload();
 				}
 			, create: function ()
 				{
 					this.sea.create();
 					this.desk.create();
+					this.events.create();
 				}
 			, update: function ()
 				{
 					this.sea.update();
 					this.desk.update();
+					this.events.update();
 				}
 			});
 });

@@ -1,9 +1,10 @@
 
 namespace("PXTree.AchtzehnKnoten", function (AzK)
 {
-	AzK.Sea = function Sea (game)
+	AzK.Sea = function Sea (parent)
 	{
-		this.game = game;
+		this.parent = parent;
+		this.game = this.parent.game;
 		this.ship = new AzK.Ship(this);
 		this.spots = new AzK.Spots(this);
 		this.currentSpotNr = null;
@@ -34,7 +35,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			, loadLevel: function (levelnr, enteringFrom)
 				{
 					var leveldat = AzK.Levels[levelnr];
-					this.spots.loadLevel(leveldat);
+					this.spots.loadLevel(leveldat, this.events);
 					this.currentLevel = levelnr;
 					this.ship.move(
 							this.spots.start[enteringFrom].peripheral.port,
@@ -44,7 +45,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
 				}
 			
-			, unloadLevel: function()
+			, unloadLevel: function ()
 				{
 					if ('end' in this.spots.spot[this.currentSpotNr])
 					{
@@ -63,13 +64,6 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					if (this.spots.spotIsReachable(spotNr,
 							this.currentSpotNr))
 					{
-						//TODO remove this when events are properly implemented and call unload themselves
-						if ('end' in spot)
-						{
-							onComplete = this.unloadLevel;
-							onCompleteContext = this;
-						}
-						
 						this.currentSpotNr = spotNr;
 						this.moveShip(spot.port, onComplete, onCompleteContext);
 					}
