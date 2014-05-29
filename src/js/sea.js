@@ -34,7 +34,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			
 			, loadLevel: function (levelnr, enteringFrom)
 				{
-					var leveldat = AzK.Levels[levelnr];
+					var leveldat = AzK.Data.Levels[levelnr];
 					this.spots.loadLevel(leveldat, this.events);
 					this.currentLevel = levelnr;
 					this.ship.move(

@@ -1,7 +1,7 @@
 
-namespace("PXTree.AchtzehnKnoten", function (AzK)
+namespace("PXTree.AchtzehnKnoten.Data", function (Data)
 {
-	AzK.Levels =
+	Data.Levels =
 			[ { spots:
 					[ { x: 50, y: 325, reachable: [1, 2], start:'west' }
 					, { x: 105, y: 123, reachable: [3] }
