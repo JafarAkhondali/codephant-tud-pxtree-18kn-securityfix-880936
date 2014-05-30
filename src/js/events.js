@@ -1,8 +1,7 @@
 namespace("PXTree.AchtzehnKnoten", function (AK)
 {
-	var ButtonTextStyle = { fill:'white', font:'normal 12pt sans-serif' }
-		, DialogBounds = { x: 20, y: 20, width: 500, height: 500 }
-		;
+	
+	var Config = AK.Config.Events;
 	
 	/**
 	 * 
@@ -29,7 +28,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.prototype.create = function create ()
 	{
 		this._dialogParent = this.game.add.group();
-		this._dialogParent.position.set(10,10);
 	};
 	
 	AK.Events.prototype.update = function update ()
@@ -60,7 +58,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.prototype._makeDialogFromTask = function _makeDialogFromTask (task)
 	{
 		var dial = new AK.Events.SingleSelectDialog(
-					this.game, DialogBounds, this.game.world)
+					this.game, this._dialogParent)
 			;
 		dial.description(task.description);
 		task.choices.forEach(function (choice, idx)
@@ -112,21 +110,20 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	/**
 	 * This is the base class for any dialog, that provides exercises to the player.
 	 */
-	AK.Events.TaskDialog = function TaskDialog (game, bounds, parent)
+	AK.Events.TaskDialog = function TaskDialog (game, parent)
 	{
 		this.game = game;
-		this.bounds = bounds;
 		this.content = this.game.make.group();
 		this.displayObject = this.game.make.group();
 		this._parent = parent;
 		
 		this.displayObject.visible = false;
 
-		this.displayObject.position.set(bounds.x, bounds.y);
+		this.displayObject.position.set(Config.Dialog.Margin, Config.Dialog.Margin);
 		this.displayObject.add(this.game.make.tileSprite(
-				0, 0, bounds.width, bounds.height, 'wood'));
+				0, 0, Config.Dialog.Width, Config.Dialog.Height, 'wood'));
 		
-		this.content.position.set(10, 10);
+		this.content.position.set(Config.Dialog.Padding, Config.Dialog.Padding);
 		this.displayObject.add(this.content);
 		
 		this._parent.add(this.displayObject);
@@ -154,9 +151,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	/**
 	 * 
 	 */
-	AK.Events.SingleSelectDialog = function SingleSelectDialog (game, bounds, parent)
+	AK.Events.SingleSelectDialog = function SingleSelectDialog (game, parent)
 	{
-		AK.Events.TaskDialog.call(this, game, bounds, parent);
+		AK.Events.TaskDialog.call(this, game, parent);
 		this._buttons = [];
 		this.buttonPanel = this.game.make.group();
 		this.descriptionPanel = this.game.make.group();
@@ -164,7 +161,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.content.add(this.descriptionPanel);
 		this.content.add(this.buttonPanel);
 		
-		this.buttonPanel.y = this.bounds.height - 20;
+		this.buttonPanel.y = Config.Dialog.Height - 2 * Config.Dialog.Padding ;
 	};
 	
 	AK.Events.SingleSelectDialog.prototype =
@@ -182,17 +179,20 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						, clickHandler = function ()
 								{ dialog.destroy(); callback(); }
 						, btn = this.game.make.button(
-								.5 * (this.bounds - 256),
-								this._buttons.length * 64,
-								'dialog-button',
+								0,
+								this._buttons.length * Config.Button.Height,
+								Config.Button.Texture.key,
 								clickHandler)
-						, text = this.game.make.text(20, 0, label, ButtonTextStyle)
+						, text = this.game.make.text(
+								Config.Button.LabelOffset.x, Config.Button.LabelOffset.y,
+								label, Config.Button.TextStyle)
 						;
 					text.wordWrap = true;
-					text.wordWrapWidth = 236;
+					text.wordWrapWidth = Config.Dialog.Width - 2
+							* (Config.Dialog.Padding + Config.Button.LabelOffset.x);
 					btn.addChild(text);
-					text.y = .5 * (64-text.height);
-					this.buttonPanel.y -= 64;
+					text.y = .5 * (Config.Button.Height - text.height);
+					this.buttonPanel.y -= Config.Button.Height;
 					this.buttonPanel.add(btn);
 					this._buttons.push(btn);
 					return this;
@@ -205,11 +205,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				 */
 				def.description = function description (desc)
 				{
-					var text = this.game.make.text(0, 0, desc, ButtonTextStyle)
+					var text = this.game.make.text(
+								0, 0, desc, Config.Description.TextStyle)
 						, c
 						;
 					text.wordWrap = true;
-					text.wordWrapWidth = this.bounds.width - 20;
+					text.wordWrapWidth = Config.Dialog.Width - 2 * Config.Dialog.Padding;
 					if ((c = this.descriptionPanel.getAt(0)) !== -1)
 							this.descriptionPanel.remove(c, true);
 					this.descriptionPanel.add(text);

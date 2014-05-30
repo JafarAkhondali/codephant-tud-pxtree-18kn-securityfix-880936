@@ -1,16 +1,18 @@
 
-namespace("PXTree", function(PxT)
-{	
-	PxT.AchtzehnKnoten = function AchtzehnKnoten ()
+namespace("PXTree.AchtzehnKnoten", function(AK)
+{
+	AK.Game = function Game ()
 	{
 		this.parent = null;
 		this.top = this;
-		this.game = new Phaser.Game(1024, 576, Phaser.AUTO, '', null);
-		this.play = new AchtzehnKnoten.Play(this);
-		this.config = Object.create(PxT.AchtzehnKnoten.Data.Config);
+		this.game = new Phaser.Game(
+				AK.Config.Game.Width,
+				AK.Config.Game.Height,
+				Phaser.AUTO, '', null);
+		this.play = new AK.Play(this);
 	};
 	
-	PxT.AchtzehnKnoten.prototype =
+	AK.Game.prototype =
 			{ run : function run ()
 				{
 					this.game.state.add(this.play.key, this.play);
