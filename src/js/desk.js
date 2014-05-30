@@ -3,7 +3,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 {
 	AK.Desk = function Desk (play)
 	{
+		this.parent = play;
 		this.play = play;
+		this.top = play.top;
 		this.game = play.game;
 		this._stats = {};
 	};

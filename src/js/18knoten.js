@@ -3,8 +3,11 @@ namespace("PXTree", function(PxT)
 {	
 	PxT.AchtzehnKnoten = function AchtzehnKnoten ()
 	{
+		this.parent = null;
+		this.top = this;
 		this.game = new Phaser.Game(1024, 576, Phaser.AUTO, '', null);
 		this.play = new AchtzehnKnoten.Play(this);
+		this.config = Object.create(PxT.AchtzehnKnoten.Data.Config);
 	};
 	
 	PxT.AchtzehnKnoten.prototype =

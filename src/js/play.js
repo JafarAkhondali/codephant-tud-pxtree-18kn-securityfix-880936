@@ -4,6 +4,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	AzK.Play = function Play (parent)
 	{
 		this.parent = parent;
+		this.top = parent.top;
 		this.game = parent.game;
 		this.events = new AzK.Events(this); //TODO make extra event layer
 		this.sea = new AzK.Sea(this);

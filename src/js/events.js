@@ -9,6 +9,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events = function Events (parentCtrl, dialogParent)
 	{
 		this.parent = parentCtrl;
+		this.top = parentCtrl.top;
 		this.game = parentCtrl.game;
 
 		this._dialogQueue = [];
@@ -48,6 +49,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	/**
 	 * 
 	 */
+	AK.Events.prototype._makeDialogFromEvent = function _makeDialogFromEvent (evt)
+	{
+		var dial = new AK.Events.SingleSelectDialog(this.game)
+			;
+	};
+	
+	/**
+	 * 
+	 */
 	AK.Events.Dialog = function Dialog (game, bounds, parent)
 	{
 		this.game = game;
@@ -82,6 +92,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		this.hide();
 		this._parent.removeChild(this.displayObject);
+//		this.displayObject.destroy();
 	};
 	
 	/**

@@ -3,7 +3,9 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 {
 	AzK.Ship = function Ship (sea)
 	{
+		this.parent = sea;
 		this.sea = sea;
+		this.top = sea.top;
 		this.game = sea.game;
 		this.sprite = null;
 		this.model = {speed: 0.2};

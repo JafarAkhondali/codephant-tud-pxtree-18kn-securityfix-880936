@@ -4,7 +4,8 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	AzK.Sea = function Sea (parent)
 	{
 		this.parent = parent;
-		this.game = this.parent.game;
+		this.top = parent.top;
+		this.game = parent.game;
 		this.ship = new AzK.Ship(this);
 		this.spots = new AzK.Spots(this);
 		this.currentSpotNr = null;

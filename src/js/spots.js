@@ -1,10 +1,12 @@
 
 namespace("PXTree.AchtzehnKnoten", function(){
 	
-	function Spots (sea, leveldat)
+	function Spots (sea)
 	{
-		this.game = sea.game;
+		this.parent = sea;
 		this.sea = sea;
+		this.top = sea.top;
+		this.game = sea.game;
 		this.spot = [];
 		this._group = [];
 		this.start = {};
