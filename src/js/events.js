@@ -42,10 +42,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	AK.Events.prototype.startEvent = function startEvent (opts)
 	{
-		var evt = this._selectEventByName(opts.name)
-			, dial = this._makeDialogFromTask(evt)
+		var evt = null
 			;
-		dial.show();
+		if ('name' in opts)
+			evt = this._selectEventByName(opts.name);
+		else if ('tags' in opts)
+			evt = this._selectEventByTags(opts.tags);
+		else
+			evt = opts;
+		this._makeDialogFromTask(evt).show();
 	};
 	
 	
@@ -94,7 +99,17 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	AK.Events.prototype._selectEventByName = function _selectEventByName (name)
 	{
-		return AK.Data.Events[0];
+		var found = null
+			, i = -1
+			, ev = null
+			;
+		while (!found && AK.Data.Events.length > ++i)
+		{
+			ev = AK.Data.Events[i];
+			if (name === ev.name)
+				found = ev;
+		}
+		return found;
 	};
 	
 	/**
@@ -102,7 +117,21 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	AK.Events.prototype._selectEventByTags = function _selectEventByTags (tags)
 	{
-		return AK.Data.Events[0];
+		var matching = []
+			, selected = null
+			, testTags = function (ev)
+					{ return tags.every(function (t) { return ev.tags.indexOf(t) >= 0; }); }
+			;
+		AK.Data.Events.forEach(function(ev)
+		{
+			
+			if (testTags(ev))
+				matching.push(ev);
+		}, this);
+		if (0 < matching.length)
+			selected = matching[Math.floor(matching.length * Math.random())];
+		
+		return selected;
 	};
 
 

@@ -69,8 +69,11 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 							this.currentSpotNr))
 					{
 						this.currentSpotNr = spotNr;
-						this.moveShip(spot.port,
-								function () { this.parent.startEvent(spot.event); }, this);
+						if ('event' in spot)
+							this.moveShip(spot.port,
+									function () { this.parent.startEvent(spot.event); }, this);
+						else
+							this.moveShip(spot.port);
 					}
 					
 				}
