@@ -166,6 +166,9 @@ namespace("PXTree.AchtzehnKnoten", function(){
 					map.peripheral = end;
 					spots.end[map.end] = map;
 				}
+				
+				if ('event' in spot)
+					map.event = spot.event;
 
 				return map;
 			}, this);

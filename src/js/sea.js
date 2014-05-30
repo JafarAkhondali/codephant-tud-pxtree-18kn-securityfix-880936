@@ -24,7 +24,6 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'water');
 					this.spots.create();
 					this.ship.create();
-					this.loadLevel(0, 'west');
 					
 				}
 			, update: function ()
@@ -46,12 +45,16 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
 				}
 			
-			, unloadLevel: function ()
+			, unloadLevel: function (instant)
 				{
-					if ('end' in this.spots.spot[this.currentSpotNr])
+					if (!instant)
 					{
-						this.ship.move(this.spots.spot[this.currentSpotNr].peripheral.port);
+						if ('end' in this.spots.spot[this.currentSpotNr])
+						{
+							this.ship.move(this.spots.spot[this.currentSpotNr].peripheral.port);
+						}
 					}
+					this.currentLevel = null;
 				}
 			
 			, moveShip: function (port, onComplete, onCompleteContext)
@@ -59,14 +62,15 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.ship.move(port, onComplete, onCompleteContext);
 				}
 			
-			, moveShipToSpot: function (spotNr, onComplete, onCompleteContext)
+			, moveShipToSpot: function (spotNr)
 				{
 					var spot = this.spots.spot[spotNr];
 					if (this.spots.spotIsReachable(spotNr,
 							this.currentSpotNr))
 					{
 						this.currentSpotNr = spotNr;
-						this.moveShip(spot.port, onComplete, onCompleteContext);
+						this.moveShip(spot.port,
+								function () { this.parent.startEvent(spot.event); }, this);
 					}
 					
 				}

@@ -1,6 +1,7 @@
 namespace("PXTree.AchtzehnKnoten", function (AK)
 {
 	var ButtonTextStyle = { fill:'white', font:'normal 12pt sans-serif' }
+		, DialogBounds = { x: 20, y: 20, width: 500, height: 500 }
 		;
 	
 	/**
@@ -14,7 +15,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 		this._dialogQueue = [];
 		this._dialogParent = null;
-		this._currentDialog = null;
 	};
 	
 	AK.Events.prototype.preload = function preload ()
@@ -44,21 +44,75 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	AK.Events.prototype.startEvent = function startEvent (opts)
 	{
-	};
-	
-	/**
-	 * 
-	 */
-	AK.Events.prototype._makeDialogFromEvent = function _makeDialogFromEvent (evt)
-	{
-		var dial = new AK.Events.SingleSelectDialog(this.game)
+		var evt = this._selectEventByName(opts.name)
+			, dial = this._makeDialogFromTask(evt)
 			;
+		dial.show();
+	};
+	
+	
+	
+	/**
+	 * Generates a dialog according to the tasks 'type' property.
+	 * 
+	 * @todo This currently only generates 'SingleSelectDialog's.
+	 */
+	AK.Events.prototype._makeDialogFromTask = function _makeDialogFromTask (task)
+	{
+		var dial = new AK.Events.SingleSelectDialog(
+					this.game, DialogBounds, this.game.world)
+			;
+		dial.description(task.description);
+		task.choices.forEach(function (choice, idx)
+		{
+			dial.choice(choice.label,
+					(function () { this._resolveTask(task, idx); }).bind(this));
+		}, this);
+		return dial;
 	};
 	
 	/**
 	 * 
 	 */
-	AK.Events.Dialog = function Dialog (game, bounds, parent)
+	AK.Events.prototype._resolveTask = function _resolveTask (task, idx)
+	{
+		var choice = task.choices[idx];
+
+		if (choice.hasOwnProperty('outcome'))
+			this._processOutcome(choice.outcome);
+
+		if (choice.hasOwnProperty('choices'))
+			this._makeDialogFromTask(choice).show();
+	};
+	
+	/**
+	 * 
+	 */
+	AK.Events.prototype._processOutcome = function _processOutcome (outcome)
+	{};
+	
+	/**
+	 * @todo Implement proper Event selecting structures and algorithms
+	 */
+	AK.Events.prototype._selectEventByName = function _selectEventByName (name)
+	{
+		return AK.Data.Events[0];
+	};
+	
+	/**
+	 * @todo Implement proper Event selecting structures and algorithms
+	 */
+	AK.Events.prototype._selectEventByTags = function _selectEventByTags (tags)
+	{
+		return AK.Data.Events[0];
+	};
+
+
+
+	/**
+	 * This is the base class for any dialog, that provides exercises to the player.
+	 */
+	AK.Events.TaskDialog = function TaskDialog (game, bounds, parent)
 	{
 		this.game = game;
 		this.bounds = bounds;
@@ -78,29 +132,31 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._parent.add(this.displayObject);
 	};
 	
-	AK.Events.Dialog.prototype.show = function show ()
+	AK.Events.TaskDialog.prototype.show = function show ()
 	{
 		this.displayObject.visible = true;
 	};
 	
-	AK.Events.Dialog.prototype.hide = function hide ()
+	AK.Events.TaskDialog.prototype.hide = function hide ()
 	{
 		this.displayObject.visible = false;
 	};
 	
-	AK.Events.Dialog.prototype.destroy = function destroy ()
+	AK.Events.TaskDialog.prototype.destroy = function destroy ()
 	{
 		this.hide();
 		this._parent.removeChild(this.displayObject);
 //		this.displayObject.destroy();
 	};
-	
+
+
+
 	/**
 	 * 
 	 */
 	AK.Events.SingleSelectDialog = function SingleSelectDialog (game, bounds, parent)
 	{
-		AK.Events.Dialog.call(this, game, bounds, parent);
+		AK.Events.TaskDialog.call(this, game, bounds, parent);
 		this._buttons = [];
 		this.buttonPanel = this.game.make.group();
 		this.descriptionPanel = this.game.make.group();
@@ -112,7 +168,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	};
 	
 	AK.Events.SingleSelectDialog.prototype =
-			on(Object.create(AK.Events.Dialog.prototype), function (def)
+			on(Object.create(AK.Events.TaskDialog.prototype), function (def)
 			{
 				/**
 				 * Adds a new choice/button to the dialog.
@@ -122,11 +178,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				 */
 				def.choice = function choice (label, callback)
 				{
-					var btn = this.game.make.button(
+					var dialog = this
+						, clickHandler = function ()
+								{ dialog.destroy(); callback(); }
+						, btn = this.game.make.button(
 								.5 * (this.bounds - 256),
 								this._buttons.length * 64,
 								'dialog-button',
-								callback)
+								clickHandler)
 						, text = this.game.make.text(20, 0, label, ButtonTextStyle)
 						;
 					text.wordWrap = true;

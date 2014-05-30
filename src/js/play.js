@@ -13,23 +13,29 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	
 	AzK.Play.prototype = derive(Phaser.State,
 			{ key : 'play'
-			, preload : function ()
+			, preload : function preload ()
 				{
 					this.sea.preload();
 					this.desk.preload();
 					this.events.preload();
 				}
-			, create: function ()
+			, create: function create ()
 				{
 					this.sea.create();
 					this.desk.create();
 					this.events.create();
+					this.sea.loadLevel(0, 'west');
 				}
-			, update: function ()
+			, update: function create ()
 				{
 					this.sea.update();
 					this.desk.update();
 					this.events.update();
+				}
+			
+			, startEvent: function startEvent (opts)
+				{
+					this.events.startEvent(opts);
 				}
 			});
 });
