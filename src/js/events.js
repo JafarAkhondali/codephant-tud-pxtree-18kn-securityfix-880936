@@ -95,7 +95,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		var stat, newVal
 			;
-		for (stat in outcome)
+		for (stat in outcome) if (outcome.hasOwnProperty(stat))
 		{
 			newVal = this.top.stats.get(stat) + outcome[stat];
 			this.top.stats.set(stat, newVal);
