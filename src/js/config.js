@@ -30,7 +30,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		{ TextStyle: { font : 'normal 12pt sans-serif', fill: 'black' }
 		, Offset: { x: 10, y: 10 }
 		, Lines:
-			{ Origin: { x: 40, y: 40 }
+			{ Origin: { x: 30, y: 40 }
 			, LineHeight: 50
 			, LabelOffset: { x: 42, y: 10 }
 			, ValueXOffset: 105

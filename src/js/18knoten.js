@@ -9,6 +9,24 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				AK.Config.Game.Width,
 				AK.Config.Game.Height,
 				Phaser.AUTO, '', null);
+		
+		//TODO replace with gathering of actual data.
+		this.stats = new AK.Stats(
+				{ player:
+					{ name: "Paddington"
+					, morale: 11
+					, nationality: 'portuguese'
+					, gold: 20000
+					, food: 500
+					, crewCount: 31
+					, strength: 23
+					}
+				, ship:
+					{ speed: 0.2
+					, crewCapacity: 60
+					}
+				});
+		
 		this.play = new AK.Play(this);
 	};
 	

@@ -9,7 +9,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.play = play;
 		this.top = play.top;
 		this.game = play.game;
-		this._stats = {};
+		this._statData = {};
+		this.stats = this.top.stats;
 	};
 	
 	AK.Desk.Const =
@@ -109,10 +110,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this._getOrMakeStatData(stat).valueText = this.game.make.text(
 					Config.StatPaper.Lines.LabelOffset.x + Config.StatPaper.Lines.ValueXOffset,
 					Config.StatPaper.Lines.LabelOffset.y,
-					'0',
+					this.stats.get("player."+stat),
 					Config.StatPaper.TextStyle);
 			//... then add it to the group
-			grp.add(this._stats[stat].valueText);
+			grp.add(this._getOrMakeStatData(stat).valueText);
 		}
 	};//Desk.createStatPaper
 	
@@ -127,15 +128,18 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		deskGrp.add(grp);
 		grp.position.copyFrom(Config.CptPanel.Origin);
 		
-		grp.create(0, 0, 'captain-spanish');
+		grp.create(0, 0, 'captain-'+this.stats.get('player.nationality'));
 		grp.add(this.game.make.text(60, 10, 'Captain', Config.CptPanel.TextStyle));
-		grp.add(this.game.make.text(60, 40, 'Paddington', Config.CptPanel.TextStyle));
+		grp.add(this.game.make.text(60, 40, this.stats.get('player.name'), Config.CptPanel.TextStyle));
 		
 		//captain morale
 		grp = this.game.make.group();
 		deskGrp.add(grp);
 		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 80);
-		morale.valueText = this.game.make.text(70, 0, '0', Config.CptPanel.TextStyle);
+		morale.valueText = this.game.make.text(
+				70, 0,
+				this.stats.get("player.morale"),
+				Config.CptPanel.TextStyle);
 		grp.add(morale.valueText);
 		grp.add(this.game.make.text(70, 30, 'Moral', Config.CptPanel.TextStyle));
 		
@@ -164,7 +168,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	AK.Desk.prototype._getOrMakeStatData = function (name)
 	{
-		return this._stats[name] || (this._stats[name] = {});
+		return this._statData[name] || (this._statData[name] = {});
 	};
 
 });

@@ -8,7 +8,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 		this.top = sea.top;
 		this.game = sea.game;
 		this.sprite = null;
-		this.model = {speed: 0.2};
+		this.model = this.top.stats.get("ship");
 		this.yOffset = { v: 0, up: true };
 		this.idling = true;
 		this._coordDelta = new Phaser.Point();
