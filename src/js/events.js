@@ -92,7 +92,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 * 
 	 */
 	AK.Events.prototype._processOutcome = function _processOutcome (outcome)
-	{};
+	{
+		var stat, newVal
+			;
+		for (stat in outcome)
+		{
+			newVal = this.top.stats.get(stat) + outcome[stat];
+			this.top.stats.set(stat, newVal);
+		}
+	};
 	
 	/**
 	 * @todo Implement proper Event selecting structures and algorithms

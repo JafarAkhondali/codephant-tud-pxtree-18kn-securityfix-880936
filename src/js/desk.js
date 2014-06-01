@@ -79,7 +79,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	AK.Desk.prototype.createStatPaper = function (deskGrp)
 	{
-		var dat, grp, stat, y
+		var dat, grp, stat, text, y
 			, paperGrp = this.game.make.group()
 			, StatConf = AK.Desk.Const.LinesConf
 			;
@@ -107,13 +107,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					dat.label,
 					Config.StatPaper.TextStyle));
 			// create the stat-value text and store it for future modification, ...
-			this._getOrMakeStatData(stat).valueText = this.game.make.text(
+			text = this._getOrMakeStatData(stat).valueText = this.game.make.text(
 					Config.StatPaper.Lines.LabelOffset.x + Config.StatPaper.Lines.ValueXOffset,
 					Config.StatPaper.Lines.LabelOffset.y,
-					this.stats.get("player."+stat),
+					this.stats.get("player." + stat),
 					Config.StatPaper.TextStyle);
 			//... then add it to the group
-			grp.add(this._getOrMakeStatData(stat).valueText);
+			grp.add(text);
+
+			this.stats.registerValueChangedHandler('player.' + stat,
+					(function (newVal) { this.text = newVal; }).bind(text));
 		}
 	};//Desk.createStatPaper
 	
@@ -142,6 +145,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				Config.CptPanel.TextStyle);
 		grp.add(morale.valueText);
 		grp.add(this.game.make.text(70, 30, 'Moral', Config.CptPanel.TextStyle));
+		this.top.stats.registerValueChangedHandler('player.morale',
+				(function (newVal) { this.text = newVal; }).bind(morale.valueText));
 		
 		//document navigation
 		grp = this.game.make.group();
