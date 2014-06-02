@@ -18,11 +18,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	AK.Events.prototype.preload = function preload ()
 	{
-		on(this.game.load, function (load)
-		{
-			load.image('wood', 'assets/wood.png');
-			load.image('dialog-button', 'assets/board-decorated-256x64-2x.png');
-		});
+		this.game.load
+				.image('wood', 'assets/wood.png')
+				.spritesheet(
+					'dialog-button', 'assets/dialog-button-8x8on24x8.png', 4, 16, 3)
+				;
 	};
 	
 	AK.Events.prototype.create = function create ()
@@ -213,23 +213,41 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				def.choice = function choice (label, callback)
 				{
 					var dialog = this
-						, clickHandler = function ()
-								{ dialog.destroy(); callback(); }
-						, btn = this.game.make.button(
-								0,
-								this._buttons.length * Config.Button.Height,
-								Config.Button.Texture.key,
-								clickHandler)
+						, btn = this.game.make.group()
+						, marker = this.game.make.sprite(0, 0, "dialog-button", 0)
 						, text = this.game.make.text(
 								Config.Button.LabelOffset.x, Config.Button.LabelOffset.y,
-								label, Config.Button.TextStyle)
+								label, Object.create(Config.Button.TextStyle))
+						, clickHandler = function ()
+								{ dialog.destroy(); callback(); }
+						, mouseInHandler = function ()
+								{
+									text.fill = Config.Button.HoverTextStyle.fill;
+									marker.frame = 1;
+								}
+						, mouseOutHandler = function ()
+								{
+									text.fill = Config.Button.TextStyle.fill;
+									marker.frame = 0;
+								}
 						;
-					text.wordWrap = true;
-					text.wordWrapWidth = Config.Dialog.Width - 2
-							* (Config.Dialog.Padding + Config.Button.LabelOffset.x);
-					btn.addChild(text);
+
+					//setup input handlers
+					text.inputEnabled = true;
+					text.events.onInputOver.add(mouseInHandler);
+					text.events.onInputOut.add(mouseOutHandler);
+					text.events.onInputDown.add(clickHandler);
+					
+					//put all in place
+					marker.y = .5 * (Config.Button.Height - marker.height);
+					btn.add(marker);
+
 					text.y = .5 * (Config.Button.Height - text.height);
-					this.buttonPanel.y -= Config.Button.Height;
+					btn.add(text);
+
+					btn.position.set(
+							0, this._buttons.length * (Config.Button.Height + Config.Button.Spacing));
+					this.buttonPanel.y -= (Config.Button.Height + Config.Button.Spacing);
 					this.buttonPanel.add(btn);
 					this._buttons.push(btn);
 					return this;
@@ -246,8 +264,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 								0, 0, desc, Config.Description.TextStyle)
 						, c
 						;
-					text.wordWrap = true;
-					text.wordWrapWidth = Config.Dialog.Width - 2 * Config.Dialog.Padding;
+					text.x = .5 * (Config.Description.TextStyle.wordWrapWidth - text.width);
 					if ((c = this.descriptionPanel.getAt(0)) !== -1)
 							this.descriptionPanel.remove(c, true);
 					this.descriptionPanel.add(text);

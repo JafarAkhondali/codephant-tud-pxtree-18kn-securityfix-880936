@@ -7,19 +7,31 @@ namespace("PXTree.AchtzehnKnoten.Config",
 
 , Events:
 	{ Description:
-		{ TextStyle: { font: "normal 12pt sans-serif", fill: "white" }
+		{ TextStyle:
+			{ font: "normal 12pt sans-serif"
+			, fill: "white"
+			, wordWrap: true
+			, wordWrapWidth: 476
+			, align: "center"
+			}
 		}
 	, Button:
-		{ TextStyle: { font: "normal 12pt sans-serif", fill: "white" }
-		, LabelOffset: { x: 20, y: 0 }
-		, Texture: { key: 'dialog-button', url: 'assets/board-decorated-256x64-2x.png' }
+		{ TextStyle:
+			{ font: "normal 12pt sans-serif"
+			, fill: "white"
+			, wordWrap: true
+			, wordWrapWidth: 461
+			}
+		, HoverTextStyle: { fill: "#ff774b" }
+		, LabelOffset: { x: 15, y: 0 }
 		, Height: 64
+		, Spacing: 5
 		}
 	, Dialog:
-		{ Width: 500
-		, Height: 500
-		, Padding: 10
-		, Margin: 20
+		{ Width: 516
+		, Height: 516
+		, Padding: 20
+		, Margin: 30
 		}
 	}
 
