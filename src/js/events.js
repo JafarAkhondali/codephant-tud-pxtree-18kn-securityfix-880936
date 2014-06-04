@@ -62,15 +62,23 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	AK.Events.prototype._makeDialogFromTask = function _makeDialogFromTask (task)
 	{
-		var dial = new AK.Events.SingleSelectDialog(
-					this.game, this._dialogParent)
+		var dial = null
 			;
-		dial.description(task.description);
-		task.choices.forEach(function (choice, idx)
+		if ('choices' in task) //SingleSelection
 		{
-			dial.choice(choice.label,
-					(function () { this._resolveTask(task, idx); }).bind(this));
-		}, this);
+			dial = new AK.Events.SingleSelectDialog(this.game, this._dialogParent);
+			dial.description(task.description);
+			task.choices.forEach(function (choice, idx)
+			{
+				dial.choice(choice.label,
+						(function () { this._resolveTask(task, idx); }).bind(this));
+			}, this);
+		}
+		else if ('description' in task)
+		{
+			dial = new AK.Events.MessageDialog(this.game, this._dialogParent);
+			dial.message(task.description);
+		}
 		return dial;
 	};
 	
@@ -79,13 +87,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	AK.Events.prototype._resolveTask = function _resolveTask (task, idx)
 	{
-		var choice = task.choices[idx];
+		var choice = task.choices[idx]
+			, dial = null
+			;
 
 		if (choice.hasOwnProperty('outcome'))
 			this._processOutcome(choice.outcome);
 
-		if (choice.hasOwnProperty('choices'))
-			this._makeDialogFromTask(choice).show();
+		
+		dial = this._makeDialogFromTask(choice);
+		if (dial) dial.show();
 	};
 	
 	/**
