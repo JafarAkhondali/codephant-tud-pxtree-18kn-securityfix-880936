@@ -24,6 +24,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			}
 		, HoverTextStyle: { fill: "#ff774b" }
 		, LabelOffset: { x: 15, y: 0 }
+		, DefaultLabel: "Aye!"
 		, Height: 64
 		, Spacing: 5
 		}

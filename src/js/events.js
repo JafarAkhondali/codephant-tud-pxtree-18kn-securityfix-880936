@@ -179,14 +179,58 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.TaskDialog.prototype.destroy = function destroy ()
 	{
 		this.hide();
-		this._parent.removeChild(this.displayObject);
-//		this.displayObject.destroy();
+//		this._parent.removeChild(this.displayObject);
+		this.displayObject.destroy();
+	};
+	
+	AK.Events.TaskDialog.prototype.makeButton = function makeButton (labelText, clickHandler)
+	{
+		var btn = this.game.make.group()
+			, marker = this.game.make.sprite(0, 0, "dialog-button", 0)
+			, label = this.game.make.text(
+					Config.Button.LabelOffset.x, Config.Button.LabelOffset.y,
+					labelText, Object.create(Config.Button.TextStyle))
+			, mouseInHandler = function ()
+					{
+						label.fill = Config.Button.HoverTextStyle.fill;
+						marker.frame = 1;
+					}
+			, mouseOutHandler = function ()
+					{
+						label.fill = Config.Button.TextStyle.fill;
+						marker.frame = 0;
+					}
+			;
+
+			//setup input handlers
+			label.inputEnabled = true;
+			label.events.onInputOver.add(mouseInHandler);
+			label.events.onInputOut.add(mouseOutHandler);
+			if (clickHandler) label.events.onInputDown.add(clickHandler);
+			
+			marker.inputEnabled = true;
+			if (clickHandler) marker.events.onInputDown.add(clickHandler);
+			marker.events.onInputOver.add(mouseInHandler);
+			marker.events.onInputOut.add(mouseOutHandler);
+			
+			//put all in place
+			marker.y = .5 * (Config.Button.Height - marker.height);
+			btn.add(marker);
+
+			label.y = .5 * (Config.Button.Height - label.height);
+			btn.add(label);
+			
+			btn.marker = marker;
+			btn.label = label;
+			return btn;
 	};
 
 
 
 	/**
-	 * 
+	 * This Dialog type allows the user to select one of a range of choices.
+	 * To this end it displays a descriptive text concerning the object of the choice
+	 * and lists the options at the lower end of the dialog.
 	 */
 	AK.Events.SingleSelectDialog = function SingleSelectDialog (game, parent)
 	{
@@ -213,37 +257,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				def.choice = function choice (label, callback)
 				{
 					var dialog = this
-						, btn = this.game.make.group()
-						, marker = this.game.make.sprite(0, 0, "dialog-button", 0)
-						, text = this.game.make.text(
-								Config.Button.LabelOffset.x, Config.Button.LabelOffset.y,
-								label, Object.create(Config.Button.TextStyle))
 						, clickHandler = function ()
 								{ dialog.destroy(); callback(); }
-						, mouseInHandler = function ()
-								{
-									text.fill = Config.Button.HoverTextStyle.fill;
-									marker.frame = 1;
-								}
-						, mouseOutHandler = function ()
-								{
-									text.fill = Config.Button.TextStyle.fill;
-									marker.frame = 0;
-								}
+						, btn = this.makeButton(label, clickHandler)
 						;
-
-					//setup input handlers
-					text.inputEnabled = true;
-					text.events.onInputOver.add(mouseInHandler);
-					text.events.onInputOut.add(mouseOutHandler);
-					text.events.onInputDown.add(clickHandler);
-					
-					//put all in place
-					marker.y = .5 * (Config.Button.Height - marker.height);
-					btn.add(marker);
-
-					text.y = .5 * (Config.Button.Height - text.height);
-					btn.add(text);
 
 					btn.position.set(
 							0, this._buttons.length * (Config.Button.Height + Config.Button.Spacing));
@@ -268,6 +285,42 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					if ((c = this.descriptionPanel.getAt(0)) !== -1)
 							this.descriptionPanel.remove(c, true);
 					this.descriptionPanel.add(text);
+					
+					return this;
+				};
+				
+				return def;
+			});
+	
+	/**
+	 * Shows a message to the user and provides an OK-button to close.
+	 */
+	AK.Events.MessageDialog = function MessageDialog (game, parent)
+	{
+		AK.Events.TaskDialog.call(this, game, parent);
+		this._okBtn = this.makeButton(Config.Button.DefaultLabel, this.destroy.bind(this));
+		this._message = this.game.make.text(0, 0, "", Config.Description.TextStyle);
+		this._okBtn.position.set(
+				0, Config.Dialog.Height - Config.Dialog.Padding - Config.Button.Height);
+		
+		this.content.add(this._message);
+		this.content.add(this._okBtn);
+	};
+	
+	AK.Events.MessageDialog.prototype =
+			on(Object.create(AK.Events.TaskDialog.prototype), function (def)
+			{
+				def.message = function message (newText)
+				{
+					this._message.text = newText;
+					
+					return this;
+				};
+				
+				def.ok = function ok (okHandler)
+				{
+					this._okBtn.label.events.onInputDown.add(okHandler);
+					this._okBtn.marker.events.onInputDown.add(okHandler);
 					
 					return this;
 				};
