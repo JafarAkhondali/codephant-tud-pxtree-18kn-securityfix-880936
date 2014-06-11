@@ -105,10 +105,12 @@ namespace("PXTree.AchtzehnKnoten", function()
 					periSpot.inputEnabled = true;
 					periSpot.events.onInputDown.add(
 							function ()
-							{ this.parent.loadLevel(
-									spot.end.to,
-									Spots.getOppositeDirection(spot.end.dir));
-							}, this);
+							{ 
+								if (this.parent.currentSpotNr === this.spotNr)
+									this.parent.loadLevel(
+										this.spot.end.to,
+										Spots.getOppositeDirection(this.spot.end.dir));
+							}, { parent: this.parent, spotNr: i, spot: spot });
 					this._spotLayer.add(periSpot);
 				}
 				this.createSpotGroup(i);
