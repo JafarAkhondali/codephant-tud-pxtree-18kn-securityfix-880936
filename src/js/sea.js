@@ -34,27 +34,40 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			
 			, loadLevel: function (levelnr, enteringFrom)
 				{
-					var leveldat = AzK.Data.Levels[levelnr];
-					this.spots.loadLevel(leveldat, this.events);
-					this.currentLevel = levelnr;
-					this.ship.move(
-							this.spots.start[enteringFrom].peripheral.port,
-							true);
-					this.ship.move(
-							this.spots.start[enteringFrom].port);
-					this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
+					if (null !== this.currentLevel)
+					{
+						this.unloadLevel(function () { this.loadLevel(levelnr, enteringFrom); }, this);
+					}
+					else
+					{
+						var leveldat = AzK.Data.Levels[levelnr];
+						this.spots.loadLevel(leveldat, this.events);
+						this.currentLevel = levelnr;
+						this.ship.move(
+								this.spots.start[enteringFrom].peripheral.port,
+								true);
+						this.ship.move(
+								this.spots.start[enteringFrom].port);
+						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
+					}
 				}
 			
-			, unloadLevel: function (instant)
+			, unloadLevel: function (instantOrCompleteCallback, completeContext, callingBack)
 				{
-					if (!instant)
+					if (!callingBack && 'end' in this.currentSpot())
 					{
-						if ('end' in this.spots.spot[this.currentSpotNr])
-						{
-							this.ship.move(this.spots.spot[this.currentSpotNr].peripheral.port);
-						}
+						this.ship.move(this.currentSpot().peripheral.port,
+								function () { this.unloadLevel(instantOrCompleteCallback, completeContext, true); }, this);
+						return;
 					}
-					this.currentLevel = null;
+					else
+					{
+						this.ship.move({x:-100,y:-100}, true);
+						this.spots.removeAll();
+						this.currentLevel = null;
+						if (instantOrCompleteCallback instanceof Function)
+							instantOrCompleteCallback.call(completeContext);
+					}
 				}
 			
 			, moveShip: function (port, onComplete, onCompleteContext)
@@ -76,6 +89,11 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 							this.moveShip(spot.port);
 					}
 					
+				}
+			
+			, currentSpot: function ()
+				{
+					return this.spots.spot[this.currentSpotNr];
 				}
 			};
 });

@@ -1,5 +1,7 @@
 
-namespace("PXTree.AchtzehnKnoten", function(){
+namespace("PXTree.AchtzehnKnoten", function()
+{
+	var Config = PXTree.AchtzehnKnoten.Config;
 	
 	function Spots (sea)
 	{
@@ -8,9 +10,9 @@ namespace("PXTree.AchtzehnKnoten", function(){
 		this.top = sea.top;
 		this.game = sea.game;
 		this.spot = [];
-		this._group = [];
 		this.start = {};
 		this.end = {};
+		this._spotLayer = null;
 	};
 	
 	Spots.Types =
@@ -42,6 +44,18 @@ namespace("PXTree.AchtzehnKnoten", function(){
 		opts.end && (spot.end = opts.end);
 		return spot;
 	};
+	
+	Spots.getOppositeDirection = function getOppositeDirection (dir)
+	{
+		return this._oppositeDirections[dir];
+	};
+	
+	Spots._oppositeDirections =
+			{ north: "south"
+			, east: "west"
+			, south: "north"
+			, west: "east"
+			};
 	
 	Spots.prototype =
 	{ preload: function ()
@@ -78,6 +92,27 @@ namespace("PXTree.AchtzehnKnoten", function(){
 			
 			this.spot.forEach(function (spot, i)
 			{
+				var periSpot
+					, peripheral
+					;
+				if ('end' in spot)
+				{
+					peripheral = spot.peripheral;
+					periSpot = this.game.make.sprite(0, 0, 'cross');
+					periSpot.position.set(
+							peripheral.port.x - periSpot.width/2,
+							peripheral.port.y - periSpot.height/2);
+					periSpot.inputEnabled = true;
+					periSpot.events.onInputDown.add(
+							function ()
+							{ 
+								if (this.parent.currentSpotNr === this.spotNr)
+									this.parent.loadLevel(
+										this.spot.end.to,
+										Spots.getOppositeDirection(this.spot.end.dir));
+							}, { parent: this.parent, spotNr: i, spot: spot });
+					this._spotLayer.add(periSpot);
+				}
 				this.createSpotGroup(i);
 			}, this);
 		}
@@ -134,8 +169,6 @@ namespace("PXTree.AchtzehnKnoten", function(){
 						this);
 			}, this);
 			
-			this._group[spotNr] = grp;
-			
 			return grp;
 		}
 	
@@ -153,18 +186,18 @@ namespace("PXTree.AchtzehnKnoten", function(){
 				//register start
 				if ('start' in map)
 				{
-					var start = this._getPeripheralSpot(map.start, map.port);
+					var start = this._getPeripheralSpot(map.start.dir, map.port);
 					start.reachable = [map];
 					map.peripheral = start;
-					spots.start[map.start] = map;
+					spots.start[map.start.dir] = map;
 				}
 				
 				// register end
 				if ('end' in map)
 				{
-					var end = this._getPeripheralSpot(map.end, map.port);
+					var end = this._getPeripheralSpot(map.end.dir, map.port);
 					map.peripheral = end;
-					spots.end[map.end] = map;
+					spots.end[map.end.dir] = map;
 				}
 				
 				if ('event' in spot)
@@ -189,13 +222,13 @@ namespace("PXTree.AchtzehnKnoten", function(){
 		}
 	
 	, spotIsReachable: function (spot, from)
-	{
-		var reachable = false;
-		spot = this.spot[spot];
-		from = this.spot[from];
-		reachable = (from.reachable.indexOf(spot) >= 0);
-		return reachable;
-	}
+		{
+			var reachable = false;
+			spot = this.spot[spot];
+			from = this.spot[from];
+			reachable = (from.reachable.indexOf(spot) >= 0);
+			return reachable;
+		}
 	
 	, _getPeripheralSpot: function (dir, pt)
 		{
@@ -204,16 +237,21 @@ namespace("PXTree.AchtzehnKnoten", function(){
 			switch(dir)
 			{
 			case 'east':
-				port = new Phaser.Point(this.game.world.width + 100, pt.y); break;
+				port = new Phaser.Point(Config.Desk.Left, pt.y); break;
 			case 'north':
-				port = new Phaser.Point(pt.x, -100); break;
+				port = new Phaser.Point(pt.x, 0); break;
 			case 'west':
-				port = new Phaser.Point(-100, pt.y); break;
+				port = new Phaser.Point(0, pt.y); break;
 			case 'south':
-				port = new Phaser.Point(pt.x, this.game.world.height + 100); break;
+				port = new Phaser.Point(pt.x, Config.Game.Height); break;
 			}
 			
 			return Spots.make(port, { type: 'water' });
+		}
+	
+	, removeAll: function ()
+		{
+			this._spotLayer.removeAll(true);
 		}
 	
 	}; // Spots.prototype
