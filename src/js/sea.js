@@ -77,6 +77,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			
 			, moveShipToSpot: function (spotNr)
 				{
+				if (!this.ship.idling) return; //don't allow a course change will moving
 					var spot = this.spots.spot[spotNr];
 					if (this.spots.spotIsReachable(spotNr,
 							this.currentSpotNr))
