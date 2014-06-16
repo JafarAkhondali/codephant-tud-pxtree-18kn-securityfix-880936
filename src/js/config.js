@@ -55,6 +55,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, TextStyle: { font: 'normal 12pt sans-serif', fill: 'white' }
 		}
 	}
+
+, MainMenu:
+	{ TextStyle:
+		{ font: "bold 20pt sans-serif"
+		, fill: "white"
+		}
+	}
 }
 
 );
