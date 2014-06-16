@@ -43,17 +43,17 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		on(this.game.load, function(load)
 		{
-			load.image('wood', 'assets/wood.png');
-			load.image('paper', 'assets/papier-256x256-2x.png');
-			load.image('food-icon', 'assets/icon-food-32x32-2x.png');
-			load.image('gold-icon', 'assets/icon-gold-32x32-2x.png');
-			load.image('small-sailor', 'assets/sailor-32x32-2x.png');
-			load.image('small-soldier', 'assets/soldier-32x32-1x.png');
-			load.image('captain-spanish', 'assets/captain-64x64-2x.png');
-			load.image('captain-portuguese', 'assets/captain-portugese-64x64-2x.png');
-			load.image('captain-british', 'assets/captain-british-64x64-2x.png');
-			load.image('decor-board', 'assets/board-decorated-256x64-2x.png');
-			load.image('ship-avatar', 'assets/visual-ship-400x300-2x.png');
+			load.image('wood', 'assets/textures/wood.jpg');
+			load.image('paper', 'assets/ui/ui-paper.png');
+			load.image('food-icon', 'assets/icons/ui-food.png');
+			load.image('gold-icon', 'assets/icons/ui-gold.png');
+			load.image('small-sailor', 'assets/chars/sailor-simple.png');
+			load.image('small-soldier', 'assets/chars/soldier-spanish-simple.png');
+			load.image('captain-spanish', 'assets/chars/captain-placeholder-large.png');
+			load.image('captain-portuguese', 'assets/chars/captain-portugese-large.png');
+			load.image('captain-british', 'assets/chars/captain-british-large.png');
+			load.image('decor-board', 'assets/ui/ui-board-decorated.png');
+			load.image('ship-avatar', 'assets/ui/visual-ship.png');
 		});
 		
 	};

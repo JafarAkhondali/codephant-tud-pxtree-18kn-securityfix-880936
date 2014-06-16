@@ -39,8 +39,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		def.preload = function ()
 		{
 			this.game.load
-				.image('mainmenu-bg', 'assets/hauptmenue.png')
-				.image('button', 'assets/board-decorated-256x64-2x.png')
+				.image('mainmenu-bg', 'assets/entwurf-hauptmenue.png')
+				.image('button', 'assets/ui/ui-board-decorated.png')
 				;
 		};
 		

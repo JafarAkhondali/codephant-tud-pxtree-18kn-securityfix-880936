@@ -19,7 +19,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			
 			, preload: function ()
 				{
-					this.game.load.image('ship', 'assets/schiff-64x64-2x.png');
+					this.game.load.image('ship', 'assets/icons/map-schiff.png');
 				}
 	
 			, create: function ()

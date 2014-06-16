@@ -60,10 +60,12 @@ namespace("PXTree.AchtzehnKnoten", function()
 	Spots.prototype =
 	{ preload: function ()
 		{
-			this.game.load.image('cross', 'assets/kreuz-16x16-2x.png');
-			this.game.load.image('island', 'assets/insel1-64x64-2x.png');
-			this.game.load.image('atoll', 'assets/insel2-64x64-2x.png');
-			this.game.load.image('line', 'assets/linedot-8x8.png');
+			this.game.load
+				.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
+				.image('island', 'assets/islands/normal-1.png')
+				.image('atoll', 'assets/islands/normal-2.png')
+				.image('line', 'assets/linedot-8x8.png')
+				;
 		}
 	
 	, create: function ()

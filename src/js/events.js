@@ -19,9 +19,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.prototype.preload = function preload ()
 	{
 		this.game.load
-				.image('wood', 'assets/wood.png')
+				.image('wood', 'assets/textures/wood.jpg')
 				.spritesheet(
-					'dialog-button', 'assets/dialog-button-8x8on24x8.png', 4, 16, 3)
+					'dialog-button', 'assets/ui/ui-eventbox-button.png', 4, 16, 3)
 				;
 	};
 	
