@@ -1,18 +1,25 @@
 
-namespace("PXTree.AchtzehnKnoten", function (AzK)
+namespace("PXTree.AchtzehnKnoten", function (AK)
 {
-	AzK.Play = function Play (parent)
+	Play = function Play (parent)
 	{
-		this.parent = parent;
-		this.top = parent.top;
-		this.game = parent.game;
-		this.events = new AzK.Events(this); //TODO make extra event layer
-		this.sea = new AzK.Sea(this);
-		this.desk = new AzK.Desk(this);
+		var self = Object.create(Play.prototype);
+		Phaser.State.call(self);
+		return self;
 	};
 	
-	AzK.Play.prototype = derive(Phaser.State,
-			{ key : 'play'
+	Play.key = 'play';
+	
+	Play.prototype = derive(Phaser.State,
+			{ init : function (parentCtrl)
+				{
+					this.parent = parentCtrl;
+					this.top = this.parent.top;
+					this.events = new AK.Events(this); //TODO make extra event layer
+					this.sea = new AK.Sea(this);
+					this.desk = new AK.Desk(this);
+				}
+				
 			, preload : function preload ()
 				{
 					this.sea.preload();
@@ -38,4 +45,6 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.events.startEvent(opts);
 				}
 			});
+	
+	AK.Play = Play;
 });

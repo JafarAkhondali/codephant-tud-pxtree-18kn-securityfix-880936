@@ -26,15 +26,14 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 					, crewCapacity: 60
 					}
 				});
-		
-		this.play = new AK.Play(this);
 	};
 	
 	AK.Game.prototype =
 			{ run : function run ()
 				{
-					this.game.state.add(this.play.key, this.play);
-					this.game.state.start(this.play.key);
+					this.game.state.add(AK.MainMenu.key, AK.MainMenu());
+					this.game.state.add(AK.Play.key, AK.Play());
+					this.game.state.start(AK.MainMenu.key, true, false, this);
 				}
 			};
 	
