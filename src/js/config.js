@@ -45,16 +45,24 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		{ TextStyle: { font : 'normal 12pt sans-serif', fill: 'black' }
 		, Offset: { x: 10, y: 10 }
 		, Lines:
-			{ Origin: { x: 30, y: 40 }
-			, LineHeight: 50
-			, LabelOffset: { x: 42, y: 10 }
+			{ Origin: { x: 20, y: 30 }
+			, LineHeight: 40
+			, LabelOffset: { x: 37, y: 10 }
 			, ValueXOffset: 105
 			}
 		}
 
 	, CptPanel:
-		{ Origin : { x : 270, y : 20 }
-		, TextStyle: { font: 'normal 12pt sans-serif', fill: 'white' }
+		{ Origin : { x : 260, y : 10 }
+		, TextStyle:
+			{ font: 'normal 12pt sans-serif'
+			, fill: 'white'
+			, wordWrap: true
+			, wordWrapWidth: 81
+			}
+		, Morale:
+			{ Offset: [260,110]
+			}
 		}
 	}
 

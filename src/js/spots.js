@@ -62,9 +62,9 @@ namespace("PXTree.AchtzehnKnoten", function()
 		{
 			this.game.load
 				.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
+				.image('line', 'assets/textures/line-dot.png')
 				.image('island', 'assets/islands/normal-1.png')
 				.image('atoll', 'assets/islands/normal-2.png')
-				.image('line', 'assets/linedot-8x8.png')
 				;
 		}
 	

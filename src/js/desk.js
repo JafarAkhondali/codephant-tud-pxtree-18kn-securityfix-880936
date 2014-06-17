@@ -41,21 +41,23 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	AK.Desk.prototype.preload = function ()
 	{
-		on(this.game.load, function(load)
-		{
-			load.image('wood', 'assets/textures/wood.jpg');
-			load.image('paper', 'assets/ui/ui-paper.png');
-			load.image('food-icon', 'assets/icons/ui-food.png');
-			load.image('gold-icon', 'assets/icons/ui-gold.png');
-			load.image('small-sailor', 'assets/chars/sailor-simple.png');
-			load.image('small-soldier', 'assets/chars/soldier-spanish-simple.png');
-			load.image('captain-spanish', 'assets/chars/captain-placeholder-large.png');
-			load.image('captain-portuguese', 'assets/chars/captain-portugese-large.png');
-			load.image('captain-british', 'assets/chars/captain-british-large.png');
-			load.image('decor-board', 'assets/ui/ui-board-decorated.png');
-			load.image('ship-avatar', 'assets/ui/visual-ship.png');
-		});
-		
+		this.game.load
+			.image('wood', 'assets/textures/wood.jpg')
+			.image('paper', 'assets/ui/ui-paper.png')
+			.image('food-icon', 'assets/icons/ui-food.png')
+			.image('gold-icon', 'assets/icons/ui-gold.png')
+			.image('small-sailor', 'assets/chars/sailor-simple.png')
+			.image('small-soldier', 'assets/chars/soldier-spanish-simple.png')
+			.image('captain-spanish', 'assets/chars/captain-placeholder-large.png')
+			.image('captain-portuguese', 'assets/chars/captain-portugese-large.png')
+			.image('captain-british', 'assets/chars/captain-british-large.png')
+			.image('decor-board', 'assets/ui/ui-board-decorated.png')
+			.image('ship-avatar', 'assets/ui/visual-ship.png')
+			.image('ship-avatar-bg', 'assets/textures/ship-background.png')
+			.image('captains-bg', 'assets/ui/ui-avatarbox.png')
+			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
+			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
+			;
 	};
 
 	AK.Desk.prototype.create = function ()
@@ -124,6 +126,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		var grp = null
 			, morale = this._getOrMakeStatData('morale')
+			, moraleHandler = null
 			;
 		
 		//captain avatar and name
@@ -131,27 +134,31 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		deskGrp.add(grp);
 		grp.position.copyFrom(Config.CptPanel.Origin);
 		
-		grp.create(0, 0, 'captain-'+this.stats.get('player.nationality'));
-		grp.add(this.game.make.text(60, 10, 'Captain', Config.CptPanel.TextStyle));
-		grp.add(this.game.make.text(60, 40, this.stats.get('player.name'), Config.CptPanel.TextStyle));
+		grp.add(this.game.make.sprite(0, 0, 'captains-bg'));
+		
+		grp.create(10, 20, 'captain-'+this.stats.get('player.nationality'));
+		grp.add(this.game.make.text(82, 17, 'Captain', Config.CptPanel.TextStyle));
+		grp.add(this.game.make.text(82, 40, this.stats.get('player.name'), Config.CptPanel.TextStyle));
 		
 		//captain morale
 		grp = this.game.make.group();
 		deskGrp.add(grp);
-		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 80);
-		morale.valueText = this.game.make.text(
-				70, 0,
-				this.stats.get("player.morale"),
-				Config.CptPanel.TextStyle);
-		grp.add(morale.valueText);
-		grp.add(this.game.make.text(70, 30, 'Moral', Config.CptPanel.TextStyle));
-		this.top.stats.registerValueChangedHandler('player.morale',
-				(function (newVal) { this.text = newVal; }).bind(morale.valueText));
+		
+		grp.position.set(Config.CptPanel.Morale.Offset[0], Config.CptPanel.Morale.Offset[1]);
+		
+		morale.bar = this.game.make.sprite(87, 17, 'morale-bar');
+		moraleHandler = (function (newVal) { this.scale.x = newVal; })
+				.bind(morale.bar);
+		grp.add(morale.bar);
+		grp.create(0, 0, 'morale-bg');
+		grp.add(this.game.make.text(65, 35, 'Moral', Config.CptPanel.TextStyle));
+		this.top.stats.registerValueChangedHandler('player.morale', moraleHandler);
+		moraleHandler(this.top.stats.get('player.morale'));
 		
 		//document navigation
 		grp = this.game.make.group();
 		deskGrp.add(grp);
-		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 130);
+		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 180);
 		grp.create(0, 0, 'decor-board').scale.set(0.6);
 	};//Desk.createCaptainsPanel
 	
@@ -161,8 +168,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			;
 		
 		deskGrp.add(grp);
-		grp.position.set(20, 270);
-		grp.create(0, 0, 'ship-avatar');
+		grp.position.set(13, 250);
+		grp.create(0, 0, 'ship-avatar-bg');
+		grp.create(10, 10, 'ship-avatar');
 	};
 	
 	AK.Desk.prototype.setStat = function (name, value)
