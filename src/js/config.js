@@ -11,28 +11,30 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			{ font: "normal 12pt sans-serif"
 			, fill: "white"
 			, wordWrap: true
-			, wordWrapWidth: 476
-			, align: "center"
+			, wordWrapWidth: 365
+			, align: "align"
 			}
+		, Offset: [25,200]
 		}
 	, Button:
 		{ TextStyle:
 			{ font: "normal 12pt sans-serif"
 			, fill: "white"
 			, wordWrap: true
-			, wordWrapWidth: 461
+			, wordWrapWidth: 365
 			}
 		, HoverTextStyle: { fill: "#ff774b" }
-		, LabelOffset: { x: 15, y: 0 }
+		, LabelOffset: [5,0]
+		, PanelOffset: [16,300]
 		, DefaultLabel: "Aye!"
-		, Height: 64
-		, Spacing: 5
+		, Height: 32
+		, Spacing: 2
 		}
 	, Dialog:
-		{ Width: 516
-		, Height: 516
-		, Padding: 20
-		, Margin: 30
+		{ Width: 414
+		, Height: 400
+		, Padding: [20,20]
+		, Margin: [81,68]
 		}
 	}
 

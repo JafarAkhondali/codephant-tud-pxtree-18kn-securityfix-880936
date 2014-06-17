@@ -20,6 +20,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		this.game.load
 				.image('wood', 'assets/textures/wood.jpg')
+				.image('eventbox-bg', 'assets/ui/ui-eventbox.png')
+				.image('eventbox-btn', 'assets/ui/ui-eventbox-button.png')
 				.spritesheet(
 					'dialog-button', 'assets/ui/ui-eventbox-button.png', 4, 16, 3)
 				;
@@ -74,7 +76,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						(function () { this._resolveTask(task, idx); }).bind(this));
 			}, this);
 		}
-		else if ('description' in task)
+		else if ('description' in task) //Message
 		{
 			dial = new AK.Events.MessageDialog(this.game, this._dialogParent);
 			dial.message(task.description);
@@ -167,11 +169,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		this.displayObject.visible = false;
 
-		this.displayObject.position.set(Config.Dialog.Margin, Config.Dialog.Margin);
-		this.displayObject.add(this.game.make.tileSprite(
-				0, 0, Config.Dialog.Width, Config.Dialog.Height, 'wood'));
+		this.displayObject.position.set(Config.Dialog.Margin[0], Config.Dialog.Margin[1]);
+		this.displayObject.add(this.game.make.sprite(0, 0, 'eventbox-bg'));
 		
-		this.content.position.set(Config.Dialog.Padding, Config.Dialog.Padding);
+		this.content.position.set(0, 0);
 		this.displayObject.add(this.content);
 		
 		this._parent.add(this.displayObject);
@@ -197,19 +198,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.TaskDialog.prototype.makeButton = function makeButton (labelText, clickHandler)
 	{
 		var btn = this.game.make.group()
-			, marker = this.game.make.sprite(0, 0, "dialog-button", 0)
+			, bg = this.game.make.sprite(0, 0, "eventbox-btn")
 			, label = this.game.make.text(
-					Config.Button.LabelOffset.x, Config.Button.LabelOffset.y,
+					Config.Button.LabelOffset[0], Config.Button.LabelOffset[1],
 					labelText, Object.create(Config.Button.TextStyle))
 			, mouseInHandler = function ()
 					{
 						label.fill = Config.Button.HoverTextStyle.fill;
-						marker.frame = 1;
+						bg.frame = 1;
 					}
 			, mouseOutHandler = function ()
 					{
 						label.fill = Config.Button.TextStyle.fill;
-						marker.frame = 0;
+						bg.frame = 0;
 					}
 			;
 
@@ -219,19 +220,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			label.events.onInputOut.add(mouseOutHandler);
 			if (clickHandler) label.events.onInputDown.add(clickHandler);
 			
-			marker.inputEnabled = true;
-			if (clickHandler) marker.events.onInputDown.add(clickHandler);
-			marker.events.onInputOver.add(mouseInHandler);
-			marker.events.onInputOut.add(mouseOutHandler);
+			bg.inputEnabled = true;
+			if (clickHandler) bg.events.onInputDown.add(clickHandler);
+			bg.events.onInputOver.add(mouseInHandler);
+			bg.events.onInputOut.add(mouseOutHandler);
 			
 			//put all in place
-			marker.y = .5 * (Config.Button.Height - marker.height);
-			btn.add(marker);
+			bg.y = .5 * (Config.Button.Height - bg.height);
+			btn.add(bg);
 
 			label.y = .5 * (Config.Button.Height - label.height);
 			btn.add(label);
 			
-			btn.marker = marker;
+			btn.bg = bg;
 			btn.label = label;
 			return btn;
 	};
@@ -253,7 +254,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.content.add(this.descriptionPanel);
 		this.content.add(this.buttonPanel);
 		
-		this.buttonPanel.y = Config.Dialog.Height - 2 * Config.Dialog.Padding ;
+		this.buttonPanel.position.set(
+				Config.Button.PanelOffset[0], Config.Button.PanelOffset[1]);
 	};
 	
 	AK.Events.SingleSelectDialog.prototype =
@@ -268,14 +270,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				def.choice = function choice (label, callback)
 				{
 					var dialog = this
-						, clickHandler = function ()
-								{ dialog.destroy(); callback(); }
+						, clickHandler = function () { dialog.destroy(); callback(); }
 						, btn = this.makeButton(label, clickHandler)
 						;
 
 					btn.position.set(
 							0, this._buttons.length * (Config.Button.Height + Config.Button.Spacing));
-					this.buttonPanel.y -= (Config.Button.Height + Config.Button.Spacing);
 					this.buttonPanel.add(btn);
 					this._buttons.push(btn);
 					return this;
@@ -292,7 +292,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 								0, 0, desc, Config.Description.TextStyle)
 						, c
 						;
-					text.x = .5 * (Config.Description.TextStyle.wordWrapWidth - text.width);
+					text.position.set(Config.Description.Offset[0], Config.Description.Offset[1]);
+					text.x = Math.floor((Config.Dialog.Width - text.width) / 2);
 					if ((c = this.descriptionPanel.getAt(0)) !== -1)
 							this.descriptionPanel.remove(c, true);
 					this.descriptionPanel.add(text);
@@ -310,9 +311,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		AK.Events.TaskDialog.call(this, game, parent);
 		this._okBtn = this.makeButton(Config.Button.DefaultLabel, this.destroy.bind(this));
-		this._message = this.game.make.text(0, 0, "", Config.Description.TextStyle);
+		this._message = this.game.make.text(
+				Config.Description.Offset[0], Config.Description.Offset[1],
+				"", Config.Description.TextStyle);
 		this._okBtn.position.set(
-				0, Config.Dialog.Height - Config.Dialog.Padding - Config.Button.Height);
+				Config.Button.PanelOffset[0], Config.Button.PanelOffset[1]);
 		
 		this.content.add(this._message);
 		this.content.add(this._okBtn);

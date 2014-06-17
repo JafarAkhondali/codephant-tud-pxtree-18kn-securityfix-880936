@@ -17,8 +17,8 @@ namespace("PXTree.AchtzehnKnoten", function()
 	
 	Spots.Types =
 		{ water: { name: 'water', key: false, portAt:[0,0] }
-		, island: { name: 'island', key: 'island', portAt:[25,110] }
-		, atoll: { name: 'atoll', key: 'atoll', portAt:[80,70] }
+		, island: { name: 'island', key: 'island', portAt:[-3,24] }
+		, atoll: { name: 'atoll', key: 'atoll', portAt:[0,30] }
 		};
 
 	Spots.TypeNames = ['water', 'island', 'atoll'];
