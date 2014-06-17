@@ -57,11 +57,38 @@ namespace("PXTree.AchtzehnKnoten", function()
 			, west: "east"
 			};
 	
+	Spots.getAngle = function getAngle (dir)
+	{
+		return this._dirAngleMap[dir];
+	};
+	
+	Spots.getPeripheralSpritePos = function getPeripheralSpritePos (port, dir)
+	{
+		var p = (new Phaser.Point()).copyFrom(port);
+			;
+		switch (dir)
+		{
+		case 'north': p.y += 16; break;
+		case 'east': p.x -= 16; break;
+		case 'south': p.y -= 16; break;
+		case 'west': p.x += 16; break;
+		}
+		return p;
+	}
+	
+	Spots._dirAngleMap =
+			{ north: 0
+			, east: 90
+			, south: 180
+			, west: 270
+			};
+	
 	Spots.prototype =
 	{ preload: function ()
 		{
 			this.game.load
 				.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
+				.spritesheet('arrow', 'assets/icons/map-arrow.png', 32, 32)
 				.image('line', 'assets/textures/line-dot.png')
 				.image('island', 'assets/islands/normal-1.png')
 				.image('atoll', 'assets/islands/normal-2.png')
@@ -100,10 +127,12 @@ namespace("PXTree.AchtzehnKnoten", function()
 				if ('end' in spot)
 				{
 					peripheral = spot.peripheral;
-					periSpot = this.game.make.sprite(0, 0, 'cross');
-					periSpot.position.set(
-							peripheral.port.x - periSpot.width/2,
-							peripheral.port.y - periSpot.height/2);
+					periSpot = this.game.make.sprite(0, 0, 'arrow');
+					periSpot.anchor.set(.5, .5);
+					periSpot.angle = Spots.getAngle(spot.end.dir);
+					periSpot.position.copyFrom(Spots.getPeripheralSpritePos(
+									peripheral.port,
+									spot.end.dir));
 					periSpot.inputEnabled = true;
 					periSpot.events.onInputDown.add(
 							function ()
@@ -125,6 +154,7 @@ namespace("PXTree.AchtzehnKnoten", function()
 				, dist = diff.getMagnitude()
 				, line = this.game.make.tileSprite(0, 0, dist, 8, 'line')
 				;
+			line.anchor.set(0, .5);
 			line.angle = Math.atan2(diff.y, diff.x) * 180 / Math.PI;
 			line.position.copyFrom(from.port);
 			
@@ -151,9 +181,10 @@ namespace("PXTree.AchtzehnKnoten", function()
 						type.key)
 						.spotNr = spotNr;
 			}
+			cross.anchor.set(.5, .5);
 			cross.position.set(
-					port.x - cross.width / 2,
-					port.y - cross.height / 2);
+					port.x,
+					port.y);
 			cross.spotNr = spotNr;
 			
 			grp.add(cross);
