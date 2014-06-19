@@ -61,8 +61,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			credits.position.set(570, 280);
 			credits.onInputUp.add(function()
 			{
-				alert("Coming soon ...");
-			});
+				this.game.state.start(AK.Credits.key, true, false, this.parent);
+			}, this);
 			this.game.world.add(credits);
 		};
 		

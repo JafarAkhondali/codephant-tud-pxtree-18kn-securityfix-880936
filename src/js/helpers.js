@@ -114,3 +114,160 @@ on(namespace.prototype, function()
 		return names.reverse.join(".");
 	};
 });
+
+/**
+ * Allows two place text freely and in respect to formerly placed text.
+ */
+function TextPlacer (game, into, defaultStyle, options)
+{
+	var self = (this instanceof TextPlacer)
+				? this : Object.create(TextPlacer.prototype)
+		;
+	self.defaultStyle = defaultStyle;
+	self.position = { x: 0, y: 0 };
+	self._game = game;
+	self._parentDisplayObj = into;
+	self._lastPlaced = null;
+	self._indentCount = 0;
+	self._options = options || {};
+	
+	return self;
+};
+
+TextPlacer.DefaultOptions =
+		{ lineSpace: 5
+		, indentWidth: 100
+		};
+
+TextPlacer.prototype = (function (def)
+{
+	def.moveTo = function (xOrPt, y)
+	{
+		var x = xOrPt
+			;
+		if (typeof(y) === 'undefined')
+		{
+			y = xOrPt.y;
+			x = xOrPt.x;
+		}
+		this.position.x = x;
+		this.position.y = y;
+		
+		return this;
+	};
+	
+	def.moveBy = function (xOrPt, y)
+	{
+		var x = xOrPt
+			;
+		if (typeof(y) === 'undefined')
+		{
+			y = xOrPt.y;
+			x = xOrPt.x;
+		}
+		this.position.x += x;
+		this.position.y += y;
+		
+		return this;
+	};
+	
+	def.feedLine = function ()
+	{
+		var deltaY = this._options.lineHeight;
+		this.position.y += deltaY;
+		return this;
+	};
+	
+	def.feed = def.feedLine;
+	
+	def.spaceLine = function ()
+	{
+		if (this._lastPlaced)
+		{
+			this.position.y += this._lastPlaced.height + this._options.lineSpace;
+		}
+		return this;
+	};
+	
+	def.space = def.spaceLine;
+	
+	def.indent = function (level)
+	{
+		if (typeof(level) === 'undefined') level = 1;
+		this._indentCount += level;
+		this.position.x += this._options.indentWidth * level;
+		
+		return this;
+	};
+	
+	def.tab = function ()
+	{
+		return this.indent(1);
+	};
+	
+	def.exdent = function (level)
+	{
+		if (typeof(level) === 'undefined') level = 1;
+		this.indent(-level);
+		
+		return this;
+	};
+	
+	def.clearIndent = function ()
+	{
+		this.exdent(this._indentCount);
+		this._indentCount = 0;
+		
+		return this;
+	};
+	
+	def.clear = def.clearIndent;
+	
+	def.place = function (text, style)
+	{
+		style = this._getMergedStyle(style);
+		this._lastPlaced = this._game.make.text(this.position.x, this.position.y, text, style);
+		this._parentDisplayObj.addChild(this._lastPlaced);
+		return this;
+	};
+	
+	def.option = function (name, value)
+	{
+		if (typeof(value) === 'undefined')
+		{
+			return this._options[name];
+		}
+		else
+		{
+			this._options[name] = value;
+			return this;
+		}
+	};
+	
+	def.options = function (optsToSet)
+	{
+		var key
+			;
+		for (key in optsToSet) if (optsToSet.hasOwnProperty(key))
+		{
+			this.option(key, optsToSet[key]);
+		}
+		return this;
+	};
+	
+	def._getMergedStyle = function (style)
+	{
+		var merged = Object.create(this.defaultStyle)
+			, key
+			;
+		for (key in style)
+		if (style.hasOwnProperty(key) && typeof(style[key]) !== 'undefined')
+		{
+			merged[key] = style[key];
+		}
+		
+		return merged;
+	};
+	
+	return def;
+})(TextPlacer.prototype);
