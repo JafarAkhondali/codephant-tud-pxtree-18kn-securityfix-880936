@@ -116,24 +116,52 @@ on(namespace.prototype, function()
 });
 
 /**
- * Allows two place text freely and in respect to formerly placed text.
+ * Allows to place text with regards to certain parameters to ease working with
+ * indented text, grid-like text and alike.
  */
 function TextPlacer (game, into, defaultStyle, options)
 {
 	var self = (this instanceof TextPlacer)
 				? this : Object.create(TextPlacer.prototype)
 		;
+	/**
+	 * The default text Style which will either be used for placing or will merge
+	 * with the given style at placing. This uses the same object as Phaser.Text#style().
+	 * @property defaultStyle:object
+	 */
 	self.defaultStyle = defaultStyle;
+	/**
+	 * The Coordinates where the next text is placed.
+	 */
 	self.position = { x: 0, y: 0 };
+	/**
+	 * Used for creating the text display objects.
+	 */
 	self._game = game;
+	/**
+	 * The display object to which the new texts are appended as children.
+	 */
 	self._parentDisplayObj = into;
+	/**
+	 * Reference to the last placed text display object. Used for calculation of
+	 * line feed with spacing.
+	 */
 	self._lastPlaced = null;
+	/**
+	 * Keeps track of the level of indentation.
+	 */
 	self._indentCount = 0;
+	/**
+	 * Different parameters, that influence text placing.
+	 */
 	self._options = options || {};
 	
 	return self;
 };
 
+/**
+ * If not defined in the instance options, use the values of this one.
+ */
 TextPlacer.DefaultOptions =
 		{ lineSpace: 5
 		, indentWidth: 100
@@ -141,6 +169,14 @@ TextPlacer.DefaultOptions =
 
 TextPlacer.prototype = (function (def)
 {
+	/**
+	 * Place the text cursor at the given position.
+	 * @param xOrPt:number,object Either the X-component of the coordinates or an
+	 * 	object which has the properties "x" and "y".
+	 * @param y:number The Y-component of the coordinates. This is not needed if an
+	 * 	object is given for xOrPt.
+	 * @returns this
+	 */
 	def.moveTo = function (xOrPt, y)
 	{
 		var x = xOrPt
@@ -155,7 +191,14 @@ TextPlacer.prototype = (function (def)
 		
 		return this;
 	};
-	
+	/**
+	 * Move the text cursor by adding the given position to the current.
+	 * @param xOrPt:number,object Either the X-component of the coordinates or an
+	 * 	object which has the properties "x" and "y".
+	 * @param y:number The Y-component of the coordinates. This is not needed if an
+	 * 	object is given for xOrPt.
+	 * @returns this
+	 */
 	def.moveBy = function (xOrPt, y)
 	{
 		var x = xOrPt
@@ -171,15 +214,30 @@ TextPlacer.prototype = (function (def)
 		return this;
 	};
 	
+	/**
+	 * Moves the text cursor to simulate a line feed, which will only happen, if
+	 * the lineHeight options is set. This does not reset indentation.
+	 * @returns this
+	 */
 	def.feedLine = function ()
 	{
-		var deltaY = this._options.lineHeight;
+		var deltaY = ('lineHeight' in this._options) ? this._options.lineHeight : 0;
 		this.position.y += deltaY;
 		return this;
 	};
 	
+	/**
+	 * Alias of feedLine().
+	 */
 	def.feed = def.feedLine;
 	
+	/**
+	 * Moves the text cursor to simulate a ile feed, but other than 'feedLine' it
+	 * uses line spacing which does rely on the last text placed. It adds the
+	 * height of the last placed text to the Y-component of the current position
+	 * plus extra "lineSpace" pixels.
+	 * @returns this
+	 */
 	def.spaceLine = function ()
 	{
 		if (this._lastPlaced)
@@ -189,8 +247,18 @@ TextPlacer.prototype = (function (def)
 		return this;
 	};
 	
+	/**
+	 * Alias of spaceLine().
+	 */
 	def.space = def.spaceLine;
 	
+	/**
+	 * Raises the preceding whitespace (empty space) in front of following texts.
+	 * This can be used to create tables.
+	 * @param level:number=1 Number of levels by which the indentation is raised
+	 * 	or lowered, if negative.
+	 * @returns this
+	 */
 	def.indent = function (level)
 	{
 		if (typeof(level) === 'undefined') level = 1;
@@ -200,19 +268,39 @@ TextPlacer.prototype = (function (def)
 		return this;
 	};
 	
+	/**
+	 * Indent by one level.
+	 * @returns this
+	 */
 	def.tab = function ()
 	{
 		return this.indent(1);
 	};
 	
+	/**
+	 * Lower the level of indentation by given amount.
+	 * @returns this
+	 */
 	def.exdent = function (level)
 	{
 		if (typeof(level) === 'undefined') level = 1;
-		this.indent(-level);
 		
-		return this;
+		return this.indent(-level);
 	};
 	
+	/**
+	 * Exdent by one level.
+	 * @returns this
+	 */
+	def.untab = function ()
+	{
+		return this.exdent(1);
+	};
+	
+	/**
+	 * Remove any indentation and return to the original X value.
+	 * @returns this
+	 */
 	def.clearIndent = function ()
 	{
 		this.exdent(this._indentCount);
@@ -221,8 +309,17 @@ TextPlacer.prototype = (function (def)
 		return this;
 	};
 	
+	/**
+	 * Alias of clearIndent().
+	 */
 	def.clear = def.clearIndent;
 	
+	/**
+	 * Positions a new text at the current coordinate.
+	 * @param text:string The character string to place.
+	 * @param style:object Text style description as used by Phase.Text#style().
+	 * @returns this
+	 */
 	def.place = function (text, style)
 	{
 		style = this._getMergedStyle(style);
@@ -231,6 +328,17 @@ TextPlacer.prototype = (function (def)
 		return this;
 	};
 	
+	/**
+	 * Get or set a text placing option.
+	 * # Options
+	 * lineHeight:number Pixels between one base line and the next. Used by feedLine().
+	 * lineSpace:number Pixels between the bottom of one line and the top of the next. Used by spaceLine().
+	 * indentWidth:number Pixels the text is shifted when "tab()"-ing and "untab()"-ing.
+	 * @param name:string Option's name.
+	 * @param value:any The new value for the option. If not given, this method
+	 * 	acts as getter.
+	 * @returns this on setting and the option value on getting.
+	 */
 	def.option = function (name, value)
 	{
 		if (typeof(value) === 'undefined')
@@ -244,6 +352,12 @@ TextPlacer.prototype = (function (def)
 		}
 	};
 	
+	/**
+	 * Set multiple options at once.
+	 * @param optsToSet:object The option names and their values.
+	 * @returns this
+	 * @see TextPlacer#option
+	 */
 	def.options = function (optsToSet)
 	{
 		var key
@@ -255,6 +369,11 @@ TextPlacer.prototype = (function (def)
 		return this;
 	};
 	
+	/**
+	 * Merge a given style with the default style.
+	 * @param style:object Styles as accepted by Phaser.Text#style().
+	 * @returns :object The merge Style.
+	 */
 	def._getMergedStyle = function (style)
 	{
 		var merged = Object.create(this.defaultStyle)
