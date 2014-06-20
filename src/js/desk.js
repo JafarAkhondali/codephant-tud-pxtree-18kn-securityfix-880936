@@ -74,6 +74,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.createStatPaper(deskGrp);
 		this.createCaptainsPanel(deskGrp);
 		this.createShipAvatar(deskGrp);
+
+		/**
+		 * Nur übergangsweise zu Testzwecken
+		 
+		var image = this.game.add.sprite(750, 450, 'decor-board');
+	    //  Moves the image anchor to the middle, so it centers inside the game properly
+	    image.anchor.set(0.5);
+	    image.scale.set(0.5);
+
+	    //  Enables all kind of input actions on this image (click, etc)
+	    image.inputEnabled = true;
+	  //  image.events.onInputDown.add(this.parent.openAlmanach(), this);
+		*/
 	};
 
 	AK.Desk.prototype.update = function ()
@@ -160,6 +173,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		deskGrp.add(grp);
 		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 180);
 		grp.create(0, 0, 'decor-board').scale.set(0.6);
+
 	};//Desk.createCaptainsPanel
 	
 	AK.Desk.prototype.createShipAvatar = function (deskGrp)
