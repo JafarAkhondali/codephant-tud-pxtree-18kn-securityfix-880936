@@ -256,6 +256,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		this.buttonPanel.position.set(
 				Config.Button.PanelOffset[0], Config.Button.PanelOffset[1]);
+		
+		this._btnFactory = TextButtonFactory(this.game,
+				{ key: 'eventbox-btn'
+				, normalStyle: Config.Button.TextStyle
+				, overStyle: Config.Button.HoverTextStyle
+				, textOffset: Config.Button.LabelOffset
+				, textAlign: [0, .5]
+				});
 	};
 	
 	AK.Events.SingleSelectDialog.prototype =
@@ -267,13 +275,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				 * @param callback:Function Called when the corresponding choice is selected.
 				 * @returns this For chaining.
 				 */
-				def.choice = function choice (label, callback)
+				def.choice = function choice (label, callback, callbackContext)
 				{
-					var dialog = this
-						, clickHandler = function () { dialog.destroy(); callback(); }
-						, btn = this.makeButton(label, clickHandler)
+					var btn = this._btnFactory.create(label)
 						;
-
+					
+					btn.onInputUp.add(this.destroy, this);
+					btn.onInputUp.add(callback, callbackContext);
+					
 					btn.position.set(
 							0, this._buttons.length * (Config.Button.Height + Config.Button.Spacing));
 					this.buttonPanel.add(btn);

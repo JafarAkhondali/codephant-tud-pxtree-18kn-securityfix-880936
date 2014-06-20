@@ -125,8 +125,8 @@ function TextPlacer (game, into, defaultStyle, options)
 				? this : Object.create(TextPlacer.prototype)
 		;
 	/**
-	 * The default text Style which will either be used for placing or will merge
-	 * with the given style at placing. This uses the same object as Phaser.Text#style().
+	 * The default text-style which will either be used for placing or will merge
+	 * with the at placing given style. This uses the same object as Phaser.Text#style().
 	 * @property defaultStyle:object
 	 */
 	self.defaultStyle = defaultStyle;
@@ -390,3 +390,181 @@ TextPlacer.prototype = (function (def)
 	
 	return def;
 })(TextPlacer.prototype);
+
+/**
+ * Creates custom Buttons with the ability to show Text. Those buttons are given
+ * as a Phaser.Group with some special properties, like event handlers.
+ */
+function TextButtonFactory (game, opts)
+{
+	var me = Object.create(TextButtonFactory.prototype)
+		;
+	me._game = game;
+	me._options = opts;
+	
+	return me;
+};
+
+TextButtonFactory.prototype = (function ()
+{
+	
+	this.create = function create (text, clickHandler, clickContext)
+	{
+		var grp = this._game.make.group()
+			, txt = this._game.make.text(0, 0, text, Object.create(this._getNormalStyle()))
+			, btn = this._game.make.sprite(0, 0, this._options.key)
+			;
+		
+		//piece stuff together
+		grp.add(btn);
+		grp.add(txt);
+		
+		//setup positions
+		if ('textAlign' in this._options)
+		{
+			txt.anchor.set(
+					this._options.textAlign[0] || 0,
+					this._options.textAlign[1] || 0);
+		}
+		txt.position.copyFrom(this._getTextPosition(btn));
+		
+		//setup input handling
+		btn.inputEnabled = true;
+		txt.inputEnabled = true;
+		btn.input.useHandCursor = true;
+		txt.input.useHandCursor = true;
+		
+		grp.onInputDown = new Phaser.Signal();
+		grp.onInputUp = new Phaser.Signal();
+		grp.onInputOver = new Phaser.Signal();
+		grp.onInputOut = new Phaser.Signal();
+		
+		btn.events.onInputDown.add(grp.onInputDown.dispatch);
+		txt.events.onInputDown.add(grp.onInputDown.dispatch);
+		btn.events.onInputUp.add(grp.onInputUp.dispatch);
+		txt.events.onInputUp.add(grp.onInputUp.dispatch);
+		btn.events.onInputOver.add(function (_, mouse)
+		{
+			if (Phaser.Rectangle.containsRaw(
+					btn.x, btn.y, btn.width, btn.height,
+					mouse.x, mouse.y))
+			{
+				grp.onInputOver.dispatch.call(null, arguments);
+			}
+		});
+		btn.events.onInputOut.add(function (_, mouse)
+		{
+			if (!Phaser.Rectangle.containsRaw(
+					btn.x, btn.y, btn.width, btn.height,
+					mouse.x, mouse.y))
+			{
+				grp.onInputOut.dispatch.call(null, arguments);
+			}
+		});
+		
+		//setup hover effects
+		grp.onInputOver.add(function ()
+		{
+			var style = this._getMergedStyle('overStyle')
+				;
+			if (style)
+				txt.setStyle(style);
+			
+			if ('overFrame' in this._options)
+				btn[(typeof(this._options.overFrame) === 'string')
+						? 'frameName'
+						: 'frame'] = this._options.overFrame;
+		}, this);
+		grp.onInputOut.add(function ()
+		{
+			var style = this._getNormalStyle()
+				;
+			if (style)
+				txt.setStyle(style);
+			
+			btn[(typeof(this._options.normalFrame) === 'string')
+					? 'frameName'
+					: 'frame'] = ('normalFrame' in this._options)
+							? this._options.normalFrame
+							: 0;
+		}, this);
+		grp.onInputDown.add(function ()
+		{}, this);
+		grp.onInputUp.add(function ()
+		{}, this);
+		
+		//link up clickHandler
+		if (clickHandler)
+		{
+			grp.onInputUp.add(clickHandler, clickContext);
+		}
+		
+		//there it goes!
+		return grp;
+	}; //TextButtonFactory#create
+	
+	/**
+	 * Merge a given style with the default style.
+	 * @param style:object Styles as accepted by Phaser.Text#style().
+	 * @returns :object The merge Style.
+	 */
+	this._getMergedStyle = function (style)
+	{
+		var parent = this._getNormalStyle()
+			, merged = null
+			, key
+			;
+		if (style in this._options)
+		{
+			style = this._options[style];
+			
+			if (parent)
+			{
+				merged = parent;
+				for (key in style)
+					if (style.hasOwnProperty(key) && typeof(style[key]) !== 'undefined')
+					{
+						merged[key] = style[key];
+					}
+			}
+			else
+			{
+				merged = Object.create(style);
+			}
+		}
+		
+		return merged;
+	}; //TextButtonFactory#_getMergedStyle
+	
+	this._getNormalStyle = function ()
+	{
+		return ('normalStyle' in this._options)
+				? Object.create(this._options.normalStyle)
+				: null;
+	};
+	
+	this._getTextPosition = function (dimensions)
+	{
+		var xFactor = 0
+			, yFactor = 0
+			, xOffset = 0
+			, yOffset = 0
+			;
+		if ('textAlign' in this._options)
+		{
+			xFactor = this._options.textAlign[0] || 0;
+			yFactor = this._options.textAlign[1] || 0;
+		}
+		if ('textOffset' in this._options)
+		{
+			if (xFactor === 0) xOffset = this._options.textOffset[0];
+			else if (xFactor === 0) xOffset = -this._options.textOffset[0];
+			if (yFactor === 0) yOffset = this._options.textOffset[1];
+			else if (yFactor === 0) yOffset = -this._options.textOffset[1];
+		}
+		return	{ x: xFactor * dimensions.width + xOffset
+						, y: yFactor * dimensions.height + yOffset};
+	};
+	
+	return this;
+}).call(TextButtonFactory.prototype);

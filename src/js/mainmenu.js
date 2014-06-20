@@ -14,22 +14,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	MainMenu.prototype = on(Object.create(Phaser.State.prototype), function (def)
 	{
-		function makeButton (self, text)
-		{
-			var btn = self.game.make.button(0, 0, 'button')
-				, label = self.game.make.text(0, 0, text, Object.create(Config.TextStyle))
-				;
-			label.inputEnabled = true;
-			label.events.onInputOver.add(btn.onInputOverHandler, btn);
-			label.events.onInputOut.add(btn.onInputOutHandler, btn);
-			label.events.onInputDown.add(btn.onInputDownHandler, btn);
-			label.events.onInputUp.add(btn.onInputUpHandler, btn);
-			label.x = Math.floor((btn.width - label.width) / 2);
-			label.y = Math.floor((btn.height - label.height) / 2);
-			btn.addChild(label);
-			return btn;
-		};
-		
 		def.init = function (parentCtrl)
 		{
 			this.parent = parentCtrl;
@@ -40,16 +24,22 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			this.game.load
 				.image('mainmenu-bg', 'assets/entwurf-hauptmenue.png')
-				.image('button', 'assets/ui/ui-board-decorated.png')
+				.image('mainmenu-button', 'assets/ui/ui-board-decorated.png')
 				;
 		};
 		
 		def.create = function ()
 		{
-			this.game.add.sprite(0, 0, 'mainmenu-bg');
-			var start = makeButton(this, "start")
-				, credits = makeButton(this, "credits")
+			var btnFactory = TextButtonFactory(this.game,
+						{ key: 'mainmenu-button'
+						, normalStyle: Config.TextStyle
+						, overStyle: { fill: 'gold'}
+						, textAlign: [.5,.5]
+						})
+				, start = btnFactory.create("start")
+				, credits = btnFactory.create("credits")
 				;
+			this.game.add.sprite(0, 0, 'mainmenu-bg');
 			
 			start.position.set(570, 205);
 			start.onInputUp.add(function()
