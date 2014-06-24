@@ -57,6 +57,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('captains-bg', 'assets/ui/ui-avatarbox.png')
 			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
 			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
+			this.game.load.spritesheet('almanach', 'assets/icons/ui-almanach.png', 64, 64)
 			;
 	};
 
@@ -77,16 +78,23 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 		/**
 		 * Nur übergangsweise zu Testzwecken
-		 
-		var image = this.game.add.sprite(750, 450, 'decor-board');
+		 */
+		var image1 = this.game.add.sprite(Config.CptPanel.Origin.x+Config.Left+20, Config.CptPanel.Origin.y + 200, 'almanach');
 	    //  Moves the image anchor to the middle, so it centers inside the game properly
-	    image.anchor.set(0.5);
-	    image.scale.set(0.5);
-
+	    image1.anchor.set(0.5);
+	   // image1.scale.set(0.5);
+	    imagefunction = function(){
+	    	this.parent.openAlmanach();
+	    }
 	    //  Enables all kind of input actions on this image (click, etc)
-	    image.inputEnabled = true;
-	  //  image.events.onInputDown.add(this.parent.openAlmanach(), this);
-		*/
+	    image1.inputEnabled = true;
+	    image1.events.onInputDown.add(
+	    		imagefunction,this);
+	    
+	    imagefunction = function(){
+	    	this.parent.openAlmanach();
+	    }
+		
 	};
 
 	AK.Desk.prototype.update = function ()
@@ -171,8 +179,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		//document navigation
 		grp = this.game.make.group();
 		deskGrp.add(grp);
-		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 180);
-		grp.create(0, 0, 'decor-board').scale.set(0.6);
+		grp.position.set(Config.CptPanel.Origin.x-40, Config.CptPanel.Origin.y + 170);
+		grp.create(0, 0, 'decor-board').scale.set(0.9);
 
 	};//Desk.createCaptainsPanel
 	

@@ -3,23 +3,32 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
 [ 	{
 		title:"Geographie",
 		content:[	{
-						type:image, 
+						type:'image', 
 						url:"assets\chars\captain-british-large.png"
 					},
 					{
-						type:paragraph,
+						type:'paragraph',
 						text:"Blabla bla vblalblablabla"
 					},
 					{
-						type:paragraph,
+						type:'paragraph',
 						text:"Blabla bla vblalblablabla"
 					}
 		         ]
 	},
 	
 	{
-		title:"2",
-		content:"2"
-	}
+		title:"Hauptschule",
+		content:[	{
+						type:'image', 
+						url:"assets\chars\captain-british-large.png"
+					},
+					{
+						type:'paragraph',
+						text:"Blabla bla vblalblablabla"
+					},
+		         ]
+	},
 	
-]);
+]
+);
