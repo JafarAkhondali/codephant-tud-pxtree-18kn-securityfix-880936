@@ -72,6 +72,22 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, fill: "white"
 		}
 	}
+
+, Credits:
+	{ TextStyle:
+		{ font: "normal 14pt sans-serif"
+		, fill: "white"
+		}
+	, TextArea:
+		{ x: 430, y: 0
+		, width: 1024 - 430
+		, height: 576
+		, Padding: [30, 30]
+		}
+	, RolesXOffset: 200
+	, LineSpace: 5
+	, TextYOrigin: 100
+	}
 }
 
 );
