@@ -39,14 +39,18 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		def.preload = function ()
 		{
 			this.game.load
-				.image('mainmenu-bg', 'assets/entwurf-hauptmenue.png')
+				.image('mainmenu-bg', 'assets/textures/mm-bg.png')
 				.image('button', 'assets/ui/ui-board-decorated.png')
+				.image('logo', 'assets/ui/ui-logo.png');
 				;
 		};
 		
 		def.create = function ()
 		{
 			this.game.add.sprite(0, 0, 'mainmenu-bg');
+			var logo = this.game.add.sprite(700,80,'logo');
+			logo.anchor.set(0.5);
+			logo.scale.set(3);
 			var start = makeButton(this, "start")
 				, credits = makeButton(this, "credits")
 				;
