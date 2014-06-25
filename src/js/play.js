@@ -18,6 +18,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.events = new AK.Events(this); //TODO make extra event layer
 					this.sea = new AK.Sea(this);
 					this.desk = new AK.Desk(this);
+					this.almanach = new AK.Almanach(this);
 				}
 				
 			, preload : function preload ()
@@ -25,6 +26,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.preload();
 					this.desk.preload();
 					this.events.preload();
+					this.almanach.preload();
 				}
 			, create: function create ()
 				{
@@ -32,6 +34,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.desk.create();
 					this.events.create();
 					this.sea.loadLevel(0, 'west');
+					this.almanach.create();
 				}
 			, update: function create ()
 				{
@@ -44,6 +47,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{
 					this.events.startEvent(opts);
 				}
+			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(); }
 			});
 	
 	AK.Play = Play;
