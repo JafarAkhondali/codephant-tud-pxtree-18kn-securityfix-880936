@@ -1,0 +1,86 @@
+{ "id": "http://wwwpub.zih.tu-dresden.de/~s5384755/18knoten/js/level-schema"
+, "$schema": "http://json-schema.org/schema#"
+, "description": "Level map for the educational game 18 Knoten."
+, "type": "object"
+, "required": [ "spots" ]
+, "properties":
+	{ "spots": 
+		{ "type": "array"
+		, "description": "The different places on the map the ship can go."
+		, "items":
+			{ "type": "object"
+			, "description": "Single level map spot."
+			, "required": [ "x", "y", "event" ]
+			, "properties":
+				{ "x":
+					{ "type": "number"
+					, "description": "X coordinate, where to place the spot."
+					}
+				, "y":
+					{ "type": "number"
+					, "description": "Y coordinate, where to place the spot."
+					}
+				, "reachable":
+					{ "type": "array"
+					, "description": "Neighboring spots given by index in spot array."
+					, "items": { "type": "integer", "minimum": 0 }
+					}
+				, "type":
+					{ "type": "string"
+					, "description": "Determines the picture, which is shown along with the spot's cross. Will be randomly chosen, if not present."
+					, "enum": [ "water", "island", "atoll" ]
+					}
+				, "start":
+					{ "type": "object"
+					, "description": "Indicates that this spot is a possible starting point of the map."
+					, "required": [ "dir" ]
+					, "properties":
+						{ "dir":
+							{ "type": "string"
+							, "description": "The ship enters the level map from this direction, when it left the prior level into the opposite direction."
+							, "enum": [ "north", "east", "west", "south" ] }
+						}
+					}
+				, "end":
+					{ "type": "object"
+					, "description": "Indicates that this spot is a ending point of the current map, by which the ship can procede on to the next one."
+					, "required": [ "dir", "to" ]
+					, "properties":
+						{ "dir":
+							{ "type": "string"
+							, "description": "The ship leaves the map into this direction and enters the next map from the starting point of opposite direction."
+							, "enum": [ "north", "east", "west", "south" ] }
+						, "to":
+							{ "type": "integer"
+							, "description": "The index of the level map two which this spot leads."
+							, "minimum": 0
+							}
+						}
+					}
+				, "event":
+					{ "type": "object"
+					, "description": "Determines by which mode the event triggered at arrival on this spot will be selected."
+					, "oneOf":
+						[ { "required": [ "tags" ]
+							, "description": "Randomly select a event from the event database which bears the given tag words."
+							, "properties":
+								{ "tags":
+									{ "type": "array"
+									, "items": { "type": "string" }
+									, "uniqueItems": true
+									}
+								}
+							}
+						, { "required": [ "name" ]
+							, "description": "Select the event with the given name."
+							, "properties":
+								{ "name": { "type": "string" }
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+}
