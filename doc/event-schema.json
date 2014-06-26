@@ -1,0 +1,83 @@
+{ "id": "http://wwwpub.zih.tu-dresden.de/~s5384755/18knoten/js/event-schema"
+, "$schema": "http://json-schema.org/schema#"
+, "definitions":
+	{
+	, "ChildTask":
+		{ "oneOf":
+			[ { "title": "Empty Task"
+				, "description": "An empty task is a possible end of a event's task chain."
+				}
+			, { "$ref": "#" }
+			]
+		}
+	, "Message":
+		{ "description": "Shows a simple dialog with information to the user."
+		, "properties":
+			{ "type":
+				{ "type": "string"
+				, "enum": [ "message" ]
+				}
+			, "description":
+				{ "type": "string"
+				, "description": "The text is shown to the user."
+				}
+			}
+		}
+	, "SingleSelectTask":
+		{ "description": "Presents the user with a descriptive test to select one option of a set of up to four."
+		, "properties":
+			{ "type":
+				{ "type": "string"
+				, "enum": [ "single-select" ]
+				}
+			, "description":
+				{ "type": "string"
+				, "description": "Describes the conditions under which the choice of this task is made."
+				}
+			, "choices":
+				{ "type": "array"
+				, "description": "A collection of reactions to the proposed problem. One of them must be chosen."
+				, "items":
+					{ "type": "object"
+					, "allOf":
+						[ { "properties":
+								{ "label":
+									{ "type": "string"
+									, "description": "A short descriptive text explaining the choice. It will be shown on the selection dialog button."
+									}
+								, "outcome": { "$ref": "#/definitions/Outcome" }
+								}
+							}
+						, { "$ref": "#/definitions/ChildTask"}
+						]
+					}
+				, "minItems": 1
+				, "maxItems": 4
+				}
+			}
+		}
+	, "Outcome":
+		{ "type": "object"
+		, "description": ""
+		}
+	}
+, "type": "object"
+, "title": "RootTask"
+, "required": [ "type" ]
+, "description": "Events are a series of tasks, that a user needs to get through to complete a spot challenge. Each task in a chain can be of different type."
+, "properties":
+	{ "name":
+		{ "type": "string"
+		, "description": "A unique identifier for the task."
+		}
+	, "tags":
+		{ "type": "array"
+		, "description": "A collection of tag words to relate the event to map spots. This only effects the event's root task."
+		, "items": { "type": "string", "minItems": 1 }
+		}
+	}
+, "oneOf":
+	[ { "$ref": "#/definitions/Message" }
+	, { "$ref": "#/definitions/SingleSelectTask"}
+	]
+}
