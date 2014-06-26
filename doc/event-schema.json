@@ -56,9 +56,41 @@
 				}
 			}
 		}
+	, "DragToOrderTask":
+		{ "description": "Several items need to get in place and order via drag-and-drop. They will be randomly shuffled."
+		, "properties":
+			{ "type":
+				{ "type": "string"
+				, "enum": [ "drag-to-order" ]
+				}
+			, "description":
+				{ "type": "string"
+				, "description": "Describes to the user by which aspect the items shall be sorted."
+				}
+			, "items":
+				{ "description": "The things to sort. This can either be words or a collection of sprites."
+				, "oneOf":
+					[ { "type": "array"
+						, "description": "Words."
+						, "items":
+							{ "type": "string"
+							}
+						}
+					, { "type": "object"
+						, "description": "The items to sort. The keys of the object give the name by which the item is identified, the values give the texture to draw."
+						, "additionalProperties":
+							{ "type": "string"
+							}
+						}
+					]
+				}
+			}
+		}
 	, "Outcome":
 		{ "type": "object"
-		, "description": ""
+		, "description": "Describes the changes, that affect the user's statistics. Each key describes a property of the Stats object. The value is added to the statistic."
+		, "additionalProperties":
+			{ "type": "integer" }
 		}
 	}
 , "type": "object"
