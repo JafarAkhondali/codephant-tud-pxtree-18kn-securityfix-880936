@@ -58,30 +58,52 @@
 		}
 	, "DragToOrderTask":
 		{ "description": "Several items need to get in place and order via drag-and-drop. They will be randomly shuffled."
+		, "required": [ "description", "items", "itemType", "order", "wrong", "correct" ]
 		, "properties":
 			{ "type":
 				{ "type": "string"
 				, "enum": [ "drag-to-order" ]
 				}
 			, "description":
-				{ "type": "string"
-				, "description": "Describes to the user by which aspect the items shall be sorted."
+				{ "description": "Describes to the user by which aspect the items shall be sorted."
+				, "type": "string"
 				}
 			, "items":
-				{ "description": "The things to sort. This can either be words or a collection of sprites."
-				, "oneOf":
-					[ { "type": "array"
-						, "description": "Words."
-						, "items":
-							{ "type": "string"
-							}
+				{ "description": "The things to sort. This can either be words or a collection of sprites. The keys are the names by which the items are identified."
+				, "type": "object"
+				, "additionalProperties":
+					{ "description": "Depending on the itemType this is either a phrase (word or word chain) or a sprite URL relative to the 'assets'-directory."
+					, "type": "string"
+					}
+				}
+			, "itemType":
+				{ "description": "If 'word' the values of 'items' are presented as text; if 'sprite' the values are interpreted as URLs relative to the 'assets'-directory."
+				, "type": "string"
+				, "enum": [ "word", "sprite" ]
+				}
+			, "order":
+				{ "description": "The correct order of items. The items are represented by their names from 'items'."
+				, "type": "array"
+				, "items": { "type": "string" }
+				}
+			, "correct":
+				{ "description": "If the user resolves the order correctly this path of the task chain is processed."
+				, "type": "object"
+				, "allOf":
+					[ { "properties":
+							{ "outcome": { "$ref": "#/definitions/Outcome" } }
 						}
-					, { "type": "object"
-						, "description": "The items to sort. The keys of the object give the name by which the item is identified, the values give the texture to draw."
-						, "additionalProperties":
-							{ "type": "string"
-							}
+					, { "$ref": "#/definitions/ChildTask" }
+					]
+				}
+			, "wrong":
+				{ "description": "If the user guesses the order wrongly this path of the task chain is processed."
+				, "type": "object"
+				, "allOf":
+					[ { "properties":
+							{ "outcome": { "$ref": "#/definitions/Outcome" } }
 						}
+					, { "$ref": "#/definitions/ChildTask" }
 					]
 				}
 			}
@@ -110,6 +132,7 @@
 	}
 , "oneOf":
 	[ { "$ref": "#/definitions/Message" }
-	, { "$ref": "#/definitions/SingleSelectTask"}
+	, { "$ref": "#/definitions/SingleSelectTask" }
+	, { "$ref": "#/definitions/DragToOrderTask" }
 	]
 }
