@@ -98,7 +98,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 							, "description": "Nach einer kurzen Demonstration deiner Waffen ist der Stamm zu einem Handel bereit."
 							, "outcome":
 								{ "player.strength": -5
-								, "player.foo": +30
+								, "player.food": +30
 								}
 							}
 						, { "name": "native_island_food"
