@@ -13,17 +13,17 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		//TODO replace with gathering of actual data.
 		this.stats = new AK.Stats(
 				{ player:
-					{ name: "Paddington"
+					{ name: "Cumberdale"
 					, morale: 11
-					, nationality: 'portuguese'
-					, gold: 20000
-					, food: 500
-					, crewCount: 31
-					, strength: 23
+					, nationality: 'british'
+					, gold: 100
+					, food: 20
+					, crewCount: 10
+					, strength: 5
 					}
 				, ship:
 					{ speed: 0.2
-					, crewCapacity: 60
+					, crewCapacity: 20
 					}
 				});
 	};

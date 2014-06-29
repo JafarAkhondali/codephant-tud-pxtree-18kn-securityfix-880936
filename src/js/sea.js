@@ -15,7 +15,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	AzK.Sea.prototype = 
 			{ preload : function ()
 				{
-					this.game.load.image('water', 'assets/textures/water.jpg');
+					this.game.load.image('water', 'assets/textures/water.png');
 					this.spots.preload();
 					this.ship.preload();
 				}

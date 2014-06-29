@@ -21,9 +21,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.game.load
 				.image('wood', 'assets/textures/wood.jpg')
 				.image('eventbox-bg', 'assets/ui/ui-eventbox.png')
-				.image('eventbox-btn', 'assets/ui/ui-eventbox-button.png')
+				//.image('eventbox-btn', 'assets/ui/ui-eventbox-button.png')
 				.spritesheet(
-					'dialog-button', 'assets/ui/ui-eventbox-button.png', 4, 16, 3)
+					'eventbox-btn', 'assets/ui/ui-eventbox-button.png', 386, 28)
 				;
 	};
 	
