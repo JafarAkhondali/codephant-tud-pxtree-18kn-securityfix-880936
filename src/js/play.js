@@ -19,7 +19,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea = new AK.Sea(this);
 					this.desk = new AK.Desk(this);
 					this.almanach = new AK.Almanach(this);
-				}
+					this.tutorial = new AK.Tutorial(this);
+					}
 				
 			, preload : function preload ()
 				{
@@ -27,15 +28,17 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.desk.preload();
 					this.events.preload();
 					this.almanach.preload();
+					this.tutorial.preload();
 				}
 			, create: function create ()
 				{
 					this.sea.create();
 					this.desk.create();
 					this.events.create();
-					console.log(this.top.currentLevel + ' ' + this.top.enteringFrom)
 					this.sea.loadLevel(this.top.currentLevel, this.top.enteringFrom);
 					this.almanach.create();
+					this.tutorial.create();
+					this.tutorial.openTutorial(); 
 				}
 			, update: function create ()
 				{
@@ -49,6 +52,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.events.startEvent(opts);
 				}
 			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(); }
+			, openTutorial: function openTutorial() {this.tutorial.openTutorial(); }
 			});
 	
 	AK.Play = Play;

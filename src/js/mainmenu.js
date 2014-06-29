@@ -36,7 +36,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						, overStyle: { fill: 'gold'}
 						, textAlign: [.5,.5]
 					})
-		, start = btnFactory.create("start")
+		, start = btnFactory.create("neues spiel")
 		, fortsetzen = btnFactory.create("fortsetzen")
 		, credits = btnFactory.create("credits")
 		;
