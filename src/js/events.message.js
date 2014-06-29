@@ -32,7 +32,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				def.ok = function ok (okHandler, okContext)
 				{
 					this._okBtn.label.events.onInputDown.add(okHandler, okContext);
-					this._okBtn.marker.events.onInputDown.add(okHandler, okContext);
+					this._okBtn.bg.events.onInputDown.add(okHandler, okContext);
 					
 					return this;
 				};

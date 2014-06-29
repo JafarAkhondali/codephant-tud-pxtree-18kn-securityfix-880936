@@ -1,14 +1,14 @@
 
 namespace("PXTree.AchtzehnKnoten.Config",
 
-{ TextStyle: { font: "normal 12pt sans-serif", fill: "black" }
+{ TextStyle: { font: "normal 8pt GameFont", fill: "black" }
 , Game:
 	{ Width: 1024, Height: 576 }
 
 , Events:
 	{ Description:
 		{ TextStyle:
-			{ font: "normal 12pt sans-serif"
+			{ font: "normal 8pt GameFont"
 			, fill: "white"
 			, wordWrap: true
 			, wordWrapWidth: 365
@@ -18,7 +18,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		}
 	, Button:
 		{ TextStyle:
-			{ font: "normal 12pt sans-serif"
+			{ font: "normal 8pt GameFont"
 			, fill: "white"
 			, wordWrap: true
 			, wordWrapWidth: 365
@@ -45,40 +45,40 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	{ Left: 576
 	
 	, StatPaper:
-		{ TextStyle: { font : 'normal 12pt sans-serif', fill: 'black' }
-		, Offset: { x: 10, y: 10 }
+		{ TextStyle: { font : 'normal 8pt GameFont', fill: 'black' }
+		, Offset: { x: 30, y: 30 }
 		, Lines:
-			{ Origin: { x: 20, y: 30 }
+			{ Origin: { x: 20, y: 20 }
 			, LineHeight: 40
-			, LabelOffset: { x: 37, y: 10 }
-			, ValueXOffset: 105
+			, LabelOffset: { x: 100, y: 10 }
+			, ValueXOffset: -50
 			}
 		}
 
 	, CptPanel:
-		{ Origin : { x : 260, y : 10 }
+		{ Origin : { x : 270, y : 20 }
 		, TextStyle:
-			{ font: 'normal 12pt sans-serif'
+			{ font: 'normal 8pt GameFont'
 			, fill: 'white'
 			, wordWrap: true
 			, wordWrapWidth: 81
 			}
 		, Morale:
-			{ Offset: [260,110]
+			{ Offset: [270,122]
 			}
 		}
 	}
 
 , MainMenu:
 	{ TextStyle:
-		{ font: "bold 20pt sans-serif"
+		{ font: "bold 16pt GameFont"
 		, fill: "white"
 		}
 	}
 
 , Credits:
 	{ TextStyle:
-		{ font: "normal 14pt sans-serif"
+		{ font: "normal 8pt GameFont"
 		, fill: "white"
 		}
 	, TextArea:
