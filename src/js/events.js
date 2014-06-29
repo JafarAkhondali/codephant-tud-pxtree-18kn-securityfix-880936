@@ -143,7 +143,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		var matching = []
 			, selected = null
 			, testTags = function (ev)
-					{ return ev.tags.every(function (t) { return tags.indexOf(t) >= 0; }); }
+					{
+						if (!('tags' in ev)) return false;
+						return ev.tags.every(function (t) { return tags.indexOf(t) >= 0; });
+					}
 			;
 		AK.Data.Events.forEach(function(ev)
 		{
