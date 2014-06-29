@@ -33,7 +33,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.create();
 					this.desk.create();
 					this.events.create();
-					this.sea.loadLevel(0, 'west');
+					this.sea.loadLevel(0, 'east');
 					this.almanach.create();
 				}
 			, update: function create ()
