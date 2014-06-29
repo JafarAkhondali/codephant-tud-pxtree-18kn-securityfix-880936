@@ -47,22 +47,21 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		page_flag = 0;
 		var titles = [];
 		var count = 0;
-		var title, text_im;
+		var title, text_im, titletext;
 		var text = "Keine gültigen Daten gefunden";
-
 		
 		var textstyle = Config.StatPaper.TextStyle;
-		var headline = this.game.add.text(Config.Left + 150, 80+count, 'Almanach - Index', textstyle);
+		var headline = this.game.add.text(Config.Left + 150, 80+count, 'Almanach des Schiffes', textstyle);
 		txtGrp.add(headline);
 		for(var i=0; i<data_almanach.length;i++) {
 			count+=30;
-			if(text == null) text = "Keine gültigen Daten gefunden";
+			if(titletext == null) text = "Keine gültigen Daten gefunden";
 			title = data_almanach[i].title;
 			//textbutton.events.onInputOver.add(mouseInHandler, this);
 			//textbutton.events.onInputOut.add(mouseOutHandler, this);
-			this.createButton(title, Config.Left + 50, 100+count);
-			text = this.game.make.text(Config.Left + 50, 100+count, data_almanach[i].title, textstyle);
-			txtGrp.add(text);
+			titletext = this.game.make.text(Config.Left + 50, 100+count, data_almanach[i].title, textstyle);
+			txtGrp.add(titletext);
+			this.createButton(title, 0, Config.Left + 50, 100+count, title.length, titletext);
 		};
 		txtGrp.setAll('visible','true');
 		
@@ -85,7 +84,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	};
 	
 	
-	AK.Almanach.prototype.openPage = function (title, page) {
+	AK.Almanach.prototype.openPage = function (title, line) {
     	txtGrp.removeAll();
     	alm_view.removeAll();
     	page_flag = 1;
@@ -96,23 +95,23 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			if(data_almanach[i].title==title) {page_data = data_almanach[i].content; break; }
 		}
 		var count = 0;
+		var line_number = line;
 		var textstyle = Config.StatPaper.TextStyle;
 		var content_text;
-		var headline = this.game.add.text(Config.Left + 150, 50+count, title + ' (Seite ' + (page+1) +')', textstyle);
+		var content_lines = [];
+		var headline = this.game.add.text(Config.Left + 150, 50+count, title, textstyle);
+		headline.fill='black';
 		txtGrp.add(headline);
-		var from = page*cpp;
-		var upto = (cpp+page*cpp>page_data.length)? page_data.length-cpp*page : cpp;
-		for(var i=from;i<upto;i++){
+		for(var i=0;i<page_data.length;i++){
 			if(page_data[i].type == 'paragraph') {
 				content_text = page_data[i].text;
-				var content_lines = self.splitText(content_text);
-				for(var j=0;j<content_lines.length;j++){
-					text = this.game.make.text(Config.Left + 50, 100+count, content_lines[j], textstyle);
-					txtGrp.add(text);
-					count+=20;
+				if(content_lines.length <= 0 || typeof content_lines == 'undefined') content_lines = self.splitText(content_text);
+				else {
+					content_lines.push.apply(content_lines, self.splitText(content_text));
 				}
+				
 			}
-			if(page_data[i].type == 'image') {
+			/* if(page_data[i].type == 'image') {
 				content_text=page_data[i].url;
 				var img_name = 'image'+i;
 				//text = this.game.make.text(Config.Left + 50, 100+count, content_text, textstyle);
@@ -122,16 +121,27 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				console.log(content_text);
 				//txtGrp.add(text);
 				count+=20;
-			}
-			
+			}*/
 		}
-		if(page_data.length>(page*cpp+cpp)){
-			//TODO: Link zur nächsten Seite   this.openPage(title, page+1);
-		}
+		upto = (line_number+20>content_lines.length)? content_lines.length : line_number+20;
 		
-		if(page>0){
+		for(var j=line_number;j<upto;j++){
+				var contenttext = this.game.make.text(Config.Left + 50, 100+count, content_lines[j], textstyle);
+				contenttext.fill = 'black';
+				txtGrp.add(contenttext);
+				count+=20;
+			}
+		if(content_lines.length>line_number+20){
+			//TODO: Link zur nächsten Seite   this.openPage(title, page+1);
+			var next_link = this.game.add.text(Config.Left + 300, 530, 'Nächste Seite', textstyle);
+			txtGrp.add(next_link);
+			this.createButton(title, line_number+20, Config.Left + 300, 530, title.length, next_link);
+		}
+		if(line_number-20>=0){
 			//TODO: Link zur vorhergehenden Seite
-			//this.openPage(title, page-1);
+			var prev_link = this.game.add.text(Config.Left + 100, 530, 'Vorherige Seite', textstyle);
+			txtGrp.add(prev_link);
+			this.createButton(title, line_number-20, Config.Left + 100, 530, title.length, prev_link);
 		}
 		
 	};
@@ -148,14 +158,20 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
     	
     }
 	
-	AK.Almanach.prototype.createButton = function(title, x, y) {
-		var textbutton = alm_view.create(x,y,null);
+	AK.Almanach.prototype.createButton = function(title, line, x, y, textlength, obj) {
+		var textbutton = this.game.add.tileSprite(x-5,y-5,textlength*10, y+5, null);
+		alm_view.add(textbutton);
 		var self = this;
 		textbutton.inputEnabled = true;
 		textbutton.events.onInputDown.add(function() {
-			self.openPage(title, 0);
+			self.openPage(title, line);
 				});
-		
+		textbutton.events.onInputOver.add(function() {
+			obj.fill='#ff774b';
+		});
+		textbutton.events.onInputOut.add(function() {
+			obj.fill='black';
+		});
 	};
 	
 	AK.Almanach.prototype.splitText = function (text){
