@@ -92,7 +92,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		var wheel = this.game.add.sprite(Config.CptPanel.Origin.x+Config.Left+100, Config.CptPanel.Origin.y + 200, 'wheel');
 	    wheel.anchor.set(0.5);
 	    optionWheel = function(){
-	    	this.game.state.start(AK.MainMenu.key, true, false, this);
+	    	this.game.state.start(AK.MainMenu.key, true, false, this.top);
 	    }
 	    wheel.inputEnabled = true;
 	    wheel.events.onInputDown.add(

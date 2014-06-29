@@ -37,6 +37,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						, textAlign: [.5,.5]
 					})
 		, start = btnFactory.create("start")
+		, fortsetzen = btnFactory.create("fortsetzen")
 		, credits = btnFactory.create("credits")
 		;
 		this.game.add.sprite(0, 0, 'mainmenu-bg');
@@ -47,14 +48,42 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		start.position.set(570, 205);
 		start.onInputUp.add(function()
 				{
-			this.game.state.start(AK.Play.key, true, false, this.parent);
+			if(confirm('Hierbei werden alle vorhanden Daten gelöscht! \n Sind Sie sicher, dass Sie ein neues Spiel starten wollen?') == false) return;
+			localStorage.removeItem('Stats');
+			localStorage.removeItem('currentLevel');
+			localStorage.removeItem('enteringFrom');
+			this.top.stats = new AK.Stats(
+				{ player:
+					{ name: "Paddington"
+					, morale: 11
+					, nationality: 'portuguese'
+					, gold: 20000
+					, food: 500
+					, crewCount: 31
+					, strength: 23
+					}
+				, ship:
+					{ speed: 0.2
+					, crewCapacity: 60
+					}
+				});
+			this.top.currentLevel = 0;
+			this.top.enteringFrom = 'west';
+			this.game.state.start(AK.Play.key, true, false, this.top);
 				}, this);
 		this.game.world.add(start);
+		
+		fortsetzen.position.set(570, 295);
+		fortsetzen.onInputUp.add(function()
+				{
+			this.game.state.start(AK.Play.key, true, false, this.top);
+				}, this);
+		this.game.world.add(fortsetzen);
 	
-		credits.position.set(570, 280);
+		credits.position.set(570, 385);
 		credits.onInputUp.add(function()
 				{
-				this.game.state.start(AK.Credits.key, true, false, this.parent);
+				this.game.state.start(AK.Credits.key, true, false, this.top);
 				},		 this);
 			this.game.world.add(credits);
 			};

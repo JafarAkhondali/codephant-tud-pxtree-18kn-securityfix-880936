@@ -33,7 +33,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.create();
 					this.desk.create();
 					this.events.create();
-					this.sea.loadLevel(0, 'west');
+					console.log(this.top.currentLevel + ' ' + this.top.enteringFrom)
+					this.sea.loadLevel(this.top.currentLevel, this.top.enteringFrom);
 					this.almanach.create();
 				}
 			, update: function create ()
