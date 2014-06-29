@@ -24,7 +24,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.game.load
 		.image('mainmenu-bg', 'assets/textures/mm-bg.png')
 		.image('button', 'assets/ui/ui-board-decorated.png')
-		.image('logo', 'assets/ui/ui-logo.png');
+		.image('logo', 'assets/textures/mm-logo.png');
 	;
 	};
 	
@@ -40,9 +40,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		, credits = btnFactory.create("credits")
 		;
 		this.game.add.sprite(0, 0, 'mainmenu-bg');
-		var logo = this.game.add.sprite(700,80,'logo');
+		var logo = this.game.add.sprite(700,90,'logo');
 		logo.anchor.set(0.5);
-		logo.scale.set(3);
+		logo.scale.set(1.2);
 	
 		start.position.set(570, 205);
 		start.onInputUp.add(function()

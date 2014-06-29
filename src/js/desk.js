@@ -58,6 +58,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
 			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
 			this.game.load.spritesheet('almanach', 'assets/icons/ui-almanach.png', 64, 64)
+			this.game.load.spritesheet('wheel','assets/icons/ui-options.png',64,64)
 			;
 	};
 
@@ -80,20 +81,23 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 * Nur übergangsweise zu Testzwecken
 		 */
 		var image1 = this.game.add.sprite(Config.CptPanel.Origin.x+Config.Left+20, Config.CptPanel.Origin.y + 200, 'almanach');
-	    //  Moves the image anchor to the middle, so it centers inside the game properly
 	    image1.anchor.set(0.5);
-	   // image1.scale.set(0.5);
 	    imagefunction = function(){
 	    	this.parent.openAlmanach();
 	    }
-	    //  Enables all kind of input actions on this image (click, etc)
 	    image1.inputEnabled = true;
 	    image1.events.onInputDown.add(
 	    		imagefunction,this);
 	    
-	    imagefunction = function(){
-	    	this.parent.openAlmanach();
+		var wheel = this.game.add.sprite(Config.CptPanel.Origin.x+Config.Left+100, Config.CptPanel.Origin.y + 200, 'wheel');
+	    wheel.anchor.set(0.5);
+	    optionWheel = function(){
+	    	this.game.state.start(AK.MainMenu.key, true, false, this);
 	    }
+	    wheel.inputEnabled = true;
+	    wheel.events.onInputDown.add(
+	    		optionWheel,this);
+
 		
 	};
 
