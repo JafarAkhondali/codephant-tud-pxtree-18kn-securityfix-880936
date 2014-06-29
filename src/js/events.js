@@ -52,6 +52,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			evt = this._selectEventByTags(opts.tags);
 		else
 			evt = opts;
+
+		this._processOutcome(Config.MoveCosts);
 		this._makeDialogFromTask(evt).show();
 	};
 	
@@ -141,7 +143,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		var matching = []
 			, selected = null
 			, testTags = function (ev)
-					{ return tags.every(function (t) { return ev.tags.indexOf(t) >= 0; }); }
+					{
+						if (!('tags' in ev)) return false;
+						return ev.tags.every(function (t) { return tags.indexOf(t) >= 0; });
+					}
 			;
 		AK.Data.Events.forEach(function(ev)
 		{
