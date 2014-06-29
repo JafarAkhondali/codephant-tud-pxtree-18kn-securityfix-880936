@@ -153,8 +153,10 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 , { "name": "scurvy"
 	, "tags": ["open_sea"]
 	, "description": "Skorbut hat ein Mitglied deiner Crew dahingerafft!"
-	, "outcome":
-		{ "player.crewCount": -1 }
+	, "ok":
+		{ "outcome":
+			{ "player.crewCount": -1 }
+		}
 	}
 	
 , { "name": "azores"
@@ -185,142 +187,122 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	, "tags": ["open_sea"]
 	, "description": "Wie heißt die südlichste Landspitze Afrikas?"
 	, "choices": [ { "name": "geo_quiz_01_a1"
-        , "type": "single-select"
 		, "label": "Kap Agulhas"
 		, "description": "Richtig. Übersetzt bedeutet es soviel wie 'Kap der Nadeln', was wahrscheinlich auf die vielen scharfen Felsen des Riffs zurückzuführen ist."
 		, "outcome": {"player.gold": 1000, "player.food": 100, "player.strength": 5, "player.morale": 5}
 		} , { "name": "geo_quiz_01_a2"
-        , "type": "single-select"
 		, "label": "Kap der Guten Hoffnung"
 		, "description": "Das Kap der guten Hoffnung ist, anders als oft vermutet, nicht die südlichste Landspitze von Afrika."
 		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strenth": -5, "player.morale": -5}
 		} ,	{ "name": "geo_quiz_01_a3"
-        , "type": "single-select"
 		, "label": "Kap Farvel"
 		, "description": "Das ist leider nicht korrekt."
 		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
 		} ,	{ "name": "geo_quiz_01_a4"
-        , "type": "single-select"
 		, "label": "Kap Hafun"
 		, "description": "Das ist nicht richtig."
 		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
 		} ] 
 	}
 ,{ "name": "geo_quiz_03_quiz"
-    , "type": "single-select"
+	, "type": "single-select"
 	, "tags": ["open_sea"]
 	, "description": "In welcher Jahreszeit kommt es nördlich des Nordpolarkreises zu lang anhaltender Tag und Nacht Dunkelheit?"
 	, "choices": [
 		{ "name": "geo_quiz_03_a1"
-        , "type": "single-select"
 		, "label": "Während des Winter"
 		, "description": "Das ist die Richitge Antwort. Deine Crew gewinnt vertrauen in deinen Fähigkeiten"
 		, "outcome": {"player.gold": 500, "player.food": 25, "player.strength": 3, "player.morale": 2}
 		},
 		{ "name": "geo_quiz_03_a2"
-        , "type": "single-select"
-		, "label": "Während des Fürhjahres"
+		, "label": "Während des Frühjahres"
 		, "description": "Das ist leider die falsche Antwort."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_03_a3"
-        , "type": "single-select"
 		, "label": "Während des Sommers"
 		, "description": " Das ist leider die falsche Antwort."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_03_a4"
-        , "type": "single-select"
 		, "label": "Während des Herbstes"
 		, "description": " Das ist leider die falsche Antwort."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player strength": -3, "player.morale": -2}
 		}
 	]
 },{ "name": "geo_quiz_04_quiz"
-    , "type": "single-select"
+	, "type": "single-select"
 	, "tags": ["open_sea"]
 	, "description": "Welche geographische Breite hat der südliche Polarkreis?"
 	, "choices": [
 		{ "name": "geo_quiz_04_a1"
-        , "type": "single-select"
 		, "label": "66,5°S"
 		, "description": " Richtig! Deine Crew vertraut dir."
 		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
 		},
 		{ "name": "geo_quiz_04_a2"
-        , "type": "single-select"
 		, "label": "66,5°N"
 		, "description": " Ein guter Kapitän würde es besser wissen!"
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_04_a3"
-        , "type": "single-select"
 		, "label": "90,0°S"
 		, "description": " Das ist der geographische Südpol und nicht der südliche Polarkreis. Deine Crew hat leichte Zweifel an deinen Fähigkeiten"
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_04_a4"
-        , "type": "single-select"
 		, "label": "23,5°S"
 		, "description": " Der südliche Polarkreis, nicht der südliche Wendekreis. Deine Crew hat leichte Zweifel an deinen Fähigkeiten."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		}
 	]
 },{ "name": "geo_quiz_05_quiz"
-    , "type": "single-select"
+	, "type": "single-select"
 	, "tags": ["open_sea"]
 	, "description": "Welche Meeresströmung hält im Winter die norwegischen Seehäfen weitgehend eisfrei?"
 	, "choices": [
 		{ "name": "geo_quiz_05_a1"
-        , "type": "single-select"
 		, "label": "Der Nordatlantikstrom"
 		, "description": "Vollkommen richtig!"
 		, "outcome": {"player.gold": 500, "player.food": 25, "player.strength": 3, "player.morale": 2}
 		},
 		{ "name": "geo_quiz_05_a2"
-        , "type": "single-select"
 		, "label": "Der Golfstrom"
 		, "description": "Der Golfstrom wird im Nordatlantik zum Nordatlantikstrom und hält die Seehäfen eisfrei"
 		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
 		},
 		{ "name": "geo_quiz_05_a3"
-        , "type": "single-select"
 		, "label": "Der Kanarenstrom"
 		, "description": "Der Kanarenstrom ist eine kalte Meereströmung. Das kostet dich etwas Gold und Nahrung"
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_05_a4"
-        , "type": "single-select"
 		, "label": "Der Labradorstrom"
 		, "description": "Der Labradorstrom ist eine kalte Meereströmung  und fließt zwischen Grönland und Amerika in Richtung Süden."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3}
 		}
 	]
 },{ "name": "geo_quiz_06_quiz"
-    , "type": "single-select"
+	, "type": "single-select"
 	, "tags": ["open_sea"]
 	, "description": "In etwa 97% des Wassers auf der Erde ist Salzwasser. Das restliche Süßwasser ist beinahe zu 70% Gletschereis. Wo findet man die größten Süßwasservorräte?"
 	, "choices": [
 		{ "name": "geo_quiz_06_a1"
-        , "type": "single-select"
 		, "label": "In der Antarktis"
 		, "description": " So gut, wie der gesamte Kontinent ist vergletschert und speichert die größten Süßwasservorräte"
 		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
 		},
 		{ "name": "geo_quiz_06_a2"
-        , "type": "single-select"
 		, "label": "In Grönland"
 		, "description": " In Grönland gibt es die größten Gletscher außerhalb des Antarktis, die als größter Süßwasserspeicher gilt."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_06_a3"
-        , "type": "single-select"
 		, "label": "Auf dem Nordpol"
 		, "description": " Das ist die falsche Antwort. Die größten Reservern sind in der Antarktis gespeichert."
 		, "outcome": { "player.gold": -500, "player.food": -25, "player.strentgh": -3, "player.morale": -2}
 		},
 		{ "name": "geo_quiz_06_a4"
-        , "type": "single-select"
 		, "label": "In den Gletschervorkommen der Hochgebirge"
 		, "description": " Die Hochgebirgsgletscher speichern bei weitem nicht die Menge an Süßwasser, wie die Antarktis."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
@@ -630,10 +612,3 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	
 ]
 );
-			
-				
-	
-				
-			
-		
-		

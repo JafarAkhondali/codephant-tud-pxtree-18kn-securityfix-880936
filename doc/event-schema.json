@@ -21,10 +21,16 @@
 				{ "type": "string"
 				, "description": "The text is shown to the user."
 				}
-			, "outcome": { "$ref": "#/definitions/Outcome" }
-			, "ok": { "$ref": "#/definitions/ChildTask"
-				,
-			}
+			, "ok":
+				{ "type": "object"
+				, "allOf":
+					[ { "properties":
+							{ "outcome": { "$ref": "#/definitions/Outcome" }
+							}
+						}
+					, { "$ref": "#/definitions/ChildTask"}
+					]
+				}
 		}
 	, "SingleSelectTask":
 		{ "description": "Presents the user with a descriptive test to select one option of a set of up to four."

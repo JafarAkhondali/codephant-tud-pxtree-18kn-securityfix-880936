@@ -26,7 +26,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			task.type = "message";
 		}
-		
 	}
 	
 	AK.Events.prototype.preload = function preload ()
@@ -65,7 +64,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			evt = this._selectEventByTags(opts.tags);
 		else
 			evt = opts;
-console.dir(evt);
 		this._processOutcome(Config.MoveCosts);
 		this._makeDialogFromTask(evt).show();
 	};
@@ -109,15 +107,18 @@ console.dir(evt);
 	 */
 	AK.Events.prototype._resolveTask = function _resolveTask (task)
 	{
-		if (!('type' in task)) AK.Events._inferType(task);
+		if (!('type' in task))
+		{
+			AK.Events._inferType(task);
+		}
 		
 		var taskName = task.type.replace(
 					/(^|-)[a-z]/g, function (m) { return m[m.length-1].toUpperCase(); })
-			, funcName = "_resolve" + taskName
+			, funcName = "_resolve" + taskName + "Task"
+			, nextTask = null
 			;
 
 		nextTask = this[funcName].apply(this, arguments);
-		
 		if (nextTask)
 		{
 			dial = this._makeDialogFromTask(nextTask);
@@ -129,10 +130,10 @@ console.dir(evt);
 	/**
 	 *
 	 */
-	AK.Events.prototype._resolveMessage = function (task)
+	AK.Events.prototype._resolveMessageTask = function (task)
 	{
 		if (task.hasOwnProperty('outcome'))
-			this._processOutcome(task.outcome);
+			this._processOutcome(task.ok.outcome);
 
 		return task.ok || null;
 	};
@@ -140,7 +141,7 @@ console.dir(evt);
 	/**
 	 *
 	 */
-	AK.Events.prototype._resolveSingleSelect = function (task, idx)
+	AK.Events.prototype._resolveSingleSelectTask = function (task, idx)
 	{
 		var choice = task.choices[idx]
 			;
