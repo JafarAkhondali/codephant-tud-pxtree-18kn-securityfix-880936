@@ -36,6 +36,9 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, Padding: [20,20]
 		, Margin: [81,68]
 		}
+	, MoveCosts:
+		{ "player.food": -15
+		}
 	}
 
 , Desk:

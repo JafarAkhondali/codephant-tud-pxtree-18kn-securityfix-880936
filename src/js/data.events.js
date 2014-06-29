@@ -123,13 +123,25 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		]
 	}
 	
-	
-
-
-
-
-
-
+, { name: "drag-testing"
+	, type: "drag-to-order"
+	, description: "Try to sort the words!"
+	, itemType: "word"
+	, items:
+		{ "one": "Eins"
+		, "two": "Zwei"
+		, "three": "Drei"
+		, "four": "Vier"
+		}
+	, correct:
+		{ type: "message"
+		, description: "Das hast du fein gemacht!"
+		}
+	, wrong:
+		{ type: "message"
+		, description: "Das war falsch!"
+		}
+	}
 ]
 
 );

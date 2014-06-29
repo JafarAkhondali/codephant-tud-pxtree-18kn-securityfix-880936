@@ -61,14 +61,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			var names = this._splitFullName(fullname)
 				, parent = this._ensurePath(names)
 				, name = names.pop()
+				, oldValue = parent[name]
 				;
 			parent[name] = value;
 			
 			if (fullname in this._valueChangedIndividualHandlers)
 			{
-				this._valueChangedIndividualHandlers[fullname].dispatch(value);
+				this._valueChangedIndividualHandlers[fullname].dispatch(value, oldValue);
 			}
-			this._valueChangedHandlers.dispatch(value);
+			this._valueChangedHandlers.dispatch(fullname, value, oldValue);
 		};
 		
 		this.registerValueChangedHandler = function (fullnameOrHandler, handlerOrContext, context)

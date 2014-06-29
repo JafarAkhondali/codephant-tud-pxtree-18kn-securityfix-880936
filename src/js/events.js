@@ -16,6 +16,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._dialogParent = null;
 	};
 	
+	
 	AK.Events.prototype.preload = function preload ()
 	{
 		this.game.load
@@ -52,6 +53,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			evt = this._selectEventByTags(opts.tags);
 		else
 			evt = opts;
+		this._processOutcome(Config.MoveCosts);
 		this._makeDialogFromTask(evt).show();
 	};
 	
@@ -65,22 +67,72 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.prototype._makeDialogFromTask = function _makeDialogFromTask (task)
 	{
 		var dial = null
+			, makeFuncName = null
 			;
-		if ('choices' in task) //SingleSelection
+		
+		// infer type if not present. NOTE: this will soon be removed!
+		if (!('type' in task))
 		{
-			dial = new AK.Events.SingleSelectDialog(this.game, this._dialogParent);
-			dial.description(task.description);
-			task.choices.forEach(function (choice, idx)
+			if ('choices' in task) //SingleSelection
 			{
-				dial.choice(choice.label,
-						(function () { this._resolveTask(task, idx); }).bind(this));
-			}, this);
+				task.type = "single-select";
+			}
+			else if ('description' in task) //Message
+			{
+				task.type = "message";
+			}
 		}
-		else if ('description' in task) //Message
+		
+		if (!("type" in task)) return null;
+		
+		makeFuncName = "_make"
+				+ task.type.replace(
+						/(^|-)[a-z]/g,
+						function(m){ return m[m.length-1].toUpperCase(); })
+				+ "Dialog";
+		return this[makeFuncName](task);
+	};
+	
+	/**
+	 * 
+	 */
+	AK.Events.prototype._makeMessageDialog = function (task)
+	{
+		var dial = new AK.Events.MessageDialog(this.game, this._dialogParent);
+		dial.message(task.description);
+		return dial;
+	};
+	
+	/**
+	 * 
+	 */
+	AK.Events.prototype._makeSingleSelectDialog = function (task)
+	{
+		var dial = new AK.Events.SingleSelectDialog(this.game, this._dialogParent);
+		dial.description(task.description);
+		task.choices.forEach(function (choice, idx)
 		{
-			dial = new AK.Events.MessageDialog(this.game, this._dialogParent);
-			dial.message(task.description);
+			dial.choice(choice.label,
+					(function () { this._resolveTask(task, idx); }).bind(this));
+		}, this);
+		return dial;
+	};
+	
+	/**
+	 * 
+	 */
+	AK.Events.prototype._makeDragToOrderDialog = function (task)
+	{
+		var dial = new AK.Events.DragToOrderDialog(this.game, this._dialogParent, task.itemType)
+			, iname, item
+			;
+		dial.description(task.description);
+		for (iname in task.items)
+		{
+			item = task.items[iname];
+			dial.item(iname, item);
 		}
+		
 		return dial;
 	};
 	
@@ -141,7 +193,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		var matching = []
 			, selected = null
 			, testTags = function (ev)
-					{ return tags.every(function (t) { return ev.tags.indexOf(t) >= 0; }); }
+					{
+						if (!('tags' in ev)) return false;
+						return tags.every(function (t) { return ev.tags.indexOf(t) >= 0; });
+					}
 			;
 		AK.Data.Events.forEach(function(ev)
 		{
