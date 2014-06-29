@@ -1,4 +1,4 @@
-
+﻿
 namespace("PXTree.AchtzehnKnoten", function (AK)
 {
 	var Config = AK.Config.Desk;
@@ -11,28 +11,30 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.game = play.game;
 		this._statData = {};
 		this.stats = this.top.stats;
+		this.sailors = null;
+		this.captain = null;
 	};
 	
 	AK.Desk.Const =
 			{ LinesConf :
 				{ crewCount :
 					{ icon : 'small-sailor'
-					, label : 'Mannschaft:'
+					, label : 'Mannschaft'
 					, position : 0
 					}
 				, strength :
 					{ icon : 'small-soldier'
-					, label : 'Waffenstärke:'
+					, label : 'Soldaten'
 					, position : 1
 					}
 				, food :
 					{ icon : 'food-icon'
-					, label : 'Nahrung:'
+					, label : 'Nahrung'
 					, position : 2
 					}
 				, gold :
 					{ icon : 'gold-icon'
-					, label : 'Gold:'
+					, label : 'Gold'
 					, position : 3
 					}
 				}
@@ -42,24 +44,31 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Desk.prototype.preload = function ()
 	{
 		this.game.load
-			.image('wood', 'assets/textures/wood.jpg')
+			.image('desk-bg', 'assets/ui/ui-bg.png')
 			.image('paper', 'assets/ui/ui-paper.png')
 			.image('food-icon', 'assets/icons/ui-food.png')
 			.image('gold-icon', 'assets/icons/ui-gold.png')
-			.image('small-sailor', 'assets/chars/sailor-simple.png')
+			//.image('small-sailor', 'assets/chars/sailor-simple.png')
 			.image('small-soldier', 'assets/chars/soldier-spanish-simple.png')
-			.image('captain-spanish', 'assets/chars/captain-placeholder-large.png')
-			.image('captain-portuguese', 'assets/chars/captain-portugese-large.png')
-			.image('captain-british', 'assets/chars/captain-british-large.png')
+			.spritesheet('small-captain-british', 'assets/chars/captain-british-simple.png',32,32)
+			.image('small-captain-spanish', 'assets/chars/captain-spanish-simple.png')
+			.image('large-captain-spanish', 'assets/chars/captain-spanish-large.png')
+			.image('large-captain-british', 'assets/chars/captain-british-large.png')
 			.image('decor-board', 'assets/ui/ui-board-decorated.png')
 			.image('ship-avatar', 'assets/ui/visual-ship.png')
 			.image('ship-avatar-bg', 'assets/textures/ship-background.png')
+			.image('ship-avatar-border', 'assets/ui/visual-box.png')
+			.spritesheet('ship-gischt', 'assets/ui/visual-gischt.png', 300,32)
 			.image('captains-bg', 'assets/ui/ui-avatarbox.png')
 			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
 			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
-			this.game.load.spritesheet('almanach', 'assets/icons/ui-almanach.png', 64, 64)
-			this.game.load.spritesheet('wheel','assets/icons/ui-options.png',64,64)
+			.spritesheet('small-sailor','assets/chars/sailor-simple.png',32,32)
+			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 64, 64)
+			.spritesheet('wheel','assets/icons/ui-options.png',64,64)
+			.audio('audio-ambient-ship', ['assets/audio/ship-at-sea.wav']);
 			;
+			
+		
 	};
 
 	AK.Desk.prototype.create = function ()
@@ -68,15 +77,54 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			;
 		deskGrp.position.set(Config.Left, 0);
 		//desktop wood texture
-		deskGrp.add(this.game.make.tileSprite(
+		deskGrp.add(this.game.make.sprite(
 				0, 0,
-				this.game.width - Config.Left, this.game.height,
-				'wood'));
+				'desk-bg'));
 
 		this.createStatPaper(deskGrp);
 		this.createCaptainsPanel(deskGrp);
-		this.createShipAvatar(deskGrp);
+		//this.createShipAvatar(deskGrp);
 
+		// START SHIP AVATAR
+		
+		var shipgrp = this.game.make.group();
+		deskGrp.add(shipgrp);
+		shipgrp.position.set(20, 240);
+		shipgrp.create(0, 0, 'ship-avatar-bg');
+		if (this.captain === null){
+			this.captain = shipgrp.create(70,180,'small-captain-'+this.stats.get('player.nationality'));
+			this.captain.animations.add('idle',[0],8,true);
+			this.captain.animations.add('idle_telescope',[0,1,2,3,4,5,6,7,8,9,10,11,12,13],4,true);
+			this.game.time.events.loop(2000, function(){
+				if (Math.random() <= 0.5){
+					this.captain.animations.play('idle');
+				} else {
+					this.captain.animations.play('idle_telescope');
+				}
+			}, this);
+		}
+		
+		//init sailors
+		if (this.sailors === null) {		
+			this.sailors = this.game.make.group();
+			shipgrp.add(this.sailors);
+			this.sailors.position.set(120,200);
+		}
+		
+		shipgrp.create(10, 10, 'ship-avatar');
+		var gischt = shipgrp.create(110, 285, 'ship-gischt');
+		gischt.animations.add('play', [0, 1, 3, 4], 4, true);
+		gischt.animations.play('play');
+		
+		shipgrp.create(0, 0, 'ship-avatar-border');
+		
+		this.updateSailors(this.stats.get('player.crewCount'),0);
+		
+		// END SHIP AVATAR
+		
+		//PLAY AUDIO
+		var music_ambient = this.game.sound.play('audio-ambient-ship');
+		
 		/**
 		 * Nur übergangsweise zu Testzwecken
 		 */
@@ -102,7 +150,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	};
 
 	AK.Desk.prototype.update = function ()
-	{};
+	{
+		
+	};
 	
 	AK.Desk.prototype.createStatPaper = function (deskGrp)
 	{
@@ -161,9 +211,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		grp.add(this.game.make.sprite(0, 0, 'captains-bg'));
 		
-		grp.create(10, 20, 'captain-'+this.stats.get('player.nationality'));
-		grp.add(this.game.make.text(82, 17, 'Captain', Config.CptPanel.TextStyle));
-		grp.add(this.game.make.text(82, 40, this.stats.get('player.name'), Config.CptPanel.TextStyle));
+		grp.create(8, 24, 'large-captain-'+this.stats.get('player.nationality'));
+		grp.add(this.game.make.text(85, 24, 'Captain', Config.CptPanel.TextStyle));
+		grp.add(this.game.make.text(85, 40, this.stats.get('player.name'), Config.CptPanel.TextStyle));
 		
 		//captain morale
 		grp = this.game.make.group();
@@ -190,14 +240,47 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	AK.Desk.prototype.createShipAvatar = function (deskGrp)
 	{
-		var grp = this.game.make.group()
-			;
-		
-		deskGrp.add(grp);
-		grp.position.set(13, 250);
-		grp.create(0, 0, 'ship-avatar-bg');
-		grp.create(10, 10, 'ship-avatar');
+		//deprecated
 	};
+	
+	AK.Desk.prototype.updateSailors = function(new_sailors, old_sailors)
+	{
+		var diff = new_sailors - old_sailors;
+		
+		if (diff < 0) {
+			for (var i = 0; i < Math.abs(diff); i++) {
+				this.sailors.getBottom().destroy();
+			}
+		} else if (diff > 0 ) {
+			for (var i = 0; i < diff; i++) {
+				var x_pos_start = Math.floor((Math.random() * 150));
+				var x_pos_end = Math.floor((Math.random() * 150));
+				
+				var s = this.sailors.create(x_pos_start,0, 'small-sailor');
+				s.animations.add('left', [0, 1, 2, 3], 8, true);
+				s.animations.add('right', [4, 5, 6, 7], 8, true);
+				
+				if (x_pos_end - x_pos_start > 0 ){
+					s.animations.play('right');
+				} else {
+					s.animations.play('left');
+				}
+				
+				var dur = (Math.floor((Math.random() * 2000) + 1)+4000);
+				var tw = this.game.add.tween(s).to( { x: x_pos_end }, dur , Phaser.Easing.Linear.None).yoyo(true).repeat(Number.MAX_VALUE).start();
+				tw.onLoop.add(function() {
+					if (this.animations.currentAnim.name == 'right'){
+						this.animations.play('left');
+						//console.log('now going left');
+					} else {
+						this.animations.play('right');
+						//console.log('now going right');
+					}
+				}.bind(s));
+			}
+		}
+				
+	}
 	
 	AK.Desk.prototype.setStat = function (name, value)
 	{
