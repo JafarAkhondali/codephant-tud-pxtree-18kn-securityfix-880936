@@ -13,12 +13,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 300, y: 240
 			, reachable: [4]
 			, type: 'water'
-			, event: { tags: ["open_sea"] }
+			, event: { tags: ["open_sea", "atlantic"] }
 			}
 		
 		, { x: 420, y: 400
 			, reachable: [3], type: "water"
-			, event: { tags: ["open_sea"] }
+			, event: { tags: ["open_sea", "atlantic"] }
 			}
 		
 		

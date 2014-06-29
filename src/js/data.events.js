@@ -67,7 +67,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 	
 , { "name": "native_island"
-	, "tags": ["island"]
+	, "tags": ["island", "carribean"]
 	, "description": "Land in Sicht!"
 	,	"choices":
 		[ { "name": "native_island_ignore"
@@ -121,6 +121,40 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				]
 			}
 		]
+	}
+	
+, { "name": "no_wind"
+	, "tags": ["open_sea"]
+	, "description": "Flaute! Deine Crew fragt dich, was sie tun soll."
+	, "choices":
+		[ { "name": "no_wind_fish"
+			, "label": "Versuche zu Angeln."
+			, "description": "Deine Crew fängt ein paar Fische."
+			, "outcome":
+				{ "player.food": +15 }
+			}
+		, { "name": "no_wind_sail"
+			, "label": "Die Takelage und die Segel überprüfen."
+			, "description": "Deine Crew nimmt ein paar Reparaturen an den Segeln und der Takelage vor."
+			, "outcome":
+				{ "ship.speed": +0.1
+				, "player.food": -15 }
+			}
+		, { "name": "no_wind_free"
+			, "label": "Der Mannschaft den Tag frei geben."
+			, "description": "Deine Crew genießt einen freien Tag."
+			, "outcome":
+				{ "player.morale": +5
+				, "player.food": -15 }
+			}
+		]
+	}
+	
+, { "name": "scurvy"
+	, "tags": ["open_sea", "atlantic"]
+	, "description": "Skorbut hat ein Mitglied deiner Crew dahingerafft!"
+	, "outcome":
+		{ "player.crewCount": -1 }
 	}
 	
 	
