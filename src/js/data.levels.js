@@ -47,7 +47,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 390, y: 270 
 			, reachable: [2, 3]
 			, type: 'atoll'
-			, event: { tags: ["island"] }
+			, event: { name: "azores" }
 			}
 
 		, { x: 300, y: 170
