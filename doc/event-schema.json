@@ -10,7 +10,7 @@
 			, { "$ref": "#" }
 			]
 		}
-	, "Message":
+	, "MessageTask":
 		{ "description": "Shows a simple dialog with information to the user."
 		, "properties":
 			{ "type":
@@ -21,6 +21,9 @@
 				{ "type": "string"
 				, "description": "The text is shown to the user."
 				}
+			, "outcome": { "$ref": "#/definitions/Outcome" }
+			, "ok": { "$ref": "#/definitions/ChildTask"
+				,
 			}
 		}
 	, "SingleSelectTask":
@@ -131,7 +134,7 @@
 		}
 	}
 , "oneOf":
-	[ { "$ref": "#/definitions/Message" }
+	[ { "$ref": "#/definitions/MessageTask" }
 	, { "$ref": "#/definitions/SingleSelectTask" }
 	, { "$ref": "#/definitions/DragToOrderTask" }
 	]

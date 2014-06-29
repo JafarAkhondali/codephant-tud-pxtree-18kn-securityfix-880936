@@ -15,6 +15,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._dialogQueue = [];
 		this._dialogParent = null;
 	};
+
+	AK.Events._inferType = function (task)
+	{
+		if ('choices' in task) //SingleSelection
+		{
+			task.type = "single-select";
+		}
+		else if ('description' in task) //Message
+		{
+			task.type = "message";
+		}
+		
+	}
 	
 	AK.Events.prototype.preload = function preload ()
 	{
@@ -68,7 +81,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		var dial = null
 			;
-		if ('choices' in task) //SingleSelection
+		if (!('type' in task))
+		{
+			AK.Events._inferType(task);
+		}
+		
+		if (task.type === "single-select")
 		{
 			dial = new AK.Events.SingleSelectDialog(this.game, this._dialogParent);
 			dial.description(task.description);
@@ -78,7 +96,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						(function () { this._resolveTask(task, idx); }).bind(this));
 			}, this);
 		}
-		else if ('description' in task) //Message
+		else if (task.type === "message")
 		{
 			dial = new AK.Events.MessageDialog(this.game, this._dialogParent);
 			dial.message(task.description);
@@ -89,18 +107,49 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	/**
 	 * 
 	 */
-	AK.Events.prototype._resolveTask = function _resolveTask (task, idx)
+	AK.Events.prototype._resolveTask = function _resolveTask (task)
+	{
+		if (!('type' in task)) AK.Events._inferType(task);
+		
+		var taskName = task.type.replace(
+					/(^|-)[a-z]/g, function (m) { return m[m.length-1].toUpperCase(); })
+			, funcName = "_resolve" + taskName
+			;
+
+		nextTask = this[funcName].apply(this, arguments);
+		
+		if (nextTask)
+		{
+			dial = this._makeDialogFromTask(nextTask);
+			if (dial) dial.show();
+		}
+
+	};
+
+	/**
+	 *
+	 */
+	AK.Events.prototype._resolveMessage = function (task)
+	{
+		if (task.hasOwnProperty('outcome'))
+			this._processOutcome(task.outcome);
+
+		return task.ok || null;
+	};
+
+	/**
+	 *
+	 */
+	AK.Events.prototype._resolveSingleSelect = function (task, idx)
 	{
 		var choice = task.choices[idx]
-			, dial = null
 			;
 
 		if (choice.hasOwnProperty('outcome'))
 			this._processOutcome(choice.outcome);
 
 		
-		dial = this._makeDialogFromTask(choice);
-		if (dial) dial.show();
+		return choice;
 	};
 	
 	/**
