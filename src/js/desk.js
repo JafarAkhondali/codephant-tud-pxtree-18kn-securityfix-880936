@@ -63,8 +63,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
 			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
 			.spritesheet('small-sailor','assets/chars/sailor-simple.png',32,32)
-			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 64, 64)
-			.spritesheet('wheel','assets/icons/ui-options.png',64,64)
+			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 32, 32)
+			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
 			.audio('audio-ambient-ship', ['assets/audio/ship-at-sea.wav']);
 			;
 			
@@ -124,28 +124,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		//PLAY AUDIO
 		var music_ambient = this.game.sound.play('audio-ambient-ship');
-		
-		/**
-		 * Nur übergangsweise zu Testzwecken
-		 */
-		var image1 = this.game.add.sprite(Config.CptPanel.Origin.x+Config.Left+20, Config.CptPanel.Origin.y + 200, 'almanach');
-	    image1.anchor.set(0.5);
-	    imagefunction = function(){
-	    	this.parent.openAlmanach();
-	    }
-	    image1.inputEnabled = true;
-	    image1.events.onInputDown.add(
-	    		imagefunction,this);
-	    
-		var wheel = this.game.add.sprite(Config.CptPanel.Origin.x+Config.Left+100, Config.CptPanel.Origin.y + 200, 'wheel');
-	    wheel.anchor.set(0.5);
-	    optionWheel = function(){
-	    	this.game.state.start(AK.MainMenu.key, true, false, this);
-	    }
-	    wheel.inputEnabled = true;
-	    wheel.events.onInputDown.add(
-	    		optionWheel,this);
-
 		
 	};
 
@@ -233,9 +211,30 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		//document navigation
 		grp = this.game.make.group();
 		deskGrp.add(grp);
-		grp.position.set(Config.CptPanel.Origin.x-40, Config.CptPanel.Origin.y + 170);
-		grp.create(0, 0, 'decor-board').scale.set(0.9);
+		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 160);
+		grp.create(0, 0, 'decor-board').scale.set(0.8);
 
+		on(grp.create(20, 10, 'almanach'),
+				function (almanach)
+				{
+					//almanach.anchor.set(0.5);
+					almanach.visible = true;
+					almanach.inputEnabled = true;
+					almanach.events.onInputUp.add(function(){
+						this.parent.openAlmanach();
+					}, this);
+				}, this);
+	    
+		on(grp.create(60, 10, 'wheel'),
+				function (wheel)
+				{
+					//wheel.anchor.set(0.5);
+					wheel.visible = true;
+					wheel.inputEnabled = true;
+					wheel.events.onInputUp.add(function(){
+						this.game.state.start(AK.MainMenu.key, true, false, this.top);
+					}, this);
+				}, this);
 	};//Desk.createCaptainsPanel
 	
 	AK.Desk.prototype.createShipAvatar = function (deskGrp)

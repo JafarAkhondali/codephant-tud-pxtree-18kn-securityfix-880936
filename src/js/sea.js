@@ -35,11 +35,21 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			, loadLevel: function (levelnr, enteringFrom)
 				{
 					if (null !== this.currentLevel)
-					{
+					{	
 						this.unloadLevel(function () { this.loadLevel(levelnr, enteringFrom); }, this);
 					}
 					else
 					{
+						//propagate data
+						this.top.currentLevel = levelnr;
+						this.top.enteringFrom = enteringFrom;
+
+						//store progresss
+						localStorage.setItem('currentLevel', this.top.currentLevel.toString());
+						localStorage.setItem('enteringFrom', this.top.enteringFrom);
+						localStorage.setItem('Stats',JSON.stringify(this.top.stats._values));
+
+						// real loading
 						var leveldat = AzK.Data.Levels[levelnr];
 						this.spots.loadLevel(leveldat, this.events);
 						this.currentLevel = levelnr;
@@ -89,7 +99,6 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						else
 							this.moveShip(spot.port);
 					}
-					
 				}
 			
 			, currentSpot: function ()

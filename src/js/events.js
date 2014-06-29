@@ -52,7 +52,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			evt = this._selectEventByTags(opts.tags);
 		else
 			evt = opts;
-
+console.dir(evt);
 		this._processOutcome(Config.MoveCosts);
 		this._makeDialogFromTask(evt).show();
 	};

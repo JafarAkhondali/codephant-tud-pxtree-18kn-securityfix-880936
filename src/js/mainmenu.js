@@ -36,7 +36,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						, overStyle: { fill: 'gold'}
 						, textAlign: [.5,.5]
 					})
-		, start = btnFactory.create("start")
+		, start = btnFactory.create("neues spiel")
+		, fortsetzen = btnFactory.create("fortsetzen")
 		, credits = btnFactory.create("credits")
 		;
 		this.game.add.sprite(0, 0, 'mainmenu-bg');
@@ -47,14 +48,24 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		start.position.set(570, 205);
 		start.onInputUp.add(function()
 				{
-			this.game.state.start(AK.Play.key, true, false, this.parent);
+			if(confirm('Hierbei werden alle vorhanden Daten gelöscht! \n Sind Sie sicher, dass Sie ein neues Spiel starten wollen?') == false) return;
+			this.top.resetSaveData();
+			
+			this.game.state.start(AK.Play.key, true, false, this.top);
 				}, this);
 		this.game.world.add(start);
+		
+		fortsetzen.position.set(570, 295);
+		fortsetzen.onInputUp.add(function()
+				{
+			this.game.state.start(AK.Play.key, true, false, this.top);
+				}, this);
+		this.game.world.add(fortsetzen);
 	
-		credits.position.set(570, 280);
+		credits.position.set(570, 385);
 		credits.onInputUp.add(function()
 				{
-				this.game.state.start(AK.Credits.key, true, false, this.parent);
+				this.game.state.start(AK.Credits.key, true, false, this.top);
 				},		 this);
 			this.game.world.add(credits);
 			};

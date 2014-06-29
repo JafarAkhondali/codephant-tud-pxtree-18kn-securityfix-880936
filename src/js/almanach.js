@@ -24,7 +24,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	
 	AK.Almanach.prototype.preload = function preload() {
 		this.game.load.image('background','assets/ui/ui-almanach.png');
-		this.game.load.spritesheet('exit','assets/icons/almanach-back.png', 64, 64);
+		this.game.load.spritesheet('exit','assets/icons/almanach-back.png', 32, 32);
 		
 	};
 	

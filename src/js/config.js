@@ -64,7 +64,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, wordWrapWidth: 81
 			}
 		, Morale:
-			{ Offset: [270,125]
+			{ Offset: [270,122]
 			}
 		}
 	}
