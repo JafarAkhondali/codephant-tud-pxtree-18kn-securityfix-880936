@@ -428,39 +428,25 @@ TextButtonFactory.prototype = (function ()
 		}
 		txt.position.copyFrom(this._getTextPosition(btn));
 		
+		grp.onInputDown = new Phaser.Signal();
+		grp.onInputUp = new Phaser.Signal();
+		grp.onInputOver = new Phaser.Signal();
+		grp.onInputOut = new Phaser.Signal();
+		
 		//setup input handling
 		btn.inputEnabled = true;
 		txt.inputEnabled = true;
 		btn.input.useHandCursor = true;
 		txt.input.useHandCursor = true;
 		
-		grp.onInputDown = new Phaser.Signal();
-		grp.onInputUp = new Phaser.Signal();
-		grp.onInputOver = new Phaser.Signal();
-		grp.onInputOut = new Phaser.Signal();
-		
 		btn.events.onInputDown.add(grp.onInputDown.dispatch);
-		txt.events.onInputDown.add(grp.onInputDown.dispatch);
 		btn.events.onInputUp.add(grp.onInputUp.dispatch);
+		btn.events.onInputOver.add(grp.onInputOver.dispatch);
+		btn.events.onInputOut.add(grp.onInputOut.dispatch);
+		txt.events.onInputDown.add(grp.onInputDown.dispatch);
 		txt.events.onInputUp.add(grp.onInputUp.dispatch);
-		btn.events.onInputOver.add(function (_, mouse)
-		{
-			if (Phaser.Rectangle.containsRaw(
-					btn.x, btn.y, btn.width, btn.height,
-					mouse.x, mouse.y))
-			{
-				grp.onInputOver.dispatch.call(null, arguments);
-			}
-		});
-		btn.events.onInputOut.add(function (_, mouse)
-		{
-			if (!Phaser.Rectangle.containsRaw(
-					btn.x, btn.y, btn.width, btn.height,
-					mouse.x, mouse.y))
-			{
-				grp.onInputOut.dispatch.call(null, arguments);
-			}
-		});
+		txt.events.onInputOver.add(grp.onInputOver.dispatch);
+		txt.events.onInputOut.add(grp.onInputOut.dispatch);
 		
 		//setup hover effects
 		grp.onInputOver.add(function ()

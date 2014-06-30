@@ -24,6 +24,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{ key: 'eventbox-btn'
 				, normalStyle: Config.Button.TextStyle
 				, overStyle: Config.Button.HoverTextStyle
+				, normalFrame: 0
+				, overFrame: 1
 				, textOffset: Config.Button.LabelOffset
 				, textAlign: [0, .5]
 				});
