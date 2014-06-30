@@ -16,19 +16,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	Credits.Data = 
 		{ members: 
-			[ { name: "Felix"
+			[ { name: "Felix Wollert"
 				, roles: ["Team-Leiter", "Mädchen-für-alles", "Content"]
 				}
-			, { name: "Toni"
+			, { name: "Toni Weinert"
 				, roles: ["Game-Play", "Konzepte", "Programmierung"]
 				}
-			, { name: "Axel"
+			, { name: "Axel Rother"
 				, roles: ["Grafiken", "Chef-Designer"]
 				}
-			, { name: "Gregor"
+			, { name: "Gregor Stopp"
 				, roles: ["Recherche", "Aufgabenstellungen"]
 				}
-			, { name: "Andre"
+			, { name: "André Arnold"
 				, roles: ["Chef-Programmierer"]
 				}
 			]
@@ -63,7 +63,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		def.preload = function preload ()
 		{
 			this.game.load
-				.image('credits-bg', 'assets/entwurf-hauptmenue.png')
+				.image('credits-bg', 'assets/textures/mm-bg.png')
 				.image('wood', 'assets/textures/wood.jpg')
 				.image('18k-logo', 'assets/ui/ui-logo.png')
 				;
