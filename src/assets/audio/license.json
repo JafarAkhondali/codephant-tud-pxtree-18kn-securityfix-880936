@@ -1,0 +1,17 @@
+{ "silence.mp3":
+	{ "source
+		{ "url": "http://freesound.org/people/parcodeisuoni/sounds/201883/"
+		, "name": "201883__parcodeisuoni__silence.mp3"
+		}
+	, "author":
+		{ "name": "parcodeisuoni"
+		, "url": "http://freesound.org/people/parcodeisuoni/"
+		}
+	, "license":
+		{ "name": "Creative Commons Attribution"
+		, "short": "CC BY"
+		, "version": [3, 0]
+		, "url": "http://creativecommons.org/licenses/by/3.0/"
+		}
+	}
+}
