@@ -14,7 +14,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 		this._dialogQueue = [];
 		this._dialogParent = null;
+
+		AK.Events.button = TextButtonFactory(this.game,
+				{ key: 'eventbox-btn'
+				, normalStyle: Config.Button.TextStyle
+				, overStyle: Config.Button.HoverTextStyle
+				, normalFrame: 0
+				, overFrame: 1
+				, textOffset: Config.Button.LabelOffset
+				, textAlign: [0, .5]
+				});
 	};
+
+	AK.Events.button = null;
 
 	on(AK.Events, function (def)
 	{
@@ -128,7 +140,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			task.choices.forEach(function (choice, idx)
 			{
 				dial.choice(choice.label,
-						(function () { this._resolveTask(task, idx); }).bind(this));
+						function () { this._resolveTask(task, idx); }, this);
 			}, this);
 			return dial;
 		};
@@ -147,6 +159,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				item = task.items[iname];
 				dial.item(iname, item);
 			}
+
+			dial.ok(function () { this._resolveTask(task, dial.order); }, this);
 			
 			return dial;
 		};
@@ -206,7 +220,21 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._resolveDragToOrderTask = function (task, order)
 		{
-			//TODO
+			var correctOrder = task.order
+				, isCorrect = order.length === correctOrder.length
+				, next = null
+				, i
+				;
+			if (isCorrect)
+				for (i = 0; i < correctOrder.length; i++)
+				{
+					isCorrect = order[i] === correctOrder[i]
+					if (!isCorrect) break;
+				}
+
+			next = task[isCorrect ? "correct" : "wrong"];
+			this._processOutcome(next.outcome);
+			return next;
 		};
 		
 		/**

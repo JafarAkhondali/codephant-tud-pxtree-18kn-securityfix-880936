@@ -1,5 +1,6 @@
 namespace("PXTree.AchtzehnKnoten", function(AK)
-{
+{ "use strict";
+
 	var Config = AK.Config.Events;
 	
 	function DragToOrderDialog (game, parent, itemType)
@@ -24,6 +25,14 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this._nextDragLineYOffset = 0;
 		this._nextDropLineYOffset = 0;
 		this._dragObjectData = [];
+
+		this._okBtn = AK.Events.button.create(Config.Button.DefaultLabel, this.destroy, this);
+		this.content.add(this._okBtn);
+		this._okBtn.position.set(
+				15,
+				Config.Dialog.Height - 10);
+
+		this.order = [];
 	};
 	
 	DragToOrderDialog._itemDispatcher =
@@ -67,16 +76,30 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		 */
 		def.itemWord = function itemWord (itemName, text)
 		{
-			var label = this.game.make.text(0, 0, text, Config.Description.TextStyle)
+			var label = this.game.make.text(0, 0, text, Config.Drag.TextStyle)
+				, data =
+						{ origin: { x: 0, y: 0 }
+						, object: label
+						, name: itemName
+						}
 				;
 			this._placeDragItem(label);
+			label.position.copyTo(data.origin);
+			this._dragObjectData[itemName] = data;
 			label.inputEnabled = true;
 			label.input.enableDrag();
-			this._dragObjectData[itemName] =
-					{ origin: { x: label.x, y: label.y }
-					, object: label
-					, name: itemName
-					};
+			label.events.onDragStop.add(function ()
+			{
+				if (label.y > Config.Drag.Threshold)
+				{
+					this._placeDropItem(label);
+					this.order.push(data.name);
+				}
+				else
+				{
+					label.position.copyFrom(data.origin);
+				}
+			}, this);
 			return this;
 		};
 		
@@ -85,6 +108,15 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		 */
 		def.itemSprite = function itemSprite (itemName, spriteKey)
 		{
+			return this;
+		};
+
+		/**
+		 *
+		 */
+		def.ok = function ok (okHandler, okContext)
+		{
+			this._okBtn.onInputUp.add(okHandler, okContext);
 			return this;
 		};
 		

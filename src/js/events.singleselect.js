@@ -20,15 +20,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.buttonPanel.position.set(
 				Config.Button.PanelOffset[0], Config.Button.PanelOffset[1]);
 		
-		this._btnFactory = TextButtonFactory(this.game,
-				{ key: 'eventbox-btn'
-				, normalStyle: Config.Button.TextStyle
-				, overStyle: Config.Button.HoverTextStyle
-				, normalFrame: 0
-				, overFrame: 1
-				, textOffset: Config.Button.LabelOffset
-				, textAlign: [0, .5]
-				});
+		this._btnFactory = AK.Events.button;
 	};
 	
 	AK.Events.SingleSelectDialog.prototype =

@@ -3,14 +3,16 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 
 [ { name: "drag-testing"
 	, type: "drag-to-order"
-	, description: "Try to sort the words!"
+	, description: "Sortiere diese Name lexikografisch."
 	, itemType: "word"
 	, items:
-		{ "one": "Eins"
-		, "two": "Zwei"
-		, "three": "Drei"
-		, "four": "Vier"
+		{ "dagama": "Vasco da Gama"
+		, "vespucci": "Amerigo Vespucci"
+		, "columbus": "Christoph Kolumbus"
+		, "magellan": "Ferdinand Magellan"
+		, "eriksson": "Leif Eriksson"
 		}
+	, order: ["eriksson", "dagama", "columbus", "magellan", "vespucci"]
 	, correct:
 		{ type: "message"
 		, description: "Das hast du fein gemacht!"

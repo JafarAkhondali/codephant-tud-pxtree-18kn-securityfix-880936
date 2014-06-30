@@ -36,6 +36,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, Padding: [20,20]
 		, Margin: [81,68]
 		}
+	, Drag:
+		{ Threshold: 280
+		, TextStyle:
+			{ font: "normal 11pt GameFont"
+			, fill: "white"
+			}
+		}
 	, MoveCosts:
 		{ "player.food": -15
 		}

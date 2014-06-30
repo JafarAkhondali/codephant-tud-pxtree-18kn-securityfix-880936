@@ -65,7 +65,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('small-sailor','assets/chars/sailor-simple.png',32,32)
 			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 32, 32)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
-			.audio('audio-ambient-ship', ['assets/audio/ship-at-sea.wav']);
+			.audio('audio-ambient-ship', ['assets/audio/silence.mp3']);
 			;
 			
 		

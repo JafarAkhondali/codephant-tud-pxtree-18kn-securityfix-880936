@@ -8,7 +8,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.MessageDialog = function MessageDialog (game, parent)
 	{
 		AK.Events.TaskDialog.call(this, game, parent);
-		this._okBtn = this.makeButton(Config.Button.DefaultLabel, this.destroy.bind(this));
+		this._okBtn = AK.Events.button.create(Config.Button.DefaultLabel, this.destroy, this);
 		this._message = this.game.make.text(
 				Config.Description.Offset[0], Config.Description.Offset[1],
 				"", Config.Description.TextStyle);
@@ -31,9 +31,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				
 				def.ok = function ok (okHandler, okContext)
 				{
-					this._okBtn.label.events.onInputDown.add(okHandler, okContext);
-					this._okBtn.bg.events.onInputDown.add(okHandler, okContext);
-					
+					this._okBtn.onInputUp.add(okHandler, okContext);
 					return this;
 				};
 				
