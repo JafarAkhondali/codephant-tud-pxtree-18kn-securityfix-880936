@@ -196,7 +196,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			}
 			else
 			{
-				item.position.copyFrom(this._dragObjectData[this._dragItemName].origin);
+				item.position.copyFrom(this._dragObjectData[item._dragItemName].origin);
 			}
 			
 		};

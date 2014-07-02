@@ -37,7 +37,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, Margin: [81,68]
 		}
 	, Drag:
-		{ Threshold: 280
+		{ Threshold: 250
 		, TextStyle:
 			{ font: "normal 10pt GameFont"
 			, fill: "white"

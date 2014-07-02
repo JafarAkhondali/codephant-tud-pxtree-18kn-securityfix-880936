@@ -194,10 +194,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._resolveMessageTask = function (task)
 		{
-			if (task.hasOwnProperty('outcome'))
+			if (task.hasOwnProperty('ok') && task.ok.hasOwnProperty('outcome'))
 				this._processOutcome(task.ok.outcome);
 
-			return task.ok || null;
+			return task.hasOwnProperty('ok') ? task.ok : null;
 		};
 
 		/**
