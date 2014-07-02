@@ -51,7 +51,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			}
 
 		, { x: 300, y: 170
-			, reachable: [3]
+			, reachable: [3, 4]
 			, type: 'water'
 			, event: { tags: ["open_sea", "atlantic"] }
 			}
@@ -62,16 +62,36 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			, event: { tags: ["open_sea", "atlantic"] }
 			}
 			
-			/*, { x: 100, y: 140
-			//, type: "water"
-			//, end: { dir: 'west', to: 2 }
-			//, event: { tags: ["open_sea", "atlantic"] }
-			}*/
+			, { x: 100, y: 140
+			, type: "water"
+			, end: { dir: 'west', to: 2 }
+			, event: { tags: ["open_sea", "atlantic"] }
+			}
 		]
 	}
 
 //2
-,{}
+, { spots:
+		[ { x: 480, y: 220
+			, reachable: [1]
+			, type: 'water'
+			, start: { dir: 'east'}
+			, event: { tags: ["open_sea", "atlantic"] }
+			}
+		
+		, { x: 300, y: 330
+			, reachable: [2]
+			, type: 'water'
+			, event: { tags: ["open_sea", "atlantic"] }
+			}
+			
+		, { x: 240, y: 480
+			, type: 'water'
+			, event: { tags: ["open_sea", "atlantic"] }
+			, end: { dir: 'south', to: 5 }
+			}
+		]
+	}
 
 //3
 , { spots:
@@ -85,7 +105,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 266, y: 286
 			, reachable: [2, 3]
 			, type: "island"
-			, event: { tags: ["island", "atlantic"] }
+			, event: { name: "lanzarote" }
 			}
 			
 		, { x: 90, y: 275
@@ -159,18 +179,24 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			, reachable: [3, 4]
 		}
 		
-		, { x: 50, y: 270
+		, { x: 100, y: 270
 			, type: "water"
 			, event: { tags: ["open_sea", "atlantic"] }
 			, end: { dir: "west", to: 6 }
 		}
 		
-		, { x: 200, y: 520
+		, { x: 200, y: 500
 			, type: "water"
 			, event: { tags: ["open_sea", "atlantic"] }
 			, end: { dir: "south", to: 8 }
 		}
-			
+		
+		, { x: 220, y: 90
+			, type: "water"
+			, event: { tags: ["open_sea", "atlantic"] }
+			, start: { dir: 'north' }
+			, reachable: [2]
+			}
 		]
 	}
 ]
