@@ -1,6 +1,6 @@
 
 namespace("PXTree.AchtzehnKnoten", function (AzK)
-{
+{ "use strict";
 	AzK.Sea = function Sea (parent)
 	{
 		this.parent = parent;
@@ -94,10 +94,25 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					{
 						this.currentSpotNr = spotNr;
 						if ('event' in spot)
-							this.moveShip(spot.port,
-									function () { this.parent.startEvent(spot.event); }, this);
+						{
+							this.moveShip(spot.port, function ()
+							{
+								var leveldat = AzK.Data.Levels[this.currentLevel]
+									, spotEventDat = spot.event
+									;
+								// rewrite spot event data, if there are tags to merge
+								if ('tags' in spot.event && 'tags' in leveldat)
+								{
+									spotEventDat = { tags: spot.event.tags.concat(leveldat.tags) };
+								}
+								
+								this.parent.startEvent(spotEventDat);
+							}, this);
+						}
 						else
+						{
 							this.moveShip(spot.port);
+						}
 					}
 				}
 			
