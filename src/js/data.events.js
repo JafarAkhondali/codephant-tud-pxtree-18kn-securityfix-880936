@@ -221,13 +221,20 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				, "player.food": +100
 				, "player.gold": -1000 }
 			}
-		, { "name": "lanzarote_buy_crew"
+		, { "name": "lanzarote_ignore"
 			, "label": "Versuche, Crew anzuheuern."
 			, "description": "Du heuerst einige Seemänner an. Deine Crew hält leider nicht all zu viel von den Fremden."
 			, "outcome":
 				{ "player.crewCount": +3
 				, "player.gold": -1500 
 				, "player.morale": -2}
+			}
+		, { "name": "lanzarote_help_indigen"
+			, "label": "Versuche etwas gegen die Unterdrückung der Ureinwohner zu tun."
+			, "description": "Du kannst nicht mit ansehen, wie die Ureinwohner der Kanaren, die Guanchen, unterdrückt werden. Du befreist Nachts ein Sklavencamp und überlässt ihnen ein paar deiner Waffen, damit sie sich verteidigen können. Deine Crew bewundert dein selbstloses handeln."
+			, "outcome":
+				{ "player.strength": -5
+				, "player.morale": 5}
 			}
 		]
 	}
