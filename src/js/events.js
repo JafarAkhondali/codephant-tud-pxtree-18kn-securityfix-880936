@@ -279,7 +279,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				, testTags = function (ev)
 						{
 							if (!('tags' in ev)) return false;
-							return tags.every(function (t) { return ev.tags.indexOf(t) >= 0; });
 							return ev.tags.every(function (t) { return tags.indexOf(t) >= 0; });
 						}
 				;
