@@ -39,7 +39,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, Drag:
 		{ Threshold: 280
 		, TextStyle:
-			{ font: "normal 11pt GameFont"
+			{ font: "normal 10pt GameFont"
 			, fill: "white"
 			}
 		, ResetLabel: "Zurücksetzen"
