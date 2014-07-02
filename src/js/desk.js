@@ -1,6 +1,7 @@
 ﻿
 namespace("PXTree.AchtzehnKnoten", function (AK)
-{
+{ "use strict";
+
 	var Config = AK.Config.Desk;
 
 	AK.Desk = function Desk (play)
@@ -57,7 +58,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('small-captain-spanish', 'assets/chars/captain-spanish-simple.png')
 			.image('large-captain-spanish', 'assets/chars/captain-spanish-large.png')
 			.image('large-captain-british', 'assets/chars/captain-british-large.png')
-			.image('decor-board', 'assets/ui/ui-board-decorated.png')
 			.image('menu-board', 'assets/ui/ui-menuitems.png')
 			.image('ship-avatar', 'assets/ui/visual-ship.png')
 			.image('ship-avatar-bg', 'assets/textures/ship-background.png')
@@ -235,27 +235,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 165);
 		grp.create(0, 0, 'menu-board');
 
-		on(grp.create(20, 10, 'almanach'),
-				function (almanach)
-				{
-					//almanach.anchor.set(0.5);
-					almanach.visible = true;
-					almanach.inputEnabled = true;
-					almanach.events.onInputUp.add(function(){
-						this.parent.openAlmanach();
-					}, this);
-				}, this);
-	    
-		on(grp.create(60, 10, 'wheel'),
-				function (wheel)
-				{
-					//wheel.anchor.set(0.5);
-					wheel.visible = true;
-					wheel.inputEnabled = true;
-					wheel.events.onInputUp.add(function(){
-						this.game.state.start(AK.MainMenu.key, true, false, this.top);
-					}, this);
-				}, this);
+		grp.add(this.game.make.button(
+				20, 10, 'almanach',
+				function (icon) { icon.frame = 0; this.openAlmanach(); }, this.parent,
+				1, 0));
+		grp.add(this.game.make.button(
+				60, 10, 'wheel',
+				function () {	this.game.state.start(AK.MainMenu.key, true, false, this.top); }, this,
+				1, 0));
 	};//Desk.createCaptainsPanel
 	
 	AK.Desk.prototype.createShipAvatar = function (deskGrp)

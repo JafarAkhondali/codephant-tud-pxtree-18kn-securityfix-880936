@@ -127,21 +127,29 @@ namespace("PXTree.AchtzehnKnoten", function()
 				if ('end' in spot)
 				{
 					peripheral = spot.peripheral;
-					periSpot = this.game.make.sprite(0, 0, 'arrow');
-					periSpot.anchor.set(.5, .5);
-					periSpot.angle = Spots.getAngle(spot.end.dir);
-					periSpot.position.copyFrom(Spots.getPeripheralSpritePos(
-									peripheral.port,
-									spot.end.dir));
-					periSpot.inputEnabled = true;
-					periSpot.events.onInputDown.add(
+					periSpot = this.game.make.button(
+							0, 0, 'arrow',
 							function ()
 							{ 
 								if (this.parent.currentSpotNr === this.spotNr)
 									this.parent.loadLevel(
 										this.spot.end.to,
 										Spots.getOppositeDirection(this.spot.end.dir));
-							}, { parent: this.parent, spotNr: i, spot: spot });
+							},
+							{ parent: this.parent, spotNr: i, spot: spot });
+					periSpot.anchor.set(.5, .5);
+					periSpot.angle = Spots.getAngle(spot.end.dir);
+					periSpot.position.copyFrom(Spots.getPeripheralSpritePos(
+									peripheral.port,
+									spot.end.dir));
+					periSpot.events.onInputOver.add(function (p)
+					{
+						if (this.parent.currentSpotNr === i)
+						{
+							p.frame = 1;
+						}
+					}, this);
+					periSpot.events.onInputOut.add(function (p) { p.frame = 0; });
 					this._spotLayer.add(periSpot);
 				}
 				this.createSpotGroup(i);
@@ -169,38 +177,40 @@ namespace("PXTree.AchtzehnKnoten", function()
 				, port = props.port
 				, type = props.type
 				, grp = this.game.make.group()
-				, cross = this.game.make.sprite(0, 0, 'cross')
+				, clickHandler = function() { this.sea.moveShipToSpot(spotNr); }
+				, cross = this.game.make.button(
+						port.x, port.y, 'cross',
+						clickHandler, this)
+				, addTex = null
+				, overHandler = function ()
+					{
+						if (this.spotIsReachable(spotNr, this.parent.currentSpotNr))
+						{
+							cross.frame = 1;
+						}
+					}
+				, outHandler = function () { cross.frame = 0; }
 				;
 			this._spotLayer.add(grp);
 			
 			if (type.key)
 			{
-				grp.create(
+				addTex = grp.add(this.game.make.button(
 						port.x - type.portAt[0],
 						port.y - type.portAt[1],
-						type.key)
-						.spotNr = spotNr;
+						type.key,
+						clickHandler, this));
+				addTex.events.onInputOver.add(overHandler, this);
+				addTex.events.onInputOut.add(outHandler, this);
 			}
 			cross.anchor.set(.5, .5);
-			cross.position.set(
-					port.x,
-					port.y);
 			cross.spotNr = spotNr;
+			cross.events.onInputOver.add(overHandler, this);
+			cross.events.onInputOut.add(outHandler, this);
 			
 			grp.add(cross);
 			
 			grp.spotNr = spotNr;
-			
-			grp.forEach(function (part)
-			{
-				part.inputEnabled = true;
-				part.events.onInputDown.add(
-						function (clicked)
-						{
-							this.sea.moveShipToSpot(clicked.spotNr);
-						},
-						this);
-			}, this);
 			
 			return grp;
 		}
