@@ -13,6 +13,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.stats = this.top.stats;
 		this.sailors = null;
 		this.captain = null;
+		this.strength = null;
+		this.temp_old_strength = 0;
 		this.temp_old_sailors = 0;
 	};
 	
@@ -65,6 +67,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
 			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
 			.spritesheet('small-sailor','assets/chars/sailor-simple.png',32,32)
+			.spritesheet('small-soldier','assets/chars/soldier-spanish-simple.png',32,32)
 			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 32, 32)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
 			.audio('audio-ambient-ship', ['assets/audio/silence.mp3']);
@@ -97,15 +100,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.captain = shipgrp.create(70,180,'small-captain-'+this.stats.get('player.nationality'));
 			this.captain.animations.add('idle_breath',[14,15,16,17,18,19],4,false);
 			this.captain.animations.add('idle_telescope',[0,1,2,3,4,5,6,7,8,9,10,11,12,13],4,false);
-			/*
-			this.game.time.events.loop(2000, function(){
-				if (Math.random() <= 0.5){
-					this.captain.animations.play('idle_breath');
-				} else {
-					this.captain.animations.play('idle_telescope');
-				}
-			}, this);
-			*/
 			this.captain.animations.play('idle_breath');
 		}
 		
@@ -119,6 +113,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.top.stats.registerValueChangedHandler('player.crewCount', this.updateSailors, this);
 		}
 		
+		//init soldiers
+		if (this.strength === null) {		
+			this.strength = this.game.make.group();
+			shipgrp.add(this.strength);
+			this.strength.position.set(120,200);
+			
+			//Sailor Handler
+			this.top.stats.registerValueChangedHandler('player.strength', this.updateStrength, this);
+		}
+		
 		shipgrp.create(10, 10, 'ship-avatar');
 		var gischt = shipgrp.create(110, 285, 'ship-gischt');
 		gischt.animations.add('play', [0, 1, 3, 4], 4, true);
@@ -127,6 +131,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		shipgrp.create(0, 0, 'ship-avatar-border');
 		
 		this.updateSailors(this.stats.get('player.crewCount'),0);
+		this.updateStrength(this.stats.get('player.strength'),0);
 		
 		// END SHIP AVATAR
 		
@@ -140,7 +145,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			
 		if (this.captain.animations.currentAnim.isFinished) {
 			if (Math.random() <= 0.7){
-				console.log('this');
 				this.captain.animations.play('idle_breath');
 			} else {
 				this.captain.animations.play('idle_telescope');
@@ -259,9 +263,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		//deprecated
 	};
 	
+	/*
+	* Updated die Anzahl von Seglern auf dem Schiff
+	*/
 	AK.Desk.prototype.updateSailors = function(new_sailors)
 	{
-		var diff = new_sailors - this.temp_old_sailors;
+		var diff = Math.floor((new_sailors - this.temp_old_sailors) / 3);
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
@@ -273,8 +280,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				var x_pos_end = Math.floor((Math.random() * 150));
 				
 				var s = this.sailors.create(x_pos_start,0, 'small-sailor');
-				s.animations.add('left', [0, 1, 2, 3], 8, true);
-				s.animations.add('right', [4, 5, 6, 7], 8, true);
+				s.animations.add('left', [0, 1, 2, 3], 4, true);
+				s.animations.add('right', [4, 5, 6, 7], 4, true);
 				
 				if (x_pos_end - x_pos_start > 0 ){
 					s.animations.play('right');
@@ -302,6 +309,52 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			}
 		}
 		this.temp_old_sailors = new_sailors;
+	}
+	
+	/*
+	* Updated die Anzahl von Soldaten auf dem Schiff
+	*/
+	AK.Desk.prototype.updateStrength = function(new_strength)
+	{
+		var diff = Math.floor((new_strength - this.temp_old_strength)/3);
+		
+		if (diff < 0) {
+			for (var i = 0; i < Math.abs(diff); i++) {
+				this.strength.getBottom().destroy();
+			}
+		} else if (diff > 0 ) {
+			for (var i = 0; i < diff; i++) {
+				var x_pos_start = Math.floor((Math.random() * 150));
+				var x_pos_end = Math.floor((Math.random() * 150));
+				
+				var s = this.strength.create(x_pos_start,0, 'small-soldier');
+				s.animations.add('left', [0, 1, 2, 3, 4], 4, true);
+				s.animations.add('right', [5, 6, 7, 8, 9], 4, true);
+				
+				if (x_pos_end - x_pos_start > 0 ){
+					s.animations.play('right');
+				} else {
+					s.animations.play('left');
+				}
+				
+				var dur = (Math.floor((Math.random() * 2000) + 1)+4000);
+				var tw = this.game.add.tween(s).to( { x: x_pos_end }, dur , Phaser.Easing.Linear.None).yoyo(true).repeat(Number.MAX_VALUE).start();
+				tw.onLoop.add(function() {
+					if (this.animations.currentAnim === null) {
+						
+					} else {
+					
+						if (this.animations.currentAnim.name == 'right'){
+							this.animations.play('left');
+						} else {
+							this.animations.play('right');
+						}
+						
+					}
+				}.bind(s));
+			}
+		}
+		this.temp_old_strength = new_strength;
 	}
 	
 	AK.Desk.prototype.setStat = function (name, value)
