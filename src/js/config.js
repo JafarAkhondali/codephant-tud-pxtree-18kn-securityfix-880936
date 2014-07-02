@@ -1,14 +1,14 @@
 
 namespace("PXTree.AchtzehnKnoten.Config",
 
-{ TextStyle: { font: "normal 8pt GameFont", fill: "black" }
+{ TextStyle: { font: "normal 14pt GameFont", fill: "black" }
 , Game:
 	{ Width: 1024, Height: 576 }
 
 , Events:
 	{ Description:
 		{ TextStyle:
-			{ font: "normal 8pt GameFont"
+			{ font: "normal 14pt GameFont"
 			, fill: "white"
 			, wordWrap: true
 			, wordWrapWidth: 365
@@ -18,7 +18,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		}
 	, Button:
 		{ TextStyle:
-			{ font: "normal 8pt GameFont"
+			{ font: "normal 13pt GameFont"
 			, fill: "white"
 			, wordWrap: true
 			, wordWrapWidth: 365
@@ -39,7 +39,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, Drag:
 		{ Threshold: 250
 		, TextStyle:
-			{ font: "normal 10pt GameFont"
+			{ font: "normal 14pt GameFont"
 			, fill: "white"
 			}
 		, ResetLabel: "Zurücksetzen"
@@ -53,7 +53,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	{ Left: 576
 	
 	, StatPaper:
-		{ TextStyle: { font : 'normal 8pt GameFont', fill: 'black' }
+		{ TextStyle: { font : 'normal 14pt GameFont', fill: 'black' }
 		, Offset: { x: 30, y: 30 }
 		, Lines:
 			{ Origin: { x: 20, y: 20 }
@@ -66,7 +66,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, CptPanel:
 		{ Origin : { x : 270, y : 20 }
 		, TextStyle:
-			{ font: 'normal 8pt GameFont'
+			{ font: 'normal 14pt GameFont'
 			, fill: 'white'
 			, wordWrap: true
 			, wordWrapWidth: 81
@@ -79,14 +79,14 @@ namespace("PXTree.AchtzehnKnoten.Config",
 
 , MainMenu:
 	{ TextStyle:
-		{ font: "bold 16pt GameFont"
+		{ font: "normal 18pt GameFont"
 		, fill: "white"
 		}
 	}
 
 , Credits:
 	{ TextStyle:
-		{ font: "normal 8pt GameFont"
+		{ font: "normal 14pt GameFont"
 		, fill: "white"
 		}
 	, TextArea:
