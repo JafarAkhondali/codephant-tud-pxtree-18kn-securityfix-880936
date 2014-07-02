@@ -242,12 +242,17 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._processOutcome = function _processOutcome (outcome)
 		{
-			var stat, newVal
+			var stat, statDiff
 				;
 			for (stat in outcome) if (outcome.hasOwnProperty(stat))
 			{
-				newVal = this.top.stats.get(stat) + outcome[stat];
-				this.top.stats.set(stat, newVal);
+				statDiff = outcome[stat];
+				if (statDiff instanceof Array)
+				{
+					statDiff = Math.floor(Math.random() * (statDiff[1] - statDiff[0] + 1) + statDiff[0]);
+				}
+				
+				this.top.stats.set(stat, this.top.stats.get(stat) + statDiff);
 			}
 		};
 		

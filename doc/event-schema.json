@@ -119,9 +119,17 @@
 		}
 	, "Outcome":
 		{ "type": "object"
-		, "description": "Describes the changes, that affect the user's statistics. Each key describes a property of the Stats object. The value is added to the statistic."
+		, "description": "Describes the changes, that affect the user's statistics. Each key describes a property of the Stats object. The value is added to the statistics."
 		, "additionalProperties":
-			{ "type": "integer" }
+			{ "oneOf":
+				[ { "type": "integer" }
+				, { "type": "array"
+					, "items": { "type": "integer" }
+					, "minItems": 2
+					, "maxItems": 2
+					}
+				]
+			}
 		}
 	}
 , "type": "object"
