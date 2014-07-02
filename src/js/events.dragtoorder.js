@@ -20,17 +20,16 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this.content.add(this.dropPool);
 		this.dropPool.position.set(25, 300);
 		
-		this._nextDragPos = new Phaser.Point();
-		this._nextDropPos = new Phaser.Point();
-		this._nextDragLineYOffset = 0;
-		this._nextDropLineYOffset = 0;
+		this._resetPlaceData();
 		this._dragObjectData = [];
 
 		this._okBtn = AK.Events.button.create(Config.Button.DefaultLabel, this.destroy, this);
 		this.content.add(this._okBtn);
-		this._okBtn.position.set(
-				15,
-				Config.Dialog.Height - 10);
+		this._okBtn.position.set(14, Config.Dialog.Height - 10);
+
+		var resetBtn = AK.Events.button.create(Config.Drag.ResetLabel, this._resetDragItems, this);
+		this.content.add(resetBtn);
+		resetBtn.position.set(14, Config.Dialog.Height - 40);
 
 		this.order = [];
 	};
@@ -85,21 +84,11 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				;
 			this._placeDragItem(label);
 			label.position.copyTo(data.origin);
+			label._dragItemName = itemName;
 			this._dragObjectData[itemName] = data;
 			label.inputEnabled = true;
 			label.input.enableDrag();
-			label.events.onDragStop.add(function ()
-			{
-				if (label.y > Config.Drag.Threshold)
-				{
-					this._placeDropItem(label);
-					this.order.push(data.name);
-				}
-				else
-				{
-					label.position.copyFrom(data.origin);
-				}
-			}, this);
+			label.events.onDragStop.add(this._dragStopHandler, this);
 			return this;
 		};
 		
@@ -118,6 +107,17 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		{
 			this._okBtn.onInputUp.add(okHandler, okContext);
 			return this;
+		};
+
+		/**
+		 *
+		 */
+		def._resetPlaceData = function ()
+		{
+			this._nextDragPos = new Phaser.Point();
+			this._nextDropPos = new Phaser.Point();
+			this._nextDragLineYOffset = 0;
+			this._nextDropLineYOffset = 0;
 		};
 		
 		/**
@@ -162,6 +162,43 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			// adjust line offset if needed
 			if (sprite.height > this._nextDropLineYOffset)
 				this._nextDropLineYOffset = sprite.height;
+		};
+
+		/**
+		 *
+		 */
+		def._resetDragItems = function ()
+		{
+			var name, data
+				;
+			this.dragPool.removeAll();
+			this.dropPool.removeAll();
+			this._resetPlaceData();
+			for (name in this._dragObjectData) if (this._dragObjectData.hasOwnProperty(name))
+			{
+				data = this._dragObjectData[name];
+				this._placeDragItem(data.object);
+				data.object.position.copyFrom(data.origin);
+				data.object.input.enableDrag();
+			}
+		};
+
+		/**
+		 * 
+		 */
+		def._dragStopHandler = function (item)
+		{
+			if (item.y > Config.Drag.Threshold)
+			{
+				this._placeDropItem(item);
+				item.input.disableDrag();
+				this.order.push(item._dragItemName);
+			}
+			else
+			{
+				item.position.copyFrom(this._dragObjectData[this._dragItemName].origin);
+			}
+			
 		};
 	});
 

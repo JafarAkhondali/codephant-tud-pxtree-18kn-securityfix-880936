@@ -42,6 +42,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			{ font: "normal 11pt GameFont"
 			, fill: "white"
 			}
+		, ResetLabel: "Zurücksetzen"
 		}
 	, MoveCosts:
 		{ "player.food": -15
