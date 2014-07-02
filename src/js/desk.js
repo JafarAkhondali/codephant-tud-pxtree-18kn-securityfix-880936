@@ -13,6 +13,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.stats = this.top.stats;
 		this.sailors = null;
 		this.captain = null;
+		this.temp_old_sailors = 0;
 	};
 	
 	AK.Desk.Const =
@@ -55,6 +56,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('large-captain-spanish', 'assets/chars/captain-spanish-large.png')
 			.image('large-captain-british', 'assets/chars/captain-british-large.png')
 			.image('decor-board', 'assets/ui/ui-board-decorated.png')
+			.image('menu-board', 'assets/ui/ui-menuitems.png')
 			.image('ship-avatar', 'assets/ui/visual-ship.png')
 			.image('ship-avatar-bg', 'assets/textures/ship-background.png')
 			.image('ship-avatar-border', 'assets/ui/visual-box.png')
@@ -83,25 +85,28 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 		this.createStatPaper(deskGrp);
 		this.createCaptainsPanel(deskGrp);
-		//this.createShipAvatar(deskGrp);
-
+		
 		// START SHIP AVATAR
 		
 		var shipgrp = this.game.make.group();
 		deskGrp.add(shipgrp);
 		shipgrp.position.set(20, 240);
 		shipgrp.create(0, 0, 'ship-avatar-bg');
+		
 		if (this.captain === null){
 			this.captain = shipgrp.create(70,180,'small-captain-'+this.stats.get('player.nationality'));
-			this.captain.animations.add('idle',[0],8,true);
-			this.captain.animations.add('idle_telescope',[0,1,2,3,4,5,6,7,8,9,10,11,12,13],4,true);
+			this.captain.animations.add('idle_breath',[14,15,16,17,18,19],4,false);
+			this.captain.animations.add('idle_telescope',[0,1,2,3,4,5,6,7,8,9,10,11,12,13],4,false);
+			/*
 			this.game.time.events.loop(2000, function(){
 				if (Math.random() <= 0.5){
-					this.captain.animations.play('idle');
+					this.captain.animations.play('idle_breath');
 				} else {
 					this.captain.animations.play('idle_telescope');
 				}
 			}, this);
+			*/
+			this.captain.animations.play('idle_breath');
 		}
 		
 		//init sailors
@@ -109,6 +114,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.sailors = this.game.make.group();
 			shipgrp.add(this.sailors);
 			this.sailors.position.set(120,200);
+			
+			//Sailor Handler
+			this.top.stats.registerValueChangedHandler('player.crewCount', this.updateSailors, this);
 		}
 		
 		shipgrp.create(10, 10, 'ship-avatar');
@@ -129,6 +137,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 	AK.Desk.prototype.update = function ()
 	{
+			
+		if (this.captain.animations.currentAnim.isFinished) {
+			if (Math.random() <= 0.7){
+				console.log('this');
+				this.captain.animations.play('idle_breath');
+			} else {
+				this.captain.animations.play('idle_telescope');
+			}
+		}
 		
 	};
 	
@@ -211,8 +228,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		//document navigation
 		grp = this.game.make.group();
 		deskGrp.add(grp);
-		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 160);
-		grp.create(0, 0, 'decor-board').scale.set(0.8);
+		grp.position.set(Config.CptPanel.Origin.x, Config.CptPanel.Origin.y + 165);
+		grp.create(0, 0, 'menu-board');
 
 		on(grp.create(20, 10, 'almanach'),
 				function (almanach)
@@ -242,9 +259,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		//deprecated
 	};
 	
-	AK.Desk.prototype.updateSailors = function(new_sailors, old_sailors)
+	AK.Desk.prototype.updateSailors = function(new_sailors)
 	{
-		var diff = new_sailors - old_sailors;
+		var diff = new_sailors - this.temp_old_sailors;
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
@@ -268,17 +285,23 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				var dur = (Math.floor((Math.random() * 2000) + 1)+4000);
 				var tw = this.game.add.tween(s).to( { x: x_pos_end }, dur , Phaser.Easing.Linear.None).yoyo(true).repeat(Number.MAX_VALUE).start();
 				tw.onLoop.add(function() {
-					if (this.animations.currentAnim.name == 'right'){
-						this.animations.play('left');
-						//console.log('now going left');
+					if (this.animations.currentAnim === null) {
+						
 					} else {
-						this.animations.play('right');
-						//console.log('now going right');
+					
+						if (this.animations.currentAnim.name == 'right'){
+							this.animations.play('left');
+							//console.log('now going left');
+						} else {
+							this.animations.play('right');
+							//console.log('now going right');
+						}
+						
 					}
 				}.bind(s));
 			}
 		}
-				
+		this.temp_old_sailors = new_sailors;
 	}
 	
 	AK.Desk.prototype.setStat = function (name, value)
