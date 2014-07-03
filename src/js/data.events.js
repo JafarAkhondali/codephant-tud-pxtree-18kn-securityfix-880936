@@ -23,31 +23,74 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		}
 	}
 	
-, { "name": "pirate_privateer"
+, { "name": "ship_ahoy_pirate"
 	, "tags": ["open_sea"]
 	, "description": "Dein Ausguck entdeckt ein Schiff am Horizont. Es scheint unter spanischer Flagge zu segeln. Wie möchtest du handeln?"
 	,	"choices":
-		[ { "name": "pirate_privateer_avoid"
+		[ { "name": "ship_ahoy_pirate_avoid"
 			, "label": "Abdrehen und Abstand halten."
 			, "description": "Du hälst Abstand zu dem Schiff. Diskretion ist die Mutter aller Tugenden."
 			, "outcome":
 				{}
 			}
-		, { "name": "pirate_privateer_investigate"
+		, { "name": "ship_ahoy_pirate_investigate"
 			, "label": "Kurs beibehalten und einen Austausch mit dem anderen Schiff anregen."
 			, "description": "Als du dich dem Schiff näherst, hissen sie eine schwarze Flagge. Es sind portugiesische Freibeuter!"
 			, "choices":
-				[ { "name": "pirate_privateer_battle"
+				[ { "name": "ship_ahoy_pirate_battle"
 					, "label": "Zum Kampf vorbereiten."
 					, "outcome":
-						{ "player.food": -50
-						, "player.crewCount": -6
+						{ "player.food": [0,500]
+						, "player.crewCount": [-10,0]
+						, "player.strength": -2
+						, "player.gold": [0,1000]
 						}
 					}
-				, { "name": "pirate_privateer_evade"
+				, { "name": "ship_ahoy_pirate_evade"
 					, "label": "Ausweichmanöver und fliehen!"
 					, "outcome":
-						{}
+						{
+						  "player.strength": [-1,0]
+						}
+					}
+				]
+			}
+		]
+	}
+	
+, { "name": "ship_ahoy_friendly"
+	, "tags": ["open_sea"]
+	, "description": "Dein Ausguck entdeckt ein Schiff am Horizont. Es scheint unter spanischer Flagge zu segeln. Wie möchtest du handeln?"
+	,	"choices":
+		[ { "name": "ship_ahoy_friendly_avoid"
+			, "label": "Abdrehen und Abstand halten."
+			, "description": "Du hälst Abstand zu dem Schiff. Diskretion ist die Mutter aller Tugenden."
+			, "outcome":
+				{}
+			}
+		, { "name": "ship_ahoy_friendly_investigate"
+			, "label": "Kurs beibehalten und einen Austausch mit dem anderen Schiff anregen."
+			, "description": "Es ist ein Handelsschiff. Der Kapitän begrüsst dich. Was möchtest du tun?"
+			, "choices":
+				[ { "name": "ship_ahoy_friendly_buy_1"
+					, "label": "Nahrung für 100 Gold kaufen."
+					, "outcome":
+						{ "player.food": +100
+						, "player.gold": -100
+						}
+					}
+				, { "name": "ship_ahoy_friendly_buy_2"
+					, "label": "Nahrung für 200 Gold kaufen."
+					, "outcome":
+						{ "player.food": +200
+						, "player.gold": -200
+						}
+					}
+				, { "name": "ship_ahoy_friendly_buy_2"
+					, "label": "Ich brauche doch nichts."
+					, "outcome":
+						{
+						}
 					}
 				]
 			}
@@ -80,7 +123,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 					, "label": "Mit dem Stand der Sonne/Sterne."
 					, "description": "Du bestimmst den Breitengrad mit Hilfe der Sonne/Sterne. Deine Crew fühlt sich in ihr Vertrauen in deine navigatorischen Fähigkeiten bestätigt."
 					, "outcome":
-						{ "player.morale": +2
+						{ "player.morale": 0
 						}
 					}
 				]
