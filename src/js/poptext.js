@@ -33,9 +33,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				timer.start();
 			}
 		}
-	, next: function (text)
+	, next: function (text, style)
 		{
-			var popt = PopText(this.game, this.position.x, this.position.y, text, this.style)
+			var popt = PopText(
+						this.game, this.position.x, this.position.y,
+						text, style || this.style)
 				;
 			if (this._last)
 			{
