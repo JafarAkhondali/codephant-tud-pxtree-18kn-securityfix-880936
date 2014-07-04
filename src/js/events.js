@@ -90,6 +90,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				evt = this._selectEventByTags(opts.tags);
 			else
 				evt = opts;
+			this.top.taskLog.startEvent(evt);
 			this._processOutcome(Config.MoveCosts);
 			this._makeDialogFromTask(evt).show();
 		};
@@ -106,10 +107,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			{
 				AK.Events._inferType(task);
 			}
-			if (!("type" in task)) return null;
+			if (!("type" in task))
+				throw new TypeError('Task has no type');
 			
-			var dial = null
-				, dialogName = AK.Events.hyphenizedToUpperCamelCase(task.type)
+			var dialogName = AK.Events.hyphenizedToUpperCamelCase(task.type)
 				, makeFuncName = "_make" + dialogName + "Dialog";
 				;
 			
@@ -183,8 +184,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			nextTask = this[funcName].apply(this, arguments);
 			if (nextTask)
 			{
-				dial = this._makeDialogFromTask(nextTask);
-				if (dial) dial.show();
+				this.top.taskLog.startTask(nextTask);
+				this._makeDialogFromTask(nextTask).show();
+			}
+			else
+			{
+				this.top.taskLog.completeEvent();
 			}
 
 		};
@@ -194,6 +199,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._resolveMessageTask = function (task)
 		{
+			this.top.taskLog.completeTask(true);
 			if (task.hasOwnProperty('ok') && task.ok.hasOwnProperty('outcome'))
 				this._processOutcome(task.ok.outcome);
 
@@ -207,6 +213,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			var choice = task.choices[idx]
 				;
+			this.top.taskLog.completeTask(idx);
 
 			if (choice.hasOwnProperty('outcome'))
 				this._processOutcome(choice.outcome);
@@ -231,6 +238,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					isCorrect = order[i] === correctOrder[i]
 					if (!isCorrect) break;
 				}
+
+			this.top.taskLog.completeTask(order);
 
 			next = task[isCorrect ? "correct" : "wrong"];
 			this._processOutcome(next.outcome);

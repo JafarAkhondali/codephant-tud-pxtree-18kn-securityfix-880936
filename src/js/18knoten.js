@@ -28,6 +28,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		def.resetSaveData = function resetSaveData ()
 		{
 			localStorage.removeItem('Stats');
+			localStorage.removeItem('taskLog');
 			localStorage.removeItem('currentLevel');
 			localStorage.removeItem('enteringFrom');
 			this.loadSaveData();
@@ -38,8 +39,11 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			this.currentLevel = parseInt(localStorage.getItem('currentLevel') || '0');
 			this.currentSpotNr = 0;
 			this.enteringFrom = localStorage.getItem('enteringFrom') || 'east';
-			
-			//TODO replace with gathering of actual data.
+
+			this.taskLog = localStorage.getItem('taskLog')
+					? AK.TaskLog.fromSerializable(JSON.parse(localStorage.getItem('taskLog')))
+					: AK.TaskLog();
+
 			this.stats = new AK.Stats(localStorage.getItem('Stats')
 					? JSON.parse(localStorage.getItem('Stats'))
 					: { player:
