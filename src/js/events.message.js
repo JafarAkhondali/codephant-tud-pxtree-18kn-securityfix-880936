@@ -1,6 +1,8 @@
 namespace("PXTree.AchtzehnKnoten", function (AK)
 {
-	var Config = AK.Config.Events;
+	var Config = AK.Config.Events
+		, Labels = AK.Config.Labels
+		;
 	
 	/**
 	 * Shows a message to the user and provides an OK-button to close.
@@ -8,7 +10,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Events.MessageDialog = function MessageDialog (game, parent)
 	{
 		AK.Events.TaskDialog.call(this, game, parent);
-		this._okBtn = AK.Events.button.create(Config.Button.DefaultLabel, this.destroy, this);
+		this._okBtn = AK.Events.button.create(Labels.accept, this.destroy, this);
 		this._message = this.game.make.text(
 				Config.Description.Offset[0], Config.Description.Offset[1],
 				"", Config.Description.TextStyle);

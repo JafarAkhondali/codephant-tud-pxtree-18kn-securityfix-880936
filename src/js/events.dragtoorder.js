@@ -1,7 +1,9 @@
 namespace("PXTree.AchtzehnKnoten", function(AK)
 { "use strict";
 
-	var Config = AK.Config.Events;
+	var Config = AK.Config.Events
+		, Labels = AK.Config.Labels
+		;
 	
 	function DragToOrderDialog (game, parent, itemType)
 	{
@@ -23,7 +25,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this._resetPlaceData();
 		this._dragObjectData = [];
 
-		this._okBtn = AK.Events.button.create(Config.Button.DefaultLabel, this.destroy, this);
+		this._okBtn = AK.Events.button.create(Labels.confirm, this.destroy, this);
 		this.content.add(this._okBtn);
 		this._okBtn.position.set(14, Config.Dialog.Height - 10);
 

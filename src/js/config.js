@@ -5,6 +5,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 , Game:
 	{ Width: 1024, Height: 576 }
 
+, Labels:
+	{ accept: "Aye, verstanden!"
+	, confirm: "Aye, bestätige!"
+	}
+
 , Events:
 	{ Description:
 		{ TextStyle:
