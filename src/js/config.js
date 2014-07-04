@@ -133,8 +133,8 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	}
 
 , PopText:
-	{ Distance: 40
-	, Duration: 2000
+	{ Difference: -40
+	, Duration: 1750
 	, SingleDelay: 1000
 	, Easing: Phaser.Easing.Quadratic.In
 	}

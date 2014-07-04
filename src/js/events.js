@@ -258,7 +258,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				
 				this.top.stats.set(stat, this.top.stats.get(stat) + statDiff);
 				if (poptext)
-					poptext.next(text, style);
+					poptext.chain(text, style);
 				else
 					poptext = this.game.add.popText(
 							this.game.input.mousePointer.x + 20,
