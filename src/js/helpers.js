@@ -1,3 +1,30 @@
+//"use strict";
+
+/**
+ * Copies all properties of several object into a base object. It overrides the properties if they already exist.
+ * @param base:object Into this the properties will be copied.
+ * @param inclProto:boolean=false The extenders will be tested if they own the property to copy unless this is set to true.
+ * @param extenders...:Array<object> These are the object from which the properties are copied.
+ * @returns base:object 
+ */
+function extend (base, inclProto /*, extenders... */)
+{
+	var include = inclProto === true
+		, extenders = Array.prototype.slice.call(arguments,
+				typeof(inclProto) === 'boolean' ? 2 : 1)
+		, key
+		;
+	extenders.forEach(function (extender)
+	{
+		for (key in extender) if (include || extender.hasOwnProperty(key))
+		{
+			if (typeof(extender[key]) !== 'undefined')
+				base[key] = extender[key];
+		}
+	});
+	return base;
+};
+
 /**
  * 
  * @param ctor
@@ -6,15 +33,7 @@
  */
 function derive (ctor, diff)
 {
-	var proto = Object.create(ctor.prototype)
-		, key, value;
-	for (key in diff) if (diff.hasOwnProperty(key))
-	{
-		value = diff[key];
-		if (typeof(value) !== 'undefined')
-			proto[key] = value;
-	}
-	return proto;
+	return extend(Object.create(ctor.prototype), diff);
 }
 
 /**
@@ -30,8 +49,9 @@ function derive (ctor, diff)
  */
 function on (obj, func, context)
 {
-	return func.call(
-			typeof(context) !== 'undefined' ? context : obj, obj);
+	var ret = func.call(typeof(context) !== 'undefined' ? context : obj, obj)
+		;
+	return typeof(ret) === 'undefined' ? obj : ret;
 }
 
 /**

@@ -6,7 +6,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	/**
 	 * 
 	 */
-	AK.Events = function Events (parentCtrl, dialogParent)
+	AK.Events = function Events (parentCtrl)
 	{
 		this.parent = parentCtrl;
 		this.top = parentCtrl.top;
@@ -14,6 +14,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 		this._dialogQueue = [];
 		this._dialogParent = null;
+		this._popTextParent = null;
 
 		AK.Events.button = TextButtonFactory(this.game,
 				{ key: 'eventbox-btn'
@@ -66,6 +67,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		def.create = function create ()
 		{
 			this._dialogParent = this.game.add.group();
+			this._popTextParent = this.game.add.group();
 		};
 		
 		def.update = function update ()
@@ -91,8 +93,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this._processOutcome(Config.MoveCosts);
 			this._makeDialogFromTask(evt).show();
 		};
-		
-		
 		
 		/**
 		 * Generates a dialog according to the tasks 'type' property.
@@ -242,7 +242,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._processOutcome = function _processOutcome (outcome)
 		{
-			var stat, statDiff
+			var stat, statDiff, delay = 0
+				, poptext = null
+				, text, style
 				;
 			for (stat in outcome) if (outcome.hasOwnProperty(stat))
 			{
@@ -251,9 +253,20 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{
 					statDiff = Math.floor(Math.random() * (statDiff[1] - statDiff[0] + 1) + statDiff[0]);
 				}
+				text = Config.StatLabels[stat] + ' ' + ((statDiff < 0) ? '' : '+') + statDiff;
+				style = Config.PopStyles[(statDiff < 0) ? 'malus' : 'bonus'];
 				
 				this.top.stats.set(stat, this.top.stats.get(stat) + statDiff);
+				if (poptext)
+					poptext.chain(text, style);
+				else
+					poptext = this.game.add.popText(
+							this.game.input.mousePointer.x + 20,
+							this.game.input.mousePointer.y + 20,
+							text, style, this._popTextParent);
 			}
+
+			if (poptext) poptext.pop();
 		};
 		
 		/**

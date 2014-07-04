@@ -36,9 +36,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 						, overStyle: { fill: 'gold'}
 						, textAlign: [.5,.5]
 					})
-		, start = btnFactory.create("neues spiel")
-		, fortsetzen = btnFactory.create("fortsetzen")
-		, credits = btnFactory.create("credits")
+		, start = btnFactory.create(Config.Labels.NewGame)
+		, fortsetzen = btnFactory.create(Config.Labels.LoadGame)
+		, credits = btnFactory.create(Config.Labels.Credits)
 		;
 		this.game.add.sprite(0, 0, 'mainmenu-bg');
 		var logo = this.game.add.sprite(700,90,'logo');

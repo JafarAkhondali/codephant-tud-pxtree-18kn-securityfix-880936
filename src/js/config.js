@@ -47,6 +47,32 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, MoveCosts:
 		{ "player.food": -15
 		}
+	, StatLabels:
+		{ "player.name": "Name"
+		, "player.morale": "Moral"
+		, "player.nationality": 'british'
+		, "player.gold": "Gold"
+		, "player.food": "Nahrung"
+		, "player.crewCount": "Mannschaft"
+		, "player.strength": "Stärke"
+		, "ship.speed": "Geschwindigkeit"
+		, "ship.crewCapacity": "Vollbesatzung"
+		}
+	, PopStyles:
+		{ "bonus":
+			{ font: "bold 16pt GameFont"
+			, strokeThickness: 1
+			, fill: "#33ff55"
+			, stroke: "#33ff55"
+			}
+		, "malus":
+			{ font: "bold 16pt GameFont"
+			, strokeThickness: 1
+			, fill: "#ff3355"
+			, stroke: "#ff3355"
+			}
+		}
+	,
 	}
 
 , Desk:
@@ -82,6 +108,12 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		{ font: "normal 18pt GameFont"
 		, fill: "white"
 		}
+	, Labels:
+		{ NewGame: "Neues Spiel"
+		, LoadGame: "Fortsetzen"
+		, Credits: "Credits"
+		, ExitGame: "Schließen"
+		}
 	}
 
 , Credits:
@@ -98,6 +130,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, RolesXOffset: 200
 	, LineSpace: 5
 	, TextYOrigin: 100
+	}
+
+, PopText:
+	{ Difference: -40
+	, Duration: 1750
+	, SingleDelay: 1000
+	, Easing: Phaser.Easing.Quadratic.In
 	}
 }
 
