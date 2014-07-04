@@ -34,6 +34,14 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			this.loadSaveData();
 		};
 
+		def.storeSaveData = function storeSaveData ()
+		{
+			localStorage.setItem('currentLevel', this.currentLevel.toString());
+			localStorage.setItem('enteringFrom', this.enteringFrom);
+			localStorage.setItem('Stats',JSON.stringify(this.stats._values));
+			localStorage.setItem('taskLog', JSON.stringify(this.taskLog.getSerializable()));
+		};
+
 		def.loadSaveData = function loadSaveData ()
 		{
 			this.currentLevel = parseInt(localStorage.getItem('currentLevel') || '0');

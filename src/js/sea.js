@@ -45,9 +45,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						this.top.enteringFrom = enteringFrom;
 
 						//store progresss
-						localStorage.setItem('currentLevel', this.top.currentLevel.toString());
-						localStorage.setItem('enteringFrom', this.top.enteringFrom);
-						localStorage.setItem('Stats',JSON.stringify(this.top.stats._values));
+						this.top.storeSaveData();
 
 						// real loading
 						var leveldat = AzK.Data.Levels[levelnr];
