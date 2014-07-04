@@ -19,7 +19,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 * @param style:object Text style.
 	 * @return self:PopText The newly created PopText instance.
 	 */
-	function PopText (game, x, y, text, style)
+	function PopText (game, x, y, text, style, options)
 	{
 		var self = Object.create(PopText.prototype);
 		Phaser.Text.call(self, game, x, y, text, style);
@@ -34,6 +34,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		self._last = null;
 
+		/**
+		 *
+		 */
+		self._options = extend(Object.create(Config.Defaults), options || {});
+
+		/**
+		 *
+		 */
+		self._former = {x: x, y: y, parent: null, game: null};
+
 		//make it invisible until popped.
 		self.visible = false;
 		return self;
@@ -47,21 +57,20 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	{ pop: function ()
 		{
-			this._last = null;
+			//this._last = null;
 			this.visible = true;
 			this.game.add.tween(this)
 					.to(
-						{ y: this.y - Config.Difference, alpha: 0 },
-						Config.Duration,
-						Config.Easing)
+						{ y: this.y - this._options.difference, alpha: 0 },
+						this._options.duration,
+						this._options.easing)
 					.start()
 					.onComplete.add(this.destroy, this);
-			if (this._next)
-			{
-				var timer = this.game.time.create(true);
-				timer.add(Config.SingleDelay, this._popNext, this);
-				timer.start();
-			}
+
+			//
+			var timer = this.game.time.create(true);
+			timer.add(this._options.delay, this._popNext, this);
+			timer.start();
 			return this;
 		}
 	/**
@@ -74,21 +83,35 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	, chain: function (text, style)
 		{
-			var popt = PopText(
-						this.game, this.position.x, this.position.y,
-						 text, style || this.style)
+			var nextPopped = this._next === true;
 				;
-			if (this._last)
+			if (this._next === null || nextPopped)
 			{
-				this._last._next = popt;
-				this._last = popt;
+				this._next = this._last = PopText(
+						this.game || this._former.game, this._former.x, this._former.y,
+						 text, style || this.style);
+				if (nextPopped)
+				{
+					this._popNext();
+				}
 			}
-			else if (!this._next)
+			else
 			{
-				this._last = this._next = popt;
+				this._last.chain(text, style);
+				this._last._last = null; //last is not needed on not chain heads
+				this._last = this._last._next;
 			}
-			
 			return this;
+		}
+
+	/**
+	 *
+	 */
+	, destroy: function (destroyChildren)
+		{
+			this._former.parent = this.parent;
+			this._former.game = this.game;
+			Phaser.Text.prototype.destroy.apply(this, arguments); 
 		}
 
 	/**
@@ -96,8 +119,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	 */
 	, _popNext: function ()
 		{
-			this.parent.add(this._next);
-			this._next.pop();
+			if (this._next !== null)
+			{
+				(this.parent || this._former.parent).add(this._next);
+				this._next.pop();
+			}
+			else
+			{
+				this._next = true;
+			}
 		}
 	});
 
