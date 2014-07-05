@@ -1,5 +1,5 @@
 namespace("PXTree.AchtzehnKnoten", function (AK)
-{
+{ "use strict";
 	
 	var Config = AK.Config.Events;
 	
@@ -84,12 +84,18 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			var evt = null
 				;
-			if ('name' in opts)
-				evt = this._selectEventByName(opts.name);
-			else if ('tags' in opts)
-				evt = this._selectEventByTags(opts.tags);
-			else
-				evt = opts;
+			if (typeof(opts) === 'object' && opts !== null)
+			{
+				if ('name' in opts)
+					evt = this._selectEventByName(opts.name);
+				else if ('tags' in opts)
+					evt = this._selectEventByTags(opts.tags);
+				else
+					evt = opts;
+			}
+
+			if (!evt) evt = this._selectFallbackEvent();
+
 			this.top.taskLog.startEvent(evt);
 			this._processOutcome(Config.MoveCosts);
 			this._makeDialogFromTask(evt).show();
@@ -262,17 +268,20 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{
 					statDiff = Math.floor(Math.random() * (statDiff[1] - statDiff[0] + 1) + statDiff[0]);
 				}
-				text = Config.StatLabels[stat] + ' ' + ((statDiff < 0) ? '' : '+') + statDiff;
-				style = Config.PopStyles[(statDiff < 0) ? 'malus' : 'bonus'];
-				
-				this.top.stats.set(stat, this.top.stats.get(stat) + statDiff);
-				if (poptext)
-					poptext.chain(text, style);
-				else
-					poptext = this.game.add.popText(
-							this.game.input.mousePointer.x + 20,
-							this.game.input.mousePointer.y + 20,
-							text, style, this._popTextParent);
+				if (statDiff !== 0)
+				{
+					text = Config.StatLabels[stat] + ' ' + ((statDiff < 0) ? '' : '+') + statDiff;
+					style = Config.PopStyles[(statDiff < 0) ? 'malus' : 'bonus'];
+					
+					this.top.stats.set(stat, this.top.stats.get(stat) + statDiff);
+					if (poptext)
+						poptext.chain(text, style);
+					else
+						poptext = this.game.add.popText(
+								this.game.input.mousePointer.x + 20,
+								this.game.input.mousePointer.y + 20,
+								text, style, this._popTextParent);
+				}
 			}
 
 			if (poptext) poptext.pop();
@@ -320,6 +329,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			
 			return selected;
 		};
-	});
 
+		def._selectFallbackEvent = function _selectFallbackEvent ()
+		{
+			return this._selectEventByTags(["fallback"]);
+		};
+	});
 });

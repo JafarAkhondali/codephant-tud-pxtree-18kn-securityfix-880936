@@ -1,25 +1,36 @@
 
 namespace("PXTree.AchtzehnKnoten.Data.Events",
 
-[ { name: "drag-testing"
-	, type: "drag-to-order"
-	, description: "Sortiere diese Name lexikografisch."
-	, itemType: "word"
-	, items:
+[ { "name": "fallback-nice-weather"
+	, "tags": [ "fallback" ]
+	, "type": "message"
+	, "description": "Es ist ein ruhiger Tag auf See und das Wetter ist schön, während eine kräftige Brise das Schiff vorantreibt."
+	, "ok":
+		{ "outcome":
+			{ "player.food": [-5, 5]
+			}
+		}
+	}
+
+, { "name": "drag-testing"
+	, "type": "drag-to-order"
+	, "description": "Sortiere diese Name lexikografisch."
+	, "itemType": "word"
+	, "items":
 		{ "dagama": "Vasco da Gama"
 		, "vespucci": "Amerigo Vespucci"
 		, "columbus": "Christoph Kolumbus"
 		, "magellan": "Ferdinand Magellan"
 		, "eriksson": "Leif Eriksson"
 		}
-	, order: ["eriksson", "dagama", "columbus", "magellan", "vespucci"]
-	, correct:
-		{ type: "message"
-		, description: "Das hast du fein gemacht!"
+	, "order": ["eriksson", "dagama", "columbus", "magellan", "vespucci"]
+	, "correct":
+		{ "type": "message"
+		, "description": "Das hast du fein gemacht!"
 		}
-	, wrong:
-		{ type: "message"
-		, description: "Das war falsch!"
+	, "wrong":
+		{ "type": "message"
+		, "description": "Das war falsch!"
 		}
 	}
 	
