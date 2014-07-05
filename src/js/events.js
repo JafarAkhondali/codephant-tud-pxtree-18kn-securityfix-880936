@@ -33,7 +33,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{
 		def._inferType = function (task)
 		{
-			if ('choices' in task) //SingleSelection
+			if ('type' in task) { return; }
+			else if ('choices' in task) //SingleSelection
 			{
 				task.type = "single-select";
 			}
@@ -41,6 +42,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			{
 				task.type = "message";
 			}
+			else throw new TypeError('Could not figure out task\'s type: ' + JSON.stringify(def));
 		}
 
 		def.hyphenizedToUpperCamelCase = function (str)
@@ -96,9 +98,21 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 			if (!evt) evt = this._selectFallbackEvent();
 
-			this.top.taskLog.startEvent(evt);
-			this._processOutcome(Config.MoveCosts);
-			this._makeDialogFromTask(evt).show();
+				this._processOutcome(Config.MoveCosts);
+
+			try
+			{
+				AK.Events._inferType(evt);
+				this.top.taskLog.startEvent(evt);
+				this._makeDialogFromTask(evt).show();
+			}
+			catch(err)
+			{
+				if (err instanceof TypeError)
+					this.startEvent(this._selectFallbackEvent());
+				else throw err;
+			}
+			
 		};
 		
 		/**
@@ -108,14 +122,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._makeDialogFromTask = function _makeDialogFromTask (task)
 		{
-			// infer type if not present. NOTE: this will soon be removed!
-			if (!('type' in task))
-			{
-				AK.Events._inferType(task);
-			}
-			if (!("type" in task))
-				throw new TypeError('Task has no type');
-			
 			var dialogName = AK.Events.hyphenizedToUpperCamelCase(task.type)
 				, makeFuncName = "_make" + dialogName + "Dialog";
 				;
@@ -190,8 +196,18 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			nextTask = this[funcName].apply(this, arguments);
 			if (nextTask)
 			{
-				this.top.taskLog.startTask(nextTask);
-				this._makeDialogFromTask(nextTask).show();
+				try
+				{
+					AK.Events._inferType(nextTask);
+					this.top.taskLog.startTask(nextTask);
+					this._makeDialogFromTask(nextTask).show();
+				}
+				catch(err)
+				{
+					if (err instanceof TypeError)
+					{ this.top.taskLog.completeEvent(); }
+					else throw err;
+				}
 			}
 			else
 			{
