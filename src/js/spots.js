@@ -1,6 +1,6 @@
 
 namespace("PXTree.AchtzehnKnoten", function()
-{
+{ "use strict";
 	var Config = PXTree.AchtzehnKnoten.Config;
 	
 	function Spots (sea)
@@ -40,8 +40,15 @@ namespace("PXTree.AchtzehnKnoten", function()
 				, reachable: opts.reachable || null
 				};
 		
-		opts.start && (spot.start = opts.start);
-		opts.end && (spot.end = opts.end);
+		if ('start' in opts) spot.start = opts.start;
+		if ('end' in opts) spot.end = opts.end;
+		if ('event' in opts) spot.event = opts.event;
+
+		if (!('event' in spot))
+			spot.event = { tags: [typename] };
+		else if ('tags' in spot.event)
+			spot.event.tags.push(typename);
+		
 		return spot;
 	};
 	
@@ -242,9 +249,6 @@ namespace("PXTree.AchtzehnKnoten", function()
 					map.peripheral = end;
 					spots.end[map.end.dir] = map;
 				}
-				
-				if ('event' in spot)
-					map.event = spot.event;
 
 				return map;
 			}, this);
