@@ -17,22 +17,45 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			deserialized._completedEvents = events;
 			return deserialized;
 		}
+
+	, AlreadyRunningError: function AlreadyRunningError (what)
+		{
+			if (!(this instanceof AlreadyRunningError))
+				return new AlreadyRunningError(what);
+			this.what = what;
+		}
+
+	, NotRunningError: function NotRunningError (what)
+		{
+			if (!(this instanceof NotRunningError))
+				return new NotRunningError(what);
+			this.what = what;
+		}
 	});
+
+	
 
 	extend(TaskLog.prototype,
 	{ startEvent: function (event)
 		{
+			if (this._currentEvent !== null)
+				throw TaskLog.AlreadyRunningError("Event");
 			this._currentEvent = [];
 			this.startTask(event);
 		}
 
 	, completeEvent: function ()
 		{
+			if (this._currentEvent === null)
+				throw TaskLog.NotRunningError("Event");
 			this._completedEvents.push(this._currentEvent);
 			this._currentEvent = null;
 		}
+
 	, startTask: function (task)
 		{
+			if (this._currentTask !== null)
+				throw TaskLog.AlreadyRunningError("Task");
 			this._currentTask =
 					{ name: task.name
 					, result: null
@@ -43,10 +66,17 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 
 	, completeTask: function (result)
 		{
+			if (this._currentTask === null)
+				throw TaskLog.NotRunningError("Task");
 			this._currentTask.completedAt = Date.now();
 			this._currentTask.result = result;
 			this._currentEvent.push(this._currentTask);
 			this._currentTask = null;
+		}
+
+	, isEventRunning: function ()
+		{
+			return this._currentEvent !== null && this._currentTask !== null;
 		}
 
 	, isTaskCompleted: function (name)
