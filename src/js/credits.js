@@ -22,8 +22,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			, { name: "Toni Weinert"
 				, roles: ["Game-Play", "Konzepte", "Programmierung"]
 				}
-			, { name: "Axel Rother"
-				, roles: ["Grafiken", "Chef-Designer"]
+			, { name: "Axel Rothe"
+				, roles: ["User Interface", "Art Direction" ]
 				}
 			, { name: "Gregor Stopp"
 				, roles: ["Recherche", "Aufgabenstellungen"]
@@ -38,14 +38,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				, url: "http://www.phaser.io"
 				, license: "MIT"
 				}
-			, { name: "Silkscreen"
+			/*, { name: "Silkscreen"
 				, description: "Small Pixel Font"
 				, url: "http://www.kottke.org/plus/type/silkscreen/"
 				, license: "arbitrary free license"
-				}
-			, { name: "Musik"
-				, description: "alle Töne die das Spiel produziert"
-				, url: "http://www.example.org"
+				}*/
+			, { name: "Sounds"
+				, description: "All Sounds used are from FreeSound.org"
+				, url: "http://www.freesound.org"
 				, license: "CC BY-SA-NC"
 				}
 			,

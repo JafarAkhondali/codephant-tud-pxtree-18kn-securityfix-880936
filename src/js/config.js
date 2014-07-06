@@ -13,7 +13,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 , Events:
 	{ Description:
 		{ TextStyle:
-			{ font: "normal 14pt GameFont"
+			{ font: "normal 12pt GameFont"
 			, fill: "white"
 			, wordWrap: true
 			, wordWrapWidth: 365
@@ -23,13 +23,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		}
 	, Button:
 		{ TextStyle:
-			{ font: "normal 13pt GameFont"
+			{ font: "normal 11pt GameFont"
 			, fill: "white"
 			, wordWrap: true
 			, wordWrapWidth: 365
 			}
 		, HoverTextStyle: { fill: "#ff774b" }
-		, LabelOffset: [5,0]
+		, LabelOffset: [10,10]
 		, PanelOffset: [16,300]
 		, DefaultLabel: "Aye!"
 		, Height: 32
@@ -44,7 +44,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, Drag:
 		{ Threshold: 250
 		, TextStyle:
-			{ font: "normal 14pt GameFont"
+			{ font: "normal 12pt GameFont"
 			, fill: "white"
 			}
 		, ResetLabel: "Zurücksetzen"
@@ -65,13 +65,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		}
 	, PopStyles:
 		{ "bonus":
-			{ font: "bold 16pt GameFont"
+			{ font: "bold 14pt GameFont"
 			, strokeThickness: 1
 			, fill: "#33ff55"
 			, stroke: "#33ff55"
 			}
 		, "malus":
-			{ font: "bold 16pt GameFont"
+			{ font: "bold 14pt GameFont"
 			, strokeThickness: 1
 			, fill: "#ff3355"
 			, stroke: "#ff3355"
@@ -84,7 +84,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	{ Left: 576
 	
 	, StatPaper:
-		{ TextStyle: { font : 'normal 14pt GameFont', fill: 'black' }
+		{ TextStyle: { font : 'normal 11pt GameFont', fill: 'black' }
 		, Offset: { x: 30, y: 30 }
 		, Lines:
 			{ Origin: { x: 20, y: 20 }
@@ -97,7 +97,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, CptPanel:
 		{ Origin : { x : 270, y : 20 }
 		, TextStyle:
-			{ font: 'normal 14pt GameFont'
+			{ font: 'normal 11pt GameFont'
 			, fill: 'white'
 			, wordWrap: true
 			, wordWrapWidth: 81
@@ -123,7 +123,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 
 , Credits:
 	{ TextStyle:
-		{ font: "normal 14pt GameFont"
+		{ font: "normal 12pt GameFont"
 		, fill: "white"
 		}
 	, TextArea:
