@@ -56,8 +56,9 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		{
 			if (this._currentTask !== null)
 				throw TaskLog.AlreadyRunningError("Task");
+
 			this._currentTask =
-					{ name: task.name
+					{ name: task.name || 'no-name-task'
 					, result: null
 					, startedAt: Date.now()
 					, completedAt: null
