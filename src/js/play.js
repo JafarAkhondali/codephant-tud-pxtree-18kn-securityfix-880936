@@ -10,6 +10,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	Play.key = 'play';
 	
+
 	Play.prototype = derive(Phaser.State,
 			{ init : function (parentCtrl)
 				{
@@ -20,6 +21,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.desk = new AK.Desk(this);
 					this.almanach = new AK.Almanach(this);
 					this.tutorial = new AK.Tutorial(this);
+					this.first_start_flag = 1;
 					}
 				
 			, preload : function preload ()
@@ -37,8 +39,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.events.create();
 					this.sea.loadLevel(this.top.currentLevel, this.top.enteringFrom);
 					this.almanach.create();
-					//this.tutorial.create();
-					//this.tutorial.openTutorial(); 
+					this.tutorial.create();
+					if(this.first_start_flag==1) this.tutorial.openTutorial(0);
 				}
 			, update: function create ()
 				{
@@ -52,7 +54,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.events.startEvent(opts);
 				}
 			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(); }
-			, openTutorial: function openTutorial() {this.tutorial.openTutorial(); }
+			, openTutorial: function openTutorial() {this.tutorial.openTutorial(0); }
 			});
 	
 	AK.Play = Play;

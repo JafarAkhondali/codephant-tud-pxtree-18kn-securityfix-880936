@@ -1,5 +1,5 @@
 namespace("PXTree.AchtzehnKnoten", function(AK)
-{ "use strict";
+{
 	var Config = AK.Config.Desk;
 	var data_almanach = AK.Data.Almanach;
 	var alm_view;
@@ -16,6 +16,10 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this.top = parentCtrl.top;
 		this.play = parentCtrl;
 		this.game = parentCtrl.game;
+		this.self = this;
+		this.preload();
+		this.create();
+
 	};
 	
 	AK.Almanach.prototype.preload = function preload() {
@@ -70,12 +74,13 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	AK.Almanach.prototype.makeBackground = function (){
 		paper = this.game.add.sprite(Config.Left, 0, 'background');
 		paper.visible = false;
-		exit = this.game.add.button(
-				Config.Left + 55, 530, 'exit',
-				this.closeAlmanach, this,
-				1, 0);
-		exit.anchor.set(0.5);
-		exit.visible = false;
+		exit = this.game.add.sprite(Config.Left + 55, 530, 'exit');
+	    exit.anchor.set(0.5);
+	    exit.scale.set(1);
+	    exit.visible = false;
+	    exit.inputEnabled = true;
+	    exit.events.onInputDown.add(
+	    		this.closeAlmanach,this);
 	};
 	
 	
@@ -174,8 +179,8 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		var txt = text.split(" ");
 		var line = "";
 		for(var i=0;i<txt.length;i++){
-			if(txt[i].length>45) {
-				var longtxt = txt[i].match(/[\s\S]{1,45}/g) || [];
+			if(txt[i].length>40) {
+				var longtxt = txt[i].match(/[\s\S]{1,40}/g) || [];
 				for(var j=0;j<longtxt.length;j++) {lines.push(longtxt[j]);}
 			}
 			else{
@@ -192,17 +197,6 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		lines.push('');
 		return lines;
 	}
-	
-	
-	var mouseInHandler = function ()
-	{
-		label.fill = Config.Button.HoverTextStyle.fill;
-		bg.frame = 1;
-	};
-	var mouseOutHandler = function ()
-	{
-		label.fill = Config.Button.TextStyle.fill;
-		bg.frame = 0;
-	};
+
 	
 });

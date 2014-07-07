@@ -52,8 +52,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.image('paper', 'assets/ui/ui-paper.png')
 			.image('food-icon', 'assets/icons/ui-food.png')
 			.image('gold-icon', 'assets/icons/ui-gold.png')
-			//.image('small-sailor', 'assets/chars/sailor-simple.png')
-			.image('small-soldier', 'assets/chars/soldier-spanish-simple.png')
 			.spritesheet('small-captain-british', 'assets/chars/captain-british-simple.png',32,32)
 			.image('small-captain-spanish', 'assets/chars/captain-spanish-simple.png')
 			.image('large-captain-spanish', 'assets/chars/captain-spanish-large.png')
@@ -65,6 +63,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('ship-gischt', 'assets/ui/visual-gischt.png', 300,32)
 			.image('captains-bg', 'assets/ui/ui-avatarbox.png')
 			.image('morale-bg', 'assets/ui/ui-moralmeter.png')
+			.image('morale-bar-bg', 'assets/ui/ui-moralmeter-bg.png')
 			.image('morale-bar', 'assets/ui/ui-moralmeter-bar.png')
 			.spritesheet('small-sailor','assets/chars/sailor-simple.png',32,32)
 			.spritesheet('small-soldier','assets/chars/soldier-spanish-simple.png',32,32)
@@ -211,8 +210,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		grp.add(this.game.make.sprite(0, 0, 'captains-bg'));
 		
 		grp.create(8, 24, 'large-captain-'+this.stats.get('player.nationality'));
-		grp.add(this.game.make.text(85, 24, 'Captain', Config.CptPanel.TextStyle));
-		grp.add(this.game.make.text(85, 40, this.stats.get('player.name'), Config.CptPanel.TextStyle));
+		grp.add(this.game.make.text(100, 24, 'Captain', Config.CptPanel.TextStyle));
+		grp.add(this.game.make.text(87, 50, this.stats.get('player.name'), Config.CptPanel.TextStyle));
 		
 		//captain morale
 		grp = this.game.make.group();
@@ -220,12 +219,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		grp.position.set(Config.CptPanel.Morale.Offset[0], Config.CptPanel.Morale.Offset[1]);
 		
-		morale.bar = this.game.make.sprite(87, 17, 'morale-bar');
+		grp.create(6, 16, 'morale-bar-bg');
+		
+		morale.bar = this.game.make.sprite(87, 16, 'morale-bar');
 		moraleHandler = (function (newVal) { this.scale.x = newVal; })
 				.bind(morale.bar);
 		grp.add(morale.bar);
+				
 		grp.create(0, 0, 'morale-bg');
-		grp.add(this.game.make.text(65, 35, 'Moral', Config.CptPanel.TextStyle));
+		grp.add(this.game.make.text(65, 38, 'Moral', Config.CptPanel.TextStyle));
 		this.top.stats.registerValueChangedHandler('player.morale', moraleHandler);
 		moraleHandler(this.top.stats.get('player.morale'));
 		
