@@ -9,8 +9,12 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				AK.Config.Game.Width,
 				AK.Config.Game.Height,
 				Phaser.AUTO, '', null);
-		
-		this.loadSaveData();
+
+		this.currentLevel = null;
+		this.currentSpotNr = null;
+		this.enteringFrom = null;
+		this.taskLog = null;
+		this.stats = null;
 		//console.log(easterTeggst);
 	
 	};
@@ -50,7 +54,8 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 
 			this.taskLog = localStorage.getItem('taskLog')
 					? AK.TaskLog.fromSerializable(JSON.parse(localStorage.getItem('taskLog')))
-					: AK.TaskLog();
+					: on(AK.TaskLog(),
+							function (taskLog) { taskLog.startCachingEventNames(AK.Config.Game.EventNameCacheSize); })
 
 			this.stats = new AK.Stats(localStorage.getItem('Stats')
 					? JSON.parse(localStorage.getItem('Stats'))

@@ -2,8 +2,7 @@
 namespace("PXTree.AchtzehnKnoten.Config",
 
 { TextStyle: { font: "normal 14pt GameFont", fill: "black" }
-, Game:
-	{ Width: 1024, Height: 576 }
+, Game: { Width: 1024, Height: 576, EventNameCacheSize: 10 }
 
 , Labels:
 	{ accept: "Aye, verstanden!"
@@ -77,7 +76,6 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, stroke: "#ff3355"
 			}
 		}
-	,
 	}
 
 , Desk:

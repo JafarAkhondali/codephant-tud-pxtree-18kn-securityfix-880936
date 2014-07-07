@@ -96,7 +96,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					evt = opts;
 			}
 
-			if (!evt) evt = this._selectFallbackEvent();
+			if (!evt)
+			{
+				console.log("events: falling back due to failed event selection at event start.");
+				evt = this._selectFallbackEvent();
+			}
 
 				this._processOutcome(Config.MoveCosts);
 
@@ -109,7 +113,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			catch(err)
 			{
 				if (err instanceof TypeError)
+				{
+					console.log("events: falling back due to failed type inference.");
 					this.startEvent(this._selectFallbackEvent());
+				}
 				else throw err;
 			}
 			
@@ -318,6 +325,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				if (name === ev.name)
 					found = ev;
 			}
+			if (!found)
+			{
+				console.log("events: falling back due to missing named event ("
+						+ name + ").");
+				found = this._selectFallbackEvent();
+			}
 			return found;
 		};
 		
@@ -328,27 +341,44 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			var matching = []
 				, selected = null
-				, testTags = function (ev)
+				, containedInTags = function (t) { return tags.indexOf(t) >= 0; }
+				, suitableEvents = function (ev)
 						{
-							if (!('tags' in ev)) return false;
-							return ev.tags.every(function (t) { return tags.indexOf(t) >= 0; });
+							return ('tags' in ev) //events without tags are not suitable for selection by tags
+									&& !this.top.taskLog.isInEventNameCache(ev.name) //don't select events that have been run recently
+									&& ev.tags.every(containedInTags); //are the event's tags a subset of the search tags
 						}
 				;
-			AK.Data.Events.forEach(function(ev)
-			{
-				
-				if (testTags(ev))
-					matching.push(ev);
-			}, this);
+			matching = AK.Data.Events.filter(suitableEvents, this);
 			if (0 < matching.length)
 				selected = matching[Math.floor(matching.length * Math.random())];
-			
+
+			if (!selected)
+			{
+				console.log("events: falling back due to failed tag ("
+						+ tags.join(', ')
+						+ ") matching.");
+				selected = this._selectFallbackEvent();
+			}
 			return selected;
 		};
 
+		/**
+		 * Randomly select one of the events which bear the tag 'fallback'.
+		 * This ignores the task-log.
+		 */
 		def._selectFallbackEvent = function _selectFallbackEvent ()
 		{
-			return this._selectEventByTags(["fallback"]);
+			var filter = null //TODO !!!
+				, matching = AK.Data.Events.filter(__filterFallbackEvents)
+				, selected = matching[Math.floor(matching.length * Math.random())]
+				;
+			return selected;
 		};
+		/**
+		 * Helper function which provides the filter condition for fallback events.
+		 */
+		function __filterFallbackEvents (ev)
+		{ return ('tags' in ev) && ev.tags.indexOf('fallback') >= 0; }
 	});
 });
