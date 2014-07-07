@@ -127,14 +127,14 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 					, "label": "Mit dem Kompass."
 					, "description": "Dein Crewmitglied schaut dich verwirrt an: 'Captain, ich dachte den Breitengrad bestimmt man dem Stand der Sonne oder der Sterne?'"
 					, "outcome":
-						{ "player.morale": -1
+						{ "player.morale": -2
 						}
 					}
 				, { "name": "crew_latitude_sun"
 					, "label": "Mit dem Stand der Sonne/Sterne."
 					, "description": "Du bestimmst den Breitengrad mit Hilfe der Sonne/Sterne. Deine Crew fühlt sich in ihr Vertrauen in deine navigatorischen Fähigkeiten bestätigt."
 					, "outcome":
-						{ "player.morale": 0
+						{ "player.morale": 1
 						}
 					}
 				]
@@ -150,7 +150,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "label": "Weitersegeln."
 			, "description": "Deine Reise ist wichtiger als so eine kleine Insel."
 			, "outcome":
-				{ "player.food": -5
+				{ 
 				}
 			}
 		, { "name": "native_island_anchor"
@@ -161,7 +161,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 					, "label": "Ein Paar Vorräte am Strand sammeln."
 					, "description": "Deine Crew sammelt ein wenig Holz und Früchte am Strand. Die Ausbeute ist mager, aber man nimmt was man kriegen kann."
 					, "outcome":
-						{ "player.food": +10
+						{ "player.food": [5,15]
 						}
 					}
 				, { "name": "native_island_inland"
@@ -174,23 +174,23 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 							, "description": "Nach einer kurzen Demonstration deiner Waffen ist der Stamm zu einem Handel bereit."
 							, "outcome":
 								{ "player.strength": -5
-								, "player.food": +30
+								, "player.food": [30,45]
 								}
 							}
 						, { "name": "native_island_food"
 							, "label": "Frage nach Nahrung."
 							, "description": "Die Verständigung ist nicht leicht, aber du fragst den Stamm, wo es auf der Insel Nahrung zu finden gibt. Sie zeigen dir ihre Jagdgründe und du kannst ein paar Tiere erlegen."
 							, "outcome":
-								{ "player.food": +20
+								{ "player.food": [5,15]
 								}
 							}
 						, { "name": "native_island_raid"
 							, "label": "Überfalle den Stamm in der nächsten Nacht."
 							, "description": "Du überfällst den Stamm in der nächsten Nacht und erbeutest ihre Schätze und Vorräte, einige deiner Männer sterben dabei. Ob das richtig war..."
 							, "outcome":
-								{ "player.crewCount": -3
-								, "player.morale": -5
-								, "player.food": +50
+								{ "player.crewCount": [-3,0]
+								, "player.morale": [-5,0]
+								, "player.food": [50,100]
 								}
 						} ]
 					}
@@ -207,16 +207,10 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "label": "Versuche zu Angeln."
 			, "description": "Deine Crew fängt ein paar Fische."
 			, "outcome":
-				{ "player.food": +15 }
+				{ "player.food": [10,30] }
 			}
-		, { "name": "no_wind_sail"
-			, "label": "Die Takelage und die Segel überprüfen."
-			, "description": "Die Takelage ist in Top-Form. Deine Männer sind umsonst auf den Masten herumgeklettert."
-			, "outcome":
-				{ //"ship.speed": +0.1
-				  "player.food": -15 }
-			}
-		, { "name": "no_wind_free"
+		, 
+		{ "name": "no_wind_free"
 			, "label": "Der Mannschaft den Tag frei geben."
 			, "description": "Deine Crew genießt einen freien Tag."
 			, "outcome":
@@ -228,10 +222,10 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	
 , { "name": "scurvy"
 	, "tags": ["open_sea"]
-	, "description": "Skorbut hat ein Mitglied deiner Crew dahingerafft!"
+	, "description": "Shorbut fordert neue Opfer!"
 	, "ok":
 		{ "outcome":
-			{ "player.crewCount": -1 }
+			{ "player.crewCount": [-2,-1] }
 		}
 	}
 	

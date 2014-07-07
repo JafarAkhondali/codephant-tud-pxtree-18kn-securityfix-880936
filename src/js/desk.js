@@ -305,7 +305,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	*/
 	AK.Desk.prototype.updateStrength = function(new_strength)
 	{
-		var diff = Math.floor((new_strength - this.temp_old_strength)/3);
+		var diff = Math.floor((new_strength - this.temp_old_strength)/2);
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
