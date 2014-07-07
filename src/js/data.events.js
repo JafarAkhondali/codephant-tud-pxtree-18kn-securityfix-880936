@@ -4,10 +4,10 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 [ { "name": "fallback-nice-weather"
 	, "tags": [ "fallback" ]
 	, "type": "message"
-	, "description": "Es ist ein ruhiger Tag auf See und das Wetter ist schön, während eine kräftige Brise das Schiff vorantreibt."
+	, "description": "Es ist ein ruhiger Tag auf See und das Wetter ist schön, während eine kräftige Brise das Schiff vorantreibt. Einige deiner Leute werfen die Angeln ins Wasser."
 	, "ok":
 		{ "outcome":
-			{ "player.food": [-5, 5]
+			{ "player.food": [0, 5]
 			}
 		}
 	}
