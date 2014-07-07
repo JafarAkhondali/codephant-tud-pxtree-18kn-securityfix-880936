@@ -25,7 +25,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 180, y: 450
 			, end: { dir: 'south', to: 3 }
 			, type: 'water'
-			, event: { name: "pirate_privateer" }
+			, event: { name: "ship_ahoy_pirate" }
 			}
 		
 		, { x: 100, y: 300
