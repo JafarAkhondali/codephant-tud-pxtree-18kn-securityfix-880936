@@ -24,10 +24,13 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	
 			, create: function ()
 				{
-					this.sprite = this.game.add.sprite(0, 0, 'ship');
+					this.sprite = on(this.game.add.sprite(0, 0, 'ship'), function(ship)
+					{
+						ship.anchor.set(.5, .5);
+					});
 					this._coordDelta.set(
-							this.sprite.width * (4/5),
-							this.sprite.height * (4/5));
+							this.sprite.width * (2/5),
+							this.sprite.height * (2/5));
 				}
 			
 			, update: function ()
@@ -38,12 +41,15 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			, move: function (toPort, instantOrCallback, callbackContext)
 				{
 					var dest = new Phaser.Point.subtract(toPort, this._coordDelta)
+						, orientation = dest.x - this.sprite.position.x
 						, instant = instantOrCallback === true
 						, callback = instantOrCallback instanceof Function
 								? instantOrCallback : null
 						, tween
 						;
-					
+
+					this.orientation(orientation);
+
 					if (instant)
 						this.sprite.position.copyFrom(dest);
 					else
@@ -58,7 +64,17 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						tween.start();
 					}
 				}
-			
+
+			, orientation: function (newOrientation)
+				{
+					if (typeof(newOrientation) !== 'undefined'
+							&& newOrientation !== 0)
+					{
+						newOrientation = (newOrientation < 0) ? -1 : 1; //normalize
+						this.sprite.scale.x = newOrientation;
+					}
+					return this.sprite.scale.x;
+				}
 
 			, _floatStep: function ()
 				{
