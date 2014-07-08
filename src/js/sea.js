@@ -1,6 +1,10 @@
 
 namespace("PXTree.AchtzehnKnoten", function (AzK)
 { "use strict";
+
+	var Config = AzK.Config
+		;
+
 	AzK.Sea = function Sea (parent)
 	{
 		this.parent = parent;
@@ -57,6 +61,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						this.ship.move(
 								this.spots.start[enteringFrom].port);
 						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
+						this.top.taskLog.startLevel();
 					}
 				}
 			
@@ -73,6 +78,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						this.ship.move({x:-100,y:-100}, true);
 						this.spots.removeAll();
 						this.currentLevel = null;
+						this.top.taskLog.completeLevel();
 						if (instantOrCompleteCallback instanceof Function)
 							instantOrCompleteCallback.call(completeContext);
 					}
@@ -99,9 +105,12 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 									, spotEventDat = spot.event
 									;
 								// rewrite spot event data, if there are tags to merge
-								if ('tags' in spot.event && 'tags' in leveldat)
+								if ('tags' in spot.event)
 								{
-									spotEventDat = { tags: spot.event.tags.concat(leveldat.tags) };
+									spotEventDat = { tags: spot.event.tags };
+									spotEventDat.tags.push.apply(spotEventDat.tags, this.getDifficultyTags());
+									if ('tags' in leveldat)
+										spotEventDat.tags.push.apply(spotEventDat.tags, leveldat.tags);
 								}
 								
 								this.parent.startEvent(spotEventDat);
@@ -117,6 +126,15 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 			, currentSpot: function ()
 				{
 					return this.spots.spot[this.currentSpotNr];
+				}
+
+			, getDifficultyTags: function ()
+				{
+					return ["difficulty"
+							+ Math.min(Math.floor(this.top.taskLog.countCompletedLevels()
+									* Config.LevelDifficulty.Factor) + Config.LevelDifficulty.Offset,
+									Config.LevelDifficulty.Maximum
+								)];
 				}
 			};
 });
