@@ -52,7 +52,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				return;
 
 			this.top.resetSaveData();
-			this.game.state.start(AK.Play.key, true, false, this.top);
+			//this.game.state.start(AK.Play.key, true, false, this.top);
+			this.game.state.start(AK.Intro.key, true, false, this.top);
 		}, this);
 		this.game.world.add(start);
 		
