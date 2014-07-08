@@ -8,7 +8,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Tutorial",
 					},
 					{
 						type:'paragraph',
-						text:"Dieses Tutorial wird dich in die grundsätzliche Spielmechanik einweisen. Solltest du bereits mit dem Spiel 18 Knoten vertraut sein, kannst du das Tutorial jederzeit mit dem roten Pfeil in der Ecke dieses Blattes."
+						text:"Dieses Tutorial wird dich in die grundsätzliche Spielmechanik einweisen. Solltest du bereits mit dem Spiel 18 Knoten vertraut sein, kannst du das Tutorial jederzeit mit dem roten Pfeil in der Ecke dieses Blattes beenden."
 					}
 		]
 	},
@@ -17,7 +17,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Tutorial",
 		title:"Spielprinzip",
 		content:[	{
 						type:'paragraph',
-						text:"Das Spielprinzip hinter 18 Knoten ist denkbar einfach: Mit deinem Schiff bewegst du dich auf der Karte von Punkt zu Punkt. Du kannst benachbarte Punkte besuchen, indem du sie anklickst. Die roten Pfeile am Rand der Karte bringen dich zur Weltkarte. Dort kannst du das nächste Level deiner Reise auswählen."
+						text:"Das Spielprinzip hinter 18 Knoten ist denkbar einfach: Mit deinem Schiff bewegst du dich auf der Karte von Punkt zu Punkt. Du kannst benachbarte Punkte besuchen, indem du sie anklickst. Die roten Pfeile am Rand der Karte bringen dich zur nächsten Karte. Zur Routenplanung kannst du die Weltkarte benutzen, die TODO:WELTKARTEN-SYMBOL zu finden ist"
 					},
 		         	{
 						type:'paragraph',
@@ -29,7 +29,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Tutorial",
 		title:"Events und Stats",
 		content:[	{
 		         		type:'paragraph',
-		         		text:"Sobald dein Schiff einen Punkt erreicht öffnet sich ein Event. Dabei wirst du als Kapitän vor verschiedene Situationen gestellt, in denen du dein Wissen und Denkvermögen unter Beweis stellen musst. Jedes Events beeinflusst deine Stats, also versuche nicht zu viele falsche Entscheidungen zu treffen, sonst ruht dein Schiff und du bald auf dem Boden des Meeres."     
+		         		text:"Sobald dein Schiff einen Punkt erreicht öffnet sich ein Event. Dabei wirst du als Kapitän vor verschiedene Situationen gestellt, in denen du dein Wissen und Denkvermögen unter Beweis stellen musst. Jedes Events beeinflusst deine Stats, also versuche nicht zu viele falsche Entscheidungen zu treffen, sonst ruhen dein Schiff und du bald auf dem Boden des Meeres."     
 					},
 					{
 						type:'paragraph',
