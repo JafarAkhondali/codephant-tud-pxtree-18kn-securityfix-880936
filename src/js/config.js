@@ -9,6 +9,12 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, confirm: "Aye, bestätige!"
 	}
 
+, LevelDifficulty:
+	{ Factor: 0.25
+	, Offset: 1
+	, Maximum: 4
+	}
+
 , Events:
 	{ Description:
 		{ TextStyle:

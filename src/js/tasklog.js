@@ -6,8 +6,10 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	{
 		if (!(this instanceof TaskLog)) return new TaskLog();
 		this._completedEvents = [];
+		this._completedLevelMap = [];
 		this._currentEvent = null;
 		this._currentTask = null;
+		this._currentLevel = null;
 		this._nameCacheSize = false;
 		this._nameCache = null;
 		if (typeof(eventNameCacheSize) !== 'undefined')
@@ -19,43 +21,74 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		{
 			var deserialized = TaskLog()
 			deserialized._completedEvents = saved.completedEvents;
+			deserialized._completedLevelMap = saved.completedLevelMap;
 			if (saved.nameCache !== null)
 				deserialized.startCachingEventNames(saved.nameCacheSize);
 			return deserialized;
 		}
 
-	, AlreadyRunningError: function AlreadyRunningError (what)
+	, AlreadyStartedError: function AlreadyStartedError (what)
 		{
-			if (!(this instanceof AlreadyRunningError))
-				return new AlreadyRunningError(what);
+			if (!(this instanceof AlreadyStartedError))
+				return new AlreadyStartedError(what);
 			this.what = what;
 		}
 
-	, NotRunningError: function NotRunningError (what)
+	, NotStartedError: function NotStartedError (what)
 		{
-			if (!(this instanceof NotRunningError))
-				return new NotRunningError(what);
+			if (!(this instanceof NotStartedError))
+				return new NotStartedError(what);
 			this.what = what;
 		}
 	});
 
-	
+	TaskLog.AlreadyStartedError.prototype.constructor = TaskLog.AlreadyStartedError;
+	TaskLog.NotStartedError.prototype.constructor = TaskLog.NotStartedError;
+	TaskLog.AlreadyStartedError.prototype.toString =
+	TaskLog.NotStartedError.prototype.toString =
+	function ()
+	{
+		var suffix = this.constructor.name
+					.replace(/Error$/, '')
+					.replace(/[A-Z]/g, function(c){ return " " + c.toLowerCase(); })
+			;
+		return this.what + " is" + suffix;
+	};
 
 	extend(TaskLog.prototype,
 	{ getSerializable: function ()
 		{
 			var serializable =
 						{ completedEvents: this._completedEvents
+						, completedLevelMap: this._completedLevelMap
 						, nameCache: this._nameCache
 						, nameCacheSize: this._nameCacheSize
 						}
 				;
 			return serializable;
 		}
+
+	, startLevel: function ()
+		{
+			if (this._currentLevel !== null)
+				throw TaskLog.AlreadyStartedError("Level");
+			this._currentLevel = new Array(2);
+			this._currentLevel[0] = this._completedEvents.length;
+		}
+
+	, completeLevel: function ()
+		{
+			if (this._currentLevel === null)
+				throw TaskLog.NotStartedError("Level");
+			this._currentLevel[1] = this._completedEvents.length - 1;
+			this._completedLevelMap.push(this._currentLevel);
+			this._currentLevel = null;
+		}
+
 	, startEvent: function (event)
 		{
 			if (this._currentEvent !== null)
-				throw TaskLog.AlreadyRunningError("Event");
+				throw TaskLog.AlreadyStartedError("Event");
 			this._currentEvent = [];
 			this.startTask(event);
 		}
@@ -63,7 +96,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	, completeEvent: function ()
 		{
 			if (this._currentEvent === null)
-				throw TaskLog.NotRunningError("Event");
+				throw TaskLog.NotStartedError("Event");
 			this._completedEvents.push(this._currentEvent);
 			this._addToNameCache(this._currentEvent[0].name);
 			this._currentEvent = null;
@@ -72,7 +105,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	, startTask: function (task)
 		{
 			if (this._currentTask !== null)
-				throw TaskLog.AlreadyRunningError("Task");
+				throw TaskLog.AlreadyStartedError("Task");
 
 			this._currentTask =
 					{ name: task.name || 'no-name-task'
@@ -85,7 +118,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	, completeTask: function (result)
 		{
 			if (this._currentTask === null)
-				throw TaskLog.NotRunningError("Task");
+				throw TaskLog.NotStartedError("Task");
 			this._currentTask.completedAt = Date.now();
 			this._currentTask.result = result;
 			this._currentEvent.push(this._currentTask);
@@ -143,14 +176,16 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 
 	, startCachingEventNames: function (size)
 		{
-			if (this.cachesEventNames()) throw TaskLog.AlreadyRunningError('NameCaching');
+			if (this.cachesEventNames())
+				throw TaskLog.AlreadyStartedError('NameCaching');
 			this._nameCacheSize = size;
 			this._nameCache = [];
 		}
 
 	, stopCachingEventNames: function ()
 		{
-			if (!this.cachesEventNames()) throw TaskLog.NotRunningError('NameCaching');
+			if (!this.cachesEventNames())
+				throw TaskLog.NotStartedError('NameCaching');
 			this._nameCacheSize = false;
 			this._nameCache = null;
 		}
@@ -158,6 +193,11 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	, cachesEventNames: function ()
 		{
 			return this._nameCache !== null;
+		}
+
+	, countCompletedLevels: function ()
+		{
+			return this._completedLevelMap.length;
 		}
 
 	, _addToNameCache: function (eventName)
