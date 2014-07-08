@@ -31,9 +31,11 @@ function extend (base, inclProto /*, extenders... */)
  * @param diff
  * @returns
  */
-function derive (ctor, diff)
+function derive (parent, diff)
 {
-	return extend(Object.create(ctor.prototype), diff);
+	if (parent instanceof Function)
+		parent = parent.prototype;
+	return extend(Object.create(parent), diff);
 }
 
 /**
