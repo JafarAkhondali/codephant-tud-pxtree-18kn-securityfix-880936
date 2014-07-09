@@ -70,7 +70,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 32, 32)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
 			.spritesheet('map','assets/icons/ui-map.png', 32, 32)
-			.spritesheet('mute','assets/icons/ui-almanach.png', 32, 32)
+			.spritesheet('mute','assets/icons/ui-bell.png', 32, 32)
+			.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
 			.audio('audio-ambient-ship', 'assets/audio/ship-at-sea.wav');
 			;
 			
@@ -247,10 +248,13 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				45, 10, 'map',
 				this.parent.openMap, this.parent,
 				1, 0));
+		var bell_cross = this.game.make.sprite(85,10,'cross');
+		bell_cross.visible = false;
 		grp.add(this.game.make.button(
-				85, 10, 'almanach',
-				function () {	this.game.sound.mute = !this.game.sound.mute; }, this,
+				85, 10, 'mute',
+				function () {	this.game.sound.mute = !this.game.sound.mute; bell_cross.visible = !bell_cross.visible;}, this,
 				1, 0));
+		grp.add(bell_cross);
 		grp.add(this.game.make.button(
 				125, 10, 'wheel',
 				function () {	this.game.state.start(AK.MainMenu.key, true, false, this.top); }, this,
