@@ -5,7 +5,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 
 [//0
  { coast: 181
-	 , coastIndent: 0.1
+	 , coastDistance: 0.1
 	 , spots:
 		[ { x: 484, y: 125
 			, reachable: [1, 2]
@@ -105,7 +105,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 
 //3
 , { coast: 215
-	, coastIndent: 0
+	, coastDistance: 0
 	, spots:
 	
 		[ { x: 222, y: 84
@@ -248,7 +248,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 //7
 , {	tags: ["carribean"]
 	, coast: 270
-	, coastIndent: 0.06
+	, coastDistance: 0.06
 	, spots:
 		[ 
 		{ x: 275, y: 70
@@ -273,7 +273,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 //8
 , {	tags: ["carribean"]
 	, coast: 280
-	, coastIndent: 0.08
+	, coastDistance: 0.08
 	, spots:
 		[ 
 		{ x: 270, y: 80
@@ -337,7 +337,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 //10
 , {	tags: ["atlantic"]
 	, coast: 140
-	, coastIndent: -0.0
+	, coastDistance: -0.0
 	, spots:
 		[ 
 		{ x: 180, y: 120
