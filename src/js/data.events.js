@@ -4,12 +4,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 [ { "name": "fallback-nice-weather"
 	, "tags": [ "fallback" ]
 	, "type": "message"
-	, "description": "Es ist ein ruhiger Tag auf See und das Wetter ist schön, während eine kräftige Brise das Schiff vorantreibt. Einige deiner Leute werfen die Angeln ins Wasser."
-	, "ok":
-		{ "outcome":
-			{ "player.food": [0, 5]
-			}
-		}
+	, "description": "Es ist ein ruhiger Tag auf See und das Wetter ist schön, während eine kräftige Brise das Schiff vorantreibt."
+	, "ok": {}
 	}
 
 , { "name": "drag-testing"
@@ -35,7 +31,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 	
 , { "name": "ship_ahoy_pirate"
-	, "tags": ["open_sea"]
+	, "tags": ["water"]
 	, "description": "Dein Ausguck entdeckt ein Schiff am Horizont. Es scheint unter spanischer Flagge zu segeln. Wie möchtest du handeln?"
 	,	"choices":
 		[ { "name": "ship_ahoy_pirate_avoid"
@@ -45,7 +41,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				{}
 			}
 		, { "name": "ship_ahoy_pirate_investigate"
-			, "label": "Kurs beibehalten und einen Austausch mit dem anderen Schiff anregen."
+			, "label": "Kurs beibehalten, Kontakt aufnehmen."
 			, "description": "Als du dich dem Schiff näherst, hissen sie eine schwarze Flagge. Es sind portugiesische Freibeuter!"
 			, "choices":
 				[ { "name": "ship_ahoy_pirate_battle"
@@ -70,7 +66,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 	
 , { "name": "ship_ahoy_friendly"
-	, "tags": ["open_sea"]
+	, "tags": ["water"]
 	, "description": "Dein Ausguck entdeckt ein Schiff am Horizont. Es scheint unter spanischer Flagge zu segeln. Wie möchtest du handeln?"
 	,	"choices":
 		[ { "name": "ship_ahoy_friendly_avoid"
@@ -80,7 +76,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				{}
 			}
 		, { "name": "ship_ahoy_friendly_investigate"
-			, "label": "Kurs beibehalten und einen Austausch mit dem anderen Schiff anregen."
+			, "label": "Kurs beibehalten, Kontakt aufnehmen."
 			, "description": "Es ist ein Handelsschiff. Der Kapitän begrüsst dich. Was möchtest du tun?"
 			, "choices":
 				[ { "name": "ship_ahoy_friendly_buy_1"
@@ -109,7 +105,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 	
 , { "name": "crew_latitude"
-	, "tags": ["open_sea"]
+	, "tags": ["water"]
 	, "description": "Ein Crewmitglied fragt nach dem Breitengrad. Was antwortest du?"
 	,	"choices":
 		[ { "name": "crew_latitude_deny"
@@ -154,7 +150,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				}
 			}
 		, { "name": "native_island_anchor"
-			, "label": "Vor Anker gehen. Wer weiß, was für Reichtümer dich hier erwarten könnten?."
+			, "label": "Vor Anker gehen."
 			, "description": "Du gehst vor Anker und ruderst mit deinen Beibooten zur Insel. Was möchtest du tun?"
 			, "choices":
 				[ { "name": "native_island_beach"
@@ -200,7 +196,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 
 , { "name": "no_wind"
-	, "tags": ["open_sea", "atlantic", "island"]
+	, "tags": ["water", "atlantic"]
 	, "description": "Flaute! Deine Crew fragt dich, was sie tun soll."
 	, "choices":
 		[ { "name": "no_wind_fish"
@@ -221,8 +217,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 	
 , { "name": "scurvy"
-	, "tags": ["open_sea"]
-	, "description": "Shorbut fordert neue Opfer!"
+	, "tags": ["water"]
+	, "description": "Skorbut fordert neue Opfer!"
 	, "ok":
 		{ "outcome":
 			{ "player.crewCount": [-2,-1] }
@@ -278,7 +274,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				, "player.morale": -2}
 			}
 		, { "name": "lanzarote_help_indigen"
-			, "label": "Versuche etwas gegen die Unterdrückung der Ureinwohner zu tun."
+			, "type": 'message'
+			, "label": "Mache etwas gegen die Unterdrückung der Ureinwohner."
 			, "description": "Du kannst nicht mit ansehen, wie die Ureinwohner der Kanaren, die Guanchen, unterdrückt werden. Du befreist Nachts ein Sklavencamp und überlässt ihnen ein paar deiner Waffen, damit sie sich verteidigen können. Deine Crew bewundert dein selbstloses handeln."
 			, "outcome":
 				{ "player.strength": -5
@@ -286,9 +283,28 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			}
 		]
 	}
+, { "name": "newfoundland"
+	, "tags": ["unused"]
+	, "description": "Du landest auf Neufundland! Der erste Europäer auf dieser Insel war der Italiener Giovanni Caboto. Was willst du tun?"
+	, "choices": 
+		[ { "name": "newfoundland_gather_food"
+			, "label": "Suche nach etwas Nahrung."
+			, "description": "Du suchst im Inland der Insel nach etwas Nahrung. Aufgrund des kühlen Klimas auf dieser Insel gibt das karge Land kaum etwas her."
+			, "outcome":
+				{ "player.food": [50,100] }
+			}
+		, { "name": "newfoundland_search"
+			, "label": "Suche nach Einwohnern."
+			, "description": "Nach einiger Zeit findest du am nördlichen Ende der Insel eine Siedlung - die schon seit Jahrhunderten verlassen scheint. Die Bauweise der Häuser scheint keltischen Ursprungs zu sein. Offensichtlich waren schon vor vielen Jahrhunderten Europäer auf dieser Insel!"
+			, "outcome":
+				{ "player.gold": 1500 
+				, "player.morale": 1}
+			}
+		]
+	}
 	,{ "name": "geo_quiz_01_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level3"]
+	, "tags": ["water", "difficulty3"]
 	, "description": "Wie heißt die südlichste Landspitze Afrikas?"
 	, "choices": [
 		{ "name": "geo_quiz_01_a1"
@@ -318,7 +334,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_03_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "In welcher Jahreszeit kommt es nördlich des Nordpolarkreises zu lang anhaltender Tag und Nacht Dunkelheit?"
 	, "choices": [
 		{ "name": "geo_quiz_03_a1"
@@ -348,7 +364,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_04_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level1"]
+	, "tags": ["water", "difficulty1"]
 	, "description": "Welche geographische Breite hat der südliche Polarkreis?"
 	, "choices": [
 		{ "name": "geo_quiz_04_a1"
@@ -378,7 +394,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_05_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "Welche Meeresströmung hält im Winter die norwegischen Seehäfen weitgehend eisfrei?"
 	, "choices": [
 		{ "name": "geo_quiz_05_a1"
@@ -408,7 +424,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_06_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level1"]
+	, "tags": ["water", "difficulty1"]
 	, "description": "In etwa 97% des Wassers auf der Erde ist Salzwasser. Das restliche Süßwasser ist beinahe zu 70% Gletschereis. Wo findet man die größten Süßwasservorräte?"
 	, "choices": [
 		{ "name": "geo_quiz_06_a1"
@@ -438,7 +454,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_07_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level3"]
+	, "tags": ["water", "difficulty3"]
 	, "description": "Wo liegt das Meeresgebiet Kattegat?"
 	, "choices": [
 		{ "name": "geo_quiz_07_a1"
@@ -468,7 +484,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_08_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "Die Inselgruppe Spitzbergen liegt in welchem Meeresgebiet?"
 	, "choices": [
 		{ "name": "geo_quiz_08_a1"
@@ -498,7 +514,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_09_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "Die Doggerbank ist eine Untiefe in welchem Meeresgebiet?"
 	, "choices": [
 		{ "name": "geo_quiz_09_a1"
@@ -528,7 +544,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_10_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "Welche Landspitze wird als Kap Hoorn bezeichnet?"
 	, "choices": [
 		{ "name": "geo_quiz_10_a1"
@@ -558,7 +574,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_11_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level1"]
+	, "tags": ["water", "difficulty1"]
 	, "description": "In welchem Ozean liegen die Kanarischen Inseln"
 	, "choices": [
 		{ "name": "geo_quiz_11_a1"
@@ -588,7 +604,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_12_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level4"]
+	, "tags": ["water", "difficulty4"]
 	, "description": "Die Passatwinde treten bis ca. 30° nördlicher und südlicher Breite auf. Welche Windrichtung haben die Passatwinde nördlich bzw. südlich des Äquators?"
 	, "choices": [
 		{ "name": "geo_quiz_12_a1"
@@ -618,7 +634,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_13_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level4"]
+	, "tags": ["water", "difficulty4"]
 	, "description": "Welcher Wind entsteht nicht aufgrund der Corioliskraft?"
 	, "choices": [
 		{ "name": "geo_quiz_13_a1"
@@ -648,7 +664,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_14_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "In Welchem Meer liegt die Karibik?"
 	, "choices": [
 		{ "name": "geo_quiz_14_a1"
@@ -678,7 +694,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_15_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level3"]
+	, "tags": ["water", "difficulty3"]
 	, "description": "In welchem Meer liegt der Atacamagraben?"
 	, "choices": [
 		{ "name": "geo_quiz_15_a1"
@@ -708,7 +724,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_16_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level4"]
+	, "tags": ["water", "difficulty4"]
 	, "description": "Welche Meeresströmung fließt nicht im Atlantik?"
 	, "choices": [
 		{ "name": "geo_quiz_16_a1"
@@ -738,7 +754,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_17_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level4"]
+	, "tags": ["water", "difficulty4"]
 	, "description": "Du erblickst Land. Dein erster Offizier meint es sei ein Archipel. Was ist ein Archipel, fragst du dich?"
 	, "choices": [
 		{ "name": "geo_quiz_17_a1"
@@ -768,7 +784,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_18_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level3"]
+	, "tags": ["water", "difficulty3"]
 	, "description": "Du bist mit deinem Schiff auf hoher See und die Sonne brennt. Einer deiner Matrosen fragt, wo die Sonne Zenit steht?"
 	, "choices": [
 		{ "name": "geo_quiz_18_a1"
@@ -798,7 +814,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_19_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "Du bist in der Karibik und musst eine der Inseln der kleinen Antillen anlaufen. Welche INsel kannst du ansteuern?"
 	, "choices": [
 		{ "name": "geo_quiz_19_a1"
@@ -828,7 +844,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	]
 },{ "name": "geo_quiz_20_quiz"
 	, "type": "single-select"
-	, "tags": ["open_sea", "level2"]
+	, "tags": ["water", "difficulty2"]
 	, "description": "Dein Schiff soll Neufundland anlaufen. Dein Mannschaft möchte wissen, wo es liegt."
 	, "choices": [
 		{ "name": "geo_quiz_20_a1"
@@ -854,6 +870,577 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		, "label": "Neufundland ist eine Insel an der Ostküste von Afrika."
 		, "description": "Die Offiziere sind beunruhigt, dass du nicht weißt wo es hingehen soll."
 		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+}
+,{ "name": "hist_quiz_02_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Deine Offiziere sprechen über die antiken griechischen Gelehrten. Einer fragt wer den, dass Prinzip über das Auftriebsverhalten der Stoffe entdeckt hat?"
+	, "choices": [
+		{ "name": "hist_quiz_02_a1"
+        , "type": "message"
+		, "label": "Archimedes"
+		, "description": "Heureka, du hast es!"
+		, "outcome": {"player.gold": 500, "player.food": 25, "player.strength":3, "player.morale": 2}
+		}
+		,{ "name": "hist_quiz_02_a2"
+        , "type": "message"
+		, "label": "Pythagoras"
+		, "description": "Pythagoras von Samos hat sich zwar mit Mathematik und Philosophie beschäftigt, aber nicht der Physik."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_02_a3"
+        , "type": "message"
+		, "label": "Aristoteles"
+		, "description": "Aristoteles beschäftigte sich zwar mit Physik, jedoch hat nicht er das archimedische Prinzip entdeckt."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_02_a4"
+        , "type": "message"
+		, "label": "Platon"
+		, "description": "Platon beschäftigte sich zwar mit Physik, jedoch hat nicht er das archimedische Prinzip entdeckt."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_03_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Ein paar Matrosen sitzen zusammen und reden über die antike Seefahrt. Sie sprechen über ungewöhnliche Ladungen. Obelisken in Ägypten und Brückenteile in Persien. Einer fragt, welche Tiere der Feldherr Hannibal Barkas von Afrika nach Europa verschifft hat während des Krieges gegen Rom?"
+	, "choices": [
+		{ "name": "hist_quiz_03_a1"
+        , "type": "message"
+		, "label": "Elefanten"
+		, "description": "Hannibal Barkas hat Schlachtelefanten durch die Alpen geführt um sie gegen Rom im Feld einzusetzen."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_03_a2"
+        , "type": "message"
+		, "label": "Nasshörner"
+		, "description": "Ein anderer Matrose meint, dass Elefanten verschifft wurden."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_03_a3"
+        , "type": "message"
+		, "label": "Löwen"
+		, "description": "Ein anderer Matrose meint, dass Elefanten verschifft wurden."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_03_a4"
+        , "type": "message"
+		, "label": "Giraffen"
+		, "description": "Ein anderer Matrose meint, dass Elefanten verschifft wurden."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_04_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Einer deiner Offiziere hat eine alte Karte der Römer in einem Buch entdeckt und zeigt einige Binnenhäfen im alten Gemanien. Eine Stadt heißt Colonia Claudia Ara Agrippinensium. Wie heißt diese heutzutage?"
+	, "choices": [
+		{ "name": "hist_quiz_04_a1"
+        , "type": "message"
+		, "label": "Köln"
+		, "description": " In Colonia Claudia Ara Agrippinensium war die römische Rheinflotte stationiert."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_04_a2"
+        , "type": "message"
+		, "label": "Koblenz"
+		, "description": " Dein Offizier, sagt das die Stadt nicht dort liegt, wo heute Koblenz ist"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_04_a3"
+        , "type": "message"
+		, "label": "Bonn"
+		, "description": " Dein Offizier, sagt das die Stadt nicht dort liegt, wo heute Bonn ist"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_04_a4"
+        , "type": "message"
+		, "label": "Xanten"
+		, "description": " Dein Offizier, sagt das die Stadt nicht dort liegt, wo heute Xanten ist"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_05_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Deine Offiziere sprechen über die Seefahrt im frühen Mittelalter. Sie fragen sich wie man die kriegerischen Stämme nennt, welche im Norden von Europa siedelten."
+	, "choices": [
+		{ "name": "hist_quiz_05_a1"
+        , "type": "message"
+		, "label": "Es waren die Wikinger"
+		, "description": "Ja völlig richtig, erinnert sich einer der Offiziere."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_05_a2"
+        , "type": "message"
+		, "label": "Es waren die Sachsen"
+		, "description": "Das stimmt aber nicht, sagt einer aus der Gruppe."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_05_a3"
+        , "type": "message"
+		, "label": "Es waren die Hunnen"
+		, "description": "Das stimmt aber nicht, sagt einer aus der Gruppe."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_05_a4"
+        , "type": "message"
+		, "label": "Es waren die Franke"
+		, "description": "Das stimmt aber nicht, sagt einer aus der Gruppe."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_06_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty2"]
+	, "description": "Wie hieß der isländische Wikiknger, fragt ein Matrose, der die ersten Besiedelungsversuche in Amerika nach der urgeschichtlichen Besiedelung unternahm."
+	, "choices": [
+		{ "name": "hist_quiz_06_a1"
+        , "type": "message"
+		, "label": "Leif Eriksson"
+		, "description": "Ein anderer fügt hinzu, dass es um das Jahr 1000 n. Chr. war."
+		, "outcome": {"player.gold": 500, "player.food": 25, "player.strength": 3, "player.morale": 2}
+		}
+		,{ "name": "hist_quiz_06_a2"
+        , "type": "message"
+		, "label": "Erik der Rote"
+		, "description": "Du wirst von einem Offizier berichtigt: Es war Leif Eriksson."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_06_a3"
+        , "type": "message"
+		, "label": "Ivar Ragnarsson"
+		, "description": "Du wirst von einem Offizier berichtigt: Es war Leif Eriksson."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_06_a4"
+        , "type": "message"
+		, "label": "Freydis Eriksdottir"
+		, "description": "Du wirst von einem Offizier berichtigt: Es war Leif Eriksson."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_07_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty3"]
+	, "description": "Einige Leute reden, darüber wie der erste Kreuzzug über See unterstützt wurde. Einer betont, dass bei der Schlacht von Jerusalem die Kreuzfahrer verloren hätten, wären nicht 6 Schiffe mit Nachschub zu Hilfe gekommen. Wann war eigentlich diese Schalcht?"
+	, "choices": [
+		{ "name": "hist_quiz_07_a1"
+        , "type": "message"
+		, "label": "1099"
+		, "description": "Die Kreuzfahrer nahmen die Stadt ein und verursachten ein schreckliches Massaker"
+		, "outcome": {"player.gold": 1000, "player.food": 50, "player.strength": 5, "player.morale": 5}
+		}
+		,{ "name": "hist_quiz_07_a2"
+        , "type": "message"
+		, "label": "1097"
+		, "description": "In diesem Jahr hatten die christlichen Heere Jerusalem noch nicht erreicht."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_07_a3"
+        , "type": "message"
+		, "label": "1098"
+		, "description": "In diesem Jahr hatten die christlichen Heere Jerusalem noch nicht erreicht."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_07_a4"
+        , "type": "message"
+		, "label": "1100"
+		, "description": "In diesem Jahr war Jerusalem bereist in einem schrecklichen Massaker eingenommen worden."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_08_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty4"]
+	, "description": "In deiner Kapitänskajüte liegt ein Buch über den Seeweg nach Indien, jedoch fehlen einige Seiten. Du fragst dich, wer den ersten ernsthaften Versuch unternahm um dieses Ziel zu erreichen?"
+	, "choices": [
+		{ "name": "hist_quiz_08_a1"
+        , "type": "message"
+		, "label": "Die Brüder Vivaldo"
+		, "description": "Die Vivaldos waren genuesische Seefahrer und verließen ihren Hafen 1291 in Richtung Indien."
+		, "outcome": {"player.gold": 2000, "player.food": 100, "player.strength": 10, "player.morale": 10}
+		}
+		,{ "name": "hist_quiz_08_a2"
+        , "type": "message"
+		, "label": "Die Grimaldis"
+		, "description": "Falsch!Die Grimaldis, eine alte genuesische Familie, sind die Fürstenfamilie des Fürstentums Monaco"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_08_a3"
+        , "type": "message"
+		, "label": "Die Brüder Doria"
+		, "description": "Falsch!Die Familie Doria stellte in Genua unter anderem Offiziere der Stadtflotte"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_08_a4"
+        , "type": "message"
+		, "label": "Die Colombos"
+		, "description": "Die Colombos sind eine genuesische Familie. Ihr bekanntestes Mitglied ist Cristoforo Colombo in deutscher Schreibweise Christoph Kolumbus."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_09_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Du redest mit deinem Schiffsarzt über Krankheiten und Seuchen. Wie heißt die Seuche, welche im Mittelalter ca. 25 Millionen Menschen das Leben kostete"
+	, "choices": [
+		{ "name": "hist_quiz_09_a1"
+        , "type": "message"
+		, "label": "Es war die Lungen- und Beulenpest"
+		, "description": "Dein Schiffsarzt bestätigt dich."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_09_a2"
+        , "type": "message"
+		, "label": "Es war die Cholera"
+		, "description": "Dein Schiffsarzt, sagt dass die Cholera nie solche Ausmaße annahme."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_09_a3"
+        , "type": "message"
+		, "label": "Es waren die Pocken"
+		, "description": "Dein Schiffsarzt, sagt dass die Pocken nie solche Ausmaße annahm."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_09_a4"
+        , "type": "message"
+		, "label": "Es war das Ebolfieber"
+		, "description": "Dein Schiffsarzt, sagt dass er eine Krankheit mit diesem Namen nicht kennt."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_10_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty3"]
+	, "description": "Die Männer reden über große Seefahrer und fragen dich, wer der Erste war, der die Südspitze von Afrika umsegelt hat?"
+	, "choices": [
+		{ "name": "hist_quiz_10_a1"
+        , "type": "message"
+		, "label": "Bartolomeu Dias"
+		, "description": "Die Männer sehen, dass du dich mit der Seefahrstgeschichte auskennst."
+		, "outcome": {"player.gold": 1000, "player.food": 50, "player.strength": 5, "player.morale": 5}
+		}
+		,{ "name": "hist_quiz_10_a2"
+        , "type": "message"
+		, "label": "Giovanni Caboto"
+		, "description": "Einer der Matrosen sagt, dass es Bartolomeu Dias war."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_10_a3"
+        , "type": "message"
+		, "label": "Dinis Dias"
+		, "description": "Einer der Matrosen sagt, dass es Bartolomeu Dias war."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_10_a4"
+        , "type": "message"
+		, "label": "Amerigo Vespucci"
+		, "description": "Einer der Matrosen sagt, dass es Bartolomeu Dias war."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_11_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty3"]
+	, "description": "Einige Seemänner an Bord reden am Abend über Christoph Kolumbus und seine Entdeckungsfahrten. Es entsteht eine Diskussion darüber, wo er den amerikanischen Kontinent erstmals betrat?"
+	, "choices": [
+		{ "name": "hist_quiz_11_a1"
+        , "type": "message"
+		, "label": "Auf den Bahamas"
+		, "description": "Einer der Offiziere fügt hinzu, dass es ein 12. Oktober im Jahre 1492 war."
+		, "outcome": {"player.gold": 1000, "player.food": 50, "player.strength": 5, "player.morale": 5}
+		}
+		,{ "name": "hist_quiz_11_a2"
+        , "type": "message"
+		, "label": "An der Küste Kolumbiens"
+		, "description": "Dein erster Offizier sagt, dass Christoph Kolumbus zuerst auf den Bahamas gelandet sei und ist enttäuscht von deinem Wissen"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_11_a3"
+        , "type": "message"
+		, "label": "Auf der Insel Kuba"
+		, "description": "Dein erster Offizier sagt, dass Christoph Kolumbus zuerst auf den Bahamas gelandet sei und ist enttäuscht von deinem Wissen"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_11_a4"
+        , "type": "message"
+		, "label": "Auf der halbinsel Florida"
+		, "description": "Dein erster Offizier sagt, dass Christoph Kolumbus zuerst auf den Bahamas gelandet sei und ist enttäuscht von deinem Wissen"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_12_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty4"]
+	, "description": "Dein erster Offizier fragt dich, woher man nach der Wiederentdeckung Amerikas wusste, dass es ein neuer Kontinent sei?"
+	, "choices": [
+		{ "name": "hist_quiz_12_a1"
+        , "type": "message"
+		, "label": "Vasco Nunez de Balboa erreichte die Westküste Amerikas"
+		, "description": "Durch Erreichen der Westküste war der Nachweis erbracht, dass es nicht Asien war."
+		, "outcome": {"player.gold": 2000, "player.food": 100, "player.strength": 10, "player.morale": 10}
+		}
+		,{ "name": "hist_quiz_12_a2"
+        , "type": "message"
+		, "label": "Amerigo Vespucci erreichte die Westküste Amerikas"
+		, "description": "Dein Offizier sagt, dass dieser Seefahrer die Vermutung äußerte, dass es ein unbekannter Kontinent sei aber er nicht den Nachweis erbrachte"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_12_a3"
+        , "type": "message"
+		, "label": "Alonso de Hojeda erreichte die Westküste Amerikas"
+		, "description": "Dein Offizier sagt, dass dieser Seefahrer zwar Landgänge unternahm aber keinen Nachweis brachte "
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_12_a4"
+        , "type": "message"
+		, "label": "Ferdinand II. von Aragon erreichte die Westküste Amerikas"
+		, "description": "Dein Offizier sagt, dass der spanische König sicher keine Expeditionen nach Amerika unternahm."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_13_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty3"]
+	, "description": "Ein paar Matrosen fragen dich unter wessen Kommando die zweite Weltumsegelung durchgeführt wurde?"
+	, "choices": [
+		{ "name": "hist_quiz_13_a1"
+        , "type": "message"
+		, "label": "Francis Drake führte das Kommando"
+		, "description": "Dies war die Zweite aber die erste Weltumsegelung, die unter einem Kommando begonnen und zum Ende geführt wurde"
+		, "outcome": {"player.gold": 1000, "player.food": 50, "player.strength": 5, "player.morale": 5}
+		}
+		,{ "name": "hist_quiz_13_a2"
+        , "type": "message"
+		, "label": "Ferdinand Magellan führte das Kommando"
+		, "description": "Ferdinand Magellan hatte das Kommando während der ersten Weltumsegelung. Er starb jedoch während der Expedition"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_13_a3"
+        , "type": "message"
+		, "label": "Christoph Kolumbus führte das Kommando"
+		, "description": "Christoph Kolumbus hat nie eine Weltumsegelung durchgeführt, sagt die Gruppe."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_13_a4"
+        , "type": "message"
+		, "label": "Vasco da Gama führte das Kommando"
+		, "description": "Vasco da Gama hat nie eine Weltumsegelung durchgeführt, sagt die Gruppe."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_14_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty2"]
+	, "description": "Ein paar Seeleute auf deinem Schiff fragen, wer als erster einen Seeweg nach Indien gefunden hat?"
+	, "choices": [
+		{ "name": "hist_quiz_14_a1"
+        , "type": "message"
+		, "label": "Vasco da Gama"
+		, "description": "Er ist als Erster um das Kap der Guten Hoffnung gesegelt und fand auch einen Seeweg nach Indien"
+		, "outcome": {}
+		}
+		,{ "name": "hist_quiz_14_a2"
+        , "type": "message"
+		, "label": "Christoph Kolumbus"
+		, "description": "Christoph Kolumbus hat einen Seeweg nach Indien gesucht, fand aber einen nach Amerika."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_14_a3"
+        , "type": "message"
+		, "label": "Francis Drake"
+		, "description": "Sir Francis Drake umsegelte die Erde als bereits ein Seeweg nach Indien bekannt war."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_14_a4"
+        , "type": "message"
+		, "label": "Amerigo Vespucci"
+		, "description": "Amerigo Vespucci verfasste den Reisebericht Mondu Novus, wo er über seine Reisen in die Neue Welt aber nicht nach Indien berichtete."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_15_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty2"]
+	, "description": "Deine Offziere fragen dich, welches Königreich 1588 in der Seeschlacht von Gravelines der spanischen Armada gegenüberstand?"
+	, "choices": [
+		{ "name": "hist_quiz_15_a1"
+        , "type": "message"
+		, "label": "England"
+		, "description": "England konnte die Schlacht unter hohen Verlusten für sich entscheiden und eine spanische Invasion verhindern"
+		, "outcome": {"player.gold": 500, "player.food": 25, "player.strength": 3, "player.morale": 2}
+		}
+		,{ "name": "hist_quiz_15_a2"
+        , "type": "message"
+		, "label": "Niederlande"
+		, "description": "Die Niederlande waren kein Königreich, befanden sich aber im Krieg gegen Spanien."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_15_a3"
+        , "type": "message"
+		, "label": "Belgien"
+		, "description": "Zu dieser Zeit war Belgien ein Teil der spanischen Niederlande"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_15_a4"
+        , "type": "message"
+		, "label": "Frankreich"
+		, "description": "Zu dieser Zeit stand Frankreich mit Spanien nicht im Krieg"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_16_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty4"]
+	, "description": "Einer deiner Offiziere fragt, wann James Cook eigtl geboren wurde?"
+	, "choices": [
+		{ "name": "hist_quiz_16_a1"
+        , "type": "message"
+		, "label": "7. November 1728"
+		, "description": "Deine Offiziere sind beeindruckt, wie vielfältig dein Wissen ist."
+		, "outcome": {"player.gold": 2000, "player.food": 100, "player.strength": 10, "player.morale": 10}
+		}
+		,{ "name": "hist_quiz_16_a2"
+        , "type": "message"
+		, "label": "7. November 1779"
+		, "description": "Im November 1779 war James Cook bereits tod."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_16_a3"
+        , "type": "message"
+		, "label": "7. November 1628"
+		, "description": "James Cook wurde 100 Jahre später geboren."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_16_a4"
+        , "type": "message"
+		, "label": "7. November 1679"
+		, "description": "James Cook wurde erst etwa 49 jahre später geboren."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+	]
+},{ "name": "hist_quiz_17_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty2"]
+	, "description": "Die Mannschaft redet über die Erkundung des Pazifik. Wie heißt der britische Seefahrer der weite Teile dieses Meeres vermaß, kartografierte und zur Verhinderung der Skorbut Pionierarbeit leistete?"
+	, "choices": [
+		{ "name": "hist_quiz_17_a1"
+        , "type": "message"
+		, "label": "James Cook"
+		, "description": "Er kartografierte, vermaß und entdeckte einige Inseln im Pazifik."
+		, "outcome": {"player.gold": 500, "player.food": 25, "player.strength": 3, "player.morale": 2}
+		}
+		,{ "name": "hist_quiz_17_a2"
+        , "type": "message"
+		, "label": "Abel Tasman"
+		, "description": "Nach ihm ist Tasmanien benannt. Pionierarbeit gegen die Skorbut kam von ihm aber nicht"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_17_a3"
+        , "type": "message"
+		, "label": "Vitus Bering"
+		, "description": "Nach ihm ist das Beringmeer benannt. Pionierarbeit gegen die Skorbut kam von ihm aber nicht"
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_17_a4"
+        , "type": "message"
+		, "label": "Dirk Hartog"
+		, "description": "Er unternahm Seefahrten im Pazifik. Pionierarbeit gegen die Skorbut kam von ihm aber nicht."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_18_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Welcher Seefahre konnte weite Teile der Beringstraße erstmals befahren ohne aber einen sicheren Nachweis zu bringen, dass Amerika und Asien nicht verbunden sind?"
+	, "choices": [
+		{ "name": "hist_quiz_18_a1"
+        , "type": "message"
+		, "label": "Vitus Bering"
+		, "description": "Das Beringmeer und die Beringstraße tragen seinen Namen."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_18_a2"
+        , "type": "message"
+		, "label": "George Vancouver"
+		, "description": "George vancouver wurde für die Erkundung der Westküste Nordamerikas bekannt."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_18_a3"
+        , "type": "message"
+		, "label": "Willem Barents"
+		, "description": "Willem Barents war Entdecker und ist bekannt für eine Überwinterung in der Arktis."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_18_a4"
+        , "type": "message"
+		, "label": "Henry Hudson"
+		, "description": "Henry Hudson unternahm Schiffsexpeditionen um die Nordwestpassage zu finden."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+	]
+},{ "name": "hist_quiz_19_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty1"]
+	, "description": "Wir haben das Jahr 1805. In der Seeschlacht am spanischen Kap Trafalgar kämpft die englische Flotte gegen die französische Flotte. Welches Land stellt sich außerdem gegen England?"
+	, "choices": [
+		{ "name": "hist_quiz_19_a1"
+        , "type": "message"
+		, "label": "Spanien"
+		, "description": "Gemeinsam mit Frankreich verlor Spanien gegen die brittische Flotte. England behauptete sich so gegen Napoleon."
+		, "outcome": {"player.gold": 100, "player.food": 10, "player.strength": 1, "player.morale": 1}
+		}
+		,{ "name": "hist_quiz_19_a2"
+        , "type": "message"
+		, "label": "Preußen"
+		, "description": "Preußen war neutral hatte und auch keine ernstzunehmende Flotte."
+		, "outcome": {"player.gold": -500, "player.food": -25, "player.strength": -3, "player.morale": -2}
+		}
+		,{ "name": "hist_quiz_19_a3"
+        , "type": "message"
+		, "label": "Schweden"
+		, "description": "Schweden war Koalitionspartner gegen das napoleonische Frankreich."
+		, "outcome": {}
+		}
+		,{ "name": "hist_quiz_19_a4"
+        , "type": "message"
+		, "label": "Russland"
+		, "description": "Russland war Koalitionspartner gegen das napoleonische Frankreich."
+		, "outcome": {}
+		}
+	]
+},{ "name": "hist_quiz_20_quiz"
+	, "type": "single-select"
+	, "tags": ["water", "difficulty3"]
+	, "description": "Wir schreiben den 21.10.1805. Wie heißt der britische Admiral der in der Schlacht von Trafalgar das Kommando über die Flotte des Vereinigten Königreiches Großbritannien und Irland hat?"
+	, "choices": [
+		{ "name": "hist_quiz_20_a1"
+        , "type": "message"
+		, "label": "Horatio Nelson"
+		, "description": "Nelson starb heute in der Schlacht, jedoch führte seine Taktik zu einem Sieg über die französische Flotte"
+		, "outcome": {"player.gold": 1000, "player.food": 50, "player.strength": 5, "player.morale": 5}
+		}
+		,{ "name": "hist_quiz_20_a2"
+        , "type": "message"
+		, "label": "James Cook"
+		, "description": "James Cook ist schon bereits seit über zwanzig Jahren verstorben"
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_20_a3"
+        , "type": "message"
+		, "label": "Charles Howard"
+		, "description": "Charles Howard war Admiral unter Königin Elisabeth I."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
+		}
+		,{ "name": "hist_quiz_20_a4"
+        , "type": "message"
+		, "label": "Francis Drake"
+		, "description": "Francis Drake war Freibeuter und später Vizeadmiral unter der Königin Elisabeth I."
+		, "outcome": {"player.gold": -1000, "player.food": -50, "player.strength": -5, "player.morale": -5}
 		}
 	]
 }

@@ -28,7 +28,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					}
 				, strength :
 					{ icon : 'small-soldier'
-					, label : 'Soldaten'
+					, label : 'Bewaffnung'
 					, position : 1
 					}
 				, food :
@@ -69,7 +69,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('small-soldier','assets/chars/soldier-spanish-simple.png',32,32)
 			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 32, 32)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
-			.audio('audio-ambient-ship', ['assets/audio/silence.mp3']);
+			.spritesheet('map','assets/icons/ui-map.png', 32, 32)
+			.spritesheet('mute','assets/icons/ui-almanach.png', 32, 32)
+			.audio('audio-ambient-ship', 'assets/audio/ship-at-sea.wav');
 			;
 			
 		
@@ -238,11 +240,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		grp.create(0, 0, 'menu-board');
 
 		grp.add(this.game.make.button(
-				20, 10, 'almanach',
-				function (icon) { icon.frame = 0; this.openAlmanach(); }, this.parent,
+				5, 10, 'almanach',
+				this.parent.openAlmanach, this.parent,
 				1, 0));
 		grp.add(this.game.make.button(
-				60, 10, 'wheel',
+				45, 10, 'map',
+				this.parent.openMap, this.parent,
+				1, 0));
+		grp.add(this.game.make.button(
+				85, 10, 'almanach',
+				function () {	this.game.sound.mute = !this.game.sound.mute; }, this,
+				1, 0));
+		grp.add(this.game.make.button(
+				125, 10, 'wheel',
 				function () {	this.game.state.start(AK.MainMenu.key, true, false, this.top); }, this,
 				1, 0));
 	};//Desk.createCaptainsPanel
@@ -261,7 +271,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
-				this.sailors.getBottom().destroy();
+				if (this.sailors.length > 0)
+					this.sailors.getAt(this.sailors.length-1).destroy();
 			}
 		} else if (diff > 0 ) {
 			for (var i = 0; i < diff; i++) {
@@ -309,7 +320,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
-				this.strength.getBottom().destroy();
+				if (this.strength.length > 0)
+					this.strength.getAt(this.strength.length-1).destroy();
 			}
 		} else if (diff > 0 ) {
 			for (var i = 0; i < diff; i++) {

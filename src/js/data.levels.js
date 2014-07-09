@@ -73,7 +73,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 //2
 , { spots:
 		[ { x: 480, y: 220
-			, reachable: [1]
+			, reachable: [1, 3]
 			, type: 'water'
 			, start: { dir: 'east'}
 			, event: { tags: ["open_sea", "atlantic"] }
@@ -90,6 +90,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			, event: { tags: ["open_sea", "atlantic"] }
 			, end: { dir: 'south', to: 5 }
 			}
+		
+		, { x: 190, y: 150
+			, type: 'island'
+			, event: { name: "newfoundland" }
+			, reachable: [2]
+		}
 		]
 	}
 
@@ -199,6 +205,39 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			}
 		]
 	}
+
+//6
+, {	tags: ["carribean"]
+	, spots:
+		[ 
+		{ x: 490, y: 230
+			, type: "water"
+			, start: { dir: 'east' }
+			, reachable: [1]
+		}
+		
+		, { x: 260, y: 190
+			, type: "water"
+			, reachable: [2, 3]
+		}
+		
+		, { x: 110, y: 330
+			, type: "island"
+			, reachable: [3, 4]
+		}
+		
+		, { x: 200, y: 460
+			, type: "atoll"
+			, reachable: [4]
+		}
+		
+		, { x: 350, y: 500
+			, type: "atoll"
+			, end: { dir: "south", to: 7 }
+		} 
+		]
+	}
+	
 ]
 
 );

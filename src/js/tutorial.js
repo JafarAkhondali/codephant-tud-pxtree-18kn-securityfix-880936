@@ -35,13 +35,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		paper.anchor.set(0.5);
 		paper.visible = false;
 		paper.scale.set(2.6);
-		exit = this.game.add.sprite(250, 500, 'exit');
+		exit = this.game.add.button(250, 500, 'exit', this.closeTutorial, this, 1, 0);
 	    exit.anchor.set(0.5);
 	    exit.scale.set(1);
 	    exit.visible = false;
-	    exit.inputEnabled = true;
-	    exit.events.onInputDown.add(
-	    		this.closeTutorial,this);
 	    viewGrp.add(paper);
 	    viewGrp.add(exit);
 	};

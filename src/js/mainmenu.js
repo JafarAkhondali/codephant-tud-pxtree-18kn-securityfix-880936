@@ -24,7 +24,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.game.load
 		.image('mainmenu-bg', 'assets/textures/mm-bg.png')
 		.image('button', 'assets/ui/ui-board-decorated.png')
-		.image('logo', 'assets/textures/mm-logo.png');
+		.image('logo', 'assets/textures/mm-logo.png')
+		.image('preloaderBar','assets/icons/map-schiff.png');
 	;
 	};
 	
@@ -52,6 +53,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				return;
 
 			this.top.resetSaveData();
+			this.top.already_running = true;
 			//this.game.state.start(AK.Play.key, true, false, this.top);
 			this.game.state.start(AK.Intro.key, true, false, this.top);
 		}, this);
@@ -60,6 +62,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		fortsetzen.position.set(570, 295);
 		fortsetzen.onInputUp.add(function()
 		{
+			if(localStorage.getItem('Stats')==null && this.top.already_running == false) {
+				alert('Auf diesem PC wurde kein Spielstand gefunden. Bitte starten Sie ein neues Spiel.');
+				return;
+			}
 			this.top.loadSaveData();
 			this.game.state.start(AK.Play.key, true, false, this.top);
 		}, this);

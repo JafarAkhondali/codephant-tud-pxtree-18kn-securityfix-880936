@@ -21,11 +21,13 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.desk = new AK.Desk(this);
 					this.almanach = new AK.Almanach(this);
 					this.tutorial = new AK.Tutorial(this);
-					this.first_start_flag = 1;
+					this.first_start_flag = true;
 					}
 				
 			, preload : function preload ()
 				{
+				this.preloadBar = this.add.sprite(500, 250, 'preloaderBar');
+				this.load.setPreloadSprite(this.preloadBar);
 					this.sea.preload();
 					this.desk.preload();
 					this.events.preload();
@@ -40,7 +42,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.loadLevel(this.top.currentLevel, this.top.enteringFrom);
 					this.almanach.create();
 					this.tutorial.create();
-					if(this.first_start_flag==1) this.tutorial.openTutorial(0);
+					if(this.first_start_flag==true) this.tutorial.openTutorial(0);
 				}
 			, update: function create ()
 				{
