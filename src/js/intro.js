@@ -28,7 +28,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.game.load.image('img1','assets/textures/intro-harbour.jpg');
 			this.game.load.image('img2','assets/textures/intro-harbour2.jpg');
 			this.game.load.image('img3','assets/textures/intro-ship.jpg');	
-			this.game.load.audio('audio-ambient-ship', ['assets/audio/silence.mp3']);
+			this.game.load.audio('audio-ambient-ship', 'assets/audio/323835_PiratesThemeEastWes.mp3');
 		};
 		
 		def.create = function(){
@@ -117,7 +117,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			}
 			if(i>60*30 && j==2) {
 				txtGrp.removeAll();
-				sound.stop();
+				this.game.sound.stopAll();
 				this.game.state.start(AK.Play.key, true, false, this.top);
 			}
 		};
