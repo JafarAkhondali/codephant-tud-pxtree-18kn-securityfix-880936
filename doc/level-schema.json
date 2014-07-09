@@ -1,10 +1,19 @@
 { "id": "http://wwwpub.zih.tu-dresden.de/~s5384755/18knoten/js/level-schema"
 , "$schema": "http://json-schema.org/schema#"
 , "description": "Level map for the educational game 18 Knoten."
+, "definitions":
+	{ "TagSet":
+		{ "description": "A set of highlight words, that determine the events from which one is chosen, when a spot is reached."
+		, "type": "array"
+		, "items": { "type": "string" }
+		, "uniqueItems": true
+		}
+	}
 , "type": "object"
 , "required": [ "spots" ]
 , "properties":
-	{ "spots": 
+	{ "tags": { "$ref": "#/definitions/TagSet" }
+	, "spots": 
 		{ "type": "array"
 		, "description": "The different places on the map the ship can go."
 		, "items":
@@ -49,13 +58,26 @@
 						{ "dir":
 							{ "type": "string"
 							, "description": "The ship leaves the map into this direction and enters the next map from the starting point of opposite direction."
-							, "enum": [ "north", "east", "west", "south" ] }
-						, "to":
-							{ "type": "integer"
-							, "description": "The index of the level map two which this spot leads."
-							, "minimum": 0
+							, "enum": [ "north", "east", "west", "south" ]
 							}
 						}
+					, "oneOf":
+						[ { "properties":
+								{ "to":
+									{ "type": "integer"
+									, "description": "The index of the level map two which this spot leads."
+									, "minimum": 0
+									}
+								}
+							}
+						, { "properties":
+								{ "found"
+									{ "description": "The name of the land the user finds when exiting the level in this direction. This will trigger the end-screen."
+									, "type": "string"
+									}
+								}
+							}
+						]
 					}
 				, "event":
 					{ "type": "object"
@@ -64,11 +86,7 @@
 						[ { "required": [ "tags" ]
 							, "description": "Randomly select a event from the event database which bears the given tag words."
 							, "properties":
-								{ "tags":
-									{ "type": "array"
-									, "items": { "type": "string" }
-									, "uniqueItems": true
-									}
+								{ "tags": { "$ref": "#/definitions/TagSet" }
 								}
 							}
 						, { "required": [ "name" ]
