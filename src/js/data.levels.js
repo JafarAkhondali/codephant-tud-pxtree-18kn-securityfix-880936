@@ -14,6 +14,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			, reachable: [4]
 			, type: 'water'
 			, event: { tags: ["open_sea", "atlantic"] }
+			, end: { dir: 'north', found: 'eldorado' }
 			}
 		
 		, { x: 420, y: 400

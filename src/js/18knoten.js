@@ -77,6 +77,19 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 						}
 					);
 		};
+
+		/**
+		 * Wrapper for switching states, which makes it a little easier and cleaner,
+		 * since it leaves out the clearing option and passes default values down.
+		 * Clears world, but leaves texture cache be.
+		 */
+		def.startState = function (stateName /*, args... */)
+		{
+			var args = Array.prototype.slice.call(arguments, 1)
+				;
+			return this.game.state
+					.start.apply(this.game.state, [stateName, true, false].concat(args));
+		};
 	}); //Game.prototype
 
 
