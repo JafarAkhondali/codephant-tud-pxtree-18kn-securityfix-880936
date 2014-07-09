@@ -25,7 +25,7 @@
 			, "maximum": 360
 			}
 		]}
-	, "coastIndent":
+	, "coastDistance":
 		{ "description": "An additional offset for the distance from the coast to the center of the level map. This should be values in the range of -0.5 to 0.5."
 		, "type": "number"
 		}
