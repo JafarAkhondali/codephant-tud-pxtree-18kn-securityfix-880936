@@ -156,20 +156,15 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, Style:
 			{ font: "normal 24pt GameFont"
 			, fill: "white"
+			, stroke: "#111111"
+			, strokeThickness: 2
 			}
 		, Position: { x: 430, y: 110 }
 		}
 	, LogoPosition:
 		{ x: 40, y: 20 }
 	, Button:
-		{ TextStyle:
-			{ font: "normal 18pt GameFont"
-			, fill: "white"
-			}
-		, HoverTextStyle:
-			{ fill: "gold"
-			}
-		, Text: "Zum Hauptmenü"
+		{ Text: "Zum Hauptmenü"
 		, Position: { x: 738, y: 492 }
 		}
 	, Description:
@@ -177,6 +172,8 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			{ font: "normal 18pt GameFont"
 			, fill: "white"
 			, align: "center"
+			, stroke: "#333333"
+			, strokeThickness: 2
 			, wordWrap: true
 			, wordWrapWidth: 800
 			}
@@ -187,6 +184,8 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			{ font: "normal 18pt GameFont"
 			, fill: "white"
 			, align: "center"
+			, stroke: "#555555"
+			, strokeThickness: 2
 			, wordWrap: true
 			, wordWrapWidth: 670
 			}
@@ -200,6 +199,15 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, Style:
 				{ font: "bold 36pt GameFont"
 				, fill: "crimson"
+				}
+			}
+		, Button:
+			{ TextStyle:
+				{ font: "normal 18pt GameFont"
+				, fill: "#333333"
+				}
+			, HoverTextStyle:
+				{ fill: "darkred"
 				}
 			}
 		, Descriptions:
@@ -216,6 +224,15 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, Style:
 				{ font: "bold 36pt GameFont"
 				, fill: "yellowgreen"
+				}
+			}
+		, Button:
+			{ TextStyle:
+				{ font: "normal 18pt GameFont"
+				, fill: "white"
+				}
+			, HoverTextStyle:
+				{ fill: "gold"
 				}
 			}
 		, Descriptions:

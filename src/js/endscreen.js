@@ -46,8 +46,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			var tbf = TextButtonFactory(this.game,
 						{ key: 'endscreen-' + (this.failed ? 'fail' : 'success') + '-btn'
-						, normalStyle: Config.Button.TextStyle
-						, overStyle: Config.Button.HoverTextStyle
+						, normalStyle: this._Data.Button.TextStyle
+						, overStyle: this._Data.Button.HoverTextStyle
 						, textAlign: [.5, .5]
 						})
 				;
