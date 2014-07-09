@@ -5,13 +5,13 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	var Config = AzK.Config
 		, __dirToAngle =
 				{ "west": 0
-				, "sout-west": 45
-				, "south": 90
-				, "south-east": 135
+				, "north-west": 45
+				, "north": 90
+				, "north-east": 135
 				, "east": 180
-				, "north-east": 225
-				, "north": 270
-				, "north-west": 315
+				, "south-east": 225
+				, "south": 270
+				, "south-west": 315
 				}
 		;
 
