@@ -15,6 +15,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this.enteringFrom = null;
 		this.taskLog = null;
 		this.stats = null;
+		this.already_running = false;
 		//console.log(easterTeggst);
 	
 	};
