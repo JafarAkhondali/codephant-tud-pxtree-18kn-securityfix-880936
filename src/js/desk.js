@@ -238,11 +238,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		grp.create(0, 0, 'menu-board');
 
 		grp.add(this.game.make.button(
-				20, 10, 'almanach',
+				5, 10, 'almanach',
 				function (icon) { icon.frame = 0; this.openAlmanach(); }, this.parent,
 				1, 0));
 		grp.add(this.game.make.button(
-				60, 10, 'wheel',
+				45, 10, 'map',
+				function (icon) { icon.frame = 0; this.openMap(); }, this.parent,
+				1, 0));
+		grp.add(this.game.make.button(
+				85, 10, 'almanach',
+				function () {	this.game.sound.mute = !this.game.sound.mute; }, this,
+				1, 0));
+		grp.add(this.game.make.button(
+				125, 10, 'wheel',
 				function () {	this.game.state.start(AK.MainMenu.key, true, false, this.top); }, this,
 				1, 0));
 	};//Desk.createCaptainsPanel
