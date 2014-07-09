@@ -85,7 +85,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						if ('coast' in leveldat)
 						{
 							this._coastSprite = this.game.make.sprite(288, 288, 'coast-normal');
-							this._coastSprite.anchor.set(.7 + (leveldat.coastIndent || 0), .5);
+							this._coastSprite.anchor.set(1.6 + (leveldat.coastIndent || 0), .5);
 							this._coastSprite.angle = Sea.toRealAngle(leveldat.coast);
 							this._bgGroup.add(this._coastSprite);
 						}
