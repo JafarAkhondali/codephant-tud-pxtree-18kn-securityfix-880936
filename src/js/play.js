@@ -11,6 +11,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	};
 	
 	Play.key = 'play';
+	var music;
+	var i=1;
 	
 
 	Play.prototype = derive(Phaser.State,
@@ -28,6 +30,17 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{
 				this.preloadBar = this.add.sprite(500, 250, 'preloaderBar');
 				this.load.setPreloadSprite(this.preloadBar);
+				this.game.load
+				.audio('audio0', 'assets/audio/323835_PiratesThemeEastWes.mp3')
+				.audio('audio1','assets/audio/431140_PvPdownbeatV2.mp3')
+				.audio('audio2','assets/audio/521394_DT-Eastern-Sun.mp3')
+				.audio('audio3','assets/audio/529570_DT-Sunset.mp3')
+				.audio('audio4','assets/audio/529909_DT-After-the-Storm.mp3')
+				.audio('audio5','assets/audio/539679_DT-Shiver-Me-Timber.mp3')
+				.audio('audio6','assets/audio/539870_DT-Crimson-Tide.mp3')
+				.audio('audio7','assets/audio/541384_DT-Eastern-Sunrise.mp3')
+				.audio('audio8','assets/audio/560624_DT-Duel-on-the-Cari.mp3')
+				.audio('audio-ambient-ship', 'assets/audio/ship-at-sea.mp3');
 					this.sea.preload();
 					this.desk.preload();
 					this.events.preload();
@@ -43,12 +56,29 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.almanach.create();
 					this.tutorial.create();
 					if(this.first_start_flag==true) this.tutorial.openTutorial(0);
+					//PLAY AUDIO
+					var music_ambient = this.game.sound.play('audio-ambient-ship', 1, true);
+					var key = 'audio' + Math.floor(Math.random()*9)
+					music = this.game.sound.play(key, 0.5, false);
 				}
 			, update: function create ()
 				{
 					this.sea.update();
 					this.desk.update();
 					this.events.update();
+					if(!music.isPlaying){
+						console.log('Halt');
+						i++;
+						music.stop();
+						var key = 'audio' + i;
+						music = this.game.sound.play(key, 0.5, false);
+						if(i==8) i=0;
+					}
+					
+				}
+			, shutdown: function shutdown()
+				{
+					this.game.sound.stopAll();
 				}
 			
 			, startEvent: function startEvent (opts)

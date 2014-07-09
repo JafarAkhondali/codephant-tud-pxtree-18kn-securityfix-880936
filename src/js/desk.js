@@ -71,8 +71,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
 			.spritesheet('map','assets/icons/ui-map.png', 32, 32)
 			.spritesheet('mute','assets/icons/ui-bell.png', 32, 32)
-			.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
-			.audio('audio-ambient-ship', 'assets/audio/ship-at-sea.wav');
+			.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32);
 			;
 			
 		
@@ -137,8 +136,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		// END SHIP AVATAR
 		
-		//PLAY AUDIO
-		var music_ambient = this.game.sound.play('audio-ambient-ship');
 		
 	};
 
