@@ -102,7 +102,9 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			{
 				var play = this.game.state.getCurrentState()
 					;
-				if (play instanceof AK.Play && newValue <= 0)
+				if (play instanceof AK.Play
+						&& newValue <= 0
+						&& endscreenStats[statName])
 				{
 					play.events.afterCurrentEvent(function()
 					{
@@ -112,6 +114,12 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				
 			}, this);
 		};
+		var endscreenStats =
+					{ "player.strength": true
+					, "player.crewCount": true
+					, "player.food": true
+					, "player.gold": true
+					};
 	}); //Game.prototype
 
 
