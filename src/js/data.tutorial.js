@@ -1,7 +1,7 @@
 namespace("PXTree.AchtzehnKnoten.Data.Tutorial",
 
 [ 	{
-		title:"Willkommen bei 18 Knoten",
+		title:"18 Knoten - Tutorial",
 		content:[	{
 						type:'paragraph',
 						text:"Willkommen in der Welt von 18 Knoten, wo du als Entdecker durch die Weltmeere segelst und neue Welten erkundest! Spielend lernst du über Schifffahrt, Geschichte, Geographie und viele andere spannende Themen!"

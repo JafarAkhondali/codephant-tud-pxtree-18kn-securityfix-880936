@@ -25,6 +25,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			};
 		
 		def.preload = function(){
+			this.preloadBar = this.add.sprite(500, 250, 'preloaderBar');
+			this.load.setPreloadSprite(this.preloadBar);
 			this.game.load.image('img1','assets/textures/intro-harbour.jpg');
 			this.game.load.image('img2','assets/textures/intro-harbour2.jpg');
 			this.game.load.image('img3','assets/textures/intro-ship.jpg');	
@@ -78,6 +80,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			textbutton.inputEnabled = true;
 			textbutton.events.onInputDown.add(function() {
 				txtGrp.removeAll();
+				self.game.sound.stopAll();
 				self.game.state.start(AK.Play.key, true, false, self.top);
 					});
 		};

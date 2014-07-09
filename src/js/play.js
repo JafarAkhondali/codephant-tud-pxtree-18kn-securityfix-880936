@@ -26,6 +26,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				
 			, preload : function preload ()
 				{
+				this.preloadBar = this.add.sprite(500, 250, 'preloaderBar');
+				this.load.setPreloadSprite(this.preloadBar);
 					this.sea.preload();
 					this.desk.preload();
 					this.events.preload();

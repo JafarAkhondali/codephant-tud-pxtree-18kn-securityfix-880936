@@ -24,7 +24,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this.game.load
 		.image('mainmenu-bg', 'assets/textures/mm-bg.png')
 		.image('button', 'assets/ui/ui-board-decorated.png')
-		.image('logo', 'assets/textures/mm-logo.png');
+		.image('logo', 'assets/textures/mm-logo.png')
+		.image('preloaderBar','assets/icons/map-schiff.png');
 	;
 	};
 	
