@@ -11,8 +11,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	};
 	
 	Play.key = 'play';
-	var music;
-	var i=1;
 	
 
 	Play.prototype = derive(Phaser.State,
@@ -59,21 +57,24 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					//PLAY AUDIO
 					var music_ambient = this.game.sound.play('audio-ambient-ship', 1, true);
 					var key = 'audio' + Math.floor(Math.random()*9)
-					music = this.game.sound.play(key, 0.5, false);
+					var music = this.game.sound.play(key, 0.5, false);
+					var i = 1;
+					var self =this;
+					music.onStop.add(function(){
+						i++;
+						var key = 'audio' + i;
+						if(i>=8) i=0;
+						nextSong(key);
+					})
+					nextSong = function(key){
+						music = self.game.sound.play(key, 0.5, false);
+					}
 				}
 			, update: function create ()
 				{
 					this.sea.update();
 					this.desk.update();
 					this.events.update();
-					if(!music.isPlaying){
-						console.log('Halt');
-						i++;
-						music.stop();
-						var key = 'audio' + i;
-						music = this.game.sound.play(key, 0.5, false);
-						if(i==8) i=0;
-					}
 					
 				}
 			, shutdown: function shutdown()
