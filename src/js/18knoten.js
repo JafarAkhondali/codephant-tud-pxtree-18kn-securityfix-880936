@@ -15,7 +15,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this.enteringFrom = null;
 		this.taskLog = null;
 		this.stats = null;
-		this.already_running = false;
+		this.completedTutorial = false;
 		//console.log(easterTeggst);
 	
 	};
@@ -29,6 +29,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			this.game.state.add(AK.Credits.key, AK.Credits(this));
 			this.game.state.add(AK.Intro.key, AK.Intro(this));
 			this.game.state.add(AK.Endscreen.key, AK.Endscreen(this));
+			this.loadSaveData();
 			this.startState(AK.MainMenu.key);
 		};
 		
@@ -38,6 +39,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			localStorage.removeItem('taskLog');
 			localStorage.removeItem('currentLevel');
 			localStorage.removeItem('enteringFrom');
+			localStorage.removeItem('completedTutorial');
 			this.loadSaveData();
 		};
 
@@ -47,6 +49,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			localStorage.setItem('enteringFrom', this.enteringFrom);
 			localStorage.setItem('Stats',JSON.stringify(this.stats._values));
 			localStorage.setItem('taskLog', JSON.stringify(this.taskLog.getSerializable()));
+			localStorage.setItem('completedTutorial', JSON.stringify(this.completedTutorial));
 		};
 
 		def.loadSaveData = function loadSaveData ()
@@ -54,6 +57,11 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			this.currentLevel = parseInt(localStorage.getItem('currentLevel') || '0');
 			this.currentSpotNr = 0;
 			this.enteringFrom = localStorage.getItem('enteringFrom') || 'east';
+			this.completedTutorial = on(localStorage.getItem('completedTutorial'),
+					function (doneTut)
+					{
+						return doneTut === null ? false : JSON.parse(doneTut);
+					});
 
 			this.taskLog = localStorage.getItem('taskLog')
 					? AK.TaskLog.fromSerializable(JSON.parse(localStorage.getItem('taskLog')))

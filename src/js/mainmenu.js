@@ -51,7 +51,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					return;
 
 				self.top.resetSaveData();
-				self.top.already_running = true;
 				self.top.startState(AK.Intro.key);
 			}, this);
 			this.game.world.add(start);
@@ -59,11 +58,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			fortsetzen.position.set(570, 295);
 			fortsetzen.onInputUp.add(function()
 			{
-				if(localStorage.getItem('Stats')==null && self.top.already_running == false) {
+				if(!self.top.completedTutorial) {
 					alert('Auf diesem PC wurde kein Spielstand gefunden. Bitte starten Sie ein neues Spiel.');
 					return;
 				}
-				self.top.loadSaveData();
+				//self.top.loadSaveData();
 				self.top.startState(AK.Play.key);
 			}, this);
 			this.game.world.add(fortsetzen);

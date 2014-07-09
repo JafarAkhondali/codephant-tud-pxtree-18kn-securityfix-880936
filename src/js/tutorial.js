@@ -86,12 +86,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Tutorial.prototype.closeTutorial = function(){
     	txtGrp.removeAll();
     	viewGrp.removeAll();
-    	this.parent.first_start_flag = 0;
+    	this.top.completedTutorial = true;
+    	this.top.storeSaveData();
     	
     }
 	
 	AK.Tutorial.prototype.openTutorial = function openTutorial(page){
-		this.parent.first_start_flag = 0;
 		var pagetitle, text, title, pagenum;
 		txtGrp.removeAll();
 		(!page)? pagetitle='Willkommen bei 18 Knoten' : pagetitle = tut_data[page].title;

@@ -21,7 +21,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.desk = new AK.Desk(this);
 					this.almanach = new AK.Almanach(this);
 					this.tutorial = new AK.Tutorial(this);
-					this.first_start_flag = true;
 					}
 				
 			, preload : function preload ()
@@ -53,7 +52,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.loadLevel(this.top.currentLevel, this.top.enteringFrom);
 					this.almanach.create();
 					this.tutorial.create();
-					if(this.first_start_flag==true) this.tutorial.openTutorial(0);
+					if(!this.top.completedTutorial) this.openTutorial();
 					//PLAY AUDIO
 					var music_ambient = this.game.sound.play('audio-ambient-ship', 1, true);
 					var key = 'audio' + Math.floor(Math.random()*9)
