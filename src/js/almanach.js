@@ -10,6 +10,9 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	var temp_page = 0;
 	var self;
 	var page_flag = 0;
+	var is_open = false;
+	var current_title = null;
+	var current_line = null; 
 	
 	AK.Almanach = function Almanach (parentCtrl) {
 		this.parent = parentCtrl;
@@ -45,24 +48,27 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		paper.visible = true;
 		exit.visible = true;
 		page_flag = 0;
-		var titles = [];
-		var count = 0;
-		var title, text_im, titletext;
-		var text = "Keine gültigen Daten gefunden";
-		
-		var textstyle = Config.StatPaper.TextStyle;
-		var headline = this.game.add.text(Config.Left + 150, 80+count, 'Almanach des Schiffes', textstyle);
-		txtGrp.add(headline);
-		for(var i=0; i<data_almanach.length;i++) {
-			count+=30;
-			if(titletext == null) text = "Keine gültigen Daten gefunden";
-			title = data_almanach[i].title;
-			//textbutton.events.onInputOver.add(mouseInHandler, this);
-			//textbutton.events.onInputOut.add(mouseOutHandler, this);
-			titletext = this.game.make.text(Config.Left + 50, 100+count, data_almanach[i].title, textstyle);
-			txtGrp.add(titletext);
-			this.createButton(title, 0, Config.Left + 50, 100+count, title.length, titletext);
-		};
+		if(current_title != null && current_line != null && is_open == false) this.openPage(current_title, current_line);
+		else{
+			var titles = [];
+			var count = 0;
+			var title, text_im, titletext;
+			var text = "Keine gültigen Daten gefunden";
+			
+			var textstyle = Config.StatPaper.TextStyle;
+			var headline = this.game.add.text(Config.Left + 150, 80+count, 'Almanach des Schiffes', textstyle);
+			txtGrp.add(headline);
+			for(var i=0; i<data_almanach.length;i++) {
+				count+=30;
+				if(titletext == null) text = "Keine gültigen Daten gefunden";
+				title = data_almanach[i].title;
+				//textbutton.events.onInputOver.add(mouseInHandler, this);
+				//textbutton.events.onInputOut.add(mouseOutHandler, this);
+				titletext = this.game.make.text(Config.Left + 50, 100+count, data_almanach[i].title, textstyle);
+				txtGrp.add(titletext);
+				this.createButton(title, 0, Config.Left + 50, 100+count, title.length, titletext);
+			};
+		}
 		txtGrp.setAll('visible','true');
 		
 
@@ -88,6 +94,8 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
     	txtGrp.removeAll();
     	alm_view.removeAll();
     	page_flag = 1;
+    	current_title = title;
+    	current_line = line;
     	var self = this;
 		var page_data = data_almanach[0].content;
 		var cpp = 5; //Content Per Page: number of paragraphs/pictures per page
@@ -150,11 +158,14 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
     	txtGrp.removeAll();
     	alm_view.removeAll();
 		if(page_flag == 0){
-		paper.visible = false;
-    	exit.visible = false; 
-    	txtGrp.setAll('visible','false'); 
-    	temp_page=0; }
-    	if(page_flag == 1) this.openAlmanach();
+			paper.visible = false;
+	    	exit.visible = false; 
+	    	is_open = false;
+	    	txtGrp.setAll('visible','false'); 
+	    	temp_page=0; }
+		else{ 
+			is_open = true;
+			this.openAlmanach();}
     	
     }
 	
