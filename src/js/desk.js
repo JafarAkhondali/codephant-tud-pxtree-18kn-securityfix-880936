@@ -28,7 +28,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					}
 				, strength :
 					{ icon : 'small-soldier'
-					, label : 'Soldaten'
+					, label : 'Bewaffnung'
 					, position : 1
 					}
 				, food :
@@ -261,7 +261,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
-				this.sailors.getBottom().destroy();
+				if (this.sailors.length > 0)
+					this.sailors.getAt(this.sailors.length-1).destroy();
 			}
 		} else if (diff > 0 ) {
 			for (var i = 0; i < diff; i++) {
@@ -309,7 +310,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		if (diff < 0) {
 			for (var i = 0; i < Math.abs(diff); i++) {
-				this.strength.getBottom().destroy();
+				if (this.strength.length > 0)
+					this.strength.getAt(this.strength.length-1).destroy();
 			}
 		} else if (diff > 0 ) {
 			for (var i = 0; i < diff; i++) {

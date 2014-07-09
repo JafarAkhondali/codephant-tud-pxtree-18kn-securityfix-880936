@@ -58,8 +58,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		    img1.body.velocity.y=-5;
 		    
 		    textstyle.font = "normal 24pt GameFont"
-		    textstyle.strokeThickness = 6;
-		    textstyle.stroke = 'white';
+		    textstyle.strokeThickness = 2;
+		    textstyle.stroke = '#bf9218';
+			textstyle.fill = '#e0ab1b';
+			textstyle.shadowColor = '#000000';
+			textstyle.shadowBlur = '2';
 		    
 		    txtGrp =this.game.add.group();
 		    text = this.game.add.text(150, 250, 'Willkommen in der Zeit der großen Entdecker!', textstyle);

@@ -115,7 +115,9 @@ namespace("PXTree.AchtzehnKnoten.Config",
 , MainMenu:
 	{ TextStyle:
 		{ font: "normal 18pt GameFont"
-		, fill: "white"
+		, fill: '#e0ab1b'
+		, stroke: '#bf9218'
+		, strokeThickness: 1
 		}
 	, Labels:
 		{ NewGame: "Neues Spiel"
