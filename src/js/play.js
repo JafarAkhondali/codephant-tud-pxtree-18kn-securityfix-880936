@@ -1,10 +1,12 @@
 
 namespace("PXTree.AchtzehnKnoten", function (AK)
 {
-	Play = function Play (parent)
+	Play = function Play (parentCtrl)
 	{
 		var self = Object.create(Play.prototype);
 		Phaser.State.call(self);
+		self.parent = parentCtrl;
+		self.top = self.parent.top;
 		return self;
 	};
 	
@@ -14,8 +16,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	Play.prototype = derive(Phaser.State,
 			{ init : function (parentCtrl)
 				{
-					this.parent = parentCtrl;
-					this.top = this.parent.top;
 					this.events = new AK.Events(this); //TODO make extra event layer
 					this.sea = new AK.Sea(this);
 					this.desk = new AK.Desk(this);

@@ -1,9 +1,11 @@
 namespace("PXTree.AchtzehnKnoten", function (AK)
 {
-	function Intro ()
+	function Intro (parentCtrl)
 	{
 		var self = Object.create(Intro.prototype);
 		Phaser.State.call(self);
+		self.parent = parentCtrl;
+		self.top = self.parent.top;
 		return self;
 	}
 	
@@ -17,12 +19,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	var sound;
 	
 	Intro.prototype = on(Object.create(Phaser.State.prototype), function (def)
-			{
-				def.init = function (parentCtrl)
-			{
-					this.parent = parentCtrl;
-					this.top = this.parent.top;
-			};
+	{
 		
 		def.preload = function(){
 			this.preloadBar = this.add.sprite(500, 250, 'preloaderBar');
@@ -81,7 +78,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			textbutton.events.onInputDown.add(function() {
 				txtGrp.removeAll();
 				self.game.sound.stopAll();
-				self.game.state.start(AK.Play.key, true, false, self.top);
+				self.top.startState(AK.Play.key);
 					});
 		};
 		
@@ -124,13 +121,13 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			if(i>60*30 && j==2) {
 				txtGrp.removeAll();
 				this.game.sound.stopAll();
-				this.game.state.start(AK.Play.key, true, false, this.top);
+				this.top.startState(AK.Play.key);
 			}
 		};
 	
 		return def;
-		});
+	});
 
-		AK.Intro = Intro;
+	AK.Intro = Intro;
 
 });

@@ -3,12 +3,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 {
 	var Config = AK.Config.Credits;
 	
-	function Credits ()
+	function Credits (parentCtrl)
 	{
 		var self = Object.create(Credits.prototype);
 		Phaser.State.call(self);
-		self.parent = null;
-		self.top = null;
+		self.parent = parentCtrl;
+		self.top = self.parent.top;
 		return self;
 	}
 	
@@ -54,11 +54,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	Credits.prototype = on(Object.create(Phaser.State.prototype), function (def)
 	{
-		def.init = function init (parentCtrl)
-		{
-			this.parent = parentCtrl;
-			this.top = this.parent.top;
-		};
 		
 		def.preload = function preload ()
 		{
@@ -140,7 +135,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			temp.input.useHandCursor = true;
 			temp.events.onInputUp.add(function()
 			{
-				this.game.state.start(AK.MainMenu.key, true, false, this.parent);
+				this.top.startState(AK.MainMenu.key);
 			}, this)
 		};
 		

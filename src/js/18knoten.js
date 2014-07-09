@@ -24,12 +24,12 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	{
 		def.run = function run ()
 		{
-			this.game.state.add(AK.MainMenu.key, AK.MainMenu());
-			this.game.state.add(AK.Play.key, AK.Play());
-			this.game.state.add(AK.Credits.key, AK.Credits());
-			this.game.state.add(AK.Intro.key, AK.Intro());
+			this.game.state.add(AK.MainMenu.key, AK.MainMenu(this));
+			this.game.state.add(AK.Play.key, AK.Play(this));
+			this.game.state.add(AK.Credits.key, AK.Credits(this));
+			this.game.state.add(AK.Intro.key, AK.Intro(this));
 			this.game.state.add(AK.Endscreen.key, AK.Endscreen(this));
-			this.game.state.start(AK.MainMenu.key, true, false, this);
+			this.startState(AK.MainMenu.key);
 		};
 		
 		def.resetSaveData = function resetSaveData ()

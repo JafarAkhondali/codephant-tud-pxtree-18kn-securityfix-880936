@@ -2,10 +2,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 {
 	var Config = AK.Config.MainMenu;
 	
-	function MainMenu ()
+	function MainMenu (parentCtrl)
 	{
 		var self = Object.create(MainMenu.prototype);
 		Phaser.State.call(self);
+		self.parent = parentCtrl;
+		self.top = self.parent.top;
 		return self;
 	}
 	
@@ -13,74 +15,69 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	
 	MainMenu.prototype = on(Object.create(Phaser.State.prototype), function (def)
 	{
-		def.init = function (parentCtrl)
-	{
-			this.parent = parentCtrl;
-			this.top = this.parent.top;
-	};
 	
-	def.preload = function ()
-	{
-		this.game.load
-		.image('mainmenu-bg', 'assets/textures/mm-bg.png')
-		.image('button', 'assets/ui/ui-board-decorated.png')
-		.image('logo', 'assets/textures/mm-logo.png')
-		.image('preloaderBar','assets/icons/map-schiff.png');
-	;
-	};
-	
-	def.create = function ()
-	{
-		var btnFactory = TextButtonFactory(this.game,
-					{ key: 'button'
-						, normalStyle: Config.TextStyle
-						, overStyle: { fill: 'gold'}
-						, textAlign: [.5,.5]
-					})
-		, start = btnFactory.create(Config.Labels.NewGame)
-		, fortsetzen = btnFactory.create(Config.Labels.LoadGame)
-		, credits = btnFactory.create(Config.Labels.Credits)
+		def.preload = function ()
+		{
+			this.game.load
+			.image('mainmenu-bg', 'assets/textures/mm-bg.png')
+			.image('button', 'assets/ui/ui-board-decorated.png')
+			.image('logo', 'assets/textures/mm-logo.png')
+			.image('preloaderBar','assets/icons/map-schiff.png');
 		;
-		this.game.add.sprite(0, 0, 'mainmenu-bg');
-		var logo = this.game.add.sprite(700,90,'logo');
-		logo.anchor.set(0.5);
-		logo.scale.set(1.2);
-	
-		start.position.set(570, 205);
-		start.onInputUp.add(function()
-		{
-			if(confirm('Hierbei werden alle vorhanden Daten gelöscht! \n Sind Sie sicher, dass Sie ein neues Spiel starten wollen?') == false)
-				return;
-
-			this.top.resetSaveData();
-			this.top.already_running = true;
-			//this.game.state.start(AK.Play.key, true, false, this.top);
-			this.game.state.start(AK.Intro.key, true, false, this.top);
-		}, this);
-		this.game.world.add(start);
+		};
 		
-		fortsetzen.position.set(570, 295);
-		fortsetzen.onInputUp.add(function()
+		def.create = function ()
 		{
-			if(localStorage.getItem('Stats')==null && this.top.already_running == false) {
-				alert('Auf diesem PC wurde kein Spielstand gefunden. Bitte starten Sie ein neues Spiel.');
-				return;
-			}
-			this.top.loadSaveData();
-			this.game.state.start(AK.Play.key, true, false, this.top);
-		}, this);
-		this.game.world.add(fortsetzen);
-	
-		credits.position.set(570, 385);
-		credits.onInputUp.add(function()
-		{
-			this.game.state.start(AK.Credits.key, true, false, this.top);
-		}, this);
-		this.game.world.add(credits);
-	};
+			var btnFactory = TextButtonFactory(this.game,
+						{ key: 'button'
+							, normalStyle: Config.TextStyle
+							, overStyle: { fill: 'gold'}
+							, textAlign: [.5,.5]
+						})
+			, start = btnFactory.create(Config.Labels.NewGame)
+			, fortsetzen = btnFactory.create(Config.Labels.LoadGame)
+			, credits = btnFactory.create(Config.Labels.Credits)
+			, self = this
+			;
+			this.game.add.sprite(0, 0, 'mainmenu-bg');
+			var logo = this.game.add.sprite(700,90,'logo');
+			logo.anchor.set(0.5);
+			logo.scale.set(1.2);
+		
+			start.position.set(570, 205);
+			start.onInputUp.add(function()
+			{
+				if(confirm('Hierbei werden alle vorhanden Daten gelöscht! \n Sind Sie sicher, dass Sie ein neues Spiel starten wollen?') == false)
+					return;
+
+				self.top.resetSaveData();
+				self.top.already_running = true;
+				self.top.startState(AK.Intro.key);
+			}, this);
+			this.game.world.add(start);
+			
+			fortsetzen.position.set(570, 295);
+			fortsetzen.onInputUp.add(function()
+			{
+				if(localStorage.getItem('Stats')==null && self.top.already_running == false) {
+					alert('Auf diesem PC wurde kein Spielstand gefunden. Bitte starten Sie ein neues Spiel.');
+					return;
+				}
+				self.top.loadSaveData();
+				self.top.startState(AK.Play.key);
+			}, this);
+			this.game.world.add(fortsetzen);
+		
+			credits.position.set(570, 385);
+			credits.onInputUp.add(function()
+			{
+				self.top.startState(AK.Credits.key);
+			}, this);
+			this.game.world.add(credits);
+		};
 		
 			return def;
-		});
+	});
 
 	AK.MainMenu = MainMenu;
 });

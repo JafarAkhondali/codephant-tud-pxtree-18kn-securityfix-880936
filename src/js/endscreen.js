@@ -57,7 +57,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					.position.copyFrom(Config.LogoPosition);
 			on(tbf.create(Config.Button.Text, function()
 			{
-				this.game.state.start(AK.MainMenu.key, true, false, this.parent);
+				this.top.startState(AK.MainMenu.key);
 			}, this), function()
 			{
 				this.game.world.add(this);

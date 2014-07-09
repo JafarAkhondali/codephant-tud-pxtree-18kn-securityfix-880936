@@ -257,7 +257,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		grp.add(bell_cross);
 		grp.add(this.game.make.button(
 				125, 10, 'wheel',
-				function () {	this.game.state.start(AK.MainMenu.key, true, false, this.top); }, this,
+				function () {	this.top.startState(AK.MainMenu.key); }, this,
 				1, 0));
 	};//Desk.createCaptainsPanel
 	
