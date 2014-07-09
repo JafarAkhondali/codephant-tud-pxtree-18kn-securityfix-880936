@@ -15,6 +15,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._dialogQueue = [];
 		this._dialogParent = null;
 		this._popTextParent = null;
+		this._afterEvent = new Phaser.Signal();
+		this._afterEvent.memorize = true;
+		this._afterEvent.dispatch();
 
 		AK.Events.button = TextButtonFactory(this.game,
 				{ key: 'eventbox-btn'
@@ -108,6 +111,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			{
 				AK.Events._inferType(evt);
 				this.top.taskLog.startEvent(evt);
+				this._afterEvent.forget();
 				this._makeDialogFromTask(evt).show();
 			}
 			catch(err)
@@ -121,6 +125,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			}
 			
 		};
+
+		/**
+		 * Add a listener which will be fire either immediately when no event is running
+		 */
+		def.afterCurrentEvent = function (callback, context)
+		{
+			return this._afterEvent.addOnce(callback, context);
+		};
+		
 		
 		/**
 		 * Generates a dialog according to the tasks 'type' property.
@@ -212,13 +225,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				catch(err)
 				{
 					if (err instanceof TypeError)
-					{ this.top.taskLog.completeEvent(); }
+					{
+						this.top.taskLog.completeEvent();
+						this._afterEvent.dispatch(); }
 					else throw err;
 				}
 			}
 			else
 			{
 				this.top.taskLog.completeEvent();
+				this._afterEvent.dispatch();
 			}
 
 		};

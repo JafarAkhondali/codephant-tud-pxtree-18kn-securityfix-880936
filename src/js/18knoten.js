@@ -76,6 +76,8 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 							}
 						}
 					);
+
+			this._setupStatisticsHandlers();
 		};
 
 		/**
@@ -89,6 +91,26 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				;
 			return this.game.state
 					.start.apply(this.game.state, [stateName, true, false].concat(args));
+		};
+
+		/**
+		 *
+		 */
+		def._setupStatisticsHandlers = function ()
+		{
+			this.stats.registerValueChangedHandler(function(statName, newValue)
+			{
+				var play = this.game.state.getCurrentState()
+					;
+				if (play instanceof AK.Play && newValue <= 0)
+				{
+					play.events.afterCurrentEvent(function()
+					{
+						this.startState('endscreen', true, statName);
+					}, this)
+				}
+				
+			}, this);
 		};
 	}); //Game.prototype
 
