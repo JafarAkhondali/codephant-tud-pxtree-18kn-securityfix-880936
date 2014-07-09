@@ -69,7 +69,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('small-soldier','assets/chars/soldier-spanish-simple.png',32,32)
 			.spritesheet('almanach', 'assets/icons/ui-almanach.png', 32, 32)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
-			.audio('audio-ambient-ship', ['assets/audio/silence.mp3']);
+			.spritesheet('map','assets/icons/ui-map.png', 32, 32)
+			.spritesheet('mute','assets/icons/ui-almanach.png', 32, 32)
+			.audio('audio-ambient-ship', 'assets/audio/ship-at-sea.wav');
 			;
 			
 		
