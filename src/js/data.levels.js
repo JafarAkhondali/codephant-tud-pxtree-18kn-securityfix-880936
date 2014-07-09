@@ -322,6 +322,33 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		}
 		]
 	}
+	
+//10
+, {	tags: ["atlantic"]
+	, spots:
+		[ 
+		{ x: 180, y: 120
+			, type: "water"
+			, start: { dir: 'north' }
+			, reachable: [1,2]
+		}
+		
+		, { x: 100, y: 320
+			, type: "water"
+			, reachable: [3]
+		}
+		
+		, { x: 275, y: 275
+			, type: "water"
+			, reachable: [3]
+		}
+		
+		, { x: 230, y: 470
+			, type: 'water'
+			, end: { dir: 'south', to: 13 }
+		}
+		]
+	}
 ]
 
 );
