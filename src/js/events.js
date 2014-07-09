@@ -32,6 +32,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 	AK.Events.button = null;
 
+	function InferenceError (msg)
+	{
+		var self = Object.create(InferenceError)
+			;
+		self.message = msg;
+		return self;
+	}
+
 	on(AK.Events, function (def)
 	{
 		def._inferType = function (task)
@@ -45,7 +53,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			{
 				task.type = "message";
 			}
-			else throw new TypeError('Could not figure out task\'s type: ' + JSON.stringify(def));
+			else
+				throw InferenceError('Could not figure out task\'s type: ' + JSON.stringify(def));
 		}
 
 		def.hyphenizedToUpperCamelCase = function (str)
@@ -116,9 +125,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			}
 			catch(err)
 			{
-				if (err instanceof TypeError)
+				if (err instanceof InferenceError)
 				{
 					console.log("events: falling back due to failed type inference.");
+					console.log(err.message);
 					this.startEvent(this._selectFallbackEvent());
 				}
 				else throw err;
@@ -168,10 +178,18 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._makeSingleSelectDialog = function (task)
 		{
-			var dial = new AK.Events.SingleSelectDialog(this.game, this._dialogParent);
+			var dial = new AK.Events.SingleSelectDialog(this.game, this._dialogParent)
+				, idxs = new Array(task.choices.length)
+				, i = idxs.length - 1
+				;
 			dial.description(task.description);
-			task.choices.forEach(function (choice, idx)
+
+			while (i >= 0) idxs[i] = i--;
+			Phaser.Math.shuffleArray(idxs);
+			idxs.forEach(function (idx)
 			{
+				var choice = task.choices[idx]
+					;
 				dial.choice(choice.label,
 						function () { this._resolveTask(task, idx); }, this);
 			}, this);
