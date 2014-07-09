@@ -139,11 +139,21 @@ namespace("PXTree.AchtzehnKnoten", function()
 							function ()
 							{ 
 								if (this.parent.currentSpotNr === this.spotNr)
-									this.parent.loadLevel(
-										this.spot.end.to,
-										Spots.getOppositeDirection(this.spot.end.dir));
+									if ('found' in this.spot.end)
+										this.parent.unloadLevel(function()
+										{
+											this.top.startState(
+												AK.Endscreen.key,
+												false,
+												this.spot.end.found);
+										}, this);
+						
+									else
+										this.parent.loadLevel(
+											this.spot.end.to,
+											Spots.getOppositeDirection(this.spot.end.dir));
 							},
-							{ parent: this.parent, spotNr: i, spot: spot });
+							{ parent: this.parent, spotNr: i, spot: spot, top: this.top });
 					periSpot.anchor.set(.5, .5);
 					periSpot.angle = Spots.getAngle(spot.end.dir);
 					periSpot.position.copyFrom(Spots.getPeripheralSpritePos(

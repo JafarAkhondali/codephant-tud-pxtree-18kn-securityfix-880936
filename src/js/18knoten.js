@@ -28,6 +28,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			this.game.state.add(AK.Play.key, AK.Play());
 			this.game.state.add(AK.Credits.key, AK.Credits());
 			this.game.state.add(AK.Intro.key, AK.Intro());
+			this.game.state.add(AK.Endscreen.key, AK.Endscreen(this));
 			this.game.state.start(AK.MainMenu.key, true, false, this);
 		};
 		
@@ -76,7 +77,50 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 							}
 						}
 					);
+
+			this._setupStatisticsHandlers();
 		};
+
+		/**
+		 * Wrapper for switching states, which makes it a little easier and cleaner,
+		 * since it leaves out the clearing option and passes default values down.
+		 * Clears world, but leaves texture cache be.
+		 */
+		def.startState = function (stateName /*, args... */)
+		{
+			var args = Array.prototype.slice.call(arguments, 1)
+				;
+			return this.game.state
+					.start.apply(this.game.state, [stateName, true, false].concat(args));
+		};
+
+		/**
+		 *
+		 */
+		def._setupStatisticsHandlers = function ()
+		{
+			this.stats.registerValueChangedHandler(function(statName, newValue)
+			{
+				var play = this.game.state.getCurrentState()
+					;
+				if (play instanceof AK.Play
+						&& newValue <= 0
+						&& endscreenStats[statName])
+				{
+					play.events.afterCurrentEvent(function()
+					{
+						this.startState('endscreen', true, statName);
+					}, this)
+				}
+				
+			}, this);
+		};
+		var endscreenStats =
+					{ "player.strength": true
+					, "player.crewCount": true
+					, "player.food": true
+					, "player.gold": true
+					};
 	}); //Game.prototype
 
 
