@@ -80,13 +80,10 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	AK.Almanach.prototype.makeBackground = function (){
 		paper = this.game.add.sprite(Config.Left, 0, 'background');
 		paper.visible = false;
-		exit = this.game.add.sprite(Config.Left + 55, 530, 'exit');
+		exit = this.game.add.button(Config.Left + 55, 530, 'exit', this.closeAlmanach, this, 1, 0);
 	    exit.anchor.set(0.5);
 	    exit.scale.set(1);
 	    exit.visible = false;
-	    exit.inputEnabled = true;
-	    exit.events.onInputDown.add(
-	    		this.closeAlmanach,this);
 	};
 	
 	

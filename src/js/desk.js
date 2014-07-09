@@ -239,11 +239,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 		grp.add(this.game.make.button(
 				5, 10, 'almanach',
-				function (icon) { icon.frame = 0; this.openAlmanach(); }, this.parent,
+				this.parent.openAlmanach, this.parent,
 				1, 0));
 		grp.add(this.game.make.button(
 				45, 10, 'map',
-				function (icon) { icon.frame = 0; this.openMap(); }, this.parent,
+				this.parent.openMap, this.parent,
 				1, 0));
 		grp.add(this.game.make.button(
 				85, 10, 'almanach',
