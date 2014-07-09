@@ -15,28 +15,51 @@ namespace("PXTree.AchtzehnKnoten", function()
 		this._spotLayer = null;
 	};
 	
-	Spots.Types =
-		{ water: { name: 'water', key: false, portAt:[0,0] }
-		, island: { name: 'island', key: 'island', portAt:[-3,24] }
-		, atoll: { name: 'atoll', key: 'atoll', portAt:[0,30] }
-		};
+	Spots.IslandPorts =
+			[ [-3, 24]
+			, [0, 30]
+			, [45, 1]
+			, [9, 63]
+			];
 
-	Spots.TypeNames = ['water', 'island', 'atoll'];
-	
+	//this is mainly for backwards compatibility preceding unified island type
+	Spots.AdditionalTypes =
+			{ atoll: { name: 'island', key: 'island2', portAt: Spots.IslandPorts[1] }
+			};
+
 	Spots.make = function spot (pt, opts)
 	{
 		var typename
 			, spot
+			, key = false
+			, portAt = [0, 0]
+			, islandType
 			;
 
 		opts || (opts = {});
-		typename = opts.type || ('start' in opts
+		//if no typename is given, it might be water, when this is a starting spot
+		// or simply select randomly from ['water', 'island']
+		typename = opts.type || ('start' in opts || !Math.floor(Math.random() * 2)
 					? 'water'
-					: Spots.TypeNames[Math.floor(Math.random() * Spots.TypeNames.length)]);
+					: 'island');
+
+		if (typename === 'island')
+		{
+			islandType = Math.floor(Math.random() * 4);
+			key = "island" + (islandType + 1);
+			portAt = Spots.IslandPorts[islandType];
+		}
+		else if (typename !== 'water') //maybe the type is one preceding unified island type
+		{
+			key = Spots.AdditionalTypes[typename].key;
+			portAt = Spots.AdditionalTypes[typename].portAt;
+			typename = Spots.AdditionalTypes[typename].name;
+		}
+		
 		
 		spot =
 				{ port: pt
-				, type: Spots.Types[typename]
+				, type: { name: typename, key: key, portAt: portAt }
 				, reachable: opts.reachable || null
 				};
 		
@@ -48,7 +71,6 @@ namespace("PXTree.AchtzehnKnoten", function()
 			spot.event = { tags: [typename] };
 		else if ('tags' in spot.event)
 			spot.event.tags.push(typename);
-		
 		return spot;
 	};
 	
@@ -97,8 +119,10 @@ namespace("PXTree.AchtzehnKnoten", function()
 				.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
 				.spritesheet('arrow', 'assets/icons/map-arrow.png', 32, 32)
 				.image('line', 'assets/textures/line-dot.png')
-				.image('island', 'assets/islands/normal-1.png')
-				.image('atoll', 'assets/islands/normal-2.png')
+				.image('island1', 'assets/islands/normal-1.png')
+				.image('island2', 'assets/islands/normal-2.png')
+				.image('island3', 'assets/islands/normal-3.png')
+				.image('island4', 'assets/islands/normal-4.png')
 				;
 		}
 	
