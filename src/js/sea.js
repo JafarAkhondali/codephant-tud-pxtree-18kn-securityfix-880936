@@ -5,13 +5,13 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 	var Config = AzK.Config
 		, __dirToAngle =
 				{ "west": 0
-				, "sout-west": 45
-				, "south": 90
-				, "south-east": 135
+				, "north-west": 45
+				, "north": 90
+				, "north-east": 135
 				, "east": 180
-				, "north-east": 225
-				, "north": 270
-				, "north-west": 315
+				, "south-east": 225
+				, "south": 270
+				, "south-west": 315
 				}
 		;
 
@@ -85,7 +85,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						if ('coast' in leveldat)
 						{
 							this._coastSprite = this.game.make.sprite(288, 288, 'coast-normal');
-							this._coastSprite.anchor.set(.7 + (leveldat.coastIndent || 0), .5);
+							this._coastSprite.anchor.set(1.6 + (leveldat.coastDistance || 0), .5);
 							this._coastSprite.angle = Sea.toRealAngle(leveldat.coast);
 							this._bgGroup.add(this._coastSprite);
 						}
