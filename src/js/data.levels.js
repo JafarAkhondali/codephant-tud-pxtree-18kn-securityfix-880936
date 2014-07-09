@@ -95,6 +95,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			, type: 'island'
 			, event: { name: "newfoundland" }
 			, reachable: [2]
+			, end: { dir: 'west', found: 'labrador' }
 		}
 		]
 	}
@@ -237,7 +238,90 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		} 
 		]
 	}
+//7
+, {	tags: ["carribean"]
+	, spots:
+		[ 
+		{ x: 275, y: 70
+			, type: "water"
+			, start: { dir: 'north' }
+			, reachable: [1]
+		}
+		
+		, { x: 260, y: 260
+			, type: "water"
+			, reachable: [2]
+			, end: { dir: "south", found: "latin_america" }
+		}
+		
+		, { x: 450, y: 300
+			, type: "atoll"
+			, end: { dir: "east", to: 8 }
+		}
+		]
+	}
 	
+//8
+, {	tags: ["carribean"]
+	, spots:
+		[ 
+		{ x: 270, y: 80
+			, type: "water"
+			, start: { dir: 'north' }
+			, reachable: [1]
+		}
+		
+		, { x: 360, y: 215
+			, type: "water"
+			, reachable: [2]
+		}
+		
+		, { x: 460, y: 400
+			, type: "water"
+			, end: { dir: "east", to: 9 }
+		}
+		
+		, { x: 90, y: 280
+			, type: 'water'
+			, start: { dir: 'west' }
+			, reachable: [4]
+		}
+		
+		, { x: 250, y: 360
+			, type: 'water'
+			, reachable: [2]
+			, end: { dir: "south", found: "latin_america" }
+		}
+		]
+	}
+	
+//9
+, {	tags: ["atlantic"]
+	, spots:
+		[ 
+		{ x: 200, y: 100
+			, type: "water"
+			, start: { dir: 'north' }
+			, reachable: [2]
+		}
+		
+		, { x: 135, y: 333
+			, type: "water"
+			, start: { dir: 'west' }
+			, reachable: [2]
+		}
+		
+		, { x: 320, y: 360
+			, type: "water"
+			, reachable: [3]
+		}
+		
+		, { x: 460, y: 460
+			, type: 'water'
+			, end: { dir: 'south', to: 12 }
+		}
+		]
+	}
 ]
 
 );
