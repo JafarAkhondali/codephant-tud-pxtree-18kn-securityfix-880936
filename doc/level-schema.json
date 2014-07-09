@@ -7,12 +7,28 @@
 		, "type": "array"
 		, "items": { "type": "string" }
 		, "uniqueItems": true
+		, "minItems": 1
 		}
 	}
 , "type": "object"
 , "required": [ "spots" ]
 , "properties":
 	{ "tags": { "$ref": "#/definitions/TagSet" }
+	, "coast": { "oneOf":
+		[ { "description": "The direction towards which the coast will be place."
+			, "type": "string"
+			, "enum": [ "north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west" ]
+			}
+		, { "description": "The angle by which the coast will be rotated clockwise. When zero the coast points westward."
+			, "type": "integer"
+			, "minimum": 0
+			, "maximum": 360
+			}
+		]}
+	, "coastIndent":
+		{ "description": "An additional offset for the distance from the coast to the center of the level map. This should be values in the range of -0.5 to 0.5."
+		, "type": "number"
+		}
 	, "spots": 
 		{ "type": "array"
 		, "description": "The different places on the map the ship can go."
