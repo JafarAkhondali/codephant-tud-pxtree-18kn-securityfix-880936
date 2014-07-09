@@ -283,6 +283,25 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			}
 		]
 	}
+, { "name": "newfoundland"
+	, "tags": ["unused"]
+	, "description": "Du landest auf Neufundland! Der erste Europäer auf dieser Insel war der Italiener Giovanni Caboto. Was willst du tun?"
+	, "choices": 
+		[ { "name": "newfoundland_gather_food"
+			, "label": "Suche nach etwas Nahrung."
+			, "description": "Du suchst im Inland der Insel nach etwas Nahrung. Aufgrund des kühlen Klimas auf dieser Insel gibt das karge Land kaum etwas her."
+			, "outcome":
+				{ "player.food": [50,100] }
+			}
+		, { "name": "newfoundland_search"
+			, "label": "Suche nach Einwohnern."
+			, "description": "Nach einiger Zeit findest du am nördlichen Ende der Insel eine Siedlung - die schon seit Jahrhunderten verlassen scheint. Die Bauweise der Häuser scheint keltischen Ursprungs zu sein. Offensichtlich waren schon vor vielen Jahrhunderten Europäer auf dieser Insel!"
+			, "outcome":
+				{ "player.gold": 1500 
+				, "player.morale": 1}
+			}
+		]
+	}
 	,{ "name": "geo_quiz_01_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty3"]
