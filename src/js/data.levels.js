@@ -4,7 +4,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 
 
 [//0
- { coast: 181
+  { section: [7, 3]
+	 ,coast: 181
 	 , coastDistance: 0.1
 	 , spots:
 		[ { x: 484, y: 125
@@ -38,7 +39,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		]
 	}
 //1
-, { spots:
+, { section: [6, 3]
+	, spots:
 		[ { x: 510, y: 300
 			, reachable: [1]
 			, type: 'water'
@@ -73,7 +75,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 
 //2
-, { coast: 20
+, { section: [5, 3]
+	, coast: 20
 	, spots:
 		[ { x: 480, y: 220
 			, reachable: [1, 3]
@@ -104,7 +107,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 
 //3
-, { coast: 215
+, { section: [7, 4]
+	,coast: 215
 	, coastDistance: 0
 	, spots:
 	
@@ -136,7 +140,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 	
 //4
-, { spots: 
+, { section: [6, 4]
+	,spots: 
 		[ { x: 370, y: 60 
 			, start: { dir: 'north'}
 			, event: { tags: ["open_sea", "atlantic"] }
@@ -172,7 +177,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		]
 	}
 //5
-, { spots: 
+, { section: [5, 4]
+	,spots: 
 		[ { x: 510, y: 270 
 			, start: { dir: 'east'}
 			, event: { tags: ["open_sea", "atlantic"] }
@@ -214,7 +220,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 
 //6
-, {	tags: ["carribean"]
+, { section: [4, 4]
+	,tags: ["carribean"]
 	, coast: 30
 	, spots:
 		[ 
@@ -246,7 +253,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		]
 	}
 //7
-, {	tags: ["carribean"]
+, { section: [4, 5]
+	,tags: ["carribean"]
 	, coast: 270
 	, coastDistance: 0.06
 	, spots:
@@ -271,7 +279,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 	
 //8
-, {	tags: ["carribean"]
+, { section: [5, 5]
+	,tags: ["carribean"]
 	, coast: 280
 	, coastDistance: 0.08
 	, spots:
@@ -307,7 +316,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 	
 //9
-, {	tags: ["atlantic"]
+, { section: [6, 5]
+	,tags: ["atlantic"]
 	, spots:
 		[ 
 		{ x: 200, y: 100
@@ -335,7 +345,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 	
 //10
-, {	tags: ["atlantic"]
+, { section: [7, 5]
+	,tags: ["atlantic"]
 	, coast: 140
 	, coastDistance: -0.0
 	, spots:
