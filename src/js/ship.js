@@ -12,6 +12,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 		this.yOffset = { v: 0, up: true };
 		this.idling = true;
 		this._coordDelta = new Phaser.Point();
+		this._group = null
 	};
 	
 	AzK.Ship.prototype =
@@ -22,12 +23,16 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					this.game.load.image('ship', 'assets/icons/map-schiff.png');
 				}
 	
-			, create: function ()
+			, create: function (group)
 				{
-					this.sprite = on(this.game.add.sprite(0, 0, 'ship'), function(ship)
+					this._group = group || this.game.add.group();
+					
+					this.sprite = on(this.game.make.sprite(0, 0, 'ship'), function(ship)
 					{
 						ship.anchor.set(.5, .5);
 					});
+					this._group.add(this.sprite);
+					
 					this._coordDelta.set(
 							this.sprite.width * (2/5),
 							this.sprite.height * (2/5));

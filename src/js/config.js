@@ -152,6 +152,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		}
 	}
 
+, WorldMap:
+	{ Offset: { x: 50, y: 0 }
+	, CloseButton: { at: { x: 40, y: 550 } }
+	}
+
 , Endscreen:
 	{ Heading:
 		{ Text: "Deine Reise ist"

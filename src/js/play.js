@@ -21,6 +21,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.desk = new AK.Desk(this);
 					this.almanach = new AK.Almanach(this);
 					this.tutorial = new AK.Tutorial(this);
+					this.worldmap = new AK.WorldMap(this);
 					}
 				
 			, preload : function preload ()
@@ -43,6 +44,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.events.preload();
 					this.almanach.preload();
 					this.tutorial.preload();
+					this.worldmap.preload();
 				}
 			, create: function create ()
 				{
@@ -52,6 +54,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.loadLevel(this.top.currentLevel, this.top.enteringFrom);
 					this.almanach.create();
 					this.tutorial.create();
+					this.worldmap.create(this.game.add.group());
 					if(!this.top.completedTutorial) this.openTutorial();
 					//PLAY AUDIO
 					var music_ambient = this.game.sound.play('audio-ambient-ship', 1, true);
@@ -74,6 +77,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this.sea.update();
 					this.desk.update();
 					this.events.update();
+					this.worldmap.update();
 					
 				}
 			, shutdown: function shutdown()
@@ -87,6 +91,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				}
 			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(); }
 			, openTutorial: function openTutorial() {this.tutorial.openTutorial(0); }
+			, openWorldMap: function () { this.worldmap.show(); }
 			});
 	
 	AK.Play = Play;

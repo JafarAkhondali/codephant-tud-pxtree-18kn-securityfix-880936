@@ -243,7 +243,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				1, 0));
 		grp.add(this.game.make.button(
 				45, 10, 'map',
-				this.parent.openMap, this.parent,
+				this.parent.openWorldMap, this.parent,
 				1, 0));
 		var bell_cross = this.game.make.sprite(85,10,'cross');
 		bell_cross.visible = false;
