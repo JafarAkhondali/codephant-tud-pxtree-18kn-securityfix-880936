@@ -34,6 +34,11 @@ var http = require("http"),
 		dir = parseOpt("-d", process.cwd()),
 		port = parseInt(parseOpt("-p", 8888));
 
+if (dir[0] !== '/')
+{
+  dir = path.join(process.cwd(), dir);
+}
+
 http.createServer(function(request, response) {
 
 	var uri = url.parse(request.url).pathname
@@ -72,4 +77,4 @@ http.createServer(function(request, response) {
 	});
 }).listen(parseInt(port, 10));
 
-console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
+console.log("Static file server serving from '" + dir + "' to http://localhost:" + port);
