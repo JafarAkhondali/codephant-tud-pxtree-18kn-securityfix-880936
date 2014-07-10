@@ -155,6 +155,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 , WorldMap:
 	{ Offset: { x: 50, y: 0 }
 	, CloseButton: { at: { x: 40, y: 550 } }
+	, Section:
+		{ Base: { x: 32, y: 32 }
+		, Factor: { x: 60, y: 60 }
+		}
+	, DrawingCrosses: false
 	}
 
 , Endscreen:

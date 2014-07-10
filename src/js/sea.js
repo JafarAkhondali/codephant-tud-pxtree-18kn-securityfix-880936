@@ -98,7 +98,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						this.ship.move(
 								this.spots.start[enteringFrom].port);
 						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
-						this.top.taskLog.startLevel();
+						this.top.taskLog.startLevel(this.currentLevel);
 					}
 				}
 			

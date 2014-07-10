@@ -83,6 +83,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			, shutdown: function shutdown()
 				{
 					this.game.sound.stopAll();
+					this.top.taskLog.clearAll();
 				}
 			
 			, startEvent: function startEvent (opts)
