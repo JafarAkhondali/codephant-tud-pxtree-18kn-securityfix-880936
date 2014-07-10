@@ -74,10 +74,10 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 							{ name: "Cumberdale"
 							, morale: 11
 							, nationality: 'british'
-							, gold: 20000
-							, food: 200
-							, crewCount: 31
-							, strength: 5
+							, gold: 2000
+							, food: 150
+							, crewCount: 30
+							, strength: 10
 							}
 						, ship:
 							{ speed: 0.2
