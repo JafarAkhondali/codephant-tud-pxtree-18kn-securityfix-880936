@@ -84,13 +84,13 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		def.update = function (){
 			i++;
-			if(i>60*10 && j==0){
+			if(i>60*5 && j==0){
 				j=1;
 				
 				img1.visible = false;
 				img2.visible = true;
-				img2.body.velocity.x=-10;
-				img2.body.velocity.y=-5;
+				img2.body.velocity.x=-20;
+				img2.body.velocity.y=-10;
 				
 
 				txtGrp.removeAll();
@@ -101,7 +101,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			    text = this.game.add.text(150, 330, 'entdeckte Routen zu finden.', textstyle);
 			    txtGrp.add(text);
 			}
-			if(i>60*20 && j==1){
+			if(i>60*10 && j==1){
 				j=2;
 				
 				img2.visible = false;
@@ -118,7 +118,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			    text = this.game.add.text(150, 370, 'Finde es heraus in der Welt von 18 Knoten!', textstyle);
 			    txtGrp.add(text);
 			}
-			if(i>60*30 && j==2) {
+			if(i>60*20 && j==2) {
 				txtGrp.removeAll();
 				this.game.sound.stopAll();
 				this.top.startState(AK.Play.key);
