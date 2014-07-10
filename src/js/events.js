@@ -34,7 +34,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 	function InferenceError (msg)
 	{
-		var self = Object.create(InferenceError)
+		var self = Object.create(InferenceError.prototype)
 			;
 		self.message = msg;
 		return self;
@@ -221,11 +221,6 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		def._resolveTask = function _resolveTask (task)
 		{
-			if (!('type' in task))
-			{
-				AK.Events._inferType(task);
-			}
-			
 			var taskName = AK.Events.hyphenizedToUpperCamelCase(task.type)
 				, funcName = "_resolve" + taskName + "Task"
 				, nextTask = null
@@ -242,7 +237,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				}
 				catch(err)
 				{
-					if (err instanceof TypeError)
+					if (err instanceof InferenceError)
 					{
 						this.top.taskLog.completeEvent();
 						this._afterEvent.dispatch(); }
