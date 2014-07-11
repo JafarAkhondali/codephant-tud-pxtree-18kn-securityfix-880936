@@ -17,7 +17,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Tutorial",
 		title:"Spielprinzip",
 		content:[	{
 						type:'paragraph',
-						text:"Das Spielprinzip hinter 18 Knoten ist denkbar einfach: Mit deinem Schiff bewegst du dich auf der Karte von Punkt zu Punkt. Du kannst benachbarte Punkte besuchen, indem du sie anklickst. Die roten Pfeile am Rand der Karte bringen dich zur nächsten Karte. Zur Routenplanung kannst du die Weltkarte benutzen, die TODO:WELTKARTEN-SYMBOL zu finden ist"
+						text:"Das Spielprinzip hinter 18 Knoten ist denkbar einfach: Mit deinem Schiff bewegst du dich auf der Karte von Punkt zu Punkt. Du kannst benachbarte Punkte besuchen, indem du sie anklickst. Die roten Pfeile am Rand der Karte bringen dich zur nächsten Karte. Zur Routenplanung kannst du die Weltkarte benutzen, die auf dem Schreibtisch zu finden ist"
 					},
 		         	{
 						type:'paragraph',
@@ -73,7 +73,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Tutorial",
 					},
 		         	{
 						type:'paragraph',
-						text:"Neben dem Almanach findest du auf dem Schreibtisch den Anker, der dich zurück ins Hauptmenü bringt und TODO:SOundsymbol, welches das Spiel stumm schaltet."
+						text:"Neben dem Almanach findest du auf dem Schreibtisch das Symbol für die Weltkarte, sowie die Glocke, welche das Spiel stumm schaltet und den Anker, der dich zurück ins Hauptmenü bringt."
 					},
 		]
 	},

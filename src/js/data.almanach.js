@@ -76,7 +76,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
 						text:"geschhcihte2"
 					},
 				]
-	},*/,
+	},,*/
 	
 	
 	
