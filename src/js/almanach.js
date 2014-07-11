@@ -48,7 +48,11 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		paper.visible = true;
 		exit.visible = true;
 		page_flag = 0;
-		if(current_title != null && current_line != null && is_open == false) this.openPage(current_title, current_line);
+		if(current_title != null && current_line != null && is_open == false){
+			console.log('openPAge');
+			this.openPage(current_title, current_line);
+			return;
+			}
 		else{
 			var titles = [];
 			var count = 0;
@@ -56,17 +60,18 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			var text = "Keine gültigen Daten gefunden";
 			
 			var textstyle = Config.StatPaper.TextStyle;
-			var headline = this.game.add.text(Config.Left + 150, 80+count, 'Almanach des Schiffes', textstyle);
+			var headline = this.game.add.text(Config.Left + 150, 35+count, 'Almanach des Schiffes', textstyle);
 			txtGrp.add(headline);
+			count = 50;
 			for(var i=0; i<data_almanach.length;i++) {
 				count+=30;
 				if(titletext == null) text = "Keine gültigen Daten gefunden";
 				title = data_almanach[i].title;
 				//textbutton.events.onInputOver.add(mouseInHandler, this);
 				//textbutton.events.onInputOut.add(mouseOutHandler, this);
-				titletext = this.game.make.text(Config.Left + 50, 100+count, data_almanach[i].title, textstyle);
+				titletext = this.game.make.text(Config.Left + 50, count, data_almanach[i].title, textstyle);
 				txtGrp.add(titletext);
-				this.createButton(title, 0, Config.Left + 50, 100+count, title.length, titletext);
+				this.createButton(title, 0, Config.Left + 50, count, title.length, titletext);
 			};
 		}
 		txtGrp.setAll('visible','true');
@@ -148,6 +153,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			txtGrp.add(prev_link);
 			this.createButton(title, line_number-20, Config.Left + 100, 530, title.length, prev_link);
 		}
+		return;
 		
 	};
 	
@@ -162,12 +168,13 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	    	temp_page=0; }
 		else{ 
 			is_open = true;
+			page_flag = 0;
 			this.openAlmanach();}
     	
     }
 	
 	AK.Almanach.prototype.createButton = function(title, line, x, y, textlength, obj) {
-		var textbutton = this.game.add.tileSprite(x-5,y-5,textlength*10, y+5, null);
+		var textbutton = this.game.add.tileSprite(x-5,y-9,textlength*10, 30, null);
 		alm_view.add(textbutton);
 		var self = this;
 		textbutton.inputEnabled = true;
