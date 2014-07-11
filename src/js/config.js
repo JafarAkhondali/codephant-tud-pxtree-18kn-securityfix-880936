@@ -15,6 +15,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, Maximum: 4
 	}
 
+, Spots:
+	{ NotActiveAlpha: 0.5
+	, ActiveAlpha: 1
+	}
+
 , Events:
 	{ Description:
 		{ TextStyle:

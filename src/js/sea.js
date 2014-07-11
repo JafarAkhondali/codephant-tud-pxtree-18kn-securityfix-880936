@@ -92,12 +92,12 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 						
 						this.spots.loadLevel(leveldat, this.events);
 						this.currentLevel = levelnr;
+						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
 						this.ship.move(
 								this.spots.start[enteringFrom].peripheral.port,
 								true);
-						this.ship.move(
-								this.spots.start[enteringFrom].port);
-						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
+						this.ship.move(this.spots.start[enteringFrom].port, function()
+									{ this.spots.setActiveSpot(this.currentSpotNr); }, this);
 						this.top.taskLog.startLevel(this.currentLevel);
 					}
 				}
@@ -146,6 +146,9 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 								var leveldat = AzK.Data.Levels[this.currentLevel]
 									, spotEventDat = spot.event
 									;
+								
+								this.spots.setActiveSpot(spotNr);
+								
 								// rewrite spot event data, if there are tags to merge
 								if ('tags' in spot.event)
 								{

@@ -1,7 +1,9 @@
 
-namespace("PXTree.AchtzehnKnoten", function()
+namespace("PXTree.AchtzehnKnoten", function(AK)
 { "use strict";
-	var Config = PXTree.AchtzehnKnoten.Config;
+	var Config = AK.Config
+		, SpotConf = AK.Config.Spots
+		;
 	
 	function Spots (sea)
 	{
@@ -14,6 +16,8 @@ namespace("PXTree.AchtzehnKnoten", function()
 		this.end = {};
 		this._spotLayer = null;
 	};
+
+	AK.Spots = Spots;
 	
 	Spots.IslandPorts =
 			[ [-3, 24]
@@ -136,17 +140,22 @@ namespace("PXTree.AchtzehnKnoten", function()
 	
 	, loadLevel: function (leveldat, events)
 		{
+			var connect = null
+				;
 			this.spot = this.parseLevelData(leveldat).spots;
 			this.spot.forEach(function (spot)
 			{
+				spot.connectors = [];
 				if ('peripheral' in spot)
 				{
-					this.createConnector(spot.peripheral, spot);
+					connect = this.createConnector(spot, spot.peripheral);
+					if ('end' in spot)
+						spot.connectors.push(connect);
 				}
 				
 				spot.reachable.forEach(function (to)
 				{
-					this.createConnector(spot, to);
+					spot.connectors.push(this.createConnector(spot, to));
 				}, this);
 			}, this);
 			
@@ -206,6 +215,7 @@ namespace("PXTree.AchtzehnKnoten", function()
 			line.anchor.set(0, .5);
 			line.angle = Math.atan2(diff.y, diff.x) * 180 / Math.PI;
 			line.position.copyFrom(from.port);
+			line.alpha = SpotConf.NotActiveAlpha;
 			
 			this._spotLayer.add(line);
 			
@@ -334,8 +344,19 @@ namespace("PXTree.AchtzehnKnoten", function()
 		{
 			this._spotLayer.removeAll(true);
 		}
+
+	, setActiveSpot: function (spotNr)
+		{
+			this.spot.forEach(function(spot, nr)
+			{
+				var alpha = (spotNr === nr) ? SpotConf.ActiveAlpha : SpotConf.NotActiveAlpha
+					;
+				spot.connectors.forEach(function(connector)
+				{
+					connector.alpha = alpha;
+				});
+			});
+		}
 	
 	}; // Spots.prototype
-	
-	this.Spots = Spots;
 }); // namespace(PXTree.AchtzehnKnoten)
