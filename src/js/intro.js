@@ -27,7 +27,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.game.load.image('img1','assets/textures/intro-harbour.jpg');
 			this.game.load.image('img2','assets/textures/intro-harbour2.jpg');
 			this.game.load.image('img3','assets/textures/intro-ship.jpg');	
-			this.game.load.audio('audio-ambient-ship', 'assets/audio/323835_PiratesThemeEastWes.mp3');
+			this.game.load.audio('audio-ambient-ship', 'assets/audio/small/323835_PiratesThemeEastWes.mp3');
 		};
 		
 		def.create = function(){
@@ -84,24 +84,24 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		
 		def.update = function (){
 			i++;
-			if(i>60*5 && j==0){
+			if(i>60*10 && j==0){
 				j=1;
 				
 				img1.visible = false;
 				img2.visible = true;
-				img2.body.velocity.x=-20;
-				img2.body.velocity.y=-10;
+				img2.body.velocity.x=-25;
+				img2.body.velocity.y=-5;
 				
 
 				txtGrp.removeAll();
 			    text = this.game.add.text(150, 250, 'Ausgestattet mit dem schönsten Schiff deines Königreichs', textstyle);
 			    txtGrp.add(text);
-			    text = this.game.add.text(150, 290, 'machst du dich auf, um neue Welten und un-', textstyle);
+			    text = this.game.add.text(150, 290, 'machst du, Captain Cumberdale vom British Empire, dich auf, ', textstyle);
 			    txtGrp.add(text);
-			    text = this.game.add.text(150, 330, 'entdeckte Routen zu finden.', textstyle);
+			    text = this.game.add.text(150, 330, 'um neue Welten und unentdeckte Routen zu erobern.', textstyle);
 			    txtGrp.add(text);
 			}
-			if(i>60*10 && j==1){
+			if(i>60*20 && j==1){
 				j=2;
 				
 				img2.visible = false;
@@ -118,7 +118,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			    text = this.game.add.text(150, 370, 'Finde es heraus in der Welt von 18 Knoten!', textstyle);
 			    txtGrp.add(text);
 			}
-			if(i>60*20 && j==2) {
+			if(i>60*30 && j==2) {
 				txtGrp.removeAll();
 				this.game.sound.stopAll();
 				this.top.startState(AK.Play.key);
