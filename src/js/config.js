@@ -20,6 +20,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, ActiveAlpha: 1
 	}
 
+, Climate:
+	{ ZoneTags: [ "arid", "tropic" ]
+	, DefaultZone: "temperate"
+	}
+
 , Events:
 	{ Description:
 		{ TextStyle:

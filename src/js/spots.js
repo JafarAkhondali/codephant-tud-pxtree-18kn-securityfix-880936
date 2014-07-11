@@ -123,10 +123,18 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
 				.spritesheet('arrow', 'assets/icons/map-arrow.png', 32, 32)
 				.image('line', 'assets/textures/line-dot.png')
-				.image('island1', 'assets/islands/normal-1.png')
-				.image('island2', 'assets/islands/normal-2.png')
-				.image('island3', 'assets/islands/normal-3.png')
-				.image('island4', 'assets/islands/normal-4.png')
+				.image('island1-temperate', 'assets/islands/normal-1.png')
+				.image('island2-temperate', 'assets/islands/normal-2.png')
+				.image('island3-temperate', 'assets/islands/normal-3.png')
+				.image('island4-temperate', 'assets/islands/normal-4.png')
+				.image('island1-arid', 'assets/islands/desert-1.png')
+				.image('island2-arid', 'assets/islands/desert-2.png')
+				.image('island3-arid', 'assets/islands/desert-3.png')
+				.image('island4-arid', 'assets/islands/desert-4.png')
+				.image('island1-tropic', 'assets/islands/tropical-1.png')
+				.image('island2-tropic', 'assets/islands/tropical-2.png')
+				.image('island3-tropic', 'assets/islands/tropical-3.png')
+				.image('island4-tropic', 'assets/islands/tropical-4.png')
 				;
 		}
 	
@@ -249,7 +257,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 				addTex = grp.add(this.game.make.button(
 						port.x - type.portAt[0],
 						port.y - type.portAt[1],
-						type.key,
+						type.key + '-' + this.sea.climaticZone(),
 						clickHandler, this));
 				addTex.events.onInputOver.add(overHandler, this);
 				addTex.events.onInputOut.add(outHandler, this);
