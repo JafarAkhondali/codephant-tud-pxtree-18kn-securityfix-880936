@@ -364,12 +364,18 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		
 		, { x: 275, y: 275
 			, type: "water"
-			, reachable: [3]
+			, reachable: [3, 4]
 		}
 		
 		, { x: 360, y: 470
 			, type: 'water'
+			, reachable: [4]
 			, end: { dir: 'south', to: 13 }
+		}
+		
+		, { x: 460, y: 450
+			, type: 'water'
+			, end: { dir: 'east', to: 11 }
 		}
 		]
 	}
