@@ -295,6 +295,43 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			}
 		]
 	}
+	
+/*, { "name": "helena"
+	, "tags": ["unused"]
+	, "description": "Dein Schiff erreicht St. Helena. Du findest eine kürzlich gegründete britische Kolonie auf dieser Insel. Zwei deiner erkrankten Crewmitglieder bitten dich darum, ohne sie weiterzusegeln, damit sie hier ihre Krankheit auskurieren können."
+	, "choices": 
+		[ { "name": "helena_agree"
+			, "label": "Erfülle den Männern ihren Wunsch."
+			, "description": "Deine Männer sind dir dankbar, und der Rest deiner Crew rechnet dir dein verhalten hoch an."
+			, "outcome":
+				{ "player.morale": +4
+				, "player.crew": -2}
+			, "choices": 
+			[ {
+				"name": "helena_agree_aye"
+				, "label": "Aye!"
+				, "description": "Man berichtet dir, dass einige Kolonisten auf deinem Schiff anheuern wollen, und das zu einem guten Preis von 500 Gold."
+				, "choices": [ {
+					"name": "helena_agree_aye_buy"
+					"label": "Hol die Männer auf dein Schiff."
+					"description": 
+			}
+		, { "name": "azores_buy_crew"
+			, "label": "Versuche, Crew anzuheuern."
+			, "description": "Du heuerst einige Seemänner an. Deine Crew hält leider nicht all zu viel von den Fremden."
+			, "outcome":
+				{ "player.crewCount": +3
+				, "player.gold": -1500 
+				, "player.morale": -2}
+			}
+		, { "name": "azores_ignore"
+			, "label": "Reise weiter ohne zu handeln."
+			, "description": "Keines der Angebote sagt dir zu. Du gibst der Mannschaft den Abend frei und reist am nächsten Morgen weiter."
+			, "outcome":
+				{ "player.morale": +1}
+			}
+		]
+	}*/
 , { "name": "lanzarote"
 	, "tags": ["unused"]
 	, "description": "Du fährst einen Hafen auf Lanzarote an. Viele andere Entdecker nutzen diesen erst Anfang des 15. Jh. eröffneten Hafen, um Proviant und Vorräte aufzustocken."
