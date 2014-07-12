@@ -224,6 +224,48 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			{ "player.crewCount": [-2,-1] }
 		}
 	}
+
+, { "name": "crew_steal"
+	, "tags": ["water"]
+	, "description": "Deine Mannschaft ist in Aufruhr: Ein paar Crewmitglieder haben Essen aus den Vorräten für sich geklaut. Deine Crew will sie über Bord werfen, aber du weißt, dass du jeden Mann gebrauchen kannst. Wie willst du sie bestrafen?"
+	, "choices":
+			[ { "name": "crew_steal_kill"
+				, "label": "Werft sie über Bord!"
+				, "description": "Du lässt die Diebe über die Planke laufen. Deine Crew ist mit der in ihren Augen fairen Strafe zufrieden und sieht dich als durchsetzungsfähigen Kapitän."
+				, "outcome": 
+					{ "player.crewCount": [-2, -4]
+					, "player.morale": [+2, +4] }
+			}
+			, { "name": "crew_steal_whip"
+				, "label": "Peitscht sie aus!"
+				, "description": "Du lässt die Diebe auspeitschen und ihre Rationen für zwei Wochen halbieren. Deine Mannschaft ist mit der milden Strafe nicht zufrieden."
+				, "outcome": 
+					{ "player.morale": [-2, -4] }
+				}
+			]
+		
+	}
+	
+, { "name": "storm"
+	, "tags": ["water"]
+	, "description": "Ein Sturm zieht am Horizont auf. Du überdenkst deine Optionen: Du könntest versuchen den Sturm zu umschiffen, aber das wird dich Zeit und somit vor allem Nahrung kosten. Oder du gehst das Risiko ein, den Sturm zu durchfahren."
+	, "choices":
+			[ { "name": "storm_evade"
+				, "label": "Versuche, den Sturm zu umfahren."
+				, "description": "Die Umschiffung des Sturms verlief so erfolgreich wie ereignislos. Du schätzt, dass du ungefähr zwei bis drei Tage Miese gemacht hast und demnach einige Tagesrationen an Nahrung verloren hast."
+				, "outcome": 
+					{ "player.food": [-30, -45] }
+			}
+			, { "name": "storm_pullthrough"
+				, "label": "Kurs beibehalten."
+				, "description": "Nach einigen Kräftezehrenden Stunden hast du es geschafft: Der Sturm ist durchfahren. Sogar die Schäden an deinem Schiff halten sich in Grenzen. Leider ist einer deiner Männer und etwas Equipment durch einen großen Brecher über Bord gegangen."
+				, "outcome": 
+					{ "player.crewCount": -1
+					, "player.strength": [-2,-3] }
+				}
+			]
+		
+	}
 	
 , { "name": "azores"
 	, "tags": ["unused"]

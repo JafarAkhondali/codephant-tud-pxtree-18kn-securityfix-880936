@@ -5,7 +5,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 
 [//0
   { section: [7, 3]
-	 ,coast: 181
+	 , tags: ["atlantic"]
+	 , coast: 181
 	 , coastDistance: 0.1
 	 , spots:
 		[ { x: 484, y: 125
@@ -28,18 +29,17 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 180, y: 450
 			, end: { dir: 'south', to: 3 }
 			, type: 'water'
-			, event: { name: "ship_ahoy_pirate" }
 			}
 		
 		, { x: 100, y: 300
 			, end: { dir: 'west', to: 1 }
 			, type: 'water'
-			, event: { tags: ["open_sea", "atlantic"] }
 			}
 		]
 	}
 //1
 , { section: [6, 3]
+	, tags: ["atlantic"]
 	, spots:
 		[ { x: 510, y: 300
 			, reachable: [1]
@@ -55,7 +55,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			}
 
 		, { x: 300, y: 170
-			, reachable: [3, 4]
+			, reachable: [4, 5]
 			, type: 'water'
 			, event: { tags: ["open_sea", "atlantic"] }
 			}
@@ -70,6 +70,11 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 			, type: "water"
 			, end: { dir: 'west', to: 2 }
 			, event: { tags: ["open_sea", "atlantic"] }
+			}
+			
+			, { x: 200, y: 250
+			, type: "water"
+			, reachable: [3, 4]
 			}
 		]
 	}
