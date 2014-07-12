@@ -94,7 +94,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	AK.Tutorial.prototype.openTutorial = function openTutorial(page){
 		var pagetitle, text, title, pagenum;
 		txtGrp.removeAll();
-		(!page)? pagetitle='Willkommen bei 18 Knoten' : pagetitle = tut_data[page].title;
+		(!page)? pagetitle='Willkommen bei 18 Knoten!' : pagetitle = tut_data[page].title;
 		var headline = this.game.add.text(500, 100, pagetitle, textstyle);
 		headline.anchor.set(0.5);
 		txtGrp.add(headline);
