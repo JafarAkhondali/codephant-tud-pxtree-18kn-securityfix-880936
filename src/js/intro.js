@@ -64,9 +64,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			textstyle.shadowBlur = '2';
 		    
 		    txtGrp =this.game.add.group();
-		    text = this.game.add.text(150, 250, 'Willkommen in der Zeit der großen Entdecker!', textstyle);
+		    text = this.game.add.text(200, 250, 'Willkommen in der Zeit der großen Entdecker,', textstyle);
 		    txtGrp.add(text);
-		    text = this.game.add.text(150, 290, 'Eine Welt voller Gefahren, Schätze und Abenteuer!', textstyle);
+		    text = this.game.add.text(160, 290, 'einer Welt voller Gefahren, Schätzen und Abenteuer!', textstyle);
 		    txtGrp.add(text);
 		    
 		    textstyle2 = Object.create(textstyle);
@@ -94,11 +94,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				
 
 				txtGrp.removeAll();
-			    text = this.game.add.text(150, 250, 'Ausgestattet mit dem schönsten Schiff deines Königreichs', textstyle);
+			    text = this.game.add.text(160, 250, 'Ausgestattet mit dem tüchtigsten Schiff des Königreichs', textstyle);
 			    txtGrp.add(text);
-			    text = this.game.add.text(150, 290, 'machst du, Captain Cumberdale vom British Empire, dich auf, ', textstyle);
+			    text = this.game.add.text(133, 290, 'machst du, Captain Cumberdale vom British Empire, dich auf, ', textstyle);
 			    txtGrp.add(text);
-			    text = this.game.add.text(150, 330, 'um neue Welten und unentdeckte Routen zu erobern.', textstyle);
+			    text = this.game.add.text(115, 330, 'um unentdeckte Routen zu befahren und neue Welten zu erobern.', textstyle);
 			    txtGrp.add(text);
 			}
 			if(i>60*20 && j==1){
@@ -111,11 +111,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				
 				
 				txtGrp.removeAll();
-			    text = this.game.add.text(150, 250, 'Wie wird deine Reise enden: Voller Ruhm, Ehre und Gold?', textstyle);
+			    text = this.game.add.text(250, 210, 'Wirst du deiner Mannschaft durch deinen', textstyle);
+			    txtGrp.add(text);			    
+			    text = this.game.add.text(260, 250, 'Scharfsinn zu Ruhm und Ehre verhelfen?', textstyle);
 			    txtGrp.add(text);
-			    text = this.game.add.text(150, 290, 'Oder ist deine Mission zum Scheitern verurteilt?', textstyle);
+			    text = this.game.add.text(265, 290, 'Wirst du es schaffen, dein Wissen über', textstyle);
 			    txtGrp.add(text);
-			    text = this.game.add.text(150, 370, 'Finde es heraus in der Welt von 18 Knoten!', textstyle);
+			    text = this.game.add.text(275, 330, 'die Zeit der Entdecker zu vermehren?', textstyle);
+			    txtGrp.add(text);
+			    text = this.game.add.text(230, 410, 'Finde es heraus in der Welt von 18 Knoten!', textstyle);
 			    txtGrp.add(text);
 			}
 			if(i>60*30 && j==2) {
