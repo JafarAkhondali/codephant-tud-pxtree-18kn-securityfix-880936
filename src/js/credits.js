@@ -3,6 +3,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 {
 	var Config = AK.Config.Credits;
 	
+	var textstyle = Object.create(Config.TextStyle);
+	
 	function Credits (parentCtrl)
 	{
 		var self = Object.create(Credits.prototype);
@@ -59,8 +61,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		{
 			this.game.load
 				.image('credits-bg', 'assets/textures/mm-bg.png')
-				.image('wood', 'assets/textures/wood.jpg')
-				.image('18k-logo', 'assets/ui/ui-logo.png')
+				.image('wood', 'assets/ui/ui-bg.png')
+				.image('18k-logo', 'assets/textures/mm-logo.png')
+				.image('pt-logo', 'assets/textures/pixeltree.png')
 				;
 		};
 		
@@ -79,17 +82,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.game.add.sprite(0, 0, 'credits-bg');
 			
 			// Text background
-			this.game.add.tileSprite(
-					Config.TextArea.x, Config.TextArea.y,
-					Config.TextArea.width, Config.TextArea.height,
-					'wood');
+			this.game.add.sprite(430, 0, 'wood');
 			
-			//18-Knoten logo
+			
+			//pixeltree logo
 			temp = this.game.add.sprite(
 					Config.TextArea.x + Config.TextArea.width / 2,
 					Config.TextArea.Padding[1],
-					'18k-logo');
+					'pt-logo');
 			temp.anchor.set(.5, 0);
+			
 			
 			//text
 			tp = TextPlacer(this.game, this.game.world, Config.TextStyle,
@@ -100,10 +102,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					
 			tp.moveTo(
 					Config.TextArea.x + Config.TextArea.Padding[0],
-					Config.TextYOrigin);
+					200);
 			
 			// list of members
-			tp.place("PixelTree sind:").space();
+			//tp.place("PixelTree sind:").space();
 			
 			Credits.Data.members.forEach(function (member)
 			{
@@ -129,8 +131,15 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					.clear();
 			}, this);
 			
+			textstyle.font = "normal 14pt GameFont"
+		    textstyle.strokeThickness = 2;
+		    textstyle.stroke = '#bf9218';
+			textstyle.fill = '#e0ab1b';
+			textstyle.shadowColor = '#000000';
+			textstyle.shadowBlur = '2';
+			
 			//back button
-			temp = this.game.add.text(850, 550, 'zurück zum Menü', Config.TextStyle);
+			temp = this.game.add.text(880, 540, 'zurück zum Menü', textstyle);
 			temp.inputEnabled = true;
 			temp.input.useHandCursor = true;
 			temp.events.onInputUp.add(function()
