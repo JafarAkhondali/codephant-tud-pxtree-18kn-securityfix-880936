@@ -29,16 +29,16 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				this.preloadBar = this.add.sprite(500, 250, 'preloaderBar');
 				this.load.setPreloadSprite(this.preloadBar);
 				this.game.load
-				.audio('audio0', 'assets/audio/323835_PiratesThemeEastWes.mp3')
-				.audio('audio1','assets/audio/431140_PvPdownbeatV2.mp3')
-				.audio('audio2','assets/audio/521394_DT-Eastern-Sun.mp3')
-				.audio('audio3','assets/audio/529570_DT-Sunset.mp3')
-				.audio('audio4','assets/audio/529909_DT-After-the-Storm.mp3')
-				.audio('audio5','assets/audio/539679_DT-Shiver-Me-Timber.mp3')
-				.audio('audio6','assets/audio/539870_DT-Crimson-Tide.mp3')
-				.audio('audio7','assets/audio/541384_DT-Eastern-Sunrise.mp3')
-				.audio('audio8','assets/audio/560624_DT-Duel-on-the-Cari.mp3')
-				.audio('audio-ambient-ship', 'assets/audio/ship-at-sea.mp3');
+				.audio('audio0', 'assets/audio/small/323835_PiratesThemeEastWes.mp3')
+				.audio('audio1','assets/audio/small/431140_PvPdownbeatV2.mp3')
+				.audio('audio2','assets/audio/small/521394_DT-Eastern-Sun.mp3')
+				.audio('audio3','assets/audio/small/529570_DT-Sunset.mp3')
+				.audio('audio4','assets/audio/small/529909_DT-After-the-Storm.mp3')
+				.audio('audio5','assets/audio/small/539679_DT-Shiver-Me-Timber.mp3')
+				.audio('audio6','assets/audio/small/539870_DT-Crimson-Tide.mp3')
+				.audio('audio7','assets/audio/small/541384_DT-Eastern-Sunrise.mp3')
+				.audio('audio8','assets/audio/small/560624_DT-Duel-on-the-Cari.mp3')
+				.audio('audio-ambient-ship', 'assets/audio/small/ship-at-sea.mp3');
 					this.sea.preload();
 					this.desk.preload();
 					this.events.preload();
@@ -83,13 +83,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			, shutdown: function shutdown()
 				{
 					this.game.sound.stopAll();
+					this.top.taskLog.clearAll();
 				}
 			
 			, startEvent: function startEvent (opts)
 				{
 					this.events.startEvent(opts);
 				}
-			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(); }
+			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(0); }
 			, openTutorial: function openTutorial() {this.tutorial.openTutorial(0); }
 			, openWorldMap: function () { this.worldmap.show(); }
 			});

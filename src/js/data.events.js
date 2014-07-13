@@ -30,6 +30,31 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		}
 	}
 	
+, { "name": "drag-ship_parts"
+	, "tags": [ "water", "difficulty2" ]
+	, "type": "drag-to-order"
+	, "description": "Sortiere diese Begriffe in diese Reihenfolge: 'vorne' - 'links' - 'rechts' - 'hinten'"
+	, "itemType": "word"
+	, "items":
+		{ "back": "Heck"
+		, "right": "Steuerbord"
+		, "left": "Backbord"
+		, "front": "Bug"
+		}
+	, "order": ["front", "left", "right", "back"]
+	, "correct":
+		{ "type": "message"
+		, "description": "Das ist richtig!"
+		, "outcome": { "player.morale": [2,3]
+						, "player.strength": 2 }
+		}
+	, "wrong":
+		{ "type": "message"
+		, "description": "Das war falsch!"
+		, "outcome": { "player.morale": [-2,-3] }
+		}
+	}
+	
 , { "name": "ship_ahoy_pirate"
 	, "tags": ["water"]
 	, "description": "Dein Ausguck entdeckt ein Schiff am Horizont. Es scheint unter spanischer Flagge zu segeln. Wie möchtest du handeln?"
@@ -45,10 +70,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "description": "Als du dich dem Schiff näherst, hissen sie eine schwarze Flagge. Es sind portugiesische Freibeuter!"
 			, "choices":
 				[ { "name": "ship_ahoy_pirate_battle"
+					, "type": "message"
 					, "label": "Zum Kampf vorbereiten."
+					, "description": "Nach einem schweren Kampf, der einige Opfer gefordert hat, konntest du immerhin ein paar Vorräte deiner Gegner erbeuten."
 					, "outcome":
-						{ "player.food": [0,500]
-						, "player.crewCount": [-10,0]
+						{ "player.food": [0,100]
+						, "player.crewCount": [-5,0]
 						, "player.strength": -2
 						, "player.gold": [0,1000]
 						}
@@ -80,17 +107,17 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "description": "Es ist ein Handelsschiff. Der Kapitän begrüsst dich. Was möchtest du tun?"
 			, "choices":
 				[ { "name": "ship_ahoy_friendly_buy_1"
-					, "label": "Nahrung für 100 Gold kaufen."
+					, "label": "100 Nahrung für 1000 Gold kaufen."
 					, "outcome":
 						{ "player.food": +100
-						, "player.gold": -100
+						, "player.gold": -1000
 						}
 					}
 				, { "name": "ship_ahoy_friendly_buy_2"
-					, "label": "Nahrung für 200 Gold kaufen."
+					, "label": "200 Nahrung für 2000 Gold kaufen."
 					, "outcome":
 						{ "player.food": +200
-						, "player.gold": -200
+						, "player.gold": -2000
 						}
 					}
 				, { "name": "ship_ahoy_friendly_buy_2"
@@ -112,7 +139,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "label": "Der Kurs bleibt Sache des Kapitäns!."
 			, "description": "Die Crew wird ein wenig misstrauisch."
 			, "outcome":
-				{ "player.morale": -1 
+				{ "player.morale": -2
 				}
 			}
 		, { "name": "crew_latitude_try"
@@ -123,14 +150,14 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 					, "label": "Mit dem Kompass."
 					, "description": "Dein Crewmitglied schaut dich verwirrt an: 'Captain, ich dachte den Breitengrad bestimmt man dem Stand der Sonne oder der Sterne?'"
 					, "outcome":
-						{ "player.morale": -2
+						{ "player.morale": -5
 						}
 					}
 				, { "name": "crew_latitude_sun"
 					, "label": "Mit dem Stand der Sonne/Sterne."
 					, "description": "Du bestimmst den Breitengrad mit Hilfe der Sonne/Sterne. Deine Crew fühlt sich in ihr Vertrauen in deine navigatorischen Fähigkeiten bestätigt."
 					, "outcome":
-						{ "player.morale": 1
+						{ "player.morale": 2
 						}
 					}
 				]
@@ -170,14 +197,14 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 							, "description": "Nach einer kurzen Demonstration deiner Waffen ist der Stamm zu einem Handel bereit."
 							, "outcome":
 								{ "player.strength": -5
-								, "player.food": [30,45]
+								, "player.food": [45,90]
 								}
 							}
 						, { "name": "native_island_food"
 							, "label": "Frage nach Nahrung."
 							, "description": "Die Verständigung ist nicht leicht, aber du fragst den Stamm, wo es auf der Insel Nahrung zu finden gibt. Sie zeigen dir ihre Jagdgründe und du kannst ein paar Tiere erlegen."
 							, "outcome":
-								{ "player.food": [5,15]
+								{ "player.food": [30,60]
 								}
 							}
 						, { "name": "native_island_raid"
@@ -187,6 +214,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 								{ "player.crewCount": [-3,0]
 								, "player.morale": [-5,0]
 								, "player.food": [50,100]
+								, "player.gold": [100,300]
 								}
 						} ]
 					}
@@ -224,6 +252,48 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			{ "player.crewCount": [-2,-1] }
 		}
 	}
+
+, { "name": "crew_steal"
+	, "tags": ["water"]
+	, "description": "Deine Mannschaft ist in Aufruhr: Ein paar Crewmitglieder haben Essen aus den Vorräten für sich geklaut. Deine Crew will sie über Bord werfen, aber du weißt, dass du jeden Mann gebrauchen kannst. Wie willst du sie bestrafen?"
+	, "choices":
+			[ { "name": "crew_steal_kill"
+				, "label": "Werft sie über Bord!"
+				, "description": "Du lässt die Diebe über die Planke laufen. Deine Crew ist mit der in ihren Augen fairen Strafe zufrieden und sieht dich als durchsetzungsfähigen Kapitän."
+				, "outcome": 
+					{ "player.crewCount": [-2, -4]
+					, "player.morale": [+2, +4] }
+			}
+			, { "name": "crew_steal_whip"
+				, "label": "Peitscht sie aus!"
+				, "description": "Du lässt die Diebe auspeitschen und ihre Rationen für zwei Wochen halbieren. Deine Mannschaft ist mit der milden Strafe nicht zufrieden."
+				, "outcome": 
+					{ "player.morale": [-2, -4] }
+				}
+			]
+		
+	}
+	
+, { "name": "storm"
+	, "tags": ["water"]
+	, "description": "Ein Sturm zieht am Horizont auf. Du überdenkst deine Optionen: Du könntest versuchen den Sturm zu umschiffen, aber das wird dich Zeit und somit vor allem Nahrung kosten. Oder du gehst das Risiko ein, den Sturm zu durchfahren."
+	, "choices":
+			[ { "name": "storm_evade"
+				, "label": "Versuche, den Sturm zu umfahren."
+				, "description": "Die Umschiffung des Sturms verlief so erfolgreich wie ereignislos. Du schätzt, dass du ungefähr zwei bis drei Tage Miese gemacht hast und demnach einige Tagesrationen an Nahrung verloren hast."
+				, "outcome": 
+					{ "player.food": [-30, -45] }
+			}
+			, { "name": "storm_pullthrough"
+				, "label": "Kurs beibehalten."
+				, "description": "Nach einigen Kräftezehrenden Stunden hast du es geschafft: Der Sturm ist durchfahren. Sogar die Schäden an deinem Schiff halten sich in Grenzen. Leider ist einer deiner Männer und etwas Equipment durch einen großen Brecher über Bord gegangen."
+				, "outcome": 
+					{ "player.crewCount": -1
+					, "player.strength": [-2,-3] }
+				}
+			]
+		
+	}
 	
 , { "name": "azores"
 	, "tags": ["unused"]
@@ -250,6 +320,46 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "description": "Keines der Angebote sagt dir zu. Du gibst der Mannschaft den Abend frei und reist am nächsten Morgen weiter."
 			, "outcome":
 				{ "player.morale": +1}
+			}
+		]
+	}
+	
+, { "name": "helena"
+	, "tags": ["unused"]
+	, "description": "Dein Schiff erreicht St. Helena. Du findest eine kürzlich gegründete britische Kolonie auf dieser Insel. Zwei deiner erkrankten Crewmitglieder bitten dich darum, ohne sie weiterzusegeln, damit sie hier ihre Krankheit auskurieren können."
+	, "choices": 
+		[ { "name": "helena_agree"
+			, "label": "Erfülle den Männern ihren Wunsch."
+			, "description": "Deine Männer sind dir dankbar, und der Rest deiner Crew rechnet dir dein verhalten hoch an."
+			, "outcome":
+				{ "player.morale": 4
+				, "player.crewCount": -2}
+			, "choices": 
+			[ {
+				"name": "helena_agree_aye"
+				, "label": "Aye!"
+				, "description": "Man berichtet dir, dass einige Kolonisten auf deinem Schiff anheuern wollen, und das zu einem guten Preis von 500 Gold."
+				, "choices": [ {
+								"name": "helena_agree_aye_buy"
+								, "label": "Hol die Männer auf dein Schiff."
+								, "description": "Die neuen Männer sind dankbar, endlich von dieser 'gottverlassenen Insel' runtergekommen zu sein."
+								, "outcome": 
+									{ "player.crewCount": [2,3] 
+									, "player.gold": -500 }
+								}
+								, { 
+								"name": "helena_agree_aye_dont"
+								, "label": "Nicht anheuern."
+								, "description": "Du behälst lieber dein Gold. Du wirst es bestimmt auch ohne die weiteren Männer schaffen."
+								} ] 
+				} ]
+			} 
+		
+		, { "name": "helena_not"
+			, "label": "Verweigere ihr anliegen."
+			, "description": "Du behälst die Männer auf deinem Schiff, und tatsächlich scheint es ihnen langsam besser zu gehen. Trotzdem litt die Moral deiner Mannschaft unter deiner harten Entscheidung."
+			, "outcome":
+				{ "player.morale": [-1, -3] }
 			}
 		]
 	}
@@ -575,7 +685,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "geo_quiz_11_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty1"]
-	, "description": "In welchem Ozean liegen die Kanarischen Inseln"
+	, "description": "In welchem Ozean liegen die Kanarischen Inseln?"
 	, "choices": [
 		{ "name": "geo_quiz_11_a1"
         , "type": "message"

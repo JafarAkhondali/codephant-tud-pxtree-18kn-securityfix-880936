@@ -98,7 +98,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		shipgrp.create(0, 0, 'ship-avatar-bg');
 		
 		if (this.captain === null){
-			this.captain = shipgrp.create(70,180,'small-captain-'+this.stats.get('player.nationality'));
+			this.captain = shipgrp.create(70,185,'small-captain-'+this.stats.get('player.nationality'));
 			this.captain.animations.add('idle_breath',[14,15,16,17,18,19],4,false);
 			this.captain.animations.add('idle_telescope',[0,1,2,3,4,5,6,7,8,9,10,11,12,13],4,false);
 			this.captain.animations.play('idle_breath');
@@ -108,7 +108,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		if (this.sailors === null) {		
 			this.sailors = this.game.make.group();
 			shipgrp.add(this.sailors);
-			this.sailors.position.set(120,200);
+			this.sailors.position.set(120,205);
 			
 			//Sailor Handler
 			this.top.stats.registerValueChangedHandler('player.crewCount', this.updateSailors, this);
@@ -118,7 +118,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		if (this.strength === null) {		
 			this.strength = this.game.make.group();
 			shipgrp.add(this.strength);
-			this.strength.position.set(120,200);
+			this.strength.position.set(120,205);
 			
 			//Sailor Handler
 			this.top.stats.registerValueChangedHandler('player.strength', this.updateStrength, this);

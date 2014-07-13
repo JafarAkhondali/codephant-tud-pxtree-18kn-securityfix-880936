@@ -27,11 +27,13 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 	{ preload: function ()
 		{
 			this.game.load
-			.image('endscreen-logo', 'assets/textures/mm-logo.png')
+			//.image('endscreen-logo', 'assets/textures/mm-logo.png')
 			.image('endscreen-fail-bg', 'assets/textures/endscreen-fail-bg.png')
 			.image('endscreen-success-bg', 'assets/textures/endscreen-success-bg.png')
 			.image('endscreen-fail-btn', 'assets/ui/ui-board-broken.png')
-			.image('endscreen-success-btn', 'assets/ui/ui-board-decorated.png') 
+			.image('endscreen-success-btn', 'assets/ui/ui-board-decorated.png')
+			.audio('audio_fail','assets/audio/small/529570_DT-Sunset.mp3')
+			.audio('audio_win','assets/audio/small/323835_PiratesThemeEastWes.mp3')
 			;
 		}
 
@@ -53,10 +55,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				;
 			this.game.add.sprite(0, 0,
 					'endscreen-' + (this.failed ? 'fail' : 'success') + '-bg');
-			this.game.add.sprite(0, 0, 'endscreen-logo')
-					.position.copyFrom(Config.LogoPosition);
+			//this.game.add.sprite(0, 0, 'endscreen-logo')
+			//		.position.copyFrom(Config.LogoPosition);
 			on(tbf.create(Config.Button.Text, function()
 			{
+				this.game.sound.stopAll();
 				this.top.startState(AK.MainMenu.key);
 			}, this), function()
 			{
@@ -87,6 +90,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 			this.game.add.text(0, 0, Config.Suggestion.Text, Config.Suggestion.Style)
 				.position.copyFrom(Config.Suggestion.Position);
+				
+			//Play Endscreen Music
+			if (this.failed) {
+				var music = this.game.sound.play('audio_fail', 0.5, true);
+			} else if (!this.failed){
+				var music = this.game.sound.play('audio_win', 0.5, true);
+			}
+				
 		}
 	}); // Endscreen.prototype
 });

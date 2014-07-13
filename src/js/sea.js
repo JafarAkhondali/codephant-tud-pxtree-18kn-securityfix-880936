@@ -3,6 +3,7 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 { "use strict";
 
 	var Config = AzK.Config
+		, Climate = AzK.Config.Climate
 		, __dirToAngle =
 				{ "west": 0
 				, "north-west": 45
@@ -44,7 +45,9 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 				{
 					this.game.load
 						.image('water', 'assets/textures/water.png')
-						.image('coast-normal', 'assets/islands/normal-coast.png')
+						.image('coast-temperate', 'assets/islands/normal-coast.png')
+						.image('coast-arid', 'assets/islands/desert-coast.png')
+						.image('coast-tropic', 'assets/islands/tropical-coast.png')
 						;
 					this.spots.preload();
 					this.ship.preload();
@@ -71,34 +74,41 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 					}
 					else
 					{
+						var leveldat = AzK.Data.Levels[levelnr];
+						if (!leveldat)
+						{
+							alert('Das Level existiert leider nicht. Versuche einen anderen Weg nach dem Fortsetzen.');
+							this.top.startState(AzK.MainMenu.key);
+						}
+						
 						//propagate data
+						this.currentLevel = levelnr;
 						this.top.currentLevel = levelnr;
 						this.top.enteringFrom = enteringFrom;
+
 
 						//store progresss
 						this.top.storeSaveData();
 
 						// real loading
-						var leveldat = AzK.Data.Levels[levelnr];
 
 						//coast
 						if ('coast' in leveldat)
 						{
-							this._coastSprite = this.game.make.sprite(288, 288, 'coast-normal');
+							this._coastSprite = this.game.make.sprite(288, 288, 'coast-' + this.climaticZone());
 							this._coastSprite.anchor.set(1.6 + (leveldat.coastDistance || 0), .5);
 							this._coastSprite.angle = Sea.toRealAngle(leveldat.coast);
 							this._bgGroup.add(this._coastSprite);
 						}
 						
 						this.spots.loadLevel(leveldat, this.events);
-						this.currentLevel = levelnr;
+						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
 						this.ship.move(
 								this.spots.start[enteringFrom].peripheral.port,
 								true);
-						this.ship.move(
-								this.spots.start[enteringFrom].port);
-						this.currentSpotNr = this.spots.spot.indexOf(this.spots.start[enteringFrom]);
-						this.top.taskLog.startLevel();
+						this.ship.move(this.spots.start[enteringFrom].port, function()
+									{ this.spots.setActiveSpot(this.currentSpotNr); }, this);
+						this.top.taskLog.startLevel(this.currentLevel);
 					}
 				}
 			
@@ -146,6 +156,9 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 								var leveldat = AzK.Data.Levels[this.currentLevel]
 									, spotEventDat = spot.event
 									;
+								
+								this.spots.setActiveSpot(spotNr);
+								
 								// rewrite spot event data, if there are tags to merge
 								if ('tags' in spot.event)
 								{
@@ -154,6 +167,11 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 									if ('tags' in leveldat)
 										spotEventDat.tags.push.apply(spotEventDat.tags, leveldat.tags);
 								}
+								else
+								{
+									spotEventDat.tags = [spot.type.name];
+								}
+console.dir(spotEventDat);
 								
 								this.parent.startEvent(spotEventDat);
 							}, this);
@@ -177,6 +195,25 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 									* Config.LevelDifficulty.Factor) + Config.LevelDifficulty.Offset,
 									Config.LevelDifficulty.Maximum
 								)];
+				}
+
+			, climaticZone: function ()
+				{
+					var lvltags = AK.Data.Levels[this.currentLevel].tags || []
+						, zone = null
+						, Zones = Climate.ZoneTags
+						, i = 0, tag = null
+						;
+					while (!zone && i < lvltags.length)
+					{
+						tag = lvltags[i];
+						if (Zones.indexOf(tag) >= 0)
+						{
+							zone = tag;
+						}
+						i += 1;
+					}
+					return zone || Climate.DefaultZone;
 				}
 			};
 });

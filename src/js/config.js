@@ -10,9 +10,19 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	}
 
 , LevelDifficulty:
-	{ Factor: 0.25
+	{ Factor: 0.34
 	, Offset: 1
 	, Maximum: 4
+	}
+
+, Spots:
+	{ NotActiveAlpha: 0.5
+	, ActiveAlpha: 1
+	}
+
+, Climate:
+	{ ZoneTags: [ "arid", "tropic" ]
+	, DefaultZone: "temperate"
 	}
 
 , Events:
@@ -81,6 +91,14 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, fill: "#ff3355"
 			, stroke: "#ff3355"
 			}
+		}
+	, Picture:
+		{ Offset: { x: 22, y: 22 }
+		}
+	, Pictures:
+		{ "island": ["eventpic-island-day", "eventpic-island-sunset"]
+		, "ship": ["eventpic-ship-day", "eventpic-ship-sunset"]
+		, "sea": ["eventpic-sea-day", "eventpic-sea-sunset"]
 		}
 	}
 
@@ -155,6 +173,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 , WorldMap:
 	{ Offset: { x: 50, y: 0 }
 	, CloseButton: { at: { x: 40, y: 550 } }
+	, Section:
+		{ Base: { x: 32, y: 32 }
+		, Factor: { x: 60, y: 60 }
+		}
+	, DrawingCrosses: false
 	}
 
 , Endscreen:
@@ -162,11 +185,11 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		{ Text: "Deine Reise ist"
 		, Style:
 			{ font: "normal 24pt GameFont"
-			, fill: "white"
-			, stroke: "#111111"
+			, fill: '#e0ab1b'
+			, stroke: '#bf9218'
 			, strokeThickness: 2
 			}
-		, Position: { x: 430, y: 110 }
+		, Position: { x: 200, y: 100 }
 		}
 	, LogoPosition:
 		{ x: 40, y: 20 }
@@ -176,27 +199,26 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		}
 	, Description:
 		{ Style:
-			{ font: "normal 18pt GameFont"
-			, fill: "white"
-			, align: "center"
-			, stroke: "#333333"
-			, strokeThickness: 2
+			{ font: "normal 16pt GameFont"
+			, fill: '#e0ab1b'
+			, stroke: '#bf9218'
+			, strokeThickness: 0
 			, wordWrap: true
 			, wordWrapWidth: 800
 			}
-		, Position: { x: 200, y: 180 }
+		, Position: { x: 200, y: 140 }
 		}
 	, Suggestion:
 		{ Style:
-			{ font: "normal 18pt GameFont"
-			, fill: "white"
-			, align: "center"
-			, stroke: "#555555"
-			, strokeThickness: 2
+			{ font: "normal 14pt GameFont"
+			, fill: 'white'
+			, shadowColor: '#000000'
+			, shadowBlur: 4
 			, wordWrap: true
-			, wordWrapWidth: 670
+			, align: 'right'
+			, wordWrapWidth: 500
 			}
-		, Position: { x: 320, y: 390 }
+		, Position: { x: 220, y: 492 }
 		, Text: "Du kannst jetzt vom Hauptmenü aus entweder ein neues Spiel beginnen oder aber dein altes Spiel vom letzten Level aus fortsetzen. Es gibt sicherlich noch einiges zu entdecken!"
 		}
 
@@ -205,16 +227,20 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			{ Text: " gescheitert!"
 			, Style:
 				{ font: "bold 36pt GameFont"
-				, fill: "crimson"
+				, fill: '#e0ab1b'
+				, stroke: '#bf9218'
+				, strokeThickness: 1
 				}
 			}
 		, Button:
 			{ TextStyle:
 				{ font: "normal 18pt GameFont"
-				, fill: "#333333"
+				, fill: 'white'
+				, shadowColor: '#000000'
+				, shadowBlur: 4
 				}
 			, HoverTextStyle:
-				{ fill: "darkred"
+				{ fill: "gold"
 				}
 			}
 		, Descriptions:
@@ -230,13 +256,17 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			{ Text: " erfolgreich!"
 			, Style:
 				{ font: "bold 36pt GameFont"
-				, fill: "yellowgreen"
+				, fill: '#e0ab1b'
+				, stroke: '#bf9218'
+				, strokeThickness: 1
 				}
 			}
 		, Button:
 			{ TextStyle:
 				{ font: "normal 18pt GameFont"
 				, fill: "white"
+				, shadowColor: '#000000'
+				, shadowBlur: 4
 				}
 			, HoverTextStyle:
 				{ fill: "gold"

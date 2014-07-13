@@ -1,7 +1,9 @@
 
-namespace("PXTree.AchtzehnKnoten", function()
+namespace("PXTree.AchtzehnKnoten", function(AK)
 { "use strict";
-	var Config = PXTree.AchtzehnKnoten.Config;
+	var Config = AK.Config
+		, SpotConf = AK.Config.Spots
+		;
 	
 	function Spots (sea)
 	{
@@ -14,6 +16,8 @@ namespace("PXTree.AchtzehnKnoten", function()
 		this.end = {};
 		this._spotLayer = null;
 	};
+
+	AK.Spots = Spots;
 	
 	Spots.IslandPorts =
 			[ [-3, 24]
@@ -119,10 +123,18 @@ namespace("PXTree.AchtzehnKnoten", function()
 				.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
 				.spritesheet('arrow', 'assets/icons/map-arrow.png', 32, 32)
 				.image('line', 'assets/textures/line-dot.png')
-				.image('island1', 'assets/islands/normal-1.png')
-				.image('island2', 'assets/islands/normal-2.png')
-				.image('island3', 'assets/islands/normal-3.png')
-				.image('island4', 'assets/islands/normal-4.png')
+				.image('island1-temperate', 'assets/islands/normal-1.png')
+				.image('island2-temperate', 'assets/islands/normal-2.png')
+				.image('island3-temperate', 'assets/islands/normal-3.png')
+				.image('island4-temperate', 'assets/islands/normal-4.png')
+				.image('island1-arid', 'assets/islands/desert-1.png')
+				.image('island2-arid', 'assets/islands/desert-2.png')
+				.image('island3-arid', 'assets/islands/desert-3.png')
+				.image('island4-arid', 'assets/islands/desert-4.png')
+				.image('island1-tropic', 'assets/islands/tropical-1.png')
+				.image('island2-tropic', 'assets/islands/tropical-2.png')
+				.image('island3-tropic', 'assets/islands/tropical-3.png')
+				.image('island4-tropic', 'assets/islands/tropical-4.png')
 				;
 		}
 	
@@ -136,17 +148,22 @@ namespace("PXTree.AchtzehnKnoten", function()
 	
 	, loadLevel: function (leveldat, events)
 		{
+			var connect = null
+				;
 			this.spot = this.parseLevelData(leveldat).spots;
 			this.spot.forEach(function (spot)
 			{
+				spot.connectors = [];
 				if ('peripheral' in spot)
 				{
-					this.createConnector(spot.peripheral, spot);
+					connect = this.createConnector(spot, spot.peripheral);
+					if ('end' in spot)
+						spot.connectors.push(connect);
 				}
 				
 				spot.reachable.forEach(function (to)
 				{
-					this.createConnector(spot, to);
+					spot.connectors.push(this.createConnector(spot, to));
 				}, this);
 			}, this);
 			
@@ -206,6 +223,7 @@ namespace("PXTree.AchtzehnKnoten", function()
 			line.anchor.set(0, .5);
 			line.angle = Math.atan2(diff.y, diff.x) * 180 / Math.PI;
 			line.position.copyFrom(from.port);
+			line.alpha = SpotConf.NotActiveAlpha;
 			
 			this._spotLayer.add(line);
 			
@@ -239,7 +257,7 @@ namespace("PXTree.AchtzehnKnoten", function()
 				addTex = grp.add(this.game.make.button(
 						port.x - type.portAt[0],
 						port.y - type.portAt[1],
-						type.key,
+						type.key + '-' + this.sea.climaticZone(),
 						clickHandler, this));
 				addTex.events.onInputOver.add(overHandler, this);
 				addTex.events.onInputOut.add(outHandler, this);
@@ -334,8 +352,19 @@ namespace("PXTree.AchtzehnKnoten", function()
 		{
 			this._spotLayer.removeAll(true);
 		}
+
+	, setActiveSpot: function (spotNr)
+		{
+			this.spot.forEach(function(spot, nr)
+			{
+				var alpha = (spotNr === nr) ? SpotConf.ActiveAlpha : SpotConf.NotActiveAlpha
+					;
+				spot.connectors.forEach(function(connector)
+				{
+					connector.alpha = alpha;
+				});
+			});
+		}
 	
 	}; // Spots.prototype
-	
-	this.Spots = Spots;
 }); // namespace(PXTree.AchtzehnKnoten)

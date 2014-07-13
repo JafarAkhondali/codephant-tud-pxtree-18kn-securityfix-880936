@@ -68,19 +68,23 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			return serializable;
 		}
 
-	, startLevel: function ()
+	, startLevel: function (num)
 		{
 			if (this._currentLevel !== null)
 				throw TaskLog.AlreadyStartedError("Level");
-			this._currentLevel = new Array(2);
-			this._currentLevel[0] = this._completedEvents.length;
+			this._currentLevel =
+					{ fromIndex: null
+					, toIndex: null
+					, number: num
+					};
+			this._currentLevel.fromIndex = this._completedEvents.length;
 		}
 
 	, completeLevel: function ()
 		{
 			if (this._currentLevel === null)
 				throw TaskLog.NotStartedError("Level");
-			this._currentLevel[1] = this._completedEvents.length - 1;
+			this._currentLevel.toIndex = this._completedEvents.length - 1;
 			this._completedLevelMap.push(this._currentLevel);
 			this._currentLevel = null;
 		}
@@ -198,6 +202,18 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 	, countCompletedLevels: function ()
 		{
 			return this._completedLevelMap.length;
+		}
+
+	, completedLevels: function ()
+		{
+			return this._completedLevelMap.map(function(l){ return l.number; });
+		}
+
+	, clearAll: function ()
+		{
+			this._currentLevel = null;
+			this._currentEvent = null;
+			this._currentTask = null;
 		}
 
 	, _addToNameCache: function (eventName)
