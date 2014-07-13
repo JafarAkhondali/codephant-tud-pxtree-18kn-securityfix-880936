@@ -76,8 +76,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 							ps.push.apply(ps, Config.Pictures[t] || []);
 							return ps;
 						}, [])
+				, pic = pictures[Math.floor(Math.random() * pictures.length)]
 				;
-			return pictures[Math.floor(Math.random() * pictures.length)];
+			return pic;
 		};
 	});
 	
@@ -155,7 +156,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this._afterEvent.forget();
 			this.top.taskLog.startEvent(evt);
 			this.currentEvent = this.currentTask = evt;
-			this._selectPicture(evt);
+			this._selectPicture(opts.tags);
 			this
 				._makeDialogFromTask(evt)
 				.show();
@@ -448,6 +449,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		def._selectPicture = function (tagsOrKey)
 		{
 			var picKey = null
+				, tags
 				;
 			if (typeof(tagsOrKey) === 'string')
 			{
@@ -455,7 +457,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			}
 			else
 			{
-				picKey = AK.Events.randomPictureKey(tagsOrKey);
+				if (tagsOrKey.indexOf('water') >= 0)
+					tags = ['sea', 'ship']
+				else if (tagsOrKey.indexOf('island') >= 0)
+					tags = ['island']
+				else throw Error('Cannot select event picture: no known tags.')
+				picKey = AK.Events.randomPictureKey(tags);
 			}
 
 			this.currentPictureKey = picKey;
