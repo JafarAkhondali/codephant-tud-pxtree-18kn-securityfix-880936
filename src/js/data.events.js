@@ -245,11 +245,11 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	}
 	
 , { "name": "scurvy"
-	, "tags": ["water"]
-	, "description": "Skorbut fordert neue Opfer!"
+	, "tags": ["water", "difficulty2"]
+	, "description": "Skorbut hat ein Mitglied deiner Crew dahingerafft!"
 	, "ok":
 		{ "outcome":
-			{ "player.crewCount": [-2,-1] }
+			{ "player.crewCount": -1 }
 		}
 	}
 
