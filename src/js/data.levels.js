@@ -241,6 +241,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 260, y: 190
 			, type: "water"
 			, reachable: [2, 3]
+			, end: { dir: 'west', found: 'florida' }
 		}
 		
 		, { x: 110, y: 330
