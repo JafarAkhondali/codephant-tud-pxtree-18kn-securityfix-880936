@@ -455,7 +455,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		}
 		,{ "name": "geo_quiz_03_a2"
         , "type": "message"
-		, "label": "Während des Fürhjahres"
+		, "label": "Während des Frühjahres"
 		, "description": "Das ist leider die falsche Antwort."
 		, "outcome": {"player.morale": -2}
 		}
@@ -492,7 +492,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "geo_quiz_04_a3"
         , "type": "message"
 		, "label": "90,0°S"
-		, "description": " Das ist der geographische Südpol und nicht der südliche Polarkreis. Deine Crew hat leichte Zweifel an deinen Fähigkeiten"
+		, "description": " Das ist der geographische Südpol und nicht der südliche Polarkreis. Deine Crew hat leichte Zweifel an deinen Fähigkeiten."
 		, "outcome": {"player.morale": -2}
 		}
 		,{ "name": "geo_quiz_04_a4"
@@ -516,13 +516,13 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "geo_quiz_05_a2"
         , "type": "message"
 		, "label": "Der Golfstrom"
-		, "description": "Der Golfstrom wird im Nordatlantik zum Nordatlantikstrom und hält die Seehäfen eisfrei"
+		, "description": "Der Golfstrom wird im Nordatlantik zum Nordatlantikstrom und hält die Seehäfen eisfrei."
 		, "outcome": {"player.morale": 1}
 		}
 		,{ "name": "geo_quiz_05_a3"
         , "type": "message"
 		, "label": "Der Kanarenstrom"
-		, "description": "Der Kanarenstrom ist eine kalte Meereströmung. Das kostet dich etwas Gold und Nahrung"
+		, "description": "Der Kanarenstrom ist eine kalte Meereströmung."
 		, "outcome": {"player.morale": -2}
 		}
 		,{ "name": "geo_quiz_05_a4"
@@ -540,7 +540,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		{ "name": "geo_quiz_06_a1"
         , "type": "message"
 		, "label": "In der Antarktis"
-		, "description": " So gut, wie der gesamte Kontinent ist vergletschert und speichert die größten Süßwasservorräte"
+		, "description": " So gut, wie der gesamte Kontinent ist vergletschert und speichert die größten Süßwasservorräte."
 		, "outcome": {"player.morale": 1}
 		}
 		,{ "name": "geo_quiz_06_a2"
@@ -570,13 +570,13 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		{ "name": "geo_quiz_07_a1"
         , "type": "message"
 		, "label": "Das Kattegat liegt zwischen Dänemark und Schweden."
-		, "description": "Richtige Antwort. Das Kattegat ist ein in etwa 80 Meter tiefes und relativ schwer schiffbares Meeresgebiet zwischen Dänemark und Schweden"
+		, "description": "Richtige Antwort! Das Kattegat ist ein in etwa 80 Meter tiefes und relativ schwer schiffbares Meeresgebiet zwischen Dänemark und Schweden."
 		, "outcome": {"player.morale": 5}
 		}
 		,{ "name": "geo_quiz_07_a2"
         , "type": "message"
 		, "label": "Das Kattegat liegt zwischen Schweden, Dänemark und Norwegen."
-		, "description": " Das Kattegat grenzt nicht an Norwegen. Die Mannschaft verwechselt selber manchmal Kattegat und Skagerrak und verliert deshalb kein Vertrauen"
+		, "description": " Das Kattegat grenzt nicht an Norwegen. Die Mannschaft verwechselt selber manchmal Kattegat und Skagerrak und verliert deshalb kein Vertrauen."
 		, "outcome": {"player. morale": 0}
 		}
 		,{ "name": "geo_quiz_07_a3"
@@ -678,7 +678,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "geo_quiz_10_a4"
         , "type": "message"
 		, "label": "Die südlichste Landspitze von Grönland."
-		, "description": " Die südlichste Landspitze von Grönland ist das kao Farvel."
+		, "description": " Die südlichste Landspitze von Grönland ist das Kap Farvel."
 		, "outcome": {"player.morale": -2}
 		}
 	]
@@ -708,7 +708,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "geo_quiz_11_a4"
         , "type": "message"
 		, "label": "Im Antarktischen Ozean."
-		, "description": " Wenn deine seemännischen Kenntnisse ähnlich gut sind, dann wirst du im Antarktischen Ozean vermutlich kentern."
+		, "description": " Wenn deine seemännischen Kenntnisse ähnlich gut sind, dann wirst du vermutlich im Antarktischen Ozean kentern."
 		, "outcome": {"player.morale": -2}
 		}
 	]
@@ -732,13 +732,13 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "geo_quiz_12_a3"
         , "type": "message"
 		, "label": "Man spricht von dem Nord- und Süd Passat"
-		, "description": " So wirst du nicht schnell an dein Ziel kommen. "
+		, "description": " So wirst du nicht schnell an dein Ziel kommen."
 		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_12_a4"
         , "type": "message"
 		, "label": "Man spricht von dem West- und Ost Passat"
-		, "description": " So wirst du nicht schnell an dein Ziel kommen. "
+		, "description": " So wirst du nicht schnell an dein Ziel kommen."
 		, "outcome": {"player.morale": -5}
 		}
 	]
@@ -816,19 +816,19 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "geo_quiz_15_a2"
         , "type": "message"
 		, "label": "Im Atlatischen Ozean"
-		, "description": "Das kostet dich einiges an Gold und Nahrung."
+		, "description": "Die Moral der Crew schwindet."
 		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_15_a3"
         , "type": "message"
 		, "label": "Im Indischen Ozean"
-		, "description": "Das kostet dich einiges an Gold und Nahrung."
+		, "description": "Die Moral der Crew schwindet."
 		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_15_a4"
         , "type": "message"
 		, "label": "Im Arktischen Ozean"
-		, "description": "Das kostet dich einiges an Gold und Nahrung."
+		, "description": "Die Moral der Crew schwindet."
 		, "outcome": {"player.morale": -5}
 		}
 	]
@@ -870,7 +870,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		{ "name": "geo_quiz_17_a1"
         , "type": "message"
 		, "label": "Eine Inselgruppe mit dem dazwischen liegende Gewässer"
-		, "description": "Dein erster Offizier, sieht dass du auch Wissen über die Meere hast"
+		, "description": "Dein erster Offizier, sieht dass du Wissen über die Meere hast"
 		, "outcome": {"player.morale": 10}
 		}
 		,{ "name": "geo_quiz_17_a2"
@@ -895,7 +895,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "geo_quiz_18_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty3"]
-	, "description": "Du bist mit deinem Schiff auf hoher See und die Sonne brennt. Einer deiner Matrosen fragt, wo die Sonne Zenit steht?"
+	, "description": "Du bist mit deinem Schiff auf hoher See und die Sonne brennt. Einer deiner Matrosen fragt, wo die Sonne im Zenit steht?"
 	, "choices": [
 		{ "name": "geo_quiz_18_a1"
         , "type": "message"
@@ -925,11 +925,11 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "geo_quiz_19_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty2"]
-	, "description": "Du bist in der Karibik und musst eine der Inseln der kleinen Antillen anlaufen. Welche INsel kannst du ansteuern?"
+	, "description": "Du bist in der Karibik und musst eine der Inseln der Kleinen Antillen anlaufen. Welche Insel kannst du ansteuern?"
 	, "choices": [
 		{ "name": "geo_quiz_19_a1"
         , "type": "message"
-		, "label": "Trinidad und Tobago"
+		, "label": "Trinidad"
 		, "description": "Es scheint so, als würdest du dich in der Karibik auskennnen!"
 		, "outcome": {"player.morale":2}
 		}
@@ -955,7 +955,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "geo_quiz_20_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty2"]
-	, "description": "Dein Schiff soll Neufundland anlaufen. Dein Mannschaft möchte wissen, wo es liegt."
+	, "description": "Dein Schiff soll Neufundland anlaufen. Deine Mannschaft möchte wissen, wo es liegt?"
 	, "choices": [
 		{ "name": "geo_quiz_20_a1"
         , "type": "message"
@@ -1016,7 +1016,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_03_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty1"]
-	, "description": "Ein paar Matrosen sitzen zusammen und reden über die antike Seefahrt. Sie sprechen über ungewöhnliche Ladungen. Obelisken in Ägypten und Brückenteile in Persien. Einer fragt, welche Tiere der Feldherr Hannibal Barkas von Afrika nach Europa verschifft hat während des Krieges gegen Rom?"
+	, "description": "Ein paar Matrosen reden über die Seefahrt im Altertum und ungewöhnliche Ladungen. Einer fragt, welche Tiere der Feldherr Hannibal Barkas von Afrika nach Europa verschifft hat während des Krieges gegen Rom?"
 	, "choices": [
 		{ "name": "hist_quiz_03_a1"
         , "type": "message"
@@ -1046,7 +1046,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_04_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty1"]
-	, "description": "Einer deiner Offiziere hat eine alte Karte der Römer in einem Buch entdeckt und zeigt einige Binnenhäfen im alten Gemanien. Eine Stadt heißt Colonia Claudia Ara Agrippinensium. Wie heißt diese heutzutage?"
+	, "description": "Einer deiner Offiziere hat eine alte Karte der Römer in einem Buch entdeckt und zeigt einige Binnenhäfen im alten Germanien. Eine Stadt heißt Colonia Claudia Ara Agrippinensium. Wie heißt diese heutzutage?"
 	, "choices": [
 		{ "name": "hist_quiz_04_a1"
         , "type": "message"
@@ -1076,7 +1076,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_05_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty1"]
-	, "description": "Deine Offiziere sprechen über die Seefahrt im frühen Mittelalter. Sie fragen sich wie man die kriegerischen Stämme nennt, welche im Norden von Europa siedelten."
+	, "description": "Deine Offiziere sprechen über die Seefahrt im frühen Mittelalter. Sie fragen sich wie man die kriegerischen Stämme nennt, welche im Norden von Europa siedelten?"
 	, "choices": [
 		{ "name": "hist_quiz_05_a1"
         , "type": "message"
@@ -1106,12 +1106,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_06_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty2"]
-	, "description": "Wie hieß der isländische Wikiknger, fragt ein Matrose, der die ersten Besiedelungsversuche in Amerika nach der urgeschichtlichen Besiedelung unternahm."
+	, "description": "Wie hieß der isländische Wikinger, fragt ein Matrose, der die ersten Besiedelungsversuche in Amerika nach der urgeschichtlichen Besiedelung unternahm?"
 	, "choices": [
 		{ "name": "hist_quiz_06_a1"
         , "type": "message"
 		, "label": "Leif Eriksson"
-		, "description": "Ein anderer fügt hinzu, dass es um das Jahr 1000 n. Chr. war."
+		, "description": "Ein der Crew fügt hinzu, dass es um das Jahr 1000 n. Chr. war."
 		, "outcome": {"player.morale": 2}
 		}
 		,{ "name": "hist_quiz_06_a2"
@@ -1136,7 +1136,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_07_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty3"]
-	, "description": "Einige Leute reden, darüber wie der erste Kreuzzug über See unterstützt wurde. Einer betont, dass bei der Schlacht von Jerusalem die Kreuzfahrer verloren hätten, wären nicht 6 Schiffe mit Nachschub zu Hilfe gekommen. Wann war eigentlich diese Schalcht?"
+	, "description": "Einige Leute reden, darüber wie der erste Kreuzzug über See unterstützt wurde. Einer betont, dass bei der Schlacht von Jerusalem die Kreuzfahrer verloren hätten, wären nicht 6 Schiffe mit Nachschub zu Hilfe gekommen. Wann war eigentlich diese Schlacht?"
 	, "choices": [
 		{ "name": "hist_quiz_07_a1"
         , "type": "message"
@@ -1207,7 +1207,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "hist_quiz_09_a2"
         , "type": "message"
 		, "label": "Es war die Cholera"
-		, "description": "Dein Schiffsarzt, sagt dass die Cholera nie solche Ausmaße annahme."
+		, "description": "Dein Schiffsarzt, sagt dass die Cholera nie solche Ausmaße annahm."
 		, "outcome": {"player.morale": -2}
 		}
 		,{ "name": "hist_quiz_09_a3"
@@ -1231,7 +1231,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		{ "name": "hist_quiz_10_a1"
         , "type": "message"
 		, "label": "Bartolomeu Dias"
-		, "description": "Die Männer sehen, dass du dich mit der Seefahrstgeschichte auskennst."
+		, "description": "Die Männer sehen, dass du dich mit der Seefahrtsgeschichte auskennst."
 		, "outcome": {"player.morale": 5}
 		}
 		,{ "name": "hist_quiz_10_a2"
@@ -1291,7 +1291,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		{ "name": "hist_quiz_12_a1"
         , "type": "message"
 		, "label": "Vasco Nunez de Balboa erreichte die Westküste Amerikas"
-		, "description": "Durch Erreichen der Westküste war der Nachweis erbracht, dass es nicht Asien war."
+		, "description": "Durch Erreichen der Westküste war der Nachweis erbracht, dass es nicht Asien ist."
 		, "outcome": {"player.morale": 10}
 		}
 		,{ "name": "hist_quiz_12_a2"
@@ -1303,7 +1303,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "hist_quiz_12_a3"
         , "type": "message"
 		, "label": "Alonso de Hojeda erreichte die Westküste Amerikas"
-		, "description": "Dein Offizier sagt, dass dieser Seefahrer zwar Landgänge unternahm aber keinen Nachweis brachte "
+		, "description": "Dein Offizier sagt, dass dieser Seefahrer zwar Landgänge unternahm aber keinen Nachweis erbrachte "
 		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "hist_quiz_12_a4"
@@ -1321,7 +1321,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		{ "name": "hist_quiz_13_a1"
         , "type": "message"
 		, "label": "Francis Drake führte das Kommando"
-		, "description": "Dies war die Zweite aber die erste Weltumsegelung, die unter einem Kommando begonnen und zum Ende geführt wurde"
+		, "description": "Dies war die Zweite und die erste Weltumsegelung, die unter einem Kommando begonnen und zum Ende geführt wurde"
 		, "outcome": {"player.morale": 5}
 		}
 		,{ "name": "hist_quiz_13_a2"
@@ -1376,7 +1376,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_15_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty2"]
-	, "description": "Deine Offziere fragen dich, welches Königreich 1588 in der Seeschlacht von Gravelines der spanischen Armada gegenüberstand?"
+	, "description": "Deine Offiziere fragen dich, welches Königreich 1588 in der Seeschlacht von Gravelines der spanischen Armada gegenüberstand?"
 	, "choices": [
 		{ "name": "hist_quiz_15_a1"
         , "type": "message"
@@ -1406,7 +1406,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_16_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty4"]
-	, "description": "Einer deiner Offiziere fragt, wann James Cook eigtl geboren wurde?"
+	, "description": "Einer deiner Offiziere fragt, wann James Cook eigentlich geboren wurde?"
 	, "choices": [
 		{ "name": "hist_quiz_16_a1"
         , "type": "message"
@@ -1436,12 +1436,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_17_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty2"]
-	, "description": "Die Mannschaft redet über die Erkundung des Pazifik. Wie heißt der britische Seefahrer der weite Teile dieses Meeres vermaß, kartografierte und zur Verhinderung der Skorbut Pionierarbeit leistete?"
+	, "description": "Die Mannschaft redet über die Erkundung des Pazifiks. Wie heißt der britische Seefahrer der weite Teile dieses Meeres vermaß, kartographierte und zur Verhinderung der Skorbut Pionierarbeit leistete?"
 	, "choices": [
 		{ "name": "hist_quiz_17_a1"
         , "type": "message"
 		, "label": "James Cook"
-		, "description": "Er kartografierte, vermaß und entdeckte einige Inseln im Pazifik."
+		, "description": "Er kartographierte, vermaß und entdeckte einige Inseln im Pazifik."
 		, "outcome": {"player.morale": 2}
 		}
 		,{ "name": "hist_quiz_17_a2"
@@ -1466,12 +1466,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "hist_quiz_18_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty1"]
-	, "description": "Welcher Seefahre konnte weite Teile der Beringstraße erstmals befahren ohne aber einen sicheren Nachweis zu bringen, dass Amerika und Asien nicht verbunden sind?"
+	, "description": "Welcher Seefahrer konnte weite Teile der Beringstraße erstmals befahren ohne aber einen sicheren Nachweis zu bringen, dass Amerika und Asien nicht verbunden sind?"
 	, "choices": [
 		{ "name": "hist_quiz_18_a1"
         , "type": "message"
 		, "label": "Vitus Bering"
-		, "description": "Das Beringmeer und die Beringstraße tragen seinen Namen."
+		, "description": "Richtig! Das Beringmeer und die Beringstraße tragen seinen Namen."
 		, "outcome": {"player.morale": 1}
 		}
 		,{ "name": "hist_quiz_18_a2"
@@ -1507,7 +1507,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "hist_quiz_19_a2"
         , "type": "message"
 		, "label": "Preußen"
-		, "description": "Preußen war neutral hatte und auch keine ernstzunehmende Flotte."
+		, "description": "Preußen war neutral und hatte keine ernstzunehmende Flotte."
 		, "outcome": {"player.morale": -2}
 		}
 		,{ "name": "hist_quiz_19_a3"
@@ -1549,7 +1549,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		,{ "name": "hist_quiz_20_a4"
         , "type": "message"
 		, "label": "Francis Drake"
-		, "description": "Francis Drake war Freibeuter und später Vizeadmiral unter der Königin Elisabeth I."
+		, "description": "Francis Drake war Freibeuter und später Vizeadmiral unter Königin Elisabeth I."
 		, "outcome": {"player.morale": -5}
 		}
 	]
