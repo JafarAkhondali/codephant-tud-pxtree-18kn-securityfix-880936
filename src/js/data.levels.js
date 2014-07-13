@@ -7,7 +7,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
   { section: [7, 3]
 	 , tags: ["atlantic"]
 	 , coast: 181
-	 , coastDistance: 0.1
+	 , coastDistance: -0.3
 	 , spots:
 		[ { x: 484, y: 125
 			, reachable: [1, 2]
@@ -82,6 +82,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 //2
 , { section: [5, 3]
 	, coast: 20
+	, coastDistance: -0.35
 	, spots:
 		[ { x: 480, y: 220
 			, reachable: [1, 3]
@@ -113,8 +114,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 
 //3
 , { section: [7, 4]
-	,coast: 215
-	, coastDistance: 0
+	,coast: 210
+	, coastDistance: -0.3
+	, tags: ["atlantic", "arid"]
 	, spots:
 	
 		[ { x: 222, y: 84
@@ -259,35 +261,40 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	}
 //7
 , { section: [4, 5]
-	,tags: ["carribean"]
-	, coast: 270
-	, coastDistance: 0.06
+	,tags: ["carribean", "tropic"]
+	, coast: 285
+	, coastDistance: -0.3
 	, spots:
 		[ 
 		{ x: 275, y: 70
 			, type: "water"
 			, start: { dir: 'north' }
-			, reachable: [1]
+			, reachable: [1,3]
 		}
 		
-		, { x: 260, y: 260
+		, { x: 260, y: 300
 			, type: "water"
 			, reachable: [2]
 			, end: { dir: "south", found: "latin_america" }
 		}
 		
-		, { x: 450, y: 300
+		, { x: 450, y: 370
 			, type: "atoll"
 			, end: { dir: "east", to: 8 }
+		}
+		
+		, { x: 420, y: 160
+			, type: "island"
+			, reachable: [2]
 		}
 		]
 	}
 	
 //8
 , { section: [5, 5]
-	,tags: ["carribean"]
-	, coast: 280
-	, coastDistance: 0.08
+	,tags: ["carribean", "tropic"]
+	, coast: 275
+	, coastDistance: -0.3
 	, spots:
 		[ 
 		{ x: 270, y: 80
@@ -361,9 +368,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	
 //10
 , { section: [7, 5]
-	,tags: ["atlantic"]
+	,tags: ["atlantic", "arid"]
 	, coast: 140
-	, coastDistance: -0.0
+	, coastDistance: -0.3
 	, spots:
 		[ 
 		{ x: 180, y: 120
@@ -398,9 +405,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	
 //11
 , { section: [8, 5]
-	,tags: ["atlantic"]
-	, coast: 150
-	, coastDistance: -0.3
+	,tags: ["atlantic", "arid"]
+	, coast: 135
+	, coastDistance: -0.6
 	, spots:
 		[ 
 		{ x: 120, y: 280
@@ -428,9 +435,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	
 //12
 , { section: [6, 6]
-	,tags: ["atlantic"]
+	,tags: ["atlantic", "tropic"]
 	, coast: 20
-	, coastDistance: -0.3
+	, coastDistance: -0.4
 	, spots:
 		[ 
 		{ x: 415, y: 123
@@ -506,9 +513,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	
 //14
 , { section: [8, 6]
-	, tags: ["atlantic"]
+	, tags: ["atlantic", "arid"]
 	, coast: 170
-	, coastDistance: -0.09
+	, coastDistance: -0.44
 	, spots:
 		[ 
 		{ x: 190, y: 80
@@ -592,7 +599,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		
 		, { x: 240, y: 260
 			, type: "water"
-			, reachable: [2]
+			, reachable: [2,3]
 		}
 		
 		, { x: 100, y: 330
@@ -603,6 +610,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 260, y: 460
 			, type: 'water'
 			, reachable: [2]
+			, end: { dir: 'south', to: 20 }
 		}
 		, { x: 400, y: 390
 			, type: 'water'
@@ -659,9 +667,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	
 //18
 , { section: [8, 7]
-	, coast: 139
-	, coastDistance: 0.03
-	, tags: ["atlantic"]
+	, coast: 152
+	, coastDistance: -0.3
+	, tags: ["atlantic", "arid"]
 	, spots:
 		[ 
 		{ x: 260, y: 100
@@ -735,6 +743,51 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x:190, y: 444
 			, type: 'island'
 			, end: { dir: 'west', found: "fireland" }
+		}
+		
+		]
+	}
+	
+//20
+, { section: [6, 8]
+	, tags: ["atlantic"]
+	, spots:
+		[ 
+		{ x: 280, y: 100
+			, type: "water"
+			, start: { dir: 'north' }
+			, reachable: [1,4]
+		}
+		
+		, { x: 290, y: 260
+			, type: "water"
+			, reachable: [2]
+		}
+		
+		, { x: 200, y: 350
+			, type: "water"
+			, reachable: [3]
+		}
+		
+		, { x: 70, y: 330
+			, type: 'water'
+			, end: { dir: 'west', to: 19 }
+		}
+		
+		, { x: 480, y: 240
+			, type: 'water'
+			, reachable: [5]
+		}
+		
+		, { x:460, y: 400
+			, type: 'water'
+			, reachable: [6]
+		}
+		
+		, { x: 290, y: 480
+			, type: 'island'
+			, reachable: [2]
+			, event: { name: 'southgeorgia' }
 		}
 		
 		]
