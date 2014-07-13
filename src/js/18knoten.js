@@ -72,7 +72,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 					? JSON.parse(localStorage.getItem('Stats'))
 					: { player:
 							{ name: "Cumberdale"
-							, morale: 11
+							, morale: 0
 							, nationality: 'british'
 							, gold: 2000
 							, food: 150
