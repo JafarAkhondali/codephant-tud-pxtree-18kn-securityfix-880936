@@ -200,13 +200,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, Description:
 		{ Style:
 			{ font: "normal 16pt GameFont"
-			, fill: '#ffffff'
-			, stroke: '#000000'
-			, strokeThickness: 2
+			, fill: 'white'
+			, shadowColor: '#000000'
+			, shadowBlur: 2
 			, wordWrap: true
-			, wordWrapWidth: 850
+			, wordWrapWidth: 650
 			}
-		, Position: { x: 100, y: 225 }
+		, Position: { x: 200, y: 150 }
 		}
 	, Suggestion:
 		{ Style:
