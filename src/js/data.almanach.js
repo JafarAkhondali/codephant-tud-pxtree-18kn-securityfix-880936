@@ -166,8 +166,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                         text:" Geschichte des 18. Jahrhunderts 2"
                     },
                 ]
-    },
-
+    }
  
 ]
 );

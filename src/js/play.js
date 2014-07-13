@@ -90,7 +90,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{
 					this.events.startEvent(opts);
 				}
-			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(); }
+			, openAlmanach: function openAlmanach() {this.almanach.openAlmanach(0); }
 			, openTutorial: function openTutorial() {this.tutorial.openTutorial(0); }
 			, openWorldMap: function () { this.worldmap.show(); }
 			});
