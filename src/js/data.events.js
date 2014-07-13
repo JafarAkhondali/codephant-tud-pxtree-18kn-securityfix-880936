@@ -70,7 +70,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "description": "Als du dich dem Schiff näherst, hissen sie eine schwarze Flagge. Es sind portugiesische Freibeuter!"
 			, "choices":
 				[ { "name": "ship_ahoy_pirate_battle"
+					, "type": "message"
 					, "label": "Zum Kampf vorbereiten."
+					, "description": "Nach einem schweren Kampf, der einige Opfer gefordert hat, konntest du immerhin ein paar Vorräte deiner Gegner erbeuten."
 					, "outcome":
 						{ "player.food": [0,100]
 						, "player.crewCount": [-5,0]
@@ -105,17 +107,17 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "description": "Es ist ein Handelsschiff. Der Kapitän begrüsst dich. Was möchtest du tun?"
 			, "choices":
 				[ { "name": "ship_ahoy_friendly_buy_1"
-					, "label": "Nahrung für 100 Gold kaufen."
+					, "label": "100 Nahrung für 1000 Gold kaufen."
 					, "outcome":
 						{ "player.food": +100
-						, "player.gold": -100
+						, "player.gold": -1000
 						}
 					}
 				, { "name": "ship_ahoy_friendly_buy_2"
-					, "label": "Nahrung für 200 Gold kaufen."
+					, "label": "200 Nahrung für 2000 Gold kaufen."
 					, "outcome":
 						{ "player.food": +200
-						, "player.gold": -200
+						, "player.gold": -2000
 						}
 					}
 				, { "name": "ship_ahoy_friendly_buy_2"
@@ -137,7 +139,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "label": "Der Kurs bleibt Sache des Kapitäns!."
 			, "description": "Die Crew wird ein wenig misstrauisch."
 			, "outcome":
-				{ "player.morale": -1 
+				{ "player.morale": -2
 				}
 			}
 		, { "name": "crew_latitude_try"
@@ -148,14 +150,14 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 					, "label": "Mit dem Kompass."
 					, "description": "Dein Crewmitglied schaut dich verwirrt an: 'Captain, ich dachte den Breitengrad bestimmt man dem Stand der Sonne oder der Sterne?'"
 					, "outcome":
-						{ "player.morale": -2
+						{ "player.morale": -5
 						}
 					}
 				, { "name": "crew_latitude_sun"
 					, "label": "Mit dem Stand der Sonne/Sterne."
 					, "description": "Du bestimmst den Breitengrad mit Hilfe der Sonne/Sterne. Deine Crew fühlt sich in ihr Vertrauen in deine navigatorischen Fähigkeiten bestätigt."
 					, "outcome":
-						{ "player.morale": 1
+						{ "player.morale": 2
 						}
 					}
 				]
@@ -195,14 +197,14 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 							, "description": "Nach einer kurzen Demonstration deiner Waffen ist der Stamm zu einem Handel bereit."
 							, "outcome":
 								{ "player.strength": -5
-								, "player.food": [30,45]
+								, "player.food": [45,90]
 								}
 							}
 						, { "name": "native_island_food"
 							, "label": "Frage nach Nahrung."
 							, "description": "Die Verständigung ist nicht leicht, aber du fragst den Stamm, wo es auf der Insel Nahrung zu finden gibt. Sie zeigen dir ihre Jagdgründe und du kannst ein paar Tiere erlegen."
 							, "outcome":
-								{ "player.food": [5,15]
+								{ "player.food": [30,60]
 								}
 							}
 						, { "name": "native_island_raid"
@@ -212,6 +214,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 								{ "player.crewCount": [-3,0]
 								, "player.morale": [-5,0]
 								, "player.food": [50,100]
+								, "player.gold": [100,300]
 								}
 						} ]
 					}
@@ -682,7 +685,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "geo_quiz_11_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty1"]
-	, "description": "In welchem Ozean liegen die Kanarischen Inseln"
+	, "description": "In welchem Ozean liegen die Kanarischen Inseln?"
 	, "choices": [
 		{ "name": "geo_quiz_11_a1"
         , "type": "message"
