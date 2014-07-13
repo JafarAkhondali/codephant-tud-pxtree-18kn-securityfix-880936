@@ -305,7 +305,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 
 , { "name": "crew_steal"
 	, "tags": ["water"]
-	, "description": "Deine Mannschaft ist in Aufruhr: Ein paar Crewmitglieder haben Essen aus den Vorräten für sich geklaut. Deine Crew will sie über Bord werfen, aber du weißt, dass du jeden Mann gebrauchen kannst. Wie willst du sie bestrafen?"
+	, "description": "Deine Mannschaft ist in Aufruhr: Ein paar Crewmitglieder haben Essen aus den Vorräten für sich geklaut. Deine Crew will sie über Bord werfen, aber du weißt, dass du jeden Mann gebrauchen kannst. Du musst sie bestrafen, aber wie?"
 	, "choices":
 			[ { "name": "crew_steal_kill"
 				, "label": "Werft sie über Bord!"
@@ -681,25 +681,25 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Die Doggerbank liegt in der Nordsee"
 		, "description": "Richtig. Du zeigst, dass du Kenntnisse über die Meere und deren Untiefen hast."
-		, "outcome": {"player.moral": 3}
+		, "outcome": {"player.morale": 2}
 		}
 		,{ "name": "geo_quiz_09_a2"
         , "type": "message"
 		, "label": "Die Doggerbank liegt in der Ostsee"
 		, "description": "Das stimmt nicht. Sie liegt in der Nordsee, meint dein erster Offizier."
-		, "outcome": {"player.moral": -5}
+		, "outcome": {"player.morale": -2}
 		}
 		,{ "name": "geo_quiz_09_a3"
         , "type": "message"
 		, "label": "Die Doggerbank liegt in dem Atlantik"
 		, "description": "Das stimmt nicht. Sie liegt in der Nordsee, meint dein erster Offizier."
-		, "outcome": {"player.moral": -5}
+		, "outcome": {"player.morale": -2}
 		}
 		,{ "name": "geo_quiz_09_a4"
         , "type": "message"
 		, "label": "Die Doggerbank liegt in dem Norpolarmeer"
 		, "description": "Das stimmt nicht. Sie liegt in der Nordsee, meint dein erster Offizier."
-		, "outcome": {"player.moral": -5}
+		, "outcome": {"player.morale": -2}
 		}
 	]
 },{ "name": "geo_quiz_10_quiz"
@@ -1148,7 +1148,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		}
 		,{ "name": "hist_quiz_05_a4"
         , "type": "message"
-		, "label": "Es waren die Franke"
+		, "label": "Es waren die Franken"
 		, "description": "Das stimmt aber nicht, sagt einer aus der Gruppe."
 		, "outcome": {"player.morale": -4}
 		}
