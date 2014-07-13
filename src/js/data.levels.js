@@ -554,9 +554,9 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 	
 //15
 , { section: [5, 7]
-	, tags: ["atlantic"]
+	, tags: ["atlantic", "tropic"]
 	, coast: 45
-	, coastDistance: -0.05
+	, coastDistance: -0.3
 	, spots:
 		[ 
 		{ x: 450, y: 130
@@ -711,7 +711,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 //19
 , { section: [5, 8]
 	, coast: 15
-	, coastDistance: 0.3
+	, coastDistance: -0.2
 	, tags: ["atlantic", "tropic"]
 	, spots:
 		[ 
