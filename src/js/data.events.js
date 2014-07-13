@@ -223,6 +223,56 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		]
 	}
 
+, { "name": "native_island_2"
+	, "tags": ["island", "carribean"]
+	, "description": "Land in Sicht!"
+	,	"choices":
+		[ { "name": "native_island_2_ignore"
+			, "label": "Weitersegeln."
+			, "description": "Deine Reise ist wichtiger als so eine kleine Insel."
+			, "outcome":
+				{ 
+				}
+			}
+		, { "name": "native_island_2_anchor"
+			, "label": "Vor Anker gehen."
+			, "description": "Du betritts die Insel. Am Strand stehen bereits eine große Gruppe Ureinwohner. Sie drücken dir Gold in die Arme und deuten dir ihnen zu folgen."
+			, "outcome": { "player.food": 15}
+			, "choices":
+				[ { "name": "native_island_2_inland"
+					, "label": "Folge den Einwohnern."
+					, "description": "Du folgst den Einwohnern. Der Stamm feiert ein üppiges Fest. Deine Mannschaft feiert ausgiebig. Als du am nächsten Tag zum Schiff zurückkehrt, entdeckst du, dass du bestohlen wurdest."
+					, "outcome":{ "player.gold": -100, "player.food": -30}
+					, "choices":
+						[
+						    { "name": "native_island_2_inland_attack"
+							, "label": "Diebe! Den Stamm stürmen und die Waren zurückholen!"
+							, "description": "Du bezwingst den Stamm vollständig. Du sammelst das Wenige auf was du finden kannst und verlässt so schnell es geht die Insel."
+							, "outcome": {
+								  "player.food": [15,50]
+							    , "player.gold": [50,150]
+							    , "player.strength": [-2,0]
+								, "player.crewCount":[-5,0]
+								}
+							}
+						   ,{ "name": "native_island_2_inland_leave"
+							  ,"label": "Es lohnt sich nicht noch mehr Männer zu riskieren."
+							  ,"description": "Du segelst davon und lässt die Ureinwohner hinter dir. Deine Mannschaft ist zwar erleichtert, hätte mehr Härte erwartet."
+							  ,"outcome": { "player.moral": [-1,0]}
+							}
+						]
+					}
+				, { "name": "native_island_2_leave"
+					, "label": "Umdrehen und zurück aufs Schiff."
+					, "description": "Du entscheidest dich nicht den Einwohnern zu folgen. Wieder an Deck fragen sich die Matrosen wohl welche Schätze auf der Insel verborgen waren."
+					, "outcome":
+						{ "player.moral": [-1,0]}
+					}
+				]
+			}
+		]
+	}
+
 , { "name": "no_wind"
 	, "tags": ["water", "atlantic"]
 	, "description": "Flaute! Deine Crew fragt dich, was sie tun soll."
