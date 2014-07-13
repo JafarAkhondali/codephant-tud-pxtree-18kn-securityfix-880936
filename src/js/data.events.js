@@ -895,29 +895,29 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 },{ "name": "geo_quiz_18_quiz"
 	, "type": "single-select"
 	, "tags": ["water", "difficulty3"]
-	, "description": "Du bist mit deinem Schiff auf hoher See und die Sonne brennt. Einer deiner Matrosen fragt, wo die Sonne im Zenit steht?"
+	, "description": "Du bist mit deinem Schiff auf hoher See und die Sonne brennt. Einer deiner Matrosen fragt, wo die Sonne im Zenit stehen kann?"
 	, "choices": [
 		{ "name": "geo_quiz_18_a1"
         , "type": "message"
-		, "label": "Die Sonne steht innerhalb des nördlichen und südlichen Wendekreises im Zenit"
+		, "label": "Zwischen dem nördlichen und südlichen Wendekreis"
 		, "description": "Die Mannschaft sieht, dass du wichtige geographische Kenntnisse hast."
 		, "outcome": {"player.morale": 5}
 		}
 		,{ "name": "geo_quiz_18_a2"
         , "type": "message"
-		, "label": "Die Sonne steht innerhalb des Jahres zwischen den Polarkreisen und den Wendekreisen im Zenit."
+		, "label": "Zwischen den Polarkreisen und den Wendekreisen"
 		, "description": "Die Mannschaft sieht, dass dir wichtige geographische Kenntnisse fehlen."
 		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_18_a3"
         , "type": "message"
-		, "label": "Die Sonne kann ausschließlich auf dem Äquator im Zenit stehen"
+		, "label": "Ausschließlich auf dem Äquator"
 		, "description": "Die Mannschaft sieht, dass dir wichtige geographische Kenntnisse fehlen."
 		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_18_a4"
         , "type": "message"
-		, "label": "Die Sonne kann ausschließlich auf den Polen im Zenit stehen"
+		, "label": "Ausschließlich auf den Polen"
 		, "description": "Die Mannschaft sieht, dass dir wichtige geographische Kenntnisse fehlen."
 		, "outcome": {"player.morale": -5}
 		}
