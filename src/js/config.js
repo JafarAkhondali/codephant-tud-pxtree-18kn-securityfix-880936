@@ -92,6 +92,14 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, stroke: "#ff3355"
 			}
 		}
+	, Picture:
+		{ Offset: { x: 22, y: 22 }
+		}
+	, Pictures:
+		{ "island": ["eventpic-island-day", "eventpic-island-sunset"]
+		, "ship": ["eventpic-ship-day", "eventpic-ship-sunset"]
+		, "sea": ["eventpic-sea-day", "eventpic-sea-sunset"]
+		}
 	}
 
 , Desk:
