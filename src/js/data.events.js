@@ -569,19 +569,19 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 	, "choices": [
 		{ "name": "geo_quiz_07_a1"
         , "type": "message"
-		, "label": "Das Kattegat liegt zwischen Dänemark und Schweden."
+		, "label": "Zwischen Dänemark und Schweden."
 		, "description": "Richtige Antwort! Das Kattegat ist ein in etwa 80 Meter tiefes und relativ schwer schiffbares Meeresgebiet zwischen Dänemark und Schweden."
 		, "outcome": {"player.morale": 5}
 		}
 		,{ "name": "geo_quiz_07_a2"
         , "type": "message"
-		, "label": "Das Kattegat liegt zwischen Schweden, Dänemark und Norwegen."
+		, "label": "Zwischen Schweden, Dänemark und Norwegen."
 		, "description": " Das Kattegat grenzt nicht an Norwegen. Die Mannschaft verwechselt selber manchmal Kattegat und Skagerrak und verliert deshalb kein Vertrauen."
 		, "outcome": {"player. morale": 0}
 		}
 		,{ "name": "geo_quiz_07_a3"
         , "type": "message"
-		, "label": "Das Kattegat liegt zwischen Dänemark und dem Gebiet des Heiligen Römischen Reich Deutscher Nation."
+		, "label": "Zwischen Dänemark und Deutschen Landen."
 		, "description": "Das stimmt aber nicht, meint dein erster Offizier. Es liegt zwischen Dänemark und Schweden!"
 		, "outcome": {"player.morale": -5}
 		}
