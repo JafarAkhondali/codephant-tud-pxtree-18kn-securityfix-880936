@@ -34,6 +34,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('small-captain-british', 'assets/chars/captain-british-simple.png',32,32)
 			.spritesheet('sound-bell','assets/icons/ui-bell.png', 32, 32)
 			.spritesheet('sound-cross', 'assets/icons/map-kreuz.png', 32, 32)
+			.audio('ambient','assets/audio/small/ship-at-sea.mp3')
 		;
 		};
 		
@@ -50,6 +51,8 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			, credits = btnFactory.create(Config.Labels.Credits)
 			, self = this
 			;
+			
+			var music = this.game.sound.play('ambient', 0.5, true);
 			
 			this.game.add.sprite(0, 0, 'mainmenu-bg');
 			

@@ -63,6 +63,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				, name = names.pop()
 				, oldValue = parent[name]
 				;
+			value = this._applyValueConstraints(fullname, value);
 			parent[name] = value;
 			
 			if (fullname in this._valueChangedIndividualHandlers)
@@ -89,6 +90,29 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				context = handlerOrContext;
 			}
 			signal.add(handler, context);
+		};
+
+		this._applyValueConstraints = function (stat, value)
+		{
+			if (stat === 'player.morale')
+			{
+				if (value > 40)
+				{
+					value = 40;
+				}
+				if (value < -40)
+				{
+					value = -40;
+				}
+			}
+			else //any other stat
+			{
+				if (value < 0)
+				{
+					value = 0;
+				}
+			}
+			return value;
 		};
 		
 		

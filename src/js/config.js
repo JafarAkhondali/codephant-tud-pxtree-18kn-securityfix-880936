@@ -200,13 +200,13 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	, Description:
 		{ Style:
 			{ font: "normal 16pt GameFont"
-			, fill: '#e0ab1b'
-			, stroke: '#bf9218'
-			, strokeThickness: 0
+			, fill: '#ffffff'
+			, stroke: '#000000'
+			, strokeThickness: 2
 			, wordWrap: true
-			, wordWrapWidth: 800
+			, wordWrapWidth: 850
 			}
-		, Position: { x: 200, y: 140 }
+		, Position: { x: 100, y: 225 }
 		}
 	, Suggestion:
 		{ Style:
@@ -248,6 +248,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, "player.food": "Deine Vorratsspeicher sind aufgebraucht und deine Mannschaft hat nichts mehr zu essen. Nach zwei Wochen auf See und ohne Essen und frisches Trinkwasser ist deine Mannschaft bis auf wenige dem Hunger erlegen. Auch du bist ausgezehrt und kannst das Schiff nicht mehr steuern. In den kommenden Jahrzehnten wird man dein Schiff noch mehrfach sichten und sich schauerliche Geschichten erzählen von dem, was geschehen sein mag."
 			, "player.gold": "Du hast auf zu großem Fuß gelebt! Da du immer gerne dein Gold unter die Leute gebracht hast, wenn du die Möglichkeit hattest, und dabei nicht an deine Mannschaft gedacht hast, stehst du nun vor einer meuternden Meute, die nach ihrem Sold verlangt. Da du ihnen nicht geben kannst, wonach sie verlangen, setzen sie dich kurzerhand auf einer kleinen, einsamen Insel mitten im Nirgendwo der weiten See aus und machen sich mit deinem Schiff davon."
 			, "player.crewCount": "Deine Reise war sehr anstrengend – leider viel zu anstregend für viele deiner Mannschaft! Nach und nach hast du Leute an Krankheiten wie Skorbut, in Kämpfen oder an die See verloren. Nach zwei Wochen auf See ohne Essen und frisches Trinkwasser sind die wenigen Verbliebenen deiner Mannschaft und du selbst dem Hunger erlegen. In den kommenden Jahrzehnten wird man dein Schiff noch mehrfach sichten und sich schauerliche Geschichten erzählen von dem, was geschehen sein mag."
+			, "player.morale": "Deine Crew hat gemeutert! Nach einer anstrengenden und Käfte zehrenden Reise war ihnen die Belastung zu viel und sie machen dich dafür verantwortlich. Sie beschuldigen dich, durch deine Fehlentscheidungen, dein Unwissen und die schlechte Behandlung der Crew das Schiff und die Mannschaft in den Ruin zu treiben und sind der Meinung, dass sie ohne dich besser dran sind. Sie lassen dich auf dem nächsten Stück Festland zurück und führen die Reise ohne dich fort."
 			}
 		}
 
@@ -275,6 +276,10 @@ namespace("PXTree.AchtzehnKnoten.Config",
 		, Descriptions:
 			{ "infant-island": "Du hast mitten im unendlichen Pazifik eine kleine Insel mit einer Tempel darauf gefunden! Als du und deine Mannschaft den Tempel erkundet, stellt sich heraus, dass er der Zugang zu einem viel größeren, unterirdischen Reich ist. Nachdem ihr eine Weile herumgestöbert habt, findet ihr ein riesenhaftes blaues Ei, das kurz darauf auseinander bricht. Hervor kommt eine braune Riesenlarve mit leuchtenden saphirfarbenen Augen. Sie scheint dir wohl gesonnen, was dich recht verblüfft. Was wird daraus wohl noch werden?"
 			, "eldorado": "Du hast gefunden, was noch Generationen nach dir vergeblich suchen werden – Reichtum in unendlicher Fülle! Schlecht nur, dass das ganze Gold dich so verrückt macht, dass du nicht mehr von hier weg willst. Du schließst dich selber in der goldenen Stadt ein und verteidigst sie aufs Äußerste gegen jeden Eindringling."
+			, "labrador": "Du hast Neufundland und Labrador entdeckt! Diese im Osten des heutigen Kanadas gelegene Region war das erste Gebiet, was von den Briten in Nordamerika kolonisiert wurde. Dieses Gegend ist eher für ihr raues Wetter und den kargen Boden bekannt, aber man wird lange von deiner erfolgreichen Entdeckungsreise erzählen!"
+			, "florida": "Du hast Florida entdeckt! Juan Ponce de León, ein spanischer Entdecker, gab dem Land den Namen 'La Florida', das 'blumige Land'. Die ersten Siedler in dieser subtropischen bis tropischen Landschaft waren Spanier und französische Hugenotten. Erst mit dem Anfang des 19. Jh. wurde aus Florida die Kolonie der Vereinigten Staaten, die wir heute kennen."
+			, "fireland": "Du hast Feuerland und die Magellanstraße entdeckt! Ferdinand Magellan, unter dessen Kommando die erste Weltumsegelung begann, entdeckte im Jahr 1520 die Magellanstraße, die Feuerland vom Südamerikanischen Kontinent trennt. Heutzutage hat die Meerenge eine geringe Bedeutung, da Schiffe den Panamakanal nutzen, um vom Atlantik in den Pazifik zu gelangen. Doch deine Entdeckungsreise wird in die Geschichte eingehen!" 
+			, "agulhas": "Du hast die Südspitze von Afrika entdeckt, das sogenannte 'Kap Agulhas'! Vasco da Gama war der erste Europäer, der dieses Kap und das Kap der guten Hoffnung auf seinem Weg nach Indien umsegelte. Heute benutzen Schiffe den Sueskanal, um in den Indischen Ozean zu gelangen. Aber deine Reise wird trotzdem in die Geschichte eingehen!"
 			}
 		}
 	}

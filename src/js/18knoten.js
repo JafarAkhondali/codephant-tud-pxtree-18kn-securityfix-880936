@@ -111,8 +111,9 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 			{
 				var play = this.game.state.getCurrentState()
 					;
-				if (play instanceof AK.Play
-						&& newValue <= 0
+				if (!(play instanceof AK.Play)) return;
+				
+				if (newValue <= 0
 						&& endscreenStats[statName])
 				{
 					play.events.afterCurrentEvent(function()
@@ -120,6 +121,14 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 						this.startState('endscreen', true, statName);
 					}, this)
 				}
+				else if (statName === 'player.morale' && newValue <= -40)
+				{
+					play.events.afterCurrentEvent(function()
+					{
+						this.startState('endscreen', true, statName);
+					}, this)
+				}
+				
 				
 			}, this);
 		};
