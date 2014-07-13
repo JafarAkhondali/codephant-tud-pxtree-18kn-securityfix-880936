@@ -31,7 +31,9 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('ship-gischt', 'assets/ui/visual-gischt.png', 300,32)
 			.spritesheet('small-sailor','assets/chars/sailor-simple.png',32,32)
 			.spritesheet('small-soldier','assets/chars/soldier-spanish-simple.png',32,32)
-			.spritesheet('small-captain-british', 'assets/chars/captain-british-simple.png',32,32);
+			.spritesheet('small-captain-british', 'assets/chars/captain-british-simple.png',32,32)
+			.spritesheet('sound-bell','assets/icons/ui-bell.png', 32, 32)
+			.spritesheet('sound-cross', 'assets/icons/map-kreuz.png', 32, 32)
 		;
 		};
 		
@@ -124,6 +126,14 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				self.top.startState(AK.Credits.key);
 			}, this);
 			this.game.world.add(credits);
+
+			var bell_cross = this.game.make.sprite(1, 1, 'sound-cross');
+			bell_cross.visible = this.game.sound.mute;
+			this.game.add.button(
+					968, 20, 'sound-bell',
+					function () {	this.game.sound.mute = !this.game.sound.mute; bell_cross.visible = !bell_cross.visible;}, this,
+					1, 0)
+				.addChild(bell_cross);
 		};
 		
 			return def;

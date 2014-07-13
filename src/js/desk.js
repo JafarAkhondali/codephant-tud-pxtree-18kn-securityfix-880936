@@ -71,7 +71,7 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			.spritesheet('wheel','assets/icons/ui-options.png', 32, 32)
 			.spritesheet('map','assets/icons/ui-map.png', 32, 32)
 			.spritesheet('mute','assets/icons/ui-bell.png', 32, 32)
-			.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32);
+			.spritesheet('cross', 'assets/icons/map-kreuz.png', 32, 32)
 			;
 			
 		
@@ -245,13 +245,13 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				45, 10, 'map',
 				this.parent.openWorldMap, this.parent,
 				1, 0));
-		var bell_cross = this.game.make.sprite(85,10,'cross');
-		bell_cross.visible = false;
+		var bell_cross = this.game.make.sprite(1, 1, 'cross');
+		bell_cross.visible = this.game.sound.mute;
 		grp.add(this.game.make.button(
 				85, 10, 'mute',
 				function () {	this.game.sound.mute = !this.game.sound.mute; bell_cross.visible = !bell_cross.visible;}, this,
-				1, 0));
-		grp.add(bell_cross);
+				1, 0))
+			.addChild(bell_cross);
 		grp.add(this.game.make.button(
 				125, 10, 'wheel',
 				function () {	this.top.startState(AK.MainMenu.key); }, this,
