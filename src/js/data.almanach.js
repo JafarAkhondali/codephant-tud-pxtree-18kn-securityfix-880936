@@ -16,17 +16,17 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                  
                     {
                         type:'paragraph',   //  3 & 4 & 18
-                        text:"Die Erde dreht sich um die Sonne. Dabei dreht sie sich ebenso um ihre eigene Achse. Die Eigenrotation erfolgt um eine Achse welche um 66,6° zur Rotationsebene der Drehung um die Sonne geneigt ist. Dadurch entsteht innerhalb der Polarregionen, welche den Bereich nördlich/ südlich von 66,6° nördlicher bzw. südlicher Breite defininert, je nach Jahreszeit der Polartag oder die Polarnacht. Im Norden entsteht so während des Winters die Polarnacht und im Süden der Polartag. Im Sommer ist es aufgrund der Rotation um die Sonne umgekehrt. In den Tropen kommt es aufgrund dieser Naturerscheinnug zu einer periodischen Bewegung des Sonnenzenits."
+                        text:"Die Erde dreht sich um die Sonne. Dabei dreht sie sich ebenso um ihre eigene Achse. Die Eigenrotation erfolgt um eine Achse welche um 66,6° zur Rotationsebene der Drehung um die Sonne geneigt ist. Dadurch entsteht innerhalb der Polarregionen, welche den Bereich nördlich/ südlich von 66,6° nördlicher bzw. südlicher Breite definiert, je nach Jahreszeit der Polartag oder die Polarnacht. Im Norden entsteht so während des Winters die Polarnacht und im Süden der Polartag. Im Sommer ist es aufgrund der Rotation um die Sonne umgekehrt. In den Tropen kommt es aufgrund dieser Naturerscheinung zu einer periodischen Bewegung des Sonnenzenits."
                     },
                  
                     {
                         type:'paragraph',   //  5 & 16
-                        text:"Innerhalb der Ozeane gibt es warme und kalte Meereströmungen. Eine der warmen Strömungen ist der Golfstrom. Dieser entsteht im Golf von Mexiko und fließt im Atlantischen Ozean in Richtung Nordpolarmeer. Dort wird er zum sogenannten Nordpolarstrom."
+                        text:"Innerhalb der Ozeane gibt es warme und kalte Meeresströmungen. Eine der warmen Strömungen ist der Golfstrom. Dieser entsteht im Golf von Mexiko und fließt im Atlantischen Ozean in Richtung Nordpolarmeer. Dort wird er zum sogenannten Nordpolarstrom."
                     },
                  
                     {
                         type:'paragraph',   //  6
-                        text:"Die Insel Grönland ist zu großen Teilen vergletschert. Dieser Eispanzer wird als Grönländisches Eisschild bezeichnet. Die Gletscher sind die größten Süßwasserspeicher der Erde und so liegen in Grönland die umfangreichsten Reserven der Erde außerhalb der Antatrktis."
+                        text:"Die Insel Grönland ist zu großen Teilen vergletschert. Dieser Eispanzer wird als Grönländisches Eisschild bezeichnet. Die Gletscher sind die größten Süßwasserspeicher der Erde und so liegen in Grönland die umfangreichsten Reserven der Erde außerhalb der Antarktis."
                     },
                  
                     {
@@ -36,7 +36,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                  
                     {
                         type:'paragraph',   //  8
-                        text:"Spitzbergen ist eine Inselgruppe mit über 400 einzelnen Inseln. Östlich von Spitzbergen liegt die Barentssee, teilweise ein Teil des Aktischen Ozeans und im Westen liegt die Grönlandsee, ebenso teilweise ein Teil des Arktischen Ozean. Südlich des Arktischen Ozean zählen beide Meeresgebiete zum Nordartlantik."
+                        text:"Spitzbergen ist eine Inselgruppe mit über 400 einzelnen Inseln. Östlich von Spitzbergen liegt die Barentssee, teilweise ein Teil des Arktischen Ozeans und im Westen liegt die Grönlandsee, die ebenso teilweise ein Teil des Arktischen Ozeanes ist. Südlich des Arktischen Ozean zählen beide Meeresgebiete zum Nordatlantik."
                     },
                  
                     {
@@ -71,12 +71,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                  
                     {
                         type:'paragraph',   //  17
-                        text:"Eine Inselgruppe ist eine Ansammlung von mehreren Inseln, welche geologisch die selbe Entstehungsgeschichte haben oder aufgrund politischer, historischer oder kulureller Gründe zusammengefasst werden. Beispielsweise unterscheiden sich die Friesischen Inseln in ihrer Entstehung, werden aber dennoch als Gruppe aufgefasst. Je nach topografischer Anordnung kann man Inselketten, Inselbögen, Doppelinseln und Atolle unterscheiden. Das Atoll hat außerdem die Eigenschaft, dass es von vulkanischem Ursprunges ist."
+                        text:"Eine Inselgruppe ist eine Ansammlung von mehreren Inseln, welche geologisch die selbe Entstehungsgeschichte haben oder aufgrund politischer, historischer oder kultureller Gründe zusammengefasst werden. Beispielsweise unterscheiden sich die Friesischen Inseln in ihrer Entstehung, werden aber dennoch als Gruppe aufgefasst. Je nach topografischer Anordnung kann man Inselketten, Inselbögen, Doppelinseln und Atolle unterscheiden. Das Atoll hat außerdem die Eigenschaft, dass es von vulkanischem Ursprunges ist."
                     },
                  
                     {
                         type:'paragraph',   //  19
-                        text:"Die Antillen bilden mit der Karibischen See, dem Golf von Mexiko und dem Atlantischen Ozean ein Archipel im Osten des Amerikanschischen Kontinents. Es werden zwei Untergruppen unterschieden: die Großen und die Kleinen Antillen, wovon die Ersten eine Gruppe bilden, welche bis in den Golf von Mexiko hineinreichen. Zu den größten Inseln gehören Kuba, Jamaica und Hispaniola. Die Kleinen Antillen erstrecken sich dagegen bis etwa 30 km an den Südamerikanischen Kontinent heran. Von den Westindischen Inseln spricht man, wenn außerdem die Bahamas hinzugezählt werden."
+                        text:"Die Antillen bilden mit der Karibischen See, dem Golf von Mexiko und dem Atlantischen Ozean ein Archipel im Osten des Amerikanischen Kontinents. Es werden zwei Untergruppen unterschieden: die Großen und die Kleinen Antillen, wovon die Ersten eine Gruppe bilden, welche bis in den Golf von Mexiko hineinreichen. Zu den größten Inseln gehören Kuba, Jamaica und Hispaniola. Die Kleinen Antillen erstrecken sich dagegen bis etwa 30 km an den Südamerikanischen Kontinent heran. Von den Westindischen Inseln spricht man, wenn außerdem die Bahamas hinzugezählt werden."
                  
                     },
                  
@@ -94,23 +94,23 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                 [
                     {
 						type:'paragraph', //almanac paragraph for history questions    1
-						text:"Zusammen mit der Schlacht von Marathon war die Seeschlacht von Salamis, nach Ansicht von Historikern, ein wichtiges Ereignis im Okzident, was dazu führte, dass die Zivilisation in ebendiesem sich weitgehen unabhängig vom Orient entwickelt hat. Die griechischen Stadtstaaten errangen mit den Siegen in den Schlachten Unabhängikeit und Freiheit vom Perserreich. Dieses hatte unter Führung seiner Großkönige Dareios I. und Xerxes I. versucht die griechischen Staaten unter seine Vormacht zu zwängen."
+						text:"Zusammen mit der Schlacht von Marathon war die Seeschlacht von Salamis, nach Ansicht von Historikern, ein wichtiges Ereignis im Okzident, was dazu führte, dass die Zivilisation in ebendiesem sich weitgehen unabhängig vom Orient entwickelt hat. Die griechischen Stadtstaaten errangen mit den Siegen in den Schlachten Unabhängigkeit und Freiheit vom Perserreich. Dieses hatte unter Führung seiner Großkönige Dareios I. und Xerxes I. versucht die griechischen Staaten unter seine Vormacht zu zwängen."
 					},
                  
 					{
 						type:'paragraph',   //  2
-						text:"Der griechische Physiker, Mathematiker und Ingenieur Archimedes von Syrakus ist einer der bedeutensten Gelehrten der Antike. Er bewies, dass der Durchmesser eines Kreises sich zum Umfang genauso verhält, wie das Quadrat des Radiuses zur Fläche des Kreises. Dieses Verhältnis ist heute unter dem namen Pi bekannt.  Wichtige Ideen die später zur Integralrechnung führten kamen ebenso von ihm. Nicht nur in der Mathematik waren seine Gedanken der Zeit voraus, sondern auch auf dem Gebiet der Physik. Die Hebelgesetze und das nach ihm benannte Archimedische Prinzip, welches das Auftriebsverhalten von Stoffen erklärt, sind seiner Geisteskraft entsprungen."
+						text:"Der griechische Physiker, Mathematiker und Ingenieur Archimedes von Syrakus ist einer der bedeutendsten Gelehrten der Antike. Er bewies, dass der Durchmesser eines Kreises sich zum Umfang genauso verhält, wie das Quadrat des Radius zur Fläche des Kreises. Dieses Verhältnis ist heute unter dem Namen Pi bekannt.  Wichtige Ideen die später zur Integralrechnung führten kamen ebenso von ihm. Nicht nur in der Mathematik waren seine Gedanken der Zeit voraus, sondern auch auf dem Gebiet der Physik. Die Hebelgesetze und das nach ihm benannte Archimedische Prinzip, welches das Auftriebsverhalten von Stoffen erklärt, sind seiner Geisteskraft entsprungen."
 					},
                  
                     {
                         type:'paragraph',   //  3
-                        text:"Die Punischen Kriege waren militärische Auseinandersetzungen der Handelsmacht Karthago gegen das junge Römische Reich im 300 und 200 Jahrhundert vor Christus. Im Zweiten Punischen Krieg erlitten die Römer ihre bis dahin schwerste Niederlage gegen  eine Heer unter Hannibal Barkas. Diese Armee zog von der Iberischen Halbinsel mit samt Kriegselephanten durch die Alpen und konnte die Römischen Legionen in der Schlacht von Cannae 216 vor Christus verheerend schlagen."
+                        text:"Die Punischen Kriege waren militärische Auseinandersetzungen der Handelsmacht Karthago gegen das junge Römische Reich im 300 und 200 Jahrhundert vor Christus. Im Zweiten Punischen Krieg erlitten die Römer ihre bis dahin schwerste Niederlage gegen  eine Heer unter Hannibal Barkas. Diese Armee zog von der Iberischen Halbinsel mit samt Kriegselefanten durch die Alpen und konnte die Römischen Legionen in der Schlacht von Cannae 216 vor Christus verheerend schlagen."
                  
                     },
                  
                     {
                         type:'paragraph',   //  4
-                        text:"Die Römische Stadt Colonia Claudia Ara Agrippinensium war die Hauptstadt der Provinz Germania inferior und Stützpunkt der Rheinflotte, sowie Lager von römischen Legionen. Noch heute findet man Überreste der Römer in der nähe des Kölner Doms von antiken Bauwerken"
+                        text:"Die Römische Stadt Colonia Claudia Ara Agrippinensium war die Hauptstadt der Provinz Germania inferior und Stützpunkt der Rheinflotte, sowie Lager von römischen Legionen. Noch heute findet man Überreste der Römer in der nähe des Kölner Doms von antiken Bauwerken."
                     },
 				]
 	},
@@ -121,12 +121,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                 [
                     {
                         type:'paragraph',   //  5   &   6
-                        text:"Im frühen Mittelalter siedelten germanische und baltische Stämme in den Küstenregionen von Nord- und Ostsee. Sie waren geschickte Seefahrer und so ließen sie sich ebenso in Island nieder und waren die ersten Europäer, welche den Amerikanischen Kontinent mit Schiffen erreichten. Es sind Siedlungen in Grönland entstanden und unter Leif Eriksson wurde der Versuch unternommen das Amerikanische Festland zu besiedeln. In Europa waren sie vorallem durch ihre Raubzüge gefürchtet. Der erste schriftlich erwähnte Überfall geschah im Jahre 793 auf das Kloster Lindisfarne in England. Sie gründeten aber auch Städte, wie Dublin und betrieben Handel bis in den Orient. Diese Stämme sind unter dem Namen Wikinger bekannt und so nennt man dieses Zeitalter aufgrund ihres Einflusses und Wirkens Wikingerzeit."
+                        text:"Im frühen Mittelalter siedelten germanische und baltische Stämme in den Küstenregionen von Nord- und Ostsee. Sie waren geschickte Seefahrer und so ließen sie sich ebenso in Island nieder und waren die ersten Europäer, welche den Amerikanischen Kontinent mit Schiffen erreichten. Es sind Siedlungen in Grönland entstanden und unter Leif Eriksson wurde der Versuch unternommen das Amerikanische Festland zu besiedeln. In Europa waren sie vor allem durch ihre Raubzüge gefürchtet. Der erste schriftlich erwähnte Überfall geschah im Jahre 793 auf das Kloster Lindisfarne in England. Sie gründeten aber auch Städte, wie Dublin und betrieben Handel bis in den Orient. Diese Stämme sind unter dem Namen Wikinger bekannt und so nennt man dieses Zeitalter aufgrund ihres Einflusses und Wirkens Wikingerzeit."
                     },
           
                     {
                         type:'paragraph',   //  7
-                        text:"Nach dem Aufruf 1095 zum ersten Kreuzzug durch Papst Urban II. gegen die islamische Herrschaft in Jerusalem, sowie im Heiligen Land, zogen christliche Heere in den Orient. Dem war ein Hilferuf des byzantinischen Kaisers Alexios I. von Komnenos zuvorgekommen. Dieser wurde durch die islamischen Seldschuken bedroht. Die christlichen Kreuzfahrer nutzten zum großen Teil den Landweg nach Palästina, wurden aber stetig durch Seefahrer unterstützt. Dieser Beistand war meist unkontrollert und dennoch essenziell für viele militärische Aktionen. So kam es im Oktober 1097 zu der Belagerung von Antiochia und im Juni 1098 zum Fall der Stadt. Der darauf folgende Zug nach Jerusalem endete in der Schlacht von Jerusalem und einem schrecklichen Massaker an der muslimischen Bevölkerung."
+                        text:"Nach dem Aufruf 1095 zum ersten Kreuzzug durch Papst Urban II. gegen die islamische Herrschaft in Jerusalem, sowie im Heiligen Land, zogen christliche Heere in den Orient. Dem war ein Hilferuf des byzantinischen Kaisers Alexios I. von Komnenos zuvorgekommen. Dieser wurde durch die islamischen Seldschuken bedroht. Die christlichen Kreuzfahrer nutzten zum großen Teil den Landweg nach Palästina, wurden aber stetig durch Seefahrer unterstützt. Dieser Beistand war meist unkontrolliert und dennoch essenziell für viele militärische Aktionen. So kam es im Oktober 1097 zu der Belagerung von Antiochia und im Juni 1098 zum Fall der Stadt. Der darauf folgende Zug nach Jerusalem endete in der Schlacht von Jerusalem und einem schrecklichen Massaker an der muslimischen Bevölkerung."
                     },
                  
                     {
@@ -158,12 +158,12 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                  
                     {
                         type:'paragraph',   //  12
-                        text:"Amerigo Vespucci war ein italienischer Seefahrer und Entdecker. Unter portugiesischer Flagge nahm er an Erkundungsfahrten teil und dokumentierte seine Erfahrungen, sowie Beobachtungen in dem Reisebericht Mondus Novus. Vespucci vertrat die Überzeugung, dass der entdeckte Seeweg nach Westen nicht Asien als Ziel hatte, sondern einen bisher unbekannten Kontinent. Der Nachweis, dass es unbekanntes Land war, wurde 1513 erbracht mit dem Erreichen der Westküste des Amerikanischen Kontinents"
+                        text:"Amerigo Vespucci war ein italienischer Seefahrer und Entdecker. Unter portugiesischer Flagge nahm er an Erkundungsfahrten teil und dokumentierte seine Erfahrungen, sowie Beobachtungen in dem Reisebericht Mondus Novus. Vespucci vertrat die Überzeugung, dass der entdeckte Seeweg nach Westen nicht Asien als Ziel hatte, sondern einen bisher unbekannten Kontinent. Der Nachweis, dass es unbekanntes Land war, wurde 1513 erbracht mit dem Erreichen der Westküste des Amerikanischen Kontinents."
                     },
                  
                     {
                         type:'paragraph',   //  13  &   15
-                        text:"Die zweite Weltumsegelung glückte im Jahr 1580 nach 1018 Tagen und war nicht nur aus seefahrerischer Sicht ein hochprovitables Unternehmen, sondern auch aus finnazieller. Das Kommando hatte ein englischer Freibeuter und späterer Vizeadmiral in der Seeschlacht bei Gravelines, der aufgrund des Erfolges seiner Reise mit dem Adelsstand geehrt wurde."
+                        text:"Die zweite Weltumsegelung glückte im Jahr 1580 nach 1018 Tagen und war nicht nur aus seefahrerischer Sicht ein hochprofitables Unternehmen, sondern auch aus finanzieller. Das Kommando hatte ein englischer Freibeuter und späterer Vizeadmiral in der Seeschlacht bei Gravelines, der aufgrund des Erfolges seiner Reise mit dem Adelsstand geehrt wurde."
                     },
                  
                     {
@@ -182,17 +182,17 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
                 [
                     {
                         type:'paragraph',   //  18
-                        text:"Vitus Bering wurde am 31. August 1681 geboren. Er war von dänischer Herkunft und stand in Diensten des russischen Zaren. Seine Seereisen im Nordpazifik und im Arktischen Ozean führten zu der Entdeckung von Alaska und einiger Aleuten Inseln. Erstmals konnten so die Ostküsten des russischen Reiches, sowie die Westküsten des Nordamerikanischen Kontinents vermessen und kartografiert werden. Bering starb 1741 vermutlich an Skorbut."
+                        text:"Vitus Bering wurde am 31. August 1681 geboren. Er war von dänischer Herkunft und stand in Diensten des russischen Zaren. Seine Seereisen im Nordpazifik und im Arktischen Ozean führten zu der Entdeckung von Alaska und einiger Aleuten Inseln. Erstmals konnten so die Ostküsten des russischen Reiches, sowie die Westküsten des Nordamerikanischen Kontinents vermessen und kartographiert werden. Bering starb 1741 vermutlich an Skorbut."
                     },
                  
                     {
                         type:'paragraph',   //  16  &   17
-                        text:"James Cook war einer der bedeutensten Seefahrer des 18 Jahrhunderts. Er kartografiert große Teile des Pazifischen Ozean und entdeckte zahlreiche Inseln, bei seinen drei berühmten Südseereisen. Zu seinen Verdiensten gehört auch, dass er erstmals Maßnahmen gegen die Krankheit Skorbut ergriff."
+                        text:"James Cook war einer der bedeutendsten Seefahrer des 18 Jahrhunderts. Er kartographiert große Teile des Pazifischen Ozean und entdeckte zahlreiche Inseln, bei seinen drei berühmten Südseereisen. Zu seinen Verdiensten gehört auch, dass er erstmals Maßnahmen gegen die Krankheit Skorbut ergriff."
                     },
                  
                     {
                         type:'paragraph',      //   19 &    20
-                        text:"Wir schreiben das Jahr 1805. Unsere Allierten Rußland, Österreich, Schweden und Neapel kämpfen zu Land gegen Napoleon Bonaparte und seine Armeen. Wir haben unter Admiral Caldar bereits einen wichtigen taktischen Sieg am 21. Juli am Kap Finisterre gegen den Franzosen de Villeneuve erringen können. Die Spanier stehen uns heute am 21. Oktober hier am Kap Trafalgar gegen uns aber wir werden unter dem Kommando von Lord Admiral Duke of Bronte Nelson die feindlichen Flotten zerschlagen!"
+                        text:"Wir schreiben das Jahr 1805. Unsere Verbündeten Rußland, Österreich, Schweden und Neapel kämpfen zu Land gegen Napoleon Bonaparte und seine Armeen. Wir haben unter Admiral Caldar bereits einen wichtigen taktischen Sieg am 21. Juli am Kap Finisterre gegen den Franzosen de Villeneuve erringen können. Die Spanier stehen uns heute am 21. Oktober hier am Kap Trafalgar gegen uns aber wir werden unter dem Kommando von Lord Admiral Duke of Bronte Nelson die feindlichen Flotten zerschlagen!"
                     },
                 ]
     }
