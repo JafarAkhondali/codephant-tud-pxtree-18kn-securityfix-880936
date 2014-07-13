@@ -10,7 +10,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	}
 
 , LevelDifficulty:
-	{ Factor: 0.25
+	{ Factor: 0.34
 	, Offset: 1
 	, Maximum: 4
 	}
@@ -91,6 +91,14 @@ namespace("PXTree.AchtzehnKnoten.Config",
 			, fill: "#ff3355"
 			, stroke: "#ff3355"
 			}
+		}
+	, Picture:
+		{ Offset: { x: 22, y: 22 }
+		}
+	, Pictures:
+		{ "island": ["eventpic-island-day", "eventpic-island-sunset"]
+		, "ship": ["eventpic-ship-day", "eventpic-ship-sunset"]
+		, "sea": ["eventpic-sea-day", "eventpic-sea-sunset"]
 		}
 	}
 
