@@ -95,13 +95,23 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._applyValueConstraints = function (stat, value)
 		{
 			if (stat === 'player.morale')
+			{
 				if (value > 40)
-					value = 40
-				else if (value < -40)
+				{
+					value = 40;
+				}
+				if (value < -40)
+				{
 					value = -40;
+				}
+			}
 			else //any other stat
+			{
 				if (value < 0)
+				{
 					value = 0;
+				}
+			}
 			return value;
 		};
 		
