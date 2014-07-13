@@ -10,7 +10,7 @@ namespace("PXTree.AchtzehnKnoten.Config",
 	}
 
 , LevelDifficulty:
-	{ Factor: 0.25
+	{ Factor: 0.34
 	, Offset: 1
 	, Maximum: 4
 	}
