@@ -1,4 +1,4 @@
-
+﻿
 namespace("PXTree.AchtzehnKnoten", function(AK)
 {
 	AK.Game = function Game ()
@@ -16,7 +16,7 @@ namespace("PXTree.AchtzehnKnoten", function(AK)
 		this.taskLog = null;
 		this.stats = null;
 		this.completedTutorial = false;
-		//console.log(easterTeggst);
+		console.log(easterTeggst);
 	
 	};
 	

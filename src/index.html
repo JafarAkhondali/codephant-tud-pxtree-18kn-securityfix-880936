@@ -33,13 +33,28 @@
 <script type="text/javascript" src="js/intro.js"></script>
 <script type="text/javascript" src="js/endscreen.js"></script>
 <script type="text/javascript" src="js/worldmap.js"></script>
+<style>
+	body {
+		background: url('assets/textures/wood.jpg');
+	}
+	
+	canvas {
+		margin: auto;
+	    height: 576px;
+		width: 1024px;
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+	}
+</style>
 </head>
 <body>
+<div class="game">
 <script type="text/javascript">
 var AK = PXTree.AchtzehnKnoten
 	, _18 = new AK.Game()
 	;
 _18.run();
 </script>
+</div>
 </body>
 </html>
