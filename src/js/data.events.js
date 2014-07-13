@@ -30,6 +30,31 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		}
 	}
 	
+, { "name": "drag-ship_parts"
+	, "tags": [ "water", "difficulty2" ]
+	, "type": "drag-to-order"
+	, "description": "Sortiere diese Begriffe in diese Reihenfolge: 'vorne' - 'links' - 'rechts' - 'hinten'"
+	, "itemType": "word"
+	, "items":
+		{ "back": "Heck"
+		, "right": "Steuerbord"
+		, "left": "Backbord"
+		, "front": "Bug"
+		}
+	, "order": ["front", "left", "right", "back"]
+	, "correct":
+		{ "type": "message"
+		, "description": "Das ist richtig!"
+		, "outcome": { "player.morale": [2,3]
+						, "player.strength": 2 }
+		}
+	, "wrong":
+		{ "type": "message"
+		, "description": "Das war falsch!"
+		, "outcome": { "player.morale": [-2,-3] }
+		}
+	}
+	
 , { "name": "ship_ahoy_pirate"
 	, "tags": ["water"]
 	, "description": "Dein Ausguck entdeckt ein Schiff am Horizont. Es scheint unter spanischer Flagge zu segeln. Wie möchtest du handeln?"
@@ -47,8 +72,8 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 				[ { "name": "ship_ahoy_pirate_battle"
 					, "label": "Zum Kampf vorbereiten."
 					, "outcome":
-						{ "player.food": [0,500]
-						, "player.crewCount": [-10,0]
+						{ "player.food": [0,100]
+						, "player.crewCount": [-5,0]
 						, "player.strength": -2
 						, "player.gold": [0,1000]
 						}

@@ -17,7 +17,6 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 300, y: 240
 			, reachable: [4]
 			, type: 'water'
-			, event: { tags: ["open_sea", "atlantic"] }
 			}
 		
 		, { x: 420, y: 400
