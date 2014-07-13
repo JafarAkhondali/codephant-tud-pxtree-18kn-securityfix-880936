@@ -229,6 +229,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 , { section: [4, 4]
 	,tags: ["carribean"]
 	, coast: 30
+	, coastDistance: -0.35
 	, spots:
 		[ 
 		{ x: 490, y: 230
