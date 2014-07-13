@@ -574,7 +574,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Der Kanarenstrom"
 		, "description": "Der Kanarenstrom ist eine kalte Meereströmung."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_05_a4"
         , "type": "message"
@@ -592,7 +592,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "In der Antarktis"
 		, "description": " So gut, wie der gesamte Kontinent ist vergletschert und speichert die größten Süßwasservorräte."
-		, "outcome": {"player.morale": 1}
+		, "outcome": {"player.morale": 4}
 		}
 		,{ "name": "geo_quiz_06_a2"
         , "type": "message"
@@ -622,7 +622,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Zwischen Dänemark und Schweden."
 		, "description": "Richtige Antwort! Das Kattegat ist ein in etwa 80 Meter tiefes und relativ schwer schiffbares Meeresgebiet zwischen Dänemark und Schweden."
-		, "outcome": {"player.morale": 5}
+		, "outcome": {"player.morale": 2}
 		}
 		,{ "name": "geo_quiz_07_a2"
         , "type": "message"
@@ -682,25 +682,25 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Die Doggerbank liegt in der Nordsee"
 		, "description": "Richtig. Du zeigst, dass du Kenntnisse über die Meere und deren Untiefen hast."
-		, "outcome": {"player.morale": 2}
+		, "outcome": {"player.morale": 3}
 		}
 		,{ "name": "geo_quiz_09_a2"
         , "type": "message"
 		, "label": "Die Doggerbank liegt in der Ostsee"
 		, "description": "Das stimmt nicht. Sie liegt in der Nordsee, meint dein erster Offizier."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_09_a3"
         , "type": "message"
 		, "label": "Die Doggerbank liegt in dem Atlantik"
 		, "description": "Das stimmt nicht. Sie liegt in der Nordsee, meint dein erster Offizier."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -5}
 		}
 		,{ "name": "geo_quiz_09_a4"
         , "type": "message"
 		, "label": "Die Doggerbank liegt in dem Norpolarmeer"
 		, "description": "Das stimmt nicht. Sie liegt in der Nordsee, meint dein erster Offizier."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -5}
 		}
 	]
 },{ "name": "geo_quiz_10_quiz"
@@ -730,7 +730,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Die südlichste Landspitze von Grönland."
 		, "description": " Die südlichste Landspitze von Grönland ist das Kap Farvel."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -5}
 		}
 	]
 },{ "name": "geo_quiz_11_quiz"
@@ -760,7 +760,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Im Antarktischen Ozean."
 		, "description": " Wenn deine seemännischen Kenntnisse ähnlich gut sind, dann wirst du vermutlich im Antarktischen Ozean kentern."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -4}
 		}
 	]
 },{ "name": "geo_quiz_12_quiz"
@@ -784,13 +784,13 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Man spricht von dem Nord- und Süd Passat"
 		, "description": " So wirst du nicht schnell an dein Ziel kommen."
-		, "outcome": {"player.morale": -5}
+		, "outcome": {"player.morale": -10}
 		}
 		,{ "name": "geo_quiz_12_a4"
         , "type": "message"
 		, "label": "Man spricht von dem West- und Ost Passat"
 		, "description": " So wirst du nicht schnell an dein Ziel kommen."
-		, "outcome": {"player.morale": -5}
+		, "outcome": {"player.morale": -10}
 		}
 	]
 },{ "name": "geo_quiz_13_quiz"
@@ -844,7 +844,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Sie liegt im Golf von Mexiko"
 		, "description": "Die Karibik grenzt im Westen an das Meeresgebiet des Golfes von Mexiko."
-		, "outcome": {"player.morale": 1}
+		, "outcome": {"player.morale": -1}
 		}
 		,{ "name": "geo_quiz_14_a4"
         , "type": "message"
@@ -868,19 +868,19 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Im Atlatischen Ozean"
 		, "description": "Die Moral der Crew schwindet."
-		, "outcome": {"player.morale": -5}
+		, "outcome": {"player.morale": -8}
 		}
 		,{ "name": "geo_quiz_15_a3"
         , "type": "message"
 		, "label": "Im Indischen Ozean"
 		, "description": "Die Moral der Crew schwindet."
-		, "outcome": {"player.morale": -5}
+		, "outcome": {"player.morale": -8}
 		}
 		,{ "name": "geo_quiz_15_a4"
         , "type": "message"
 		, "label": "Im Arktischen Ozean"
 		, "description": "Die Moral der Crew schwindet."
-		, "outcome": {"player.morale": -5}
+		, "outcome": {"player.morale": -8}
 		}
 	]
 },{ "name": "geo_quiz_16_quiz"
@@ -922,7 +922,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Eine Inselgruppe mit dem dazwischen liegende Gewässer"
 		, "description": "Dein erster Offizier, sieht dass du Wissen über die Meere hast"
-		, "outcome": {"player.morale": 10}
+		, "outcome": {"player.morale": 1}
 		}
 		,{ "name": "geo_quiz_17_a2"
         , "type": "message"
@@ -1163,7 +1163,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Leif Eriksson"
 		, "description": "Ein der Crew fügt hinzu, dass es um das Jahr 1000 n. Chr. war."
-		, "outcome": {"player.morale": 2}
+		, "outcome": {"player.morale": 3}
 		}
 		,{ "name": "hist_quiz_06_a2"
         , "type": "message"
@@ -1259,7 +1259,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Es war die Cholera"
 		, "description": "Dein Schiffsarzt, sagt dass die Cholera nie solche Ausmaße annahm."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -4}
 		}
 		,{ "name": "hist_quiz_09_a3"
         , "type": "message"
@@ -1284,7 +1284,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		, "label": "Bartolomeu Dias"
 
 		, "description": "Die Männer sehen, dass du dich mit der Seefahrtsgeschichte auskennst."
-		, "outcome": {"player.morale": 5}
+		, "outcome": {"player.morale": 2}
 		}
 		,{ "name": "hist_quiz_10_a2"
         , "type": "message"
@@ -1344,7 +1344,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Vasco Nunez de Balboa erreichte die Westküste Amerikas"
 		, "description": "Durch Erreichen der Westküste war der Nachweis erbracht, dass es nicht Asien ist."
-		, "outcome": {"player.morale": 10}
+		, "outcome": {"player.morale": 1}
 		}
 		,{ "name": "hist_quiz_12_a2"
         , "type": "message"
@@ -1374,7 +1374,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Francis Drake führte das Kommando"
 		, "description": "Dies war die Zweite und die erste Weltumsegelung, die unter einem Kommando begonnen und zum Ende geführt wurde"
-		, "outcome": {"player.morale": 5}
+		, "outcome": {"player.morale": 2}
 		}
 		,{ "name": "hist_quiz_13_a2"
         , "type": "message"
@@ -1494,7 +1494,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "James Cook"
 		, "description": "Er kartographierte, vermaß und entdeckte einige Inseln im Pazifik."
-		, "outcome": {"player.morale": 2}
+		, "outcome": {"player.morale": 3}
 		}
 		,{ "name": "hist_quiz_17_a2"
         , "type": "message"
@@ -1524,7 +1524,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Vitus Bering"
 		, "description": "Richtig! Das Beringmeer und die Beringstraße tragen seinen Namen."
-		, "outcome": {"player.morale": 1}
+		, "outcome": {"player.morale": 4}
 		}
 		,{ "name": "hist_quiz_18_a2"
         , "type": "message"
@@ -1561,19 +1561,19 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		, "label": "Preußen"
 
 		, "description": "Preußen war neutral und hatte keine ernstzunehmende Flotte."
-		, "outcome": {"player.morale": -2}
+		, "outcome": {"player.morale": -4}
 		}
 		,{ "name": "hist_quiz_19_a3"
         , "type": "message"
 		, "label": "Schweden"
 		, "description": "Schweden war Koalitionspartner gegen das napoleonische Frankreich."
-		, "outcome": {}
+		, "outcome": {"player.morale": -4}
 		}
 		,{ "name": "hist_quiz_19_a4"
         , "type": "message"
 		, "label": "Russland"
 		, "description": "Russland war Koalitionspartner gegen das napoleonische Frankreich."
-		, "outcome": {}
+		, "outcome": {"player.morale": -4}
 		}
 	]
 },{ "name": "hist_quiz_20_quiz"
@@ -1603,7 +1603,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
         , "type": "message"
 		, "label": "Francis Drake"
 		, "description": "Francis Drake war Freibeuter und später Vizeadmiral unter Königin Elisabeth I."
-		, "outcome": {"player.morale": -5}
+		, "outcome": {"player.morale": -8}
 		}
 	]
 }
