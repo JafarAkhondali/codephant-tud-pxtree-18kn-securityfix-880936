@@ -67,6 +67,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					return this;
 				};
 				
+				def.show = function ()
+				{
+					this.content.add(this.picture());
+					return AK.Events.TaskDialog.prototype.show.call(this);
+				};
+				
 				return def;
 			});
 });
