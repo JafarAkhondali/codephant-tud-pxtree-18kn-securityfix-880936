@@ -19,6 +19,10 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		this._afterEvent.memorize = true;
 		this._afterEvent.dispatch();
 
+		this.currentEvent = null;
+		this.currentPictureKey = null;
+		this.currentTask = null;
+
 		AK.Events.button = TextButtonFactory(this.game,
 				{ key: 'eventbox-btn'
 				, normalStyle: Config.Button.TextStyle
@@ -63,6 +67,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		};
 
 		def._lastCharUp = function (str) { return str[str.length-1].toUpperCase(); };
+
+		def.randomPictureKey = function (tags)
+		{
+			var pictures = ((tags && tags.length > 0) ? tags : Object.keys(Config.Pictures))
+						.reduce(function(ps, t)
+						{
+							ps.push.apply(ps, Config.Pictures[t] || []);
+							return ps;
+						}, [])
+				, pic = pictures[Math.floor(Math.random() * pictures.length)]
+				;
+			return pic;
+		};
 	});
 	
 	on(AK.Events.prototype, function (def)
@@ -72,7 +89,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 			this.game.load
 					.image('wood', 'assets/textures/wood.jpg')
 					.image('eventbox-bg', 'assets/ui/ui-eventbox.png')
-					//.image('eventbox-btn', 'assets/ui/ui-eventbox-button.png')
+					.image('eventpic-island-day', 'assets/textures/event-island-day.png')
+					.image('eventpic-island-sunset', 'assets/textures/event-island-sunset.png')
+					.image('eventpic-sea-day', 'assets/textures/event-sea-day.png')
+					.image('eventpic-sea-sunset', 'assets/textures/event-sea-sunset.png')
+					.image('eventpic-ship-day', 'assets/textures/event-ship-day.png')
+					.image('eventpic-ship-sunset', 'assets/textures/event-ship-sunset.png')
 					.spritesheet(
 						'eventbox-btn', 'assets/ui/ui-eventbox-button.png', 386, 28)
 					;
@@ -114,14 +136,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				evt = this._selectFallbackEvent();
 			}
 
-				this._processOutcome(Config.MoveCosts);
+			this._processOutcome(Config.MoveCosts);
 
 			try
 			{
 				AK.Events._inferType(evt);
-				this.top.taskLog.startEvent(evt);
-				this._afterEvent.forget();
-				this._makeDialogFromTask(evt).show();
 			}
 			catch(err)
 			{
@@ -129,10 +148,18 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				{
 					console.log("events: falling back due to failed type inference.");
 					console.log(err.message);
-					this.startEvent(this._selectFallbackEvent());
+					evt = this._selectFallbackEvent();
 				}
 				else throw err;
 			}
+
+			this._afterEvent.forget();
+			this.top.taskLog.startEvent(evt);
+			this.currentEvent = this.currentTask = evt;
+			this._selectPicture(opts.tags);
+			this
+				._makeDialogFromTask(evt)
+				.show();
 			
 		};
 
@@ -153,10 +180,11 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		def._makeDialogFromTask = function _makeDialogFromTask (task)
 		{
 			var dialogName = AK.Events.hyphenizedToUpperCamelCase(task.type)
-				, makeFuncName = "_make" + dialogName + "Dialog";
+				, makeFuncName = "_make" + dialogName + "Dialog"
+				, dialog = this[makeFuncName](task)
 				;
-			
-			return this[makeFuncName](task);
+			dialog.picture(this.currentPictureKey);
+			return dialog;
 		};
 		
 		/**
@@ -227,27 +255,32 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 				;
 
 			nextTask = this[funcName].apply(this, arguments);
+
+			// failed inference acts like there is no next task
 			if (nextTask)
 			{
 				try
 				{
 					AK.Events._inferType(nextTask);
-					this.top.taskLog.startTask(nextTask);
-					this._makeDialogFromTask(nextTask).show();
 				}
-				catch(err)
+				catch (err)
 				{
-					if (err instanceof InferenceError)
-					{
-						this.top.taskLog.completeEvent();
-						this._afterEvent.dispatch(); }
+					if (err instanceof InferenceError) nextTask = null;
 					else throw err;
 				}
+			}
+			
+			if (nextTask)
+			{
+				this.currentTask = nextTask;
+				this.top.taskLog.startTask(nextTask);
+				this._makeDialogFromTask(nextTask).show();
 			}
 			else
 			{
 				this.top.taskLog.completeEvent();
 				this._afterEvent.dispatch();
+				this._cleanUpAfterEvent();
 			}
 
 		};
@@ -409,5 +442,43 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 		 */
 		function __filterFallbackEvents (ev)
 		{ return ('tags' in ev) && ev.tags.indexOf('fallback') >= 0; }
+
+		/**
+		 * Select a random picture key and assign it to 'currentPicture'.
+		 */
+		def._selectPicture = function (tagsOrKey)
+		{
+			var picKey = null
+				, tags
+				;
+			if (typeof(tagsOrKey) === 'string')
+			{
+				picKey = tagsOrKey;
+			}
+			else
+			{
+				if (tagsOrKey.indexOf('water') >= 0)
+					tags = ['sea', 'ship']
+				else if (tagsOrKey.indexOf('island') >= 0)
+					tags = ['island']
+				else throw Error('Cannot select event picture: no known tags.')
+				picKey = AK.Events.randomPictureKey(tags);
+			}
+
+			this.currentPictureKey = picKey;
+			return picKey;
+		};
+
+		/**
+		 * This is called after the event to clear all state variables.
+		 */
+		def._cleanUpAfterEvent = function ()
+		{
+			this.currentPictureKey = null;
+			this.currentTask = null;
+			this.currentEvent = null;
+		};
+		
+		
 	});
 });

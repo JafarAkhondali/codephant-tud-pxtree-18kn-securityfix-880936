@@ -167,6 +167,11 @@ namespace("PXTree.AchtzehnKnoten", function (AzK)
 									if ('tags' in leveldat)
 										spotEventDat.tags.push.apply(spotEventDat.tags, leveldat.tags);
 								}
+								else
+								{
+									spotEventDat.tags = [spot.type.name];
+								}
+console.dir(spotEventDat);
 								
 								this.parent.startEvent(spotEventDat);
 							}, this);
