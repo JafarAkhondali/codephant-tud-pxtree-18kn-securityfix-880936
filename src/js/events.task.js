@@ -43,8 +43,19 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 
 	TaskDialog.prototype.picture = function picture (key)
 	{
-		this._picture = this.game.add.sprite(0, 0, key, 0, this.content);
-		this._picture.position.copyFrom(Config.Picture.Offset);
-		return this;
+		if (arguments.length === 0)
+		{
+			if (typeof(this._picture) === 'string')
+			{
+				this._picture = this.game.make.sprite(0, 0, this._picture);
+				this._picture.position.copyFrom(Config.Picture.Offset);
+			}
+			return this._picture;
+		}
+		else
+		{
+			this._picture = key;
+			return this;
+		}
 	};
 });

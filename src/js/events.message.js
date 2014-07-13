@@ -36,6 +36,12 @@ namespace("PXTree.AchtzehnKnoten", function (AK)
 					this._okBtn.onInputUp.add(okHandler, okContext);
 					return this;
 				};
+
+				def.show = function ()
+				{
+					this.content.add(this.picture());
+					return AK.Events.TaskDialog.prototype.show.call(this);
+				};
 				
 				return def;
 			});
