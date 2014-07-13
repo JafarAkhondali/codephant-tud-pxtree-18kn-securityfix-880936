@@ -701,7 +701,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		
 		, { x:430, y: 430
 			, type: 'water'
-			, end: { dir: 'east', to: 25 }
+			, end: { dir: 'east', found: 'agulhas' }
 		}
 		
 		]
