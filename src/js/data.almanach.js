@@ -1,7 +1,7 @@
 namespace("PXTree.AchtzehnKnoten.Data.Almanach",
 
 [ 	{
-		title:"Kartografie der Inseln und Landmarken",   // Geography almanac paragraphs
+		title:"Kartografie",   // Geography almanac paragraphs
 		content:
                 [
                     {
@@ -93,14 +93,25 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
 		content:
                 [
                     {
-						type:'paragraph',
-						text:"Geschichte der Antike 1"
+						type:'paragraph', //almanac paragraph for history questions    1
+						text:"Zusammen mit der Schlacht von Marathon war die Seeschlacht von Salamis, nach Ansicht von Historikern, ein wichtiges Ereignis im Okzident, was dazu führte, dass die Zivilisation in ebendiesem sich weitgehen unabhängig vom Orient entwickelt hat. Die griechischen Stadtstaaten errangen mit den Siegen in den Schlachten Unabhängikeit und Freiheit vom Perserreich. Dieses hatte unter Führung seiner Großkönige Dareios I. und Xerxes I. versucht die griechischen Staaten unter seine Vormacht zu zwängen."
 					},
                  
 					{
-						type:'paragraph',
-						text:"Geschichte der Antike 2"
+						type:'paragraph',   //  2
+						text:"Der griechische Physiker, Mathematiker und Ingenieur Archimedes von Syrakus ist einer der bedeutensten Gelehrten der Antike. Er bewies, dass der Durchmesser eines Kreises sich zum Umfang genauso verhält, wie das Quadrat des Radiuses zur Fläche des Kreises. Dieses Verhältnis ist heute unter dem namen Pi bekannt.  Wichtige Ideen die später zur Integralrechnung führten kamen ebenso von ihm. Nicht nur in der Mathematik waren seine Gedanken der Zeit voraus, sondern auch auf dem Gebiet der Physik. Die Hebelgesetze und das nach ihm benannte Archimedische Prinzip, welches das Auftriebsverhalten von Stoffen erklärt, sind seiner Geisteskraft entsprungen."
 					},
+                 
+                    {
+                        type:'paragraph',   //  3
+                        text:"Die Punischen Kriege waren militärische Auseinandersetzungen der Handelsmacht Karthago gegen das junge Römische Reich im 300 und 200 Jahrhundert vor Christus. Im Zweiten Punischen Krieg erlitten die Römer ihre bis dahin schwerste Niederlage gegen  eine Heer unter Hannibal Barkas. Diese Armee zog von der Iberischen Halbinsel mit samt Kriegselephanten durch die Alpen und konnte die Römischen Legionen in der Schlacht von Cannae 216 vor Christus verheerend schlagen."
+                 
+                    },
+                 
+                    {
+                        type:'paragraph',   //  4
+                        text:"Die Römische Stadt Colonia Claudia Ara Agrippinensium war die Hauptstadt der Provinz Germania inferior und Stützpunkt der Rheinflotte, sowie Lager von römischen Legionen. Noch heute findet man Überreste der Römer in der nähe des Kölner Doms von antiken Bauwerken"
+                    },
 				]
 	},
  
@@ -109,14 +120,25 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
         content:
                 [
                     {
-                        type:'paragraph',
-                        text:"Geschichte des Mittelalters 1"
+                        type:'paragraph',   //  5   &   6
+                        text:"Im frühen Mittelalter siedelten germanische und baltische Stämme in den Küstenregionen von Nord- und Ostsee. Sie waren geschickte Seefahrer und so ließen sie sich ebenso in Island nieder und waren die ersten Europäer, welche den Amerikanischen Kontinent mit Schiffen erreichten. Es sind Siedlungen in Grönland entstanden und unter Leif Eriksson wurde der Versuch unternommen das Amerikanische Festland zu besiedeln. In Europa waren sie vorallem durch ihre Raubzüge gefürchtet. Der erste schriftlich erwähnte Überfall geschah im Jahre 793 auf das Kloster Lindisfarne in England. Sie gründeten aber auch Städte, wie Dublin und betrieben Handel bis in den Orient. Diese Stämme sind unter dem Namen Wikinger bekannt und so nennt man dieses Zeitalter aufgrund ihres Einflusses und Wirkens Wikingerzeit."
                     },
           
                     {
-                        type:'paragraph',
-                        text:"Geschichte des Mittelalters 2"
+                        type:'paragraph',   //  7
+                        text:"Nach dem Aufruf 1095 zum ersten Kreuzzug durch Papst Urban II. gegen die islamische Herrschaft in Jerusalem, sowie im Heiligen Land, zogen christliche Heere in den Orient. Dem war ein Hilferuf des byzantinischen Kaisers Alexios I. von Komnenos zuvorgekommen. Dieser wurde durch die islamischen Seldschuken bedroht. Die christlichen Kreuzfahrer nutzten zum großen Teil den Landweg nach Palästina, wurden aber stetig durch Seefahrer unterstützt. Dieser Beistand war meist unkontrollert und dennoch essenziell für viele militärische Aktionen. So kam es im Oktober 1097 zu der Belagerung von Antiochia und im Juni 1098 zum Fall der Stadt. Der darauf folgende Zug nach Jerusalem endete in der Schlacht von Jerusalem und einem schrecklichen Massaker an der muslimischen Bevölkerung."
                     },
+                 
+                    {
+                        type:'paragraph',   //  8
+                        text:"Pfeffer, Zimt, Muskat und Myrrhe waren im Mittelalter Handelswaren mit einem erheblichen materiellen Wert. Ein Grund dafür war der weite Weg aus ihren Ursprungsländern nach Europa und ein weiterer waren die Zwischenhändler im Orient. Der Asienhandel beruhte damals auf einem Netz von Karawanenstraßen. Zwei der wichtigsten dieser Routen waren die Seidenstraße und die Weihrauchstraße. Ein Seeweg nach Indien sollte gefunden werden und so verließen erstmals genuesische Seefahrer im Mai 1291 ihren Hafen. Das Ziel der Seefahrt war es Handelsgüter von großem Wert nach Italien zu verschiffen. Die Seefahrer sollten jedoch nicht nach Genua zurückkehren und blieben verschollen."
+                    },
+                 
+                    {
+                        type:'paragraph',   //  9
+                        text:"Im späten Mittelalter unterhielten viele italienische Städte weitreichende Handelsbeziehungen. Von besonderer Bedeutung waren die sogenannten Seerepubliken. Genua und Venedig kann man dabei als herausstechende Vertreter bezeichnen. Sie hatten Handelskolonien im gesamten Mittelmeerraum und darüberhinaus. Genua beispielweise gründete Kolonien auf der Halbinsel Krim im Schwarzen Meer und in Asow am Asowschen Meer. Auf den Handelsschiffen gab es aber nicht nur Seeleute, Händler und ihre Waren, sondern auch Blinde Passagiere. So waren es vermutlich infizierte Ratten von den östlichsten Handelsposten, die nach Italien kamen und den Schwarzen Tod, die Lungen- und Beulenpest, über Europa brachten."
+                    },
+                 
                 ]
     },
  
@@ -125,45 +147,52 @@ namespace("PXTree.AchtzehnKnoten.Data.Almanach",
         content:
                 [
                     {
-                        type:'paragraph',
-                        text:"Geschichte der Renaissance 1"
+                        type:'paragraph',   //  10
+                        text:"Mit dem Beginn der Renaissance setzte eine langanhaltende Epoche der Entdeckungen, der wissenschaftlichen Fortschritte und der großen Seefahrer ein. Bereits seit mehr als 200 Jahren suchte man nach einem Seeweg von Europa nach Indien. Ein bedeutender Schritt war dabei die erste Umsegelung der Südspitze Afrikas in den Jahren 1487 und 1488. Der portugiesische Seefahrer dem diese Pionierleistung erstmals war Bartolomeu Dias."
                     },
   
                     {
-                        type:'paragraph',
-                        text:"Geschichte der Renaissance 2"
-                    },
-                 ]
-    },
-
-    {
-        title:"Geschichte des 17. Jahrhunderts",
-        content:
-                [
-                    {
-                        type:'paragraph',
-                        text:"Geschichte des 17. Jahrhunderts 1"
-                    },
- 
-                    {
-                        type:'paragraph',
-                        text:"Geschichte des 17. Jahrhunderts 2"
-                    },
-                 ]
-    },
-
-    {
-        title:"Geschichte des 18. Jahrhunderts",
-        content:
-                [
-                    {
-                        type:'paragraph',
-                        text:"Geschichte des 18. Jahrhunderts 1"
+                        type:'paragraph',   //  11
+                        text:"Seit dem 14 Jahrhundert waren die Landwege nach Indien und China nicht mehr frei. Das Osmanische Reich forderte hohe Zölle für Handelsgüter. Ein Seeweg musste gefunden werden. Christoph Kolumbus hatte die Idee von einer Westroute nach Ostasien, welche bereits durch Aristoteles beschrieben worden war. Während seiner Reisen nach England und Skandinavien könnte er sogar von den Seefahrten der Wikinger gehört haben und von den Landmassen im Westen. In Kreisen der Gelehrten galt das heliozentrische Weltbild als überholt, so dass die Idee einer Westroute durchaus auf Akzeptanz stoß. Kolumbus fand schließlich im spanischen Königshaus die nötige Unterstützung. Am 3 August 1492 stach er in See und erreichte am 12. Oktober 1492 Land, welches heute zur Gruppe der Westindischen Inseln zählt."
                     },
                  
                     {
-                        type:'paragraph',
-                        text:" Geschichte des 18. Jahrhunderts 2"
+                        type:'paragraph',   //  12
+                        text:"Amerigo Vespucci war ein italienischer Seefahrer und Entdecker. Unter portugiesischer Flagge nahm er an Erkundungsfahrten teil und dokumentierte seine Erfahrungen, sowie Beobachtungen in dem Reisebericht Mondus Novus. Vespucci vertrat die Überzeugung, dass der entdeckte Seeweg nach Westen nicht Asien als Ziel hatte, sondern einen bisher unbekannten Kontinent. Der Nachweis, dass es unbekanntes Land war, wurde 1513 erbracht mit dem Erreichen der Westküste des Amerikanischen Kontinents"
+                    },
+                 
+                    {
+                        type:'paragraph',   //  13  &   15
+                        text:"Die zweite Weltumsegelung glückte im Jahr 1580 nach 1018 Tagen und war nicht nur aus seefahrerischer Sicht ein hochprovitables Unternehmen, sondern auch aus finnazieller. Das Kommando hatte ein englischer Freibeuter und späterer Vizeadmiral in der Seeschlacht bei Gravelines, der aufgrund des Erfolges seiner Reise mit dem Adelsstand geehrt wurde."
+                    },
+                 
+                    {
+                        type:'paragraph',   //  14
+                        text:"Die Entdeckung von neuen Seewegen hatte in der Geschichte zumeist wirtschaftliche Gründe. Wichtige Handelsgüter aus Indien, sowie aus anderen Teilen Ost- und Zentralasiens, waren durch arabische, persische, aber auch durch venezianische Zwischenhändler beinahe unbezahlbar. Der seit langem angestrebte Seeweg nach Indien sollte eine Lösung bringen. Es war ein portugiesischer Seefahrer dem diese Pionierleistung 1498 gelang."
+                    },
+                 
+                 
+                 ]
+    },
+
+
+    {
+        title:"Geschichte des 17., 18. und Gegenwart",
+        content:
+                [
+                    {
+                        type:'paragraph',   //  18
+                        text:"Vitus Bering wurde am 31. August 1681 geboren. Er war von dänischer Herkunft und stand in Diensten des russischen Zaren. Seine Seereisen im Nordpazifik und im Arktischen Ozean führten zu der Entdeckung von Alaska und einiger Aleuten Inseln. Erstmals konnten so die Ostküsten des russischen Reiches, sowie die Westküsten des Nordamerikanischen Kontinents vermessen und kartografiert werden. Bering starb 1741 vermutlich an Skorbut."
+                    },
+                 
+                    {
+                        type:'paragraph',   //  16  &   17
+                        text:"James Cook war einer der bedeutensten Seefahrer des 18 Jahrhunderts. Er kartografiert große Teile des Pazifischen Ozean und entdeckte zahlreiche Inseln, bei seinen drei berühmten Südseereisen. Zu seinen Verdiensten gehört auch, dass er erstmals Maßnahmen gegen die Krankheit Skorbut ergriff."
+                    },
+                 
+                    {
+                        type:'paragraph',      //   19 &    20
+                        text:"Wir schreiben das Jahr 1805. Unsere Allierten Rußland, Österreich, Schweden und Neapel kämpfen zu Land gegen Napoleon Bonaparte und seine Armeen. Wir haben unter Admiral Caldar bereits einen wichtigen taktischen Sieg am 21. Juli am Kap Finisterre gegen den Franzosen de Villeneuve erringen können. Die Spanier stehen uns heute am 21. Oktober hier am Kap Trafalgar gegen uns aber wir werden unter dem Kommando von Lord Admiral Duke of Bronte Nelson die feindlichen Flotten zerschlagen!"
                     },
                 ]
     }
