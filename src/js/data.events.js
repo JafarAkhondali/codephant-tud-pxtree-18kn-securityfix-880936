@@ -296,7 +296,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 		]
 	}
 	
-/*, { "name": "helena"
+, { "name": "helena"
 	, "tags": ["unused"]
 	, "description": "Dein Schiff erreicht St. Helena. Du findest eine kürzlich gegründete britische Kolonie auf dieser Insel. Zwei deiner erkrankten Crewmitglieder bitten dich darum, ohne sie weiterzusegeln, damit sie hier ihre Krankheit auskurieren können."
 	, "choices": 
@@ -304,34 +304,37 @@ namespace("PXTree.AchtzehnKnoten.Data.Events",
 			, "label": "Erfülle den Männern ihren Wunsch."
 			, "description": "Deine Männer sind dir dankbar, und der Rest deiner Crew rechnet dir dein verhalten hoch an."
 			, "outcome":
-				{ "player.morale": +4
-				, "player.crew": -2}
+				{ "player.morale": 4
+				, "player.crewCount": -2}
 			, "choices": 
 			[ {
 				"name": "helena_agree_aye"
 				, "label": "Aye!"
 				, "description": "Man berichtet dir, dass einige Kolonisten auf deinem Schiff anheuern wollen, und das zu einem guten Preis von 500 Gold."
 				, "choices": [ {
-					"name": "helena_agree_aye_buy"
-					"label": "Hol die Männer auf dein Schiff."
-					"description": 
-			}
-		, { "name": "azores_buy_crew"
-			, "label": "Versuche, Crew anzuheuern."
-			, "description": "Du heuerst einige Seemänner an. Deine Crew hält leider nicht all zu viel von den Fremden."
+								"name": "helena_agree_aye_buy"
+								, "label": "Hol die Männer auf dein Schiff."
+								, "description": "Die neuen Männer sind dankbar, endlich von dieser 'gottverlassenen Insel' runtergekommen zu sein."
+								, "outcome": 
+									{ "player.crewCount": [2,3] 
+									, "player.gold": -500 }
+								}
+								, { 
+								"name": "helena_agree_aye_dont"
+								, "label": "Nicht anheuern."
+								, "description": "Du behälst lieber dein Gold. Du wirst es bestimmt auch ohne die weiteren Männer schaffen."
+								} ] 
+				} ]
+			} 
+		
+		, { "name": "helena_not"
+			, "label": "Verweigere ihr anliegen."
+			, "description": "Du behälst die Männer auf deinem Schiff, und tatsächlich scheint es ihnen langsam besser zu gehen. Trotzdem litt die Moral deiner Mannschaft unter deiner harten Entscheidung."
 			, "outcome":
-				{ "player.crewCount": +3
-				, "player.gold": -1500 
-				, "player.morale": -2}
-			}
-		, { "name": "azores_ignore"
-			, "label": "Reise weiter ohne zu handeln."
-			, "description": "Keines der Angebote sagt dir zu. Du gibst der Mannschaft den Abend frei und reist am nächsten Morgen weiter."
-			, "outcome":
-				{ "player.morale": +1}
+				{ "player.morale": [-1, -3] }
 			}
 		]
-	}*/
+	}
 , { "name": "lanzarote"
 	, "tags": ["unused"]
 	, "description": "Du fährst einen Hafen auf Lanzarote an. Viele andere Entdecker nutzen diesen erst Anfang des 15. Jh. eröffneten Hafen, um Proviant und Vorräte aufzustocken."

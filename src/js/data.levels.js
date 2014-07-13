@@ -474,6 +474,7 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x: 200, y: 390
 			, type: "island"
 			, reachable: [2]
+			, event: { name: "helena" }
 		}
 		
 		, { x: 330, y: 480
@@ -692,6 +693,48 @@ namespace("PXTree.AchtzehnKnoten.Data.Levels",
 		, { x:430, y: 430
 			, type: 'water'
 			, end: { dir: 'east', to: 25 }
+		}
+		
+		]
+	}
+
+
+//19
+, { section: [5, 8]
+	, coast: 15
+	, coastDistance: 0.3
+	, tags: ["atlantic", "tropic"]
+	, spots:
+		[ 
+		{ x: 300, y: 90
+			, type: "water"
+			, start: { dir: 'north' }
+			, reachable: [2]
+		}
+		
+		, { x: 480, y: 230
+			, type: "water"
+			, reachable: [2]
+			, start: { dir: 'east' }
+		}
+		
+		, { x: 330, y: 215
+			, type: "water"
+			, reachable: [4,3]
+		}
+		
+		, { x: 350, y: 360
+			, type: 'water'
+			, reachable: [5]
+		}
+		, { x: 200, y: 280
+			, type: 'water'
+			, reachable: [5]
+		}
+		
+		, { x:190, y: 444
+			, type: 'island'
+			, end: { dir: 'west', found: "fireland" }
 		}
 		
 		]
